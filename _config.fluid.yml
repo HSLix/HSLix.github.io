@@ -104,4 +104,3 @@ deploy:
   type: git
   repo: git@github.com:HSLix/HSLix.github.io.git
   branch: main
-  message:
