@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 第三次上机 A 手撕BST分数 50作者 朱允刚单位 吉林大学对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学">
+<meta property="og:url" content="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 第三次上机 A 手撕BST分数 50作者 朱允刚单位 吉林大学对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/fluid_default.png">
+<meta property="article:published_time" content="2024-07-04T04:00:00.000Z">
+<meta property="article:modified_time" content="2024-07-22T16:11:48.752Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="JLU">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/fluid_default.png">
+  
+  
+  
+  <title>【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学 - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-04 12:00" pubdate>
+          2024年7月4日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          23 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="第三次上机"><a href="#第三次上机" class="headerlink" title="第三次上机"></a>第三次上机</h1><hr>
+<h2 id="A-手撕BST"><a href="#A-手撕BST" class="headerlink" title="A 手撕BST"></a>A 手撕BST</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。</p>
+<p>bst.png</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10^5，树高不超过10^4。</p>
+<p>输出格式:<br>输出经上述操作后得到的二叉查找树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13</p>
+<p>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
+<p>20 11 8 4 9 31 25 24 27 35 40 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>500 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>二叉查找树的插入和查找都不算难，但删除需要注意的是，如果要删的节点有两个子节点，则将该节点的右子树中最小的节点与之交换，并执行从右子树中删除该最小点的任务。其余与普通的二叉树一样操作。</p>
+<hr>
+<h2 id="B-手撕AVL树（基础版）"><a href="#B-手撕AVL树（基础版）" class="headerlink" title="B 手撕AVL树（基础版）"></a>B 手撕AVL树（基础版）</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的高度平衡树（AVL树）进行若干插入或删除操作，请输出最后得到的AVL树。</p>
+<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
+<p>输出格式:<br>输出经上述操作后得到的高度平衡树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13<br>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
+<p>20 8 4 11 9 31 25 24 27 35 40<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>二叉平衡树的插入和删除也是思维不复杂，但实现很麻烦的东西，我只能说，为了使程序的逻辑尽可能清晰，尽量把功能打包成函数，比如一个节点的高度什么的</p>
+<hr>
+<h2 id="C-手撕红黑树"><a href="#C-手撕红黑树" class="headerlink" title="C 手撕红黑树"></a>C 手撕红黑树</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的红黑树（Red-Black Tree, RBT）进行若干插入或删除操作，请输出最后的红黑树。</p>
+<p>rbt.png</p>
+<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
+<p>输出格式:<br>输出经上述操作后得到的红黑树的中根序列和先根序列，序列中对于每个结点输出其关键词和颜色（红色用R表示，黑色用B表示），每个元素后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>5<br>Insert 8<br>Insert 9<br>Insert 3<br>Insert 4<br>Insert 5</p>
+<p>输出样例:<br>3 R 4 B 5 R 8 B 9 B </p>
+<p>8 B 4 B 3 R 5 R 9 B </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>红黑树这题，也差一个点没过，故不作思路解析</p>
+<hr>
+<h1 id="第四次上机"><a href="#第四次上机" class="headerlink" title="第四次上机"></a>第四次上机</h1><hr>
+<h2 id="A-手撕STL-sort（进阶版）"><a href="#A-手撕STL-sort（进阶版）" class="headerlink" title="A 手撕STL sort（进阶版）"></a>A 手撕STL sort（进阶版）</h2><p>分数 100<br>作者 朱允刚<br>单位 吉林大学<br>事实上，STL的sort函数在上一题（基础版）的基础上，还采用了下列优化手段，以进一步提升快速排序算法的效率。</p>
+<p>（3）“三数取中”选基准元素。不是选取第一个元素作为基准元素，而是在当前子数组中选取3个元素，取中间大的那个元素作为基准元素。从而保证选出的基准元素不是子数组的最小元素，也不是最大元素，避免Partition分到子数组最边上，以降低最坏情况发生的概率。<br>为确保本题答案唯一，本算法的实现请以教材为准，即普林斯顿大学Sedgewick教授给出的方法：若当前子数组是R[m]…R[n]，选取R[m]、R[(m+n)&#x2F;2]和R[n]的中位数作为基准元素。先将R[(m+n)&#x2F;2]与R[m+1]交换；若R[m+1]比R[n]大，交换二者；若R[m]比R[n]大，交换二者；若R[m+1]比R[m]大，交换二者。</p>
+<p>（4）尾递归转为循环。即将传统快速排序代码</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">QuickSort</span><span class="hljs-params">(<span class="hljs-type">int</span> R[],<span class="hljs-type">int</span> m,<span class="hljs-type">int</span> n)</span></span>&#123;<br>   <span class="hljs-keyword">if</span>(n - m + <span class="hljs-number">1</span> &gt; threshold)&#123;<br>        <span class="hljs-type">int</span> j = <span class="hljs-built_in">Partition</span>(R, m, n); <br>        <span class="hljs-built_in">QuickSort</span>(R, m, j<span class="hljs-number">-1</span>);  <span class="hljs-comment">//递归处理左区间</span><br>        <span class="hljs-built_in">QuickSort</span>(R, j<span class="hljs-number">+1</span>, n);  <span class="hljs-comment">//递归处理右区间，尾递归</span><br>     &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>转换为</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">QuickSort</span><span class="hljs-params">(<span class="hljs-type">int</span> R[],<span class="hljs-type">int</span> m,<span class="hljs-type">int</span> n)</span></span>&#123;<br>   <span class="hljs-keyword">while</span>(n - m + <span class="hljs-number">1</span> &gt; threshold)&#123;    <span class="hljs-comment">//注意此处不是if，而是while</span><br>        <span class="hljs-type">int</span> j = <span class="hljs-built_in">Partition</span>(R, m, n); <br>        <span class="hljs-built_in">QuickSort</span>(R, m, j<span class="hljs-number">-1</span>);  <span class="hljs-comment">//递归处理左区间</span><br>        m = j<span class="hljs-number">+1</span>;  <span class="hljs-comment">//通过while循环处理右区间，从而消除尾递归</span><br>     &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>即先递归处理左区间，后循环处理右区间，从而消除一个尾递归，以减少递归调用带来的时空消耗。<br>这里需注意，尾递归转循环后，转入堆排序的时机不仅仅是递归深度达到2logn，而是递归深度和while循环迭代的次数加一起达到2logn时转入堆排序。</p>
+<p>（5）优先处理短区间。在上述策略（4）的基础上进一步改进，不是按固定次序处理左右子区间（每次都先处理左区间、后处理右区间），而是先（通过递归）处理左右两个子区间中“较短的那个区间”，然后再（通过循环）处理两个子区间中“较长的那个区间”。从而使每次递归处理的子数组长度至少缩减一半，使最坏情况下递归深度（算法最坏情况空间复杂度）为logn。</p>
+<p>（6）三路分划（3-Way Partition）。当重复元素很多时，传统快速排序效率较低。可修改Partition操作，不是把当前数组划分为两部分，而是三部分：小于基准元素K的元素放在左边，等于K的元素放在中间，大于K的元素在右边。接下来仅需对小于K的左半部分子数组和大于K的右半部分子数组进行排序。中间等于K的所有元素都已就位，无需处理。<br>为确保本题答案唯一，此处请采用如下做法：若当前子数组是R[m]…R[n]，可设置3个指针，前指针i，中指针j，后指针k。初始时i和j指向第一个元素，k指向最后一个元素；指针j从左往右扫描数组：</p>
+<p>若R[j]小于基准元素，交换R[j]和R[i], i++, j++；<br>若R[j]大于基准元素，交换R[j]和R[k], k–；<br>若R[j]等于基准元素，j++；<br>通过指针j的遍历，使小于基准元素的元素换到当前子数组左侧，大于基准元素的元素换到右侧。当j扫描完当前子数组后，R[m]…R[i-1]即小于基准元素的元素，R[i]…R[k]即等于基准元素的元素，R[k+1]…R[n]即大于基准元素的元素。</p>
+<p>在本题中，请你在之前实现的STL sort()初级版的基础上，进一步实现上述优化策略。</p>
+<p>提示：本题只需把原来的Partition改为3-way Partition，并使用“三数取中”法选择基准元素。<br>在快速排序函数里，改为“尾递归转循环 + 先处理短区间”。你可以在Visual Studio里对sort函数右键点击“转到定义”，查看VS中STL的sort()实现细节<br>vstudio sort转到定义图片.jpg</p>
+<p>函数接口定义：<br>void sort(int *R, int n);<br>功能为对整数R[1]…R[n]递增排序。</p>
+<p>裁判测试程序样例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span><span class="hljs-string">&lt;math.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-type">int</span> threshold;<br><br><span class="hljs-comment">// 请在这里补充你的代码，即你所实现的sort函数</span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> n,i;<br>    <span class="hljs-type">int</span> a[<span class="hljs-number">50010</span>];<br>    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>, &amp;n, &amp;threshold);<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;a[i]);<br>    <br>    <span class="hljs-built_in">sort</span>(a,n);<br>    <br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Final:&quot;</span>);<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n; i++)<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d &quot;</span>,a[i]);<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n&quot;</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>备注：提交代码时，只需提交sort函数以及你自定义的其他函数，不用提交#include或者main函数等内容。</p>
+<p>输入格式:<br>输入第一行为2个正整数n和threshold，n为待排序的元素个数，不超过50000，threshold为改用插入排序的阈值，不超过20，含义如上所述。第二行为n个空格间隔的整数。本题中读入数据的操作无需你来实现，而由框架程序完成。</p>
+<p>输出格式:<br>输出第一行为以depth_limit:开头的整数，表示转为堆排序的递归深度，即⌊2log<br>2n⌋。从第二行开始，输出对某子数组转为堆排序后，该子数组初始建堆的结果，每个元素后一个空格，每个堆占一行，以Heap:开头。注意，可能不止一个堆。接下来下一行，输出n个整数，每个整数后一个空格，为快速排序所有递归退出后，插入排序执行前的数组元素，以Intermediate:开头。最后一行为n整数，每个整数后一个空格，表示排序后的数组，以Final:开头（最后一行由框架程序完成，无需你来输出）。</p>
+<p>输入样例1：<br>10 2<br>10 9 8 7 6 5 4 3 2 1</p>
+<p>输出样例1：<br>depth_limit:6<br>Intermediate:1 2 3 5 4 6 7 8 9 10<br>Final:1 2 3 4 5 6 7 8 9 10 </p>
+<p>输入样例2：<br>60 2<br>66 61 92 22 50 80 39 2 25 60 49 17 37 19 24 57 40 82 11 52 45 0 33 78 32 25 19 42 92 50 39 87 74 87 56 79 63 63 80 83 50 3 87 2 91 77 87 10 59 23 25 6 49 85 9 95 60 16 28 1<br>输出样例2：<br>depth_limit:11<br>Intermediate:1 0 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 32 28 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95<br>Final:0 1 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 28 32 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>此题基于课程设计第二次上机A题，而且改进方法都在题目里，是在不行，朱老师的ppt里有来着？</p>
+<hr>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>好像又没啥可结的，总之就这样罢</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/JLU/" class="print-no-link">#JLU</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="print-no-link">#数据结构与算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学</div>
+      <div>http://example.com/2024/07/04/[JLU] 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月4日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="ND - 禁止演绎">
+                    <i class="iconfont icon-nd"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/07/09/%5BCINTA%5D%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" title="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/07/03/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" title="【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学">
+                        <span class="hidden-mobile">【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
