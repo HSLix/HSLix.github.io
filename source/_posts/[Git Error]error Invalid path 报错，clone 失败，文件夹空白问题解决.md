@@ -1,7 +1,7 @@
 ---
 title: 【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决
 tags: [Git]
-index_img: /img/index/fluid_default.png
+index_img: /img/index/Git.png
 date: 2024-05-04 14:48:00
 ---
 # 问题背景

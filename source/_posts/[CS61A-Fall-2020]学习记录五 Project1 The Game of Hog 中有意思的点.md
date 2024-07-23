@@ -1,7 +1,7 @@
 ---
 title: 【CS61A-Fall-2020】学习记录五 Project1 The Game of Hog 中有意思的点
 tags: [Python, CS61A]
-index_img: /img/index/fluid_default.png
+index_img: /img/index/CS61A.png
 date: 2024-07-18 00:58:00
 ---
 首先，本文不是总结归纳，只是记录一些有趣的知识点罢了

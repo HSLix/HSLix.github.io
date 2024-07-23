@@ -1,7 +1,7 @@
 ---
 title: 【CS61A-Fall-2020】学习记录三 Lab1 题解思路分享
 tags: [Python, CS61A]
-index_img: /img/index/fluid_default.png
+index_img: /img/index/CS61A.png
 date: 2024-02-29 19:30:00
 ---
 ## 前言

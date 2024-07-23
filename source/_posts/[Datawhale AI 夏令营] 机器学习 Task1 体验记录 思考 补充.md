@@ -1,7 +1,7 @@
 ---
 title: 【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充
 tags: [机器学习]
-index_img: /img/index/fluid_default.png
+index_img: /img/index/DataWhale_AI.png
 date: 2024-07-11 22:43:00
 ---
 # 前言

@@ -1,7 +1,7 @@
 ---
 title: 【JLU】 吉林大学校园网上网攻略汇总与补充
 tags: [JLU]
-index_img: /img/index/fluid_default.png
+index_img: /img/index/JLUTongZhi.png
 date: 2024-06-09 20:21:00
 ---
 # 前言
