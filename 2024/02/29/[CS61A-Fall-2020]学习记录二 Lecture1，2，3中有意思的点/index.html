@@ -16,16 +16,16 @@
   <meta name="author" content="陆爻齐-LuYaoQi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言首先，本文不是总结归纳，只是记录一些有趣的知识点罢了 正文doctest好东西啊，此前的学习从未看到过，可以在函数的注释中通过特定格式便可书写文档测试，比如 12345678910def divide_exact(n, d): 　&#x27;&#x27;&#x27;    Return the quotient and remainder of dividing N by D.    &gt;">
+    <meta name="description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文doctest好东西啊，此前的学习从未看到过，可以在函数的注释中通过特定格式便可书写文档测试，比如 12345678910def divide_exact(n, d): 　&#x27;&#x27;&#x27;    Return">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【CS61A-Fall-2020】学习记录二 Lecture1，2，3中有意思的点">
 <meta property="og:url" content="http://example.com/2024/02/29/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%BA%8C%20Lecture1%EF%BC%8C2%EF%BC%8C3%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/index.html">
 <meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言首先，本文不是总结归纳，只是记录一些有趣的知识点罢了 正文doctest好东西啊，此前的学习从未看到过，可以在函数的注释中通过特定格式便可书写文档测试，比如 12345678910def divide_exact(n, d): 　&#x27;&#x27;&#x27;    Return the quotient and remainder of dividing N by D.    &gt;">
+<meta property="og:description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文doctest好东西啊，此前的学习从未看到过，可以在函数的注释中通过特定格式便可书写文档测试，比如 12345678910def divide_exact(n, d): 　&#x27;&#x27;&#x27;    Return">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/index/CS61A.png">
 <meta property="article:published_time" content="2024-02-29T11:28:00.000Z">
-<meta property="article:modified_time" content="2024-08-13T14:11:32.727Z">
+<meta property="article:modified_time" content="2024-08-13T14:24:35.208Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="CS61A">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          343 字
+          386 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          3 分钟
+          4 分钟
         
       </span>
     
@@ -276,7 +276,8 @@
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>首先，本文不是总结归纳，只是记录一些有趣的知识点罢了</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
+<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="doctest"><a href="#doctest" class="headerlink" title="doctest"></a>doctest</h3><p>好东西啊，此前的学习从未看到过，可以在函数的注释中通过特定格式便可书写文档测试，比如</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">divide_exact</span>(<span class="hljs-params">n, d</span>):<br> 　<span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">    Return the quotient and remainder of dividing N by D.</span><br><span class="hljs-string">    &gt;&gt;&gt;q, r = divide_exact(2013, 10)</span><br><span class="hljs-string">    &gt;&gt;&gt;q</span><br><span class="hljs-string">    201</span><br><span class="hljs-string">    &gt;&gt;&gt; r</span><br><span class="hljs-string">    3</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span>    <br>    <span class="hljs-keyword">return</span> floordiv(n, d), mod(n, d)<br></code></pre></td></tr></table></figure>
 <p>假设该 python 文件命名为 file.py，此时在本文件夹打开 bash，并输入命令行</p>
