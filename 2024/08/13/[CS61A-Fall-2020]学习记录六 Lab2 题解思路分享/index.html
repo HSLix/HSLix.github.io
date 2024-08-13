@@ -16,24 +16,25 @@
   <meta name="author" content="陆爻齐-LuYaoQi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言这是陆爻齐收听了 纵横四海 的播客 《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海，做的一点笔记 也就是对播客里一些内容的总结、思考和理解，权当作记录罢 正文爱的定义爱是一种行动（activity），并不能用“激情”带来的生理性好感来完全指代，并非天定，而是用行动维护、培养出来的责任。 这种行动，必须是自发的。 倘若一名丈夫被妻子说了后，马上做了几件家务讨其欢心，后又疏懒，说一下动一">
+    <meta name="description" content="前言观前提示，笔者写的代码答案放在github仓库中，此处仅记录过程与心得。 正文Q1: WWPD: Lambda the Free有两个问题有点意思。 lambda 与参数1234&gt;&gt;&gt; b &#x3D; lambda x: lambda: x  # Lambdas can return other lambdas!&gt;&gt;&gt; c &#x3D; b(88)&gt;&gt;&gt; c">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海">
-<meta property="og:url" content="http://example.com/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/index.html">
+<meta property="og:title" content="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享">
+<meta property="og:url" content="http://example.com/2024/08/13/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%85%AD%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/index.html">
 <meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言这是陆爻齐收听了 纵横四海 的播客 《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海，做的一点笔记 也就是对播客里一些内容的总结、思考和理解，权当作记录罢 正文爱的定义爱是一种行动（activity），并不能用“激情”带来的生理性好感来完全指代，并非天定，而是用行动维护、培养出来的责任。 这种行动，必须是自发的。 倘若一名丈夫被妻子说了后，马上做了几件家务讨其欢心，后又疏懒，说一下动一">
+<meta property="og:description" content="前言观前提示，笔者写的代码答案放在github仓库中，此处仅记录过程与心得。 正文Q1: WWPD: Lambda the Free有两个问题有点意思。 lambda 与参数1234&gt;&gt;&gt; b &#x3D; lambda x: lambda: x  # Lambdas can return other lambdas!&gt;&gt;&gt; c &#x3D; b(88)&gt;&gt;&gt; c">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/index/BookWithEar.png">
-<meta property="article:published_time" content="2024-08-03T06:03:00.000Z">
+<meta property="og:image" content="http://example.com/img/index/CS61A.png">
+<meta property="article:published_time" content="2024-08-13T12:08:00.000Z">
 <meta property="article:modified_time" content="2024-08-13T14:11:32.731Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="播客笔记">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/index/BookWithEar.png">
+<meta name="twitter:image" content="http://example.com/img/index/CS61A.png">
   
   
   
-  <title>【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海 - LuYaoQi&#39;s Blogs</title>
+  <title>【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享 - LuYaoQi&#39;s Blogs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海"></span>
+            <span id="subtitle" data-typed-text="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享"></span>
           
         </div>
 
@@ -210,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-03 14:03" pubdate>
-          2024年8月3日 下午
+        <time datetime="2024-08-13 20:08" pubdate>
+          2024年8月13日 晚上
         </time>
       </span>
     
@@ -222,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          756 字
+          680 字
         
       </span>
     
@@ -233,7 +234,7 @@
         
         
         
-          7 分钟
+          6 分钟
         
       </span>
     
@@ -270,33 +271,41 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</h1>
+            <h1 id="seo-header">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是陆爻齐收听了 <strong>纵横四海</strong> 的播客 <strong>《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</strong>，做的一点笔记</p>
-<p>也就是对播客里一些内容的总结、思考和理解，权当作记录罢</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="爱的定义"><a href="#爱的定义" class="headerlink" title="爱的定义"></a>爱的定义</h3><p>爱是一种行动（activity），并不能用“激情”带来的生理性好感来完全指代，并非天定，而是用行动维护、培养出来的责任。</p>
-<p>这种行动，必须是自发的。</p>
-<p>倘若一名丈夫被妻子说了后，马上做了几件家务讨其欢心，后又疏懒，说一下动一下，则不算爱的行动；</p>
-<p>若是该丈夫在认识到自己的疏忽后，在日常中主动分担部分家务，这个属于爱的行动。</p>
-<h3 id="爱的意义"><a href="#爱的意义" class="headerlink" title="爱的意义"></a>爱的意义</h3><p>消除人生孤离感的“终极武器”。</p>
-<p>作者认为，人生于家，成年断亲后，需要填补这份离开亲人的孤离感。有人沉迷酒色，用过度放纵自己，刺激感官麻木自己；有人趋同他人，在与小集团同化中寻求认同。</p>
-<p>而爱，正是消除孤离感的良方妙药。</p>
-<p>不拘泥于男女，亲人，人人皆可有爱，从细节处关心即可。</p>
-<h3 id="爱的实质"><a href="#爱的实质" class="headerlink" title="爱的实质"></a>爱的实质</h3><p>提供创造性的互助</p>
-<p>来个一个不算恰当、意会即可的例子</p>
-<p>老师辅导时，最喜欢看到的情形是，学生经过主动思考，讲述自己的探索历程，遇到困难尝试客服，经讨论交流和老师一起探寻得到结果；</p>
-<p>与之相对，最令老师头疼的是，毫无思考，只来问老师此题怎解，从头到尾跟着老师思路，不能创造性的吸收知识，而是被动地塞入，老师便会感到枯燥乏味。</p>
-<p>总得来说，互相给予创造力便是。</p>
-<p>再拿情侣为例</p>
-<p>有人认为热恋期的“激情”才是爱，这段蜜月一过便分道扬镳，因为他无法从对方那里找到所谓的“新鲜感”。</p>
-<p>如果两人相爱，互相在日常中关心对方，记住对方的喜好，近日安排，时不时安排小礼物、小惊喜，无数个这样感动的瞬间，是否能连成一生呢？（还在 go）</p>
-<h3 id="爱的实践"><a href="#爱的实践" class="headerlink" title="爱的实践"></a>爱的实践</h3><p>自爱，就是关心自己的健康，不但身体，还有心理。平日是否过于忙碌，疏于放松；平日是否过于愤慨，没有发泄。适当安排假期或许不错，但这算奢望罢。</p>
-<p>男女&#x2F;亲人之爱，是否设身处地为人着想，是否从小处都有关心对方，行动帮助对方。</p>
-<h2 id="一点总结"><a href="#一点总结" class="headerlink" title="一点总结"></a>一点总结</h2><p>让陆爻齐对于爱确实有了一些新的想法，找到伴侣不应只是等待，爱是行动，培养出来的。</p>
-<p>不过现阶段还是提升自己更为重要，这些经验或许大四闲暇就能用上呢。</p>
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在github仓库中，此处仅记录过程与心得。</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="Q1-WWPD-Lambda-the-Free"><a href="#Q1-WWPD-Lambda-the-Free" class="headerlink" title="Q1: WWPD: Lambda the Free"></a>Q1: WWPD: Lambda the Free</h3><p>有两个问题有点意思。</p>
+<h4 id="lambda-与参数"><a href="#lambda-与参数" class="headerlink" title="lambda 与参数"></a>lambda 与参数</h4><figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">b = <span class="hljs-keyword">lambda</span> x: <span class="hljs-keyword">lambda</span>: x  <span class="hljs-comment"># Lambdas can return other lambdas!</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">c = b(<span class="hljs-number">88</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">c</span><br>______<br></code></pre></td></tr></table></figure>
+<p>该问题看似只是普通的 lambda 中传 x，c 还传入了 x 参数值为 88</p>
+<p>所以答案是 88 吗？</p>
+<p>当然不是，这个问题结合下面这个问题就很显然了。</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs isbl">&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">c</span>()</span><br><span class="hljs-variable">______</span><br></code></pre></td></tr></table></figure>
+<p>那么想清楚这个问题的关键，就在于能否分辨 c 和 c() 的含义。</p>
+<p>把 88 代入 c 的 lambda 式子，可以换成</p>
+<p>c &#x3D; lambda : 88</p>
+<p>本质上，c 其实还是个 lambda 式子，只不过无参数，所以直接调用 c 不会得到 88，还得象征性地传入无参数调用才行。</p>
+<h4 id="print-与-lambda"><a href="#print-与-lambda" class="headerlink" title="print 与 lambda"></a>print 与 lambda</h4><figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">print_lambda = <span class="hljs-keyword">lambda</span> z: <span class="hljs-built_in">print</span>(z)  <span class="hljs-comment"># When is the return expression of a lambda expression executed?</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">one_thousand = print_lambda(<span class="hljs-number">1000</span>)</span><br>______<br><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">one_thousand</span><br>______<br></code></pre></td></tr></table></figure>
+
+<p>这个 print_lambda 只是一个把传入参数直接 print 出来的函数罢了，那么第一个空当然是 1000 啦。</p>
+<p>嗯嗯，对，不过重点是第二个空的答案，这个 print_lambda 到底把什么赋予给 one_thousand 了？</p>
+<p>有同学会说，不是 1000 吗？</p>
+<p>不是哟，之所以第一个空会是 1000，是因为在赋值的过程前，先执行尽右侧函数时，print 的。</p>
+<p>排除了 1000，这又不是 Function（print_lambda 才是 Function，代入了参数后就不是啦），不是 Error，排除了所有可能，只能是 None 了。</p>
+<p>想想也是，print 也没有返回，None 也是理所应当。</p>
+<h3 id="Q2-WWPD-Higher-Order-Functions"><a href="#Q2-WWPD-Higher-Order-Functions" class="headerlink" title="Q2: WWPD: Higher Order Functions"></a>Q2: WWPD: Higher Order Functions</h3><p>值得注意的就一个点</p>
+<p>如果有 return 而无变量承接，那 return * 就会相当于 print(*)。</p>
+<h3 id="Q3-Lambdas-and-Currying"><a href="#Q3-Lambdas-and-Currying" class="headerlink" title="Q3: Lambdas and Currying"></a>Q3: Lambdas and Currying</h3><p>需要通过多个 () 调用，说明内部有几层 def。</p>
+<h3 id="Q4-Count-van-Count"><a href="#Q4-Count-van-Count" class="headerlink" title="Q4: Count van Count"></a>Q4: Count van Count</h3><p>要仔细看好，在测试里面，输入的 condition 的输入参数情况如何，输出如何。</p>
+<h3 id="Q5-Make-Adder"><a href="#Q5-Make-Adder" class="headerlink" title="Q5: Make Adder"></a>Q5: Make Adder</h3><p>不难，题目也说了，不会就放这个 <a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#mode=edit">视觉化网站</a> 看看结果</p>
+<h3 id="Q6-Lambda-the-Environment-Diagram"><a href="#Q6-Lambda-the-Environment-Diagram" class="headerlink" title="Q6: Lambda the Environment Diagram"></a>Q6: Lambda the Environment Diagram</h3><p>同 Q5</p>
+<h3 id="Q7-Composite-Identity-Function"><a href="#Q7-Composite-Identity-Function" class="headerlink" title="Q7: Composite Identity Function"></a>Q7: Composite Identity Function</h3><p>本质就是让你写个函数，返回对于 n ，先 f 后 g 与 先 g 后 f 是否相等，同时用上题目里的 compose1 函数。</p>
+<h3 id="Q8-I-Heard-You-Liked-Functions…Q8"><a href="#Q8-I-Heard-You-Liked-Functions…Q8" class="headerlink" title="Q8: I Heard You Liked Functions…Q8"></a>Q8: I Heard You Liked Functions…Q8</h3><p>这个问题有点意思，题目本质是要求给个函数，可以自定义循环对一个数字按顺序循环执行的次数和数字大小。</p>
+<p>陆爻齐的思路是，先写一个可以根据循环次数，返回应该执行函数的函数，比如 i &#x3D;&#x3D; 1 时，返回 f1，i &#x3D;&#x3D; 4 时，也返回 f1 这样。暂且叫 get_todo。</p>
+<p>然后写个循环，i &lt;&#x3D; n，对数字 num，代入执行 n 次 get_todo(i) 函数，结束。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>听完课可以锻炼英语听力，同时也对这个 higher order function 有了更深的感触，期待后续课程：）</p>
 
                 
               </div>
@@ -309,7 +318,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" class="print-no-link">#播客笔记</a>
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/CS61A/" class="print-no-link">#CS61A</a>
       
     </div>
   
@@ -321,8 +332,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</div>
-      <div>http://example.com/2024/08/03/【播客笔记】 《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海/</div>
+      <div>【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</div>
+      <div>http://example.com/2024/08/13/[CS61A-Fall-2020]学习记录六 Lab2 题解思路分享/</div>
     </div>
     <div class="license-meta">
       
@@ -334,7 +345,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月3日</div>
+          <div>2024年8月13日</div>
         </div>
       
       
@@ -359,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/13/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%85%AD%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/07/19/hello-world/" title="Hello World">
-                        <span class="hidden-mobile">Hello World</span>
+                      <a href="/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" title="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海">
+                        <span class="hidden-mobile">【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
