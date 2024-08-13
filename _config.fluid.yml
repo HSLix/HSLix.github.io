@@ -645,7 +645,7 @@ post:
 
     # CreativeCommons license
     # Options: BY | BY-SA | BY-ND | BY-NC | BY-NC-SA | BY-NC-ND
-    license: 'BY-NC-ND'
+    license: 'BY-NC-'
 
     # 显示作者
     author:
