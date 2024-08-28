@@ -16,16 +16,16 @@
   <meta name="author" content="陆爻齐-LuYaoQi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文Q1: WWPD: Lambda the Free有两个问题有点意思。 lambda 与参数1234&gt;&gt;&gt; b &#x3D; lambda x: lambda: x  # Lambdas can return other">
+    <meta name="description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文assert课堂中在讲授函数，如 1234from math import pidef area_circle(r):    return r * r * pi 但老师提出，当r为-10时，函数不会报错，于是引入assert来检测">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享">
-<meta property="og:url" content="http://example.com/2024/08/13/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E5%85%AD%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/index.html">
+<meta property="og:title" content="【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点">
+<meta property="og:url" content="http://example.com/2024/02/29/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%954%20Lecture4%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/index.html">
 <meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文Q1: WWPD: Lambda the Free有两个问题有点意思。 lambda 与参数1234&gt;&gt;&gt; b &#x3D; lambda x: lambda: x  # Lambdas can return other">
+<meta property="og:description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文assert课堂中在讲授函数，如 1234from math import pidef area_circle(r):    return r * r * pi 但老师提出，当r为-10时，函数不会报错，于是引入assert来检测">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/index/CS61A.png">
-<meta property="article:published_time" content="2024-08-13T12:08:00.000Z">
-<meta property="article:modified_time" content="2024-08-13T14:24:35.208Z">
+<meta property="article:published_time" content="2024-02-29T13:27:00.000Z">
+<meta property="article:modified_time" content="2024-08-28T08:46:22.064Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="CS61A">
@@ -34,7 +34,7 @@
   
   
   
-  <title>【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享 - LuYaoQi&#39;s Blogs</title>
+  <title>【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点 - LuYaoQi&#39;s Blogs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +200,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享"></span>
+            <span id="subtitle" data-typed-text="【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点"></span>
           
         </div>
 
@@ -211,8 +211,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-13 20:08" pubdate>
-          2024年8月13日 晚上
+        <time datetime="2024-02-29 21:27" pubdate>
+          2024年2月29日 晚上
         </time>
       </span>
     
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          719 字
+          602 字
         
       </span>
     
@@ -271,42 +271,39 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</h1>
+            <h1 id="seo-header">【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点</h1>
             
             
               <div class="markdown-body">
                 
                 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
 <p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="Q1-WWPD-Lambda-the-Free"><a href="#Q1-WWPD-Lambda-the-Free" class="headerlink" title="Q1: WWPD: Lambda the Free"></a>Q1: WWPD: Lambda the Free</h3><p>有两个问题有点意思。</p>
-<h4 id="lambda-与参数"><a href="#lambda-与参数" class="headerlink" title="lambda 与参数"></a>lambda 与参数</h4><figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">b = <span class="hljs-keyword">lambda</span> x: <span class="hljs-keyword">lambda</span>: x  <span class="hljs-comment"># Lambdas can return other lambdas!</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">c = b(<span class="hljs-number">88</span>)</span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">c</span><br>______<br></code></pre></td></tr></table></figure>
-<p>该问题看似只是普通的 lambda 中传 x，c 还传入了 x 参数值为 88</p>
-<p>所以答案是 88 吗？</p>
-<p>当然不是，这个问题结合下面这个问题就很显然了。</p>
-<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs isbl">&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">c</span>()</span><br><span class="hljs-variable">______</span><br></code></pre></td></tr></table></figure>
-<p>那么想清楚这个问题的关键，就在于能否分辨 c 和 c() 的含义。</p>
-<p>把 88 代入 c 的 lambda 式子，可以换成</p>
-<p>c &#x3D; lambda : 88</p>
-<p>本质上，c 其实还是个 lambda 式子，只不过无参数，所以直接调用 c 不会得到 88，还得象征性地传入无参数调用才行。</p>
-<h4 id="print-与-lambda"><a href="#print-与-lambda" class="headerlink" title="print 与 lambda"></a>print 与 lambda</h4><figure class="highlight python-repl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python-repl"><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">print_lambda = <span class="hljs-keyword">lambda</span> z: <span class="hljs-built_in">print</span>(z)  <span class="hljs-comment"># When is the return expression of a lambda expression executed?</span></span><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">one_thousand = print_lambda(<span class="hljs-number">1000</span>)</span><br>______<br><br><span class="hljs-meta prompt_">&gt;&gt;&gt;</span> <span class="language-python">one_thousand</span><br>______<br></code></pre></td></tr></table></figure>
-
-<p>这个 print_lambda 只是一个把传入参数直接 print 出来的函数罢了，那么第一个空当然是 1000 啦。</p>
-<p>嗯嗯，对，不过重点是第二个空的答案，这个 print_lambda 到底把什么赋予给 one_thousand 了？</p>
-<p>有同学会说，不是 1000 吗？</p>
-<p>不是哟，之所以第一个空会是 1000，是因为在赋值的过程前，先执行尽右侧函数时，print 的。</p>
-<p>排除了 1000，这又不是 Function（print_lambda 才是 Function，代入了参数后就不是啦），不是 Error，排除了所有可能，只能是 None 了。</p>
-<p>想想也是，print 也没有返回，None 也是理所应当。</p>
-<h3 id="Q2-WWPD-Higher-Order-Functions"><a href="#Q2-WWPD-Higher-Order-Functions" class="headerlink" title="Q2: WWPD: Higher Order Functions"></a>Q2: WWPD: Higher Order Functions</h3><p>值得注意的就一个点</p>
-<p>如果有 return 而无变量承接，那 return * 就会相当于 print(*)。</p>
-<h3 id="Q3-Lambdas-and-Currying"><a href="#Q3-Lambdas-and-Currying" class="headerlink" title="Q3: Lambdas and Currying"></a>Q3: Lambdas and Currying</h3><p>需要通过多个 () 调用，说明内部有几层 def。</p>
-<h3 id="Q4-Count-van-Count"><a href="#Q4-Count-van-Count" class="headerlink" title="Q4: Count van Count"></a>Q4: Count van Count</h3><p>要仔细看好，在测试里面，输入的 condition 的输入参数情况如何，输出如何。</p>
-<h3 id="Q5-Make-Adder"><a href="#Q5-Make-Adder" class="headerlink" title="Q5: Make Adder"></a>Q5: Make Adder</h3><p>不难，题目也说了，不会就放这个 <a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#mode=edit">视觉化网站</a> 看看结果</p>
-<h3 id="Q6-Lambda-the-Environment-Diagram"><a href="#Q6-Lambda-the-Environment-Diagram" class="headerlink" title="Q6: Lambda the Environment Diagram"></a>Q6: Lambda the Environment Diagram</h3><p>同 Q5</p>
-<h3 id="Q7-Composite-Identity-Function"><a href="#Q7-Composite-Identity-Function" class="headerlink" title="Q7: Composite Identity Function"></a>Q7: Composite Identity Function</h3><p>本质就是让你写个函数，返回对于 n ，先 f 后 g 与 先 g 后 f 是否相等，同时用上题目里的 compose1 函数。</p>
-<h3 id="Q8-I-Heard-You-Liked-Functions…Q8"><a href="#Q8-I-Heard-You-Liked-Functions…Q8" class="headerlink" title="Q8: I Heard You Liked Functions…Q8"></a>Q8: I Heard You Liked Functions…Q8</h3><p>这个问题有点意思，题目本质是要求给个函数，可以自定义循环对一个数字按顺序循环执行的次数和数字大小。</p>
-<p>陆爻齐的思路是，先写一个可以根据循环次数，返回应该执行函数的函数，比如 i &#x3D;&#x3D; 1 时，返回 f1，i &#x3D;&#x3D; 4 时，也返回 f1 这样。暂且叫 get_todo。</p>
-<p>然后写个循环，i &lt;&#x3D; n，对数字 num，代入执行 n 次 get_todo(i) 函数，结束。</p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>听完课可以锻炼英语听力，同时也对这个 higher order function 有了更深的感触，期待后续课程：）</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><p>课堂中在讲授函数，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">area_circle</span>(<span class="hljs-params">r</span>):<br>    <span class="hljs-keyword">return</span> r * r * pi<br></code></pre></td></tr></table></figure>
+<p>但老师提出，当r为-10时，函数不会报错，于是引入assert来检测参数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">area_circle</span>(<span class="hljs-params">r</span>):<br>    <span class="hljs-comment"># 参数应为正数</span><br>    <span class="hljs-keyword">assert</span> r &gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;A length must be positive&#x27;</span><br>    <span class="hljs-keyword">return</span> r * r * pi<br><span class="hljs-keyword">assert</span> r &gt; <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
+<p>也就是当r大于0时，无事发生；否则发生错误并提示后面的语句</p>
+<h3 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher-Order Functions"></a>Higher-Order Functions</h3><p>一开始读题并不懂，什么是高等级的函数呢？课上有个例子大致如下</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">def</span> <span class="hljs-title function_">make_adder</span>(<span class="hljs-params">k</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">adder</span>(<span class="hljs-params">n</span>):<br>        <span class="hljs-keyword">return</span> n + k<br>    <span class="hljs-keyword">return</span> adder<br></code></pre></td></tr></table></figure>
+<p>make_adder函数内又定义了个adder函数</p>
+<p>此时，如果调用make_adder(1)，会返回一个k为1的adder函数</p>
+<p>而如果调用make_adder(1)(2)，则相当于调用adder(2)，此时k&#x3D;1</p>
+<p>像这样的方式可以十分方便地减少重复代码，分离函数功能，更接近DRY(Don’t Repeat Yourself)</p>
+<h3 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h3><p>square &#x3D; lambda x: x * x<br>lambda表达式使得简单函数无需用def定义后再调用</p>
+<p>在python中，与def相比，lambda定义出的函数有一个特点，那就是没有内在自己的名字</p>
+<p>直接输入上式， square，会发现在内存中，square对应的函数其实是lambda，不叫square</p>
+<p>老师表示该功能在python中不常用，但其他有的地方会很重要，故学习并记录</p>
+<p>下面是一个稍微有些难度的例子，与lambda本身关系不大</p>
+<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs gml"># 寻找到f值为True的正数<span class="hljs-variable language_">x</span><br>def search(f):<br>    <span class="hljs-variable language_">x</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> True:<br>        <span class="hljs-keyword">if</span> f(<span class="hljs-variable language_">x</span>):<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">x</span><br>        <span class="hljs-variable language_">x</span> += <span class="hljs-number">1</span><br><br>def square(<span class="hljs-variable language_">x</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">x</span> * <span class="hljs-variable language_">x</span><br><br># 可以求出<span class="hljs-variable language_">y</span>对应的<span class="hljs-variable language_">x</span>满足f（<span class="hljs-variable language_">x</span>） == <span class="hljs-variable language_">y</span><br>def inverse(f):<br>    <span class="hljs-keyword">return</span> lambda <span class="hljs-variable language_">y</span>: search(lambda <span class="hljs-variable language_">x</span>, f(<span class="hljs-variable language_">x</span>) == <span class="hljs-variable language_">y</span>)<br></code></pre></td></tr></table></figure>
+<p>这里的inverse函数在初次看的时候有些令人费解，但一点点看</p>
+<p>首先从输出结果</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs isbl">&gt;&gt;&gt; <span class="hljs-variable">sqrt</span> = <span class="hljs-function"><span class="hljs-title">inverse</span>(<span class="hljs-variable">square</span>)</span><br>&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">square</span>(<span class="hljs-number">8</span>)</span><br><span class="hljs-number">64</span><br>&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">sqrt</span>(<span class="hljs-number">64</span>)</span><br><span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+<p>可见sqrt通过inverse承担了解平方的功能</p>
+<p>inverse中f对应的是square，而在search函数中的f对应的是lambda x, f(x) &#x3D;&#x3D; y</p>
+<p>sqrt(64)的64则是赋给了y，然后再在search中寻找让f(x) &#x3D;&#x3D; y成立的正数x并返回</p>
+<p>If的另一种表达<br>直接举栗子比较清晰</p>
+<p>x &#x3D; 0<br>x &#x3D; 1 if x &gt; 0 else x &#x3D; -1<br>x &gt; 0是条件，满足该条件时执行if前，否则执行else后</p>
+<p>当作拓展知识吧</p>
 
                 
               </div>
@@ -333,8 +330,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</div>
-      <div>http://example.com/2024/08/13/[CS61A-Fall-2020]学习记录六 Lab2 题解思路分享/</div>
+      <div>【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点</div>
+      <div>http://example.com/2024/02/29/[CS61A-Fall-2020]学习记录4 Lecture4中有意思的点/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +343,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月13日</div>
+          <div>2024年2月29日</div>
         </div>
       
       
@@ -371,12 +368,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" title="【方法论】如何读论文 李沐视频笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【方法论】如何读论文 李沐视频笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" title="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海">
-                        <span class="hidden-mobile">【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</span>
+                      <a href="/2024/02/29/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%953%20Lab1%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" title="【CS61A-Fall-2020】学习记录三 Lab1 题解思路分享">
+                        <span class="hidden-mobile">【CS61A-Fall-2020】学习记录三 Lab1 题解思路分享</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
