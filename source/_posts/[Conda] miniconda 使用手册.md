@@ -1,5 +1,5 @@
 ---
-title: [Conda] miniconda 使用手册
+title: 【Conda】 miniconda 使用手册
 tags: [Conda]
 index_img: /img/index/miniconda_logo.png
 date: 2024-09-16 14:14:00
