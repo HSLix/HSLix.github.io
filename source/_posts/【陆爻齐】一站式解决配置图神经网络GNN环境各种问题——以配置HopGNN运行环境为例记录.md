@@ -1,9 +1,9 @@
 ---
-title: 【陆爻齐】一站式解决配置图神经网络GNN环境各种问题——以配置HopGNN运行环境为例记录
-tags: [Python, 深度学习]
+title: 【深度学习】一站式解决配置图神经网络GNN环境各种问题——以配置HopGNN运行环境为例记录
+tags: [Python, 机器学习, 深度学习]
 index_img: /img/index/fluid_default.png
 date: 2024-03-25 14:06:00
-hide: true
+hide: false
 ---
 # 前言
 <a id="section1"></a>
