@@ -18,7 +18,7 @@ hide: false
 <a id="section2"></a>
 ## 官方提示与配置设备
 配环境，首先肯定先看官方怎么说
-[GitHub地址](https://github.com/JC-202/HopGNN)
+[HopGNN GitHub地址](https://github.com/JC-202/HopGNN)
 无requirement，其中的Dependencies中内容是
 * python 3.7.3
 * pytorch 1.10.1

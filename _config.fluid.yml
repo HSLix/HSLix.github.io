@@ -645,10 +645,10 @@ post:
 
     # CreativeCommons license
     # Options: BY | BY-SA | BY-ND | BY-NC | BY-NC-SA | BY-NC-ND
-    license: 'BY-NC-'
+    license: 'BY-NC'
 
     # 显示作者
-    author:
+    author: 
       enable: true
 
     # 显示发布日期
