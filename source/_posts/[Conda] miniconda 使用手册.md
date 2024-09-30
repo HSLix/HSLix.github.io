@@ -20,6 +20,10 @@ date: 2024-09-16 14:14:00
 `conda remove -n name --all`
 删除名字为 name 的环境
 
+## 克隆环境
+`conda create -n name --clone other`
+将名为 other 的环境复制到新环境 name 中
+
 ## 更改存储和环境的地方
 [参考网址](https://www.autodl.com/docs/miniconda/#:~:text=%E5%8F%96%E6%B6%88%E8%AE%BE%E7%BD%AE%E5%AE%89%E8%A3%85%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%88%B0%E6%95%B0%E6%8D%AE%E7%9B%98,%E7%BC%96%E8%BE%91%2Froot%2F.condarc%E6%96%87%E4%BB%B6%EF%BC%8C%E5%88%A0%E9%99%A4%E5%AF%B9%E5%BA%94%E7%9A%84%E8%B7%AF%E5%BE%84%E6%89%80%E5%9C%A8%E8%A1%8C%E5%8D%B3%E5%8F%AF)
 执行以下命令设置将虚拟环境安装到/root/autodl-tmp/conda/envs， 包缓存到/root/autodl-tmp/conda/pkgs
