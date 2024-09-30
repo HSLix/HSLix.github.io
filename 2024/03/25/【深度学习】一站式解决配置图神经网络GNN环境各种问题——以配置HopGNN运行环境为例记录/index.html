@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/index/fluid_default.png">
 <meta property="article:published_time" content="2024-03-25T06:06:00.000Z">
-<meta property="article:modified_time" content="2024-09-23T00:47:54.376Z">
+<meta property="article:modified_time" content="2024-09-30T00:56:25.848Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="机器学习">
@@ -508,7 +508,13 @@ ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' modu
 <p>但仍没有突破，于是查到之前的错误可能是下载文件不完整，于是删掉库重新clone并下载文件后，又出现新的错误报告<br><code>AttributeError: module numpy has no attribute int</code><br>参考文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46669612/article/details/129624331">AttributeError: module numpy has no attribute int .报错解决方案</a><br>经查询，numpy回退1.22.2后解决，这下彻底解决</p>
 <p>同时又用之前的python3.7试着跑第三条，仍然报错，说明还是要结合python3.8以上版本的这个环境</p>
 <h1 id="配置环境参考流程（运用Nvidia-GPU，pytorch、pyg的环境）"><a href="#配置环境参考流程（运用Nvidia-GPU，pytorch、pyg的环境）" class="headerlink" title="配置环境参考流程（运用Nvidia GPU，pytorch、pyg的环境）"></a>配置环境参考流程（运用Nvidia GPU，pytorch、pyg的环境）</h1><p><a id="section3"></a></p>
-<p>首先是确认，设备有 nvidia 显卡<br>然后查看是否满足配置 CUDA 的环境，nvidia 控制面板-系统信息-组件中的 3d 设置右侧产品名称的右侧有 CUDA 后面一串数字，这就是自己电脑支持的 CUDA 版本，一般选择配套的，作者有时候会选择略低于这个的版本，不能高于。具体情况视情况而定。<br>接着结合自己的需求和 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011489887/article/details/135250561">pytorch与cuda版本对应关系汇总</a> 来确定要下载的CUDA版本和pytorch版本<br>再到 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA官网</a> 下载cuda版本，安装用自定义，一般只用下CUDA即可，安装后配置环境变量并测试。此处安装程序开始选择的文件夹是临时安装文件夹，安装完成后会自行删除。<br>再到下载cuDNN，根据对应版本在 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN官网</a> 下载即可（第一次下载需要注册账号），下载后将文件夹的bin，include，lib三个文件夹“替换”（直接拷贝即可）CUDA安装位置内的同名文件夹，再配置对应环境变量后验证<br>下面到 <a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/#conda">pytorch官网</a> 下载对应 torch 版本，也可以自行在这个<a target="_blank" rel="noopener" href="http://download.pytorch.org/whl/torch_stable.html">网站</a>下载（笔者偏向使用后者）<br>最后，如果要用到 pyg，就可以参考自己的 pytorch 版本和 CUDA 版本，在 <a target="_blank" rel="noopener" href="https://data.pyg.org/whl/">该网站</a> 按需下载库，然后直接 pip install torch-geometric。（应该 pyg 下最新就行）<br>PS：cp38 代表适配 python 3.8</p>
+<p>首先是确认，设备有 nvidia 显卡</p>
+<p>然后查看是否满足配置 CUDA 的环境，nvidia 控制面板-系统信息-组件中的 3d 设置右侧产品名称的右侧有 CUDA 后面一串数字，这就是自己电脑支持的 CUDA 版本，一般选择配套的，作者有时候会选择略低于这个的版本，不能高于。具体情况视情况而定。</p>
+<p>接着结合自己的需求和 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011489887/article/details/135250561">pytorch与cuda版本对应关系汇总</a> 来确定要下载的CUDA版本和pytorch版本</p>
+<p>再到 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA官网</a> 下载cuda版本，安装用自定义，一般只用下CUDA即可，安装后配置环境变量并测试。此处安装程序开始选择的文件夹是临时安装文件夹，安装完成后会自行删除。</p>
+<p>再到下载cuDNN，根据对应版本在 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN官网</a> 下载即可（第一次下载需要注册账号），下载后将文件夹的bin，include，lib三个文件夹“替换”（直接拷贝即可）CUDA安装位置内的同名文件夹，再配置对应环境变量后验证</p>
+<p>下面到 <a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/#conda">pytorch官网</a> 下载对应 torch 版本，也可以自行在这个<a target="_blank" rel="noopener" href="http://download.pytorch.org/whl/torch_stable.html">网站</a>下载（笔者偏向使用后者）</p>
+<p>最后，如果要用到 pyg，就可以参考自己的 pytorch 版本和 CUDA 版本，在 <a target="_blank" rel="noopener" href="https://data.pyg.org/whl/">该网站</a> 按需下载库，然后直接 pip install torch-geometric。（应该 pyg 下最新就行）<br>PS：cp38 代表适配 python 3.8</p>
 <p>对于多个 CUDA 版本的管理，笔者参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50677040/article/details/132131346">这篇博客</a></p>
 <p>参考博客如下，后面再用我自己的话做个综合<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/by99031433/article/details/127721199">pytorch1.13安装</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shdabai/article/details/131248257">window11系统CUDA、cuDNN 安装以及环境变量配置</a></p>
 <h1 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h1><p><a id="section4"></a></p>
