@@ -293,11 +293,17 @@ ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' modu
 <a id="section3"></a>
 
 首先是确认，设备有 nvidia 显卡
+
 然后查看是否满足配置 CUDA 的环境，nvidia 控制面板-系统信息-组件中的 3d 设置右侧产品名称的右侧有 CUDA 后面一串数字，这就是自己电脑支持的 CUDA 版本，一般选择配套的，作者有时候会选择略低于这个的版本，不能高于。具体情况视情况而定。
+
 接着结合自己的需求和 [pytorch与cuda版本对应关系汇总](https://blog.csdn.net/u011489887/article/details/135250561) 来确定要下载的CUDA版本和pytorch版本
+
 再到 [CUDA官网](https://developer.nvidia.com/cuda-toolkit-archive) 下载cuda版本，安装用自定义，一般只用下CUDA即可，安装后配置环境变量并测试。此处安装程序开始选择的文件夹是临时安装文件夹，安装完成后会自行删除。
+
 再到下载cuDNN，根据对应版本在 [cuDNN官网](https://developer.nvidia.com/rdp/cudnn-archive) 下载即可（第一次下载需要注册账号），下载后将文件夹的bin，include，lib三个文件夹“替换”（直接拷贝即可）CUDA安装位置内的同名文件夹，再配置对应环境变量后验证
+
 下面到 [pytorch官网](https://pytorch.org/get-started/previous-versions/#conda) 下载对应 torch 版本，也可以自行在这个[网站](http://download.pytorch.org/whl/torch_stable.html)下载（笔者偏向使用后者）
+
 最后，如果要用到 pyg，就可以参考自己的 pytorch 版本和 CUDA 版本，在 [该网站](https://data.pyg.org/whl/) 按需下载库，然后直接 pip install torch-geometric。（应该 pyg 下最新就行）
 PS：cp38 代表适配 python 3.8
 
