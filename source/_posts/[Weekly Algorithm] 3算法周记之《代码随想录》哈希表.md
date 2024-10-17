@@ -329,8 +329,7 @@ public:
 - 本地算[[三数之和]]的拓展，习得这个拓展套路，便可解决类似的“五数之和”等
 - 与 [[四数相加||]] 不同，该题要在与 [[三数之和]] 的一个数组下，找到四数之和为 target 的四元组
 - 注意 target 可能为负，所以剪枝不能大于target就剪就差不多了罢
--
-  ```
+-  ```
   class Solution {
   public:
       vector<vector<int>> fourSum(vector<int>& nums, int target) {

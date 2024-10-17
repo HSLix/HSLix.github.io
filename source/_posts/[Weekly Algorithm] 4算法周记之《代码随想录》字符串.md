@@ -9,14 +9,15 @@ hide: false
 本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。
 
 # 字符串
+
 ## 简评
 究其本质而言，就是数组，只不过内容换成了字母。
+
 ## 反转字符串
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE)
 - 就是把字符串前后翻转，和[[翻转链表]]相似
 - 由于字符串可以随机读取，可以简单很多，直接 `swap` i 和 str.size()-1-i 的字符即可
--
-  ```
+- ```
   class Solution {
   public:
       void reverseString(vector<char>& s) {
@@ -28,8 +29,8 @@ hide: false
   };
   ```
 
-  ## 反转字符串||
-  - [代码随想录 (programmercarl.com)](https://programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html#%E6%80%9D%E8%B7%AF)
+## 反转字符串||
+- [代码随想录 (programmercarl.com)](https://programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html#%E6%80%9D%E8%B7%AF)
 - 与 [[反转字符串]] 类似，不过要求每 2k 个字符的前 k 个字符反转
 - 方法不难，可以像陆爻齐这样把两个阶段分开，也可像代码随想录这样合一起处理，不过还是要注意循环不变原则，比如反转字符串保持左闭右闭的区间
 - 陆爻齐的解法
