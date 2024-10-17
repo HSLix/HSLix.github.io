@@ -1,0 +1,971 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="学习小结本周跟随《代码随想录》学习栈与队列和二叉树遍历的一部分，学到了栈和队列在算法中的应用，以及优先级队列的使用；此外还有二叉树的前中后序的递归、迭代、统一迭代方法。 栈与队列用栈实现队列 代码随想录 (programmercarl.com) 题意就是用栈实现队列的一部分功能 核心就是通过两栈，一个管输入，一个管输出，输出空了时，执行输出操作需从输入中把数字倒入输出的栈中       class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）">
+<meta property="og:url" content="http://example.com/2024/10/13/[Weekly%20Algorithm]%205%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》学习栈与队列和二叉树遍历的一部分，学到了栈和队列在算法中的应用，以及优先级队列的使用；此外还有二叉树的前中后序的递归、迭代、统一迭代方法。 栈与队列用栈实现队列 代码随想录 (programmercarl.com) 题意就是用栈实现队列的一部分功能 核心就是通过两栈，一个管输入，一个管输出，输出空了时，执行输出操作需从输入中把数字倒入输出的栈中       class">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/leetcode.png">
+<meta property="article:published_time" content="2024-10-13T11:48:00.000Z">
+<meta property="article:modified_time" content="2024-10-17T14:57:28.692Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/leetcode.png">
+  
+  
+  
+  <title>【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一） - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-13 19:48" pubdate>
+          2024年10月13日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          32 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习栈与队列和二叉树遍历的一部分，学到了栈和队列在算法中的应用，以及优先级队列的使用；此外还有二叉树的前中后序的递归、迭代、统一迭代方法。</p>
+<h1 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h1><h2 id="用栈实现队列"><a href="#用栈实现队列" class="headerlink" title="用栈实现队列"></a>用栈实现队列</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0232.%E7%94%A8%E6%A0%88%E5%AE%9E%E7%8E%B0%E9%98%9F%E5%88%97.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>题意就是用栈实现队列的一部分功能</li>
+<li>核心就是通过两栈，一个管输入，一个管输出，输出空了时，执行输出操作需从输入中把数字倒入输出的栈中</li>
+<li><pre><code class="hljs">
+</code></pre>
+</li>
+</ul>
+<p>  class MyQueue {<br>  public:<br>      stack<int> in;<br>      stack<int> out;</p>
+<pre><code class="hljs">  MyQueue() &#123;
+      
+  &#125;
+  
+  void push(int x) &#123;
+      in.push(x);
+  &#125;
+  
+  int pop() &#123;
+      int num = this-&gt;peek();
+      out.pop();
+      return num;
+  &#125;
+  
+  int peek() &#123;
+      // 这个判空很重要，意味着如果在两次push中有pop，下次pop不会得到刚push进去的数字，而是按队列下去
+      if (out.empty()) &#123;
+          while(!in.empty()) &#123;
+          out.push(in.top());
+          in.pop();
+          &#125;
+      &#125;
+      
+      return out.top();
+  &#125;
+  
+  bool empty() &#123;
+      return in.empty() &amp;&amp; out.empty();
+  &#125;
+</code></pre>
+<p>  };</p>
+<p>  &#x2F;**</p>
+<ul>
+<li>Your MyQueue object will be instantiated and called as such:</li>
+<li>MyQueue* obj &#x3D; new MyQueue();</li>
+<li>obj-&gt;push(x);</li>
+<li>int param_2 &#x3D; obj-&gt;pop();</li>
+<li>int param_3 &#x3D; obj-&gt;peek();</li>
+<li>bool param_4 &#x3D; obj-&gt;empty();<br>   *&#x2F;  <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>## 用队列实现栈<br>- [代码随想录 (programmercarl.com)](https://programmercarl.com/<span class="hljs-number">0225</span>.<span class="hljs-variable">%E7</span><span class="hljs-variable">%94</span><span class="hljs-variable">%A8</span><span class="hljs-variable">%E9</span><span class="hljs-variable">%98</span><span class="hljs-variable">%9</span>F<span class="hljs-variable">%E5</span><span class="hljs-variable">%88</span><span class="hljs-variable">%97</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%9</span>E<span class="hljs-variable">%E7</span><span class="hljs-variable">%8</span>E<span class="hljs-variable">%B0</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%A0</span><span class="hljs-variable">%88</span>.html#<span class="hljs-variable">%E7</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%97</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%95</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%85</span><span class="hljs-variable">%AC</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%BC</span><span class="hljs-variable">%80</span><span class="hljs-variable">%E8</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%BE</span>)<br>- 如题，用队列实现栈，强调是单向队列<br>- 乍一看，还想用 [[用栈实现队列]] 的方法，两个队列，一个模拟输入，一个模拟输出，但其实不行，因为队列先进先出，不会改变输入顺序，另一个队列只能起到备份作用，甚至乎，只要一个队列就行，在 pop（）时先获取队列长度 size，把前面 size<span class="hljs-number">-1</span> 个元素放后面，再把最前面拿出来就行。<br>- ```<br>  class MyStack &#123;<br><span class="hljs-symbol">  public:</span><br>      queue&lt;int&gt; q<span class="hljs-comment">;</span><br>      queue&lt;int&gt; backup<span class="hljs-comment">;</span><br>      MyStack() &#123;<br>  <br>      &#125;<br>      <br>      <span class="hljs-type">void</span> push(int <span class="hljs-keyword">x</span>) &#123;<br>          q.push(<span class="hljs-keyword">x</span>)<span class="hljs-comment">;</span><br>      &#125;<br>      <br>      int pop() &#123;<br>      	// 备份<br>          while(q.size() &gt; <span class="hljs-number">1</span>) &#123;<br>              backup.push(q.front())<span class="hljs-comment">;</span><br>              q.pop()<span class="hljs-comment">;</span><br>          &#125;<br>          int top <span class="hljs-operator">=</span> q.front()<span class="hljs-comment">;</span><br>          q.pop()<span class="hljs-comment">;</span><br>          // 恢复<br>          while (<span class="hljs-title">!backup.empty</span>()) &#123;<br>              q.push(backup.front())<span class="hljs-comment">;</span><br>              backup.pop()<span class="hljs-comment">;</span><br>          &#125;<br>          return top<span class="hljs-comment">;</span><br>      &#125;<br>      <br>      int top() &#123;<br>          int top <span class="hljs-operator">=</span> this-&gt;pop()<span class="hljs-comment">;</span><br>          this-&gt;push(top)<span class="hljs-comment">;</span><br>          return top<span class="hljs-comment">;</span><br>      &#125;<br>      <br>      bool empty() &#123;<br>          return q.empty()<span class="hljs-comment">;</span><br>      &#125;<br>  &#125;<span class="hljs-comment">;</span><br><span class="hljs-comment">  </span><br>  /**<br>   * Your MyStack object will be instantiated <span class="hljs-keyword">and</span> called as such:<br>   * MyStack* obj <span class="hljs-operator">=</span> new MyStack()<span class="hljs-comment">;</span><br>   * obj-&gt;push(<span class="hljs-keyword">x</span>)<span class="hljs-comment">;</span><br>   * int param_<span class="hljs-number">2</span> <span class="hljs-operator">=</span> obj-&gt;pop()<span class="hljs-comment">;</span><br>   * int param_<span class="hljs-number">3</span> <span class="hljs-operator">=</span> obj-&gt;top()<span class="hljs-comment">;</span><br>   * bool param_<span class="hljs-number">4</span> <span class="hljs-operator">=</span> obj-&gt;empty()<span class="hljs-comment">;</span><br>   */<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="有效的括号"><a href="#有效的括号" class="headerlink" title="有效的括号"></a>有效的括号</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0020.%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>题意是给一个只有小中大括号的字符串，判断其是否正确地两两匹配</li>
+<li>方法是利用栈，若两两匹配则弹出，后面的判断陆爻齐简单地判断栈是否空作为结果，毕竟陆爻齐是把无法匹配的括号也放进去了，代码随想录则分别判断了情况并处理，更为周全</li>
+<li>陆爻齐的解法<figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs fsharp"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span><span class="hljs-operator">:</span><br>    stack<span class="hljs-operator">&lt;</span>char<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">rec</span>;<br>    bool isValid(string s) &#123;<br>        <span class="hljs-keyword">if</span> (s.size() <span class="hljs-operator">%</span> <span class="hljs-number">2</span> <span class="hljs-operator">!=</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br><br>        <span class="hljs-keyword">for</span> (auto c <span class="hljs-operator">:</span> s) &#123;<br>            char top_c <span class="hljs-operator">=</span> get_top();<br>            <span class="hljs-comment">// 匹配成功则弹栈，否则压栈</span><br>            <span class="hljs-keyword">if</span> ((c <span class="hljs-operator">==</span> <span class="hljs-string">&#x27;)&#x27;</span> <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-string">&#x27;(&#x27;</span> <span class="hljs-operator">==</span> top_c) <span class="hljs-operator">||</span><br>                (c <span class="hljs-operator">==</span> <span class="hljs-string">&#x27;]&#x27;</span> <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-string">&#x27;[&#x27;</span> <span class="hljs-operator">==</span> top_c) <span class="hljs-operator">||</span><br>                (c <span class="hljs-operator">==</span> <span class="hljs-string">&#x27;&#125;&#x27;</span> <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-string">&#x27;&#123;&#x27;</span> <span class="hljs-operator">==</span> top_c)) &#123;<br>                <span class="hljs-keyword">rec</span>.pop();<br>            &#125;<br>            <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">rec</span>.push(c);<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-operator">/*</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">rec</span>.empty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>        &#125;<span class="hljs-operator">*/</span><br>        <span class="hljs-comment">// 若全部匹配成功，则有效</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">rec</span>.empty();<br>    &#125;<br><br>    <span class="hljs-keyword">inline</span> char get_top() &#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-operator">!</span><span class="hljs-keyword">rec</span>.empty()) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">rec</span>.top();<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27; &#x27;</span>;<br>    &#125;<br>    <br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li>代码随想录的解法<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">class</span> Solution &#123;<br><span class="hljs-keyword">public</span>:<br>    bool isValid(string s) &#123;<br>        <span class="hljs-keyword">if</span> (s.<span class="hljs-keyword">size</span>() % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; <span class="hljs-comment">// 如果s的长度为奇数，一定不符合要求</span><br>        stack&lt;<span class="hljs-keyword">char</span>&gt; st;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; s.<span class="hljs-keyword">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;(&#x27;</span>) st.<span class="hljs-keyword">push</span>(<span class="hljs-string">&#x27;)&#x27;</span>);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;&#123;&#x27;</span>) st.<span class="hljs-keyword">push</span>(<span class="hljs-string">&#x27;&#125;&#x27;</span>);<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s[i] == <span class="hljs-string">&#x27;[&#x27;</span>) st.<span class="hljs-keyword">push</span>(<span class="hljs-string">&#x27;]&#x27;</span>);<br>            <span class="hljs-comment">// 第三种情况：遍历字符串匹配的过程中，栈已经为空了，没有匹配的字符了，说明右括号没有找到对应的左括号 return false</span><br>            <span class="hljs-comment">// 第二种情况：遍历字符串匹配的过程中，发现栈里没有我们要匹配的字符。所以return false</span><br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (st.empty() || st.top() != s[i]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>            <span class="hljs-keyword">else</span> st.<span class="hljs-keyword">pop</span>(); <span class="hljs-comment">// st.top() 与 s[i]相等，栈弹出元素</span><br>        &#125;<br>        <span class="hljs-comment">// 第一种情况：此时我们已经遍历完了字符串，但是栈不为空，说明有相应的左括号没有右括号来匹配，所以return false，否则就return true</span><br>        <span class="hljs-keyword">return</span> st.empty();<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="删除字符串中的所有相邻重复项"><a href="#删除字符串中的所有相邻重复项" class="headerlink" title="删除字符串中的所有相邻重复项"></a>删除字符串中的所有相邻重复项</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/1047.%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9.html">代码随想录 (programmercarl.com)</a></li>
+<li>如题，比如“abbaac”，先去 “bb”，得 “aaac”，再去 “aa”，得 “ac”。</li>
+<li>方法就是用栈，来了与栈顶相同的字符就弹栈，否则压栈</li>
+<li><pre><code class="hljs">
+</code></pre>
+</li>
+</ul>
+<p>  class Solution {<br>  public:<br>      string removeDuplicates(string s) {<br>          string result;<br>          for(auto c : s) {<br>              if (result.empty() || c !&#x3D; result.back()) {<br>                  result.push_back(c);<br>              }<br>              else {<br>                  result.pop_back();<br>              }<br>          }<br>          return result;<br>      }<br>  };<br>  <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><br><span class="hljs-attr">## 逆波兰表达式求值</span><br><span class="hljs-attr">- [代码随想录 (programmercarl.com)](https://programmercarl.com/0150</span>.<span class="hljs-meta">%</span>E<span class="hljs-number">9</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span><span class="hljs-number">86</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>B<span class="hljs-number">3</span><span class="hljs-meta">%</span>A<span class="hljs-number">2</span><span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">85</span><span class="hljs-meta">%</span>B<span class="hljs-number">0</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>A<span class="hljs-number">1</span><span class="hljs-meta">%</span>A<span class="hljs-number">8</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>BE<span class="hljs-meta">%</span>BE<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span>BC<span class="hljs-meta">%</span><span class="hljs-number">8</span>F<span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>B<span class="hljs-number">1</span><span class="hljs-meta">%</span><span class="hljs-number">82</span><span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span>BC.html<span class="hljs-attr">#%E7</span><span class="hljs-meta">%</span>AE<span class="hljs-meta">%</span><span class="hljs-number">97</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>B<span class="hljs-number">3</span><span class="hljs-meta">%</span><span class="hljs-number">95</span><span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">85</span><span class="hljs-meta">%</span>AC<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span>BC<span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>AF<span class="hljs-meta">%</span>BE)<br>- 题意，就是对后缀表达式计算求值，比如 [<span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;+&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot; * &quot;</span>]<br>- 方法，就是用栈去保存遍历到的值，一旦遍历到符号，就取出两次顶来做计算然后压栈，具体实现，可以先判断是否符号再处理，也可分别判断，前者代码更简洁，后者判断少一次<br>- 代码随想录，简洁点<br></code></pre></td></tr></table></figure><br>  class Solution {<br>  public:<br>      int evalRPN(vector<string>&amp; tokens) {<br>          &#x2F;&#x2F; 力扣修改了后台测试数据，需要用longlong<br>          stack<long long> st;<br>          for (int i &#x3D; 0; i &lt; tokens.size(); i++) {<br>              if (tokens[i] &#x3D;&#x3D; “+” || tokens[i] &#x3D;&#x3D; “-“ || tokens[i] &#x3D;&#x3D; “<em>“ || tokens[i] &#x3D;&#x3D; “&#x2F;“) {<br>                  long long num1 &#x3D; st.top();<br>                  st.pop();<br>                  long long num2 &#x3D; st.top();<br>                  st.pop();<br>                  if (tokens[i] &#x3D;&#x3D; “+”) st.push(num2 + num1);<br>                  if (tokens[i] &#x3D;&#x3D; “-“) st.push(num2 - num1);<br>                  if (tokens[i] &#x3D;&#x3D; “</em>“) st.push(num2 * num1);<br>                  if (tokens[i] &#x3D;&#x3D; “&#x2F;“) st.push(num2 &#x2F; num1);<br>              } else {<br>                  st.push(stoll(tokens[i]));<br>              }<br>          }</p>
+<pre><code class="hljs">      int result = st.top();
+      st.pop(); // 把栈里最后一个元素弹出（其实不弹出也没事）
+      return result;
+  &#125;
+</code></pre>
+<p>  };<br>  <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-bullet">- </span>陆爻齐，判断少一次<br></code></pre></td></tr></table></figure><br>  class Solution {<br>  public:<br>      int evalRPN(vector<string>&amp; tokens) {<br>          stack<int> s;<br>          for (auto c : tokens) {<br>              if (c &#x3D;&#x3D; “+”) {<br>                  int top1 &#x3D; s.top();<br>                  s.pop();<br>                  int top2 &#x3D; s.top();<br>                  s.pop();<br>                  s.push(top1 + top2);<br>              }<br>              else if (c &#x3D;&#x3D; “-“) {<br>                  int top1 &#x3D; s.top();<br>                  s.pop();<br>                  int top2 &#x3D; s.top();<br>                  s.pop();<br>                  s.push(top2 - top1);<br>              }<br>              else if (c &#x3D;&#x3D; “*”) {<br>                  int top1 &#x3D; s.top();<br>                  s.pop();<br>                  int top2 &#x3D; s.top();<br>                  s.pop();<br>                  s.push(top1 * top2);<br>              }<br>              else if (c &#x3D;&#x3D; “&#x2F;“) {<br>                  int top1 &#x3D; s.top();<br>                  s.pop();<br>                  int top2 &#x3D; s.top();<br>                  s.pop();<br>                  s.push(top2 &#x2F; top1);<br>              }<br>              else {<br>                  s.push(stoi(c));<br>              }<br>          }<br>          return s.top();<br>      }<br>  };<br>  <figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><br>## 滑动窗口最大值<br>- [代码随想录 (programmercarl.com)](https://programmercarl.com/<span class="hljs-number">0239</span>.<span class="hljs-variable">%E6</span><span class="hljs-variable">%BB</span><span class="hljs-variable">%91</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%8</span>A<span class="hljs-variable">%A8</span><span class="hljs-variable">%E7</span><span class="hljs-variable">%AA</span><span class="hljs-variable">%97</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%8</span>F<span class="hljs-variable">%A3</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%9</span>C<span class="hljs-variable">%80</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%A4</span><span class="hljs-variable">%A7</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%80</span><span class="hljs-variable">%BC.html</span>#<span class="hljs-variable">%E7</span><span class="hljs-variable">%AE</span><span class="hljs-variable">%97</span><span class="hljs-variable">%E6</span><span class="hljs-variable">%B3</span><span class="hljs-variable">%95</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%85</span><span class="hljs-variable">%AC</span><span class="hljs-variable">%E5</span><span class="hljs-variable">%BC</span><span class="hljs-variable">%80</span><span class="hljs-variable">%E8</span><span class="hljs-variable">%AF</span><span class="hljs-variable">%BE</span>)<br>- 题意，设定一个窗口大小，然后在 vector 上从左向右滑动，每次都计算一次窗口内最大值并保存<br>- 方法，最简单的暴力解法，O(n^<span class="hljs-number">2</span>)，每次窗口都遍历下窗口内；想让时间复杂度变 O(n)，就需要一个叫做单调队列的数据结构，该队列保证内部数值按降序或升序排列，在 C++ 无标准库实现，本题中可让其按降序，每次找最大值仅需取 front 即可<br>- PS: 单调队列实现不唯一，本题只看最大值，故把较小的数值直接弹栈，不做保存<br>-  ```<br>  class Solution &#123;<br><span class="hljs-symbol">  public:</span><br>      // 实现单调队列<br>      class MyQueue &#123;<br><span class="hljs-symbol">      private:</span><br>          deque&lt;int&gt; q<span class="hljs-comment">;</span><br><span class="hljs-symbol">      public:</span><br>          <span class="hljs-type">void</span> push(int num) &#123;<br>              // 由于只关心大值，故小值可直接pop<br>              while(<span class="hljs-title">!q.empty</span>() &amp;&amp; num &gt; q.back()) &#123;<br>                  q.pop_back()<span class="hljs-comment">;</span><br>              &#125;<br>              q.push_back(num)<span class="hljs-comment">;</span><br>          &#125;<br>  <br>          <span class="hljs-type">void</span> pop(int num) &#123;<br>              if (<span class="hljs-title">!q.empty</span>() &amp;&amp; num <span class="hljs-operator">=</span><span class="hljs-operator">=</span> q.front()) &#123;<br>                  q.pop_front()<span class="hljs-comment">;</span><br>              &#125;<br>          &#125;<br>  <br>          // 保证 front 是最大值<br>          int front() &#123;<br>              return q.front()<span class="hljs-comment">;</span><br>          &#125;<br>  <br>      &#125;<span class="hljs-comment">;</span><br><span class="hljs-comment">      </span><br>      vector&lt;int&gt; maxSlidingWindow(vector&lt;int&gt;&amp; nums<span class="hljs-punctuation">,</span> int k) &#123;<br>          MyQueue q<span class="hljs-comment">;</span><br>          vector&lt;int&gt; result<span class="hljs-comment">;</span><br>          int size <span class="hljs-operator">=</span> nums.size()<span class="hljs-comment">;</span><br>          // 先处理前面 k 个值，并记录一次<br>          for (int i <span class="hljs-operator">=</span> <span class="hljs-number">0</span><span class="hljs-comment">; i &lt; k; i++) &#123;</span><br>              q.push(nums[i])<span class="hljs-comment">;</span><br>          &#125;<br>          result.push_back(q.front())<span class="hljs-comment">;</span><br>          // 滑动窗口<br>          for (int i <span class="hljs-operator">=</span> k<span class="hljs-comment">; i &lt; size; i++) &#123;</span><br>              q.push(nums[i])<span class="hljs-comment">;</span><br>              q.pop(nums[i - k])<span class="hljs-comment">;</span><br>              result.push_back(q.front())<span class="hljs-comment">;</span><br>          &#125;<br>          return result<span class="hljs-comment">;</span><br>      &#125;<br>  &#125;<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure></p>
+<h2 id="前K个高频元素"><a href="#前K个高频元素" class="headerlink" title="前K个高频元素"></a>前K个高频元素</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0347.%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>题意就是给一个整型数组，要求给出其中出现频率最高的前 K 个元素</p>
+</li>
+<li><p>最直观的解法，就是用 map 记录频率，导入 vector 再用快速排序，但这么做时间复杂度就达到了 O(n*logn)，还有没有更快的方法呢？</p>
+<p>这里就要引入优先级队列，在[[滑动窗口最大值]]其实就有所应用，这次不止要最大值，因此那次实现的优先级队列不好直接应用。  </p>
+<p>优先级队列在 C++ 的 STL 中就有实现，priority_queue，本质为堆，默认大顶堆。和  </p>
+<p>虽然直观上使用大顶堆来保存前 K 个元素比较合适，但是在本题中使用小顶堆更好，因为小顶堆意味着每次 pop 出的就是最小的元素，这么做就可以反复添加元素并去除多于元素来保证堆内都是最大的一批元素。  </p>
+</li>
+<li><pre><code class="hljs">
+</code></pre>
+</li>
+</ul>
+<p>  class Solution {<br>  public:<br>      &#x2F;&#x2F; 自定义排序<br>      class my_compare {<br>      public:<br>          bool operator() (const pair&lt;int,int&gt; &amp;l, const pair&lt;int,int&gt; &amp;r) {<br>              return l.second &gt; r.second;<br>          }<br>      };</p>
+<pre><code class="hljs">  vector&lt;int&gt; topKFrequent(vector&lt;int&gt;&amp; nums, int k) &#123;
+      // 统计所有数字的频率
+      unordered_map&lt;int, int&gt; rec;
+      for (auto i : nums) &#123;
+          rec[i]++;
+      &#125;
+
+      // 小顶堆
+      priority_queue&lt;pair&lt;int,int&gt;, vector&lt;pair&lt;int,int&gt;&gt;, my_compare&gt; pri_que;
+
+      for (unordered_map&lt;int,int&gt;::iterator it = rec.begin(); it != rec.end(); it++) &#123;
+          pri_que.push(*it);
+          // 对于小顶堆，总是保持非降序，故加入元素后弹出最小即可保持前 k 个最高频次元素
+          if (pri_que.size() &gt; k) &#123;
+              pri_que.pop();
+          &#125;
+      &#125;
+
+      vector&lt;int&gt; result(k);
+      for (int i = k-1; i &gt;= 0; i--) &#123;
+          result[i] = pri_que.top().first;
+          pri_que.pop();
+      &#125;
+
+      return result;
+  &#125;
+</code></pre>
+<p>  };<br>  <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><br><br><span class="hljs-attr"># 二叉树</span><br><span class="hljs-attr">## 二叉树的递归遍历</span><br><span class="hljs-attr">- [代码随想录 (programmercarl.com)](https://programmercarl.com/%E4</span><span class="hljs-meta">%</span>BA<span class="hljs-meta">%</span><span class="hljs-number">8</span>C<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>F<span class="hljs-meta">%</span><span class="hljs-number">89</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>A<span class="hljs-number">0</span><span class="hljs-meta">%</span><span class="hljs-number">91</span><span class="hljs-meta">%</span>E<span class="hljs-number">7</span><span class="hljs-meta">%</span><span class="hljs-number">9</span>A<span class="hljs-meta">%</span><span class="hljs-number">84</span><span class="hljs-meta">%</span>E<span class="hljs-number">9</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span><span class="hljs-number">92</span><span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span>BD<span class="hljs-meta">%</span><span class="hljs-number">92</span><span class="hljs-meta">%</span>E<span class="hljs-number">9</span><span class="hljs-meta">%</span><span class="hljs-number">81</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>D<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>E<span class="hljs-meta">%</span><span class="hljs-number">86.</span>html<span class="hljs-attr">#%E6</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span><span class="hljs-number">9</span>D<span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>B<span class="hljs-number">7</span><span class="hljs-meta">%</span>AF)<br>- 如题，用递归的方式完成二叉树的遍历<br>- 本题更多的是引入递归的写法，首先确认递归的参数和返回值，然后定好终止条件，最后写好单层递归逻辑<br>- 本质上不同的是输出结果的顺序，前序时，先输出结果再遍历，中序时输出结果再遍历之间，后序时输出结果在遍历后<br>- 前序遍历：<br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li><p>Definition for a binary tree node.</p>
+</li>
+<li><p>struct TreeNode {</p>
+</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li><p>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> preorderTraversal(TreeNode</em> root) {<br> pre_val(root);<br> return result;<br> }</p>
+<p> void pre_val(TreeNode* n) {<br> if (n &#x3D;&#x3D; nullptr) return;<br> result.push_back(n-&gt;val);<br> pre_val(n-&gt;left);<br> pre_val(n-&gt;right);<br> }</p>
+</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">中序遍历：  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li><p>Definition for a binary tree node.</p>
+</li>
+<li><p>struct TreeNode {</p>
+</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li><p>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> inorderTraversal(TreeNode</em> root) {<br> mid_val(root);<br> return result;<br> }</p>
+<p> void mid_val(TreeNode *n) {<br> if (n &#x3D;&#x3D; nullptr) return;<br> mid_val(n-&gt;left);<br> result.push_back(n-&gt;val);<br> mid_val(n-&gt;right);<br> }</p>
+</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">后序遍历：  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li><p>Definition for a binary tree node.</p>
+</li>
+<li><p>struct TreeNode {</p>
+</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li><p>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> postorderTraversal(TreeNode</em> root) {<br> back_val(root);<br> return result;<br> }</p>
+<p> void back_val(TreeNode *root) {<br> if (root &#x3D;&#x3D; nullptr) return;<br> back_val(root-&gt;left);<br> back_val(root-&gt;right);<br> result.push_back(root-&gt;val);<br> }</p>
+</li>
+</ul>
+<p>  };<br>  <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><br><span class="hljs-attr">## 二叉树的迭代遍历</span><br><span class="hljs-attr">- [代码随想录 (.com)](https://programmercarl.com/%E4</span><span class="hljs-meta">%</span>BA<span class="hljs-meta">%</span><span class="hljs-number">8</span>C<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>F<span class="hljs-meta">%</span><span class="hljs-number">89</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>A<span class="hljs-number">0</span><span class="hljs-meta">%</span><span class="hljs-number">91</span><span class="hljs-meta">%</span>E<span class="hljs-number">7</span><span class="hljs-meta">%</span><span class="hljs-number">9</span>A<span class="hljs-meta">%</span><span class="hljs-number">84</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>BF<span class="hljs-meta">%</span>AD<span class="hljs-meta">%</span>E<span class="hljs-number">4</span><span class="hljs-meta">%</span>BB<span class="hljs-meta">%</span>A<span class="hljs-number">3</span><span class="hljs-meta">%</span>E<span class="hljs-number">9</span><span class="hljs-meta">%</span><span class="hljs-number">81</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>D<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>E<span class="hljs-meta">%</span><span class="hljs-number">86.</span>html<span class="hljs-attr">#%E7</span><span class="hljs-meta">%</span>AE<span class="hljs-meta">%</span><span class="hljs-number">97</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>B<span class="hljs-number">3</span><span class="hljs-meta">%</span><span class="hljs-number">95</span><span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">85</span><span class="hljs-meta">%</span>AC<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span>BC<span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>AF<span class="hljs-meta">%</span>BE)<br>- 如题，要用迭代的方式来解决遍历二叉树的问题<br>- 不同于递归遍历的简洁明了，迭代方式需要用栈来模拟递归的方式<br>  <br>  前序遍历则简单点，由于搜寻的点就是马上要处理的点，但中序遍历则要分两部分，一部分是一味地搜寻左子树，另一部分开始处理栈积攒的点并切换到右子树；后序遍历则把前序遍历的 “中右左” 换成 “中左右” 再反转成 “右左中” 即可  <br>- 前序遍历<br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> preorderTraversal(TreeNode</em> root) {<br> TreeNode *p &#x3D; root;<br> stack&lt;TreeNode*&gt; rec;<br> if(root !&#x3D; nullptr) rec.push(root);<br> while(!rec.empty()) {<br>     p &#x3D; rec.top();<br>     rec.pop();<br>     result.push_back(p-&gt;val);<br>     &#x2F;&#x2F; 由于是栈，所以先入右，就会有遍历时先左后右的效果<br>     if (p-&gt;right !&#x3D; nullptr) rec.push(p-&gt;right);<br>     if (p-&gt;left !&#x3D; nullptr) rec.push(p-&gt;left);<br> }<br> return result;<br> }</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">中序遍历  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> inorderTraversal(TreeNode</em> root) {<br> TreeNode *cur &#x3D; root;<br> stack&lt;TreeNode *&gt; rec;<br> while (cur!&#x3D; nullptr || !rec.empty()) {<br>     if (cur !&#x3D; NULL) {<br>         rec.push(cur);<br>         cur &#x3D; cur-&gt;left;<br>     }<br>     else {<br>         cur &#x3D; rec.top();<br>         rec.pop();<br>         result.push_back(cur-&gt;val);<br>         cur &#x3D; cur-&gt;right;<br>     }<br> }<br> return result;<br> }</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">后序遍历  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> postorderTraversal(TreeNode</em> root) {<br> TreeNode *cur &#x3D; root;<br> stack&lt;TreeNode*&gt; rec;<br> if (cur !&#x3D; nullptr) rec.push(cur);<br><br> while(!rec.empty()) {<br>     cur &#x3D; rec.top();<br>     rec.pop();<br>     result.push_back(cur-&gt;val);<br>     if (cur-&gt;left !&#x3D; nullptr) rec.push(cur-&gt;left);<br>     if (cur-&gt;right !&#x3D; nullptr) rec.push(cur-&gt;right);<br> }<br> reverse(result.begin(), result.end());<br> return result;<br> }</li>
+</ul>
+<p>  };<br>  <figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><br><span class="hljs-attr">## 二叉树的统一迭代遍历法</span><br><span class="hljs-attr">- [代码随想录 (programmercarl.com)](https://programmercarl.com/%E4</span><span class="hljs-meta">%</span>BA<span class="hljs-meta">%</span><span class="hljs-number">8</span>C<span class="hljs-meta">%</span>E<span class="hljs-number">5</span><span class="hljs-meta">%</span><span class="hljs-number">8</span>F<span class="hljs-meta">%</span><span class="hljs-number">89</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>A<span class="hljs-number">0</span><span class="hljs-meta">%</span><span class="hljs-number">91</span><span class="hljs-meta">%</span>E<span class="hljs-number">7</span><span class="hljs-meta">%</span><span class="hljs-number">9</span>A<span class="hljs-meta">%</span><span class="hljs-number">84</span><span class="hljs-meta">%</span>E<span class="hljs-number">7</span><span class="hljs-meta">%</span>BB<span class="hljs-meta">%</span><span class="hljs-number">9</span>F<span class="hljs-meta">%</span>E<span class="hljs-number">4</span><span class="hljs-meta">%</span>B<span class="hljs-number">8</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>BF<span class="hljs-meta">%</span>AD<span class="hljs-meta">%</span>E<span class="hljs-number">4</span><span class="hljs-meta">%</span>BB<span class="hljs-meta">%</span>A<span class="hljs-number">3</span><span class="hljs-meta">%</span>E<span class="hljs-number">6</span><span class="hljs-meta">%</span>B<span class="hljs-number">3</span><span class="hljs-meta">%</span><span class="hljs-number">95.</span>html<span class="hljs-attr">#%E6</span><span class="hljs-meta">%</span><span class="hljs-number">80</span><span class="hljs-meta">%</span><span class="hljs-number">9</span>D<span class="hljs-meta">%</span>E<span class="hljs-number">8</span><span class="hljs-meta">%</span>B<span class="hljs-number">7</span><span class="hljs-meta">%</span>AF)<br>- 如题，就是用类似递归那样可比较通用的迭代遍历法<br>- 方法就是在压栈遍历过的节点时，再压入一个空指针，遍历到空指针就意味着要输出这个值了<br>- 前序遍历<br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int>result;<br> vector<int> preorderTraversal(TreeNode</em> root) {<br> stack&lt;TreeNode*&gt; st;<br> if (root !&#x3D; nullptr) st.push(root);<br> while (!st.empty()) {<br>     TreeNode *cur &#x3D; st.top();<br>     st.pop();<br>     &#x2F;&#x2F; 给遍历过的点一个标记，即在后面压一个空指针，遍历到则说明该读取了<br>     if (cur !&#x3D; nullptr) {<br>         if (cur-&gt;right !&#x3D; nullptr) st.push(cur-&gt;right);<br><br>         if (cur-&gt;left !&#x3D; nullptr) st.push(cur-&gt;left);<br><br>         st.push(cur);<br>         st.push(nullptr);<br>     }<br>     else {<br>         cur &#x3D; st.top();<br>         st.pop();<br>         result.push_back(cur-&gt;val);<br>     }<br> }<br> return result;<br> }</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">中序遍历  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> inorderTraversal(TreeNode</em> root) {<br> stack&lt;TreeNode*&gt; st;<br> if (root !&#x3D; nullptr) st.push(root);<br> while (!st.empty()) {<br>     TreeNode *cur &#x3D; st.top();<br>     st.pop();<br>     &#x2F;&#x2F; 给遍历过的点一个标记，即在后面压一个空指针，遍历到则说明该读取了<br>     if (cur !&#x3D; nullptr) {<br>         if (cur-&gt;right !&#x3D; nullptr) st.push(cur-&gt;right);<br><br>         st.push(cur);<br>         st.push(nullptr);<br><br>         if (cur-&gt;left !&#x3D; nullptr) st.push(cur-&gt;left);<br>     }<br>     else {<br>         cur &#x3D; st.top();<br>         st.pop();<br>         result.push_back(cur-&gt;val);<br>     }<br> }<br> return result;<br> }</li>
+</ul>
+<p>  };<br>  <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">后序遍历  <br></code></pre></td></tr></table></figure><br>  &#x2F;**</p>
+<ul>
+<li>Definition for a binary tree node.</li>
+<li>struct TreeNode {</li>
+<li><pre><code class="hljs">int val;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *left;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode *right;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;
+</code></pre>
+</li>
+<li><pre><code class="hljs">TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;
+</code></pre>
+</li>
+<li>};<br>   <em>&#x2F;<br>  class Solution {<br>  public:<br> vector<int> result;<br> vector<int> postorderTraversal(TreeNode</em> root) {<br> stack&lt;TreeNode*&gt; st;<br> if (root !&#x3D; nullptr) st.push(root);<br> while (!st.empty()) {<br>     TreeNode *cur &#x3D; st.top();<br>     st.pop();<br>     &#x2F;&#x2F; 给遍历过的点一个标记，即在后面压一个空指针，遍历到则说明该读取了<br>     if (cur !&#x3D; nullptr) {<br>         st.push(cur);<br>         st.push(nullptr);<br><br>         if (cur-&gt;right !&#x3D; nullptr) st.push(cur-&gt;right);<br><br>         if (cur-&gt;left !&#x3D; nullptr) st.push(cur-&gt;left);<br>     }<br>     else {<br>         cur &#x3D; st.top();<br>         st.pop();<br>         result.push_back(cur-&gt;val);<br>     }<br> }<br> return result;<br> }</li>
+</ul>
+<p>  };</p>
+<pre><code class="hljs">
+</code></pre>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Algorithm/" class="print-no-link">#Algorithm</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）</div>
+      <div>http://example.com/2024/10/13/[Weekly Algorithm] 5算法周记之《代码随想录》栈与队列与二叉树（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月13日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/06/%5BWeekly%20Algorithm%5D%204%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" title="【Weekly Algorithm】 算法周记之《代码随想录》字符串">
+                        <span class="hidden-mobile">【Weekly Algorithm】 算法周记之《代码随想录》字符串</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
