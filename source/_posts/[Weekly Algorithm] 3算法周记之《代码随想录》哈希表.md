@@ -82,8 +82,7 @@ public:
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0202.%E5%BF%AB%E4%B9%90%E6%95%B0.html#%E6%80%9D%E8%B7%AF)
 - 该题就是一个数字游戏，寻找一个整数是否存在一个其各元素平方和为 1 的情况，可能会无限循环
 - 解决方法就是创建一个哈希表，把过程中产生的数字记录，若有重复，则陷入死循环，否则到了 1，则为快乐数
--
-  ```
+-  ```
   class Solution {
   public:
       bool isHappy(int n) {
@@ -269,8 +268,7 @@ public:
   首先是 a 的去重，由于排好序了，只要让 a 与前一个值不同，就可以遍历到不同的 a；那么可以让 a 与后面一个不同吗？不能，因为可能有{1，1，-2} 这样的情况，若让 a 与后一个不同，那么由于前两个 1，该答案会被排除。  
   
   然后是 b 和 c 的去重，由于排好序，在取到一个可用值后，让 left 和 right 各向中心去重  
--
-  ```
+-  ```
   class Solution {
   public:
       vector<vector<int>> threeSum(vector<int>& nums) {
