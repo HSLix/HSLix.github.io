@@ -9,6 +9,578 @@ hide: false
 本周跟随《代码随想录》学习二叉树的层序遍历，以及对于二叉树的翻转、对称，深度问题等。
 
 # 二叉树
+- ## 二叉树的层序遍历
+- [代码随想录 (programmercarl.com)](https://programmercarl.com/0102.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE)
+- [102. 二叉树的层序遍历 - 力扣（LeetCode）](https://leetcode.cn/problems/binary-tree-level-order-traversal/description/)
+- 题意就是一层层地从左到右遍历二叉树
+- 方法就是利用队列，把一层层排进去，一层层遍历，陆爻齐用两个队列实现这个操作，不过通过 for 循环，其实只要一个队列就行
+-
+- 陆爻齐的解法
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<vector<int>> levelOrder(TreeNode* root) {
+          vector<vector<int>> result;
+  
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  rec_val.push_back(cur->val); // 记录当前层遍历的数值
+              }
+              result.push_back(rec_val); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return result;
+      }
+  };
+  ```
+  代码随想录的解法  
+  ```
+  class Solution {
+  public:
+      vector<vector<int>> levelOrder(TreeNode* root) {
+          queue<TreeNode*> que;
+          if (root != NULL) que.push(root);
+          vector<vector<int>> result;
+          while (!que.empty()) {
+              int size = que.size();
+              vector<int> vec;
+              // 这里一定要使用固定大小size，不要使用que.size()，因为que.size是不断变化的
+              for (int i = 0; i < size; i++) {
+                  TreeNode* node = que.front();
+                  que.pop();
+                  vec.push_back(node->val);
+                  if (node->left) que.push(node->left);
+                  if (node->right) que.push(node->right);
+              }
+              result.push_back(vec);
+          }
+          return result;
+      }
+  };
+  ```
+-
+- ##
+- ## 二叉树的层次遍历 II
+- [107. 二叉树的层序遍历 II - 力扣（LeetCode）](https://leetcode.cn/problems/binary-tree-level-order-traversal-ii/)
+- 题意，在层序遍历的基础上，要求从下向上遍历
+- 方法，在层序遍历后，把结果翻转下就可以了
+- 陆爻齐的解法（和代码随想录差不多）
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<vector<int>> levelOrderBottom(TreeNode* root) {
+          vector<vector<int>> result;
+  
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  rec_val.push_back(cur->val); // 记录当前层遍历的数值
+              }
+              result.push_back(rec_val); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+          reverse(result.begin(),result.end());
+          return result;
+      }
+  };
+  ```
+-
+- ## 二叉树的右视图
+- [199. 二叉树的右视图 - 力扣（LeetCode）](https://leetcode.cn/problems/binary-tree-right-side-view/)
+- 题意，要求输出一个二叉树右边看到的第一层数值，从上往下
+- 方法，层序遍历时，只保留最后一个值即可
+- 陆爻齐的解法（代码随想录也差不多）
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<int> rightSideView(TreeNode* root) {
+          vector<int> result;
+  
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  rec_val.push_back(cur->val); // 记录当前层遍历的数值
+              }
+              result.push_back(rec_val.back()); // 记录一层的最后一个
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return result;
+      }
+  };
+  ```
+-
+- ## 二叉树的层平均值
+- [637. 二叉树的层平均值 - 力扣（LeetCode）](https://leetcode.cn/problems/average-of-levels-in-binary-tree/description/)
+- 题意，即求每一层的均值
+- 方法，层序遍历基础上，记录每层均值保存即可
+- 陆爻齐解法（和代码随想录差不多）
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<double> averageOfLevels(TreeNode* root) {
+          vector<double> result;
+  
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              double sum = 0;
+              double count = 0;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  //rec_val.push_back(cur->val); // 记录当前层遍历的数值
+                  sum += cur->val;
+                  count++;
+              }
+              result.push_back(sum / count); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return result;
+      }
+  };
+  ```
+-
+- ## N 叉树的层序遍历
+- 题意，如题
+- 方法，把普通二叉树的层序遍历，中下一层的添加，换成遍历其孩子就行
+- 陆爻齐的解法（和代码随想录相近）
+  ```
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      vector<Node*> children;
+  
+      Node() {}
+  
+      Node(int _val) {
+          val = _val;
+      }
+  
+      Node(int _val, vector<Node*> _children) {
+          val = _val;
+          children = _children;
+      }
+  };
+  */
+  
+  class Solution {
+  public:
+      vector<vector<int>> levelOrder(Node* root) {
+          vector<vector<int>> result;
+  
+          queue<Node*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<Node*> rec_nextlevel;
+              // 遍历一层
+              while(!rec.empty()) {
+                  Node *cur = rec.front();
+                  rec.pop();
+                  // 存储下一层
+                  for (Node *tmp : cur->children) {
+                      if (tmp != nullptr) {
+                          rec_nextlevel.push(tmp);
+                      }
+                  }
+  
+                  rec_val.push_back(cur->val); // 记录当前层遍历的数值
+              }
+              result.push_back(rec_val); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return result;
+      }
+  };
+  ```
+-
+- ##
+- ## 在每个树行中找最大值
+- [515. 在每个树行中找最大值 - 力扣（LeetCode）](https://leetcode.cn/problems/find-largest-value-in-each-tree-row/submissions/573871357/)
+- 题意，找出二叉树中每层的最大值
+- 方法，就是在层序遍历的基础上，去记录每层的最大值
+- 陆爻齐的解法（与代码随想录差不多）
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      vector<int> largestValues(TreeNode* root) {
+          vector<int> result;
+  
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              int max_num = INT32_MIN;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  //rec_val.push_back(cur->val); // 记录当前层遍历的数值
+                  if (cur->val > max_num) {
+                      max_num = cur->val;
+                  }
+              }
+              result.push_back(max_num); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return result;
+      }
+  };
+  ```
+-
+- ##
+- ##
+- ## 填充每个节点的下一个右侧节点指针
+- [116. 填充每个节点的下一个右侧节点指针 - 力扣（LeetCode）](https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/)
+- 题意，让二叉树的每个节点都指向其右侧节点，无则指空
+- 方法，在层序遍历中，取点让其指右即可，代码随想录中用 for 循环看着挺复杂的样子，其实只是他专门区分了第一个点和其它点
+- 陆爻齐的解法（这次和代码随想录有点差别）
+  ```
+  /*
+  // Definition for a Node.
+  class Node {
+  public:
+      int val;
+      Node* left;
+      Node* right;
+      Node* next;
+  
+      Node() : val(0), left(NULL), right(NULL), next(NULL) {}
+  
+      Node(int _val) : val(_val), left(NULL), right(NULL), next(NULL) {}
+  
+      Node(int _val, Node* _left, Node* _right, Node* _next)
+          : val(_val), left(_left), right(_right), next(_next) {}
+  };
+  */
+  
+  class Solution {
+  public:
+      Node* connect(Node* root) {
+          //vector<vector<int>> result;
+  
+          queue<Node*> rec; // 记录当前要遍历的层
+          if (root != nullptr) rec.push(root);
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<Node*> rec_nextlevel;
+              // 遍历一层
+              while(!rec.empty()) {
+                  Node *cur = rec.front();
+                  rec.pop();
+  
+                  
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+                  rec_val.push_back(cur->val); // 记录当前层遍历的数值
+                  
+                  // 让每个节点指右边（无则指空）
+                  if (!rec.empty()) {
+                      cur->next = rec.front();
+                  }
+                  else {
+                      cur->next = nullptr;
+                  }
+              }
+              //result.push_back(rec_val); // 记录一层
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return root;
+      }
+  };
+  ```
+  代码随想录的解法  
+  ```
+  class Solution {
+  public:
+      Node* connect(Node* root) {
+          queue<Node*> que;
+          if (root != NULL) que.push(root);
+          while (!que.empty()) {
+              int size = que.size();
+              // vector<int> vec;
+              Node* nodePre;
+              Node* node;
+              for (int i = 0; i < size; i++) {
+                  if (i == 0) {
+                      nodePre = que.front(); // 取出一层的头结点
+                      que.pop();
+                      node = nodePre;
+                  } else {
+                      node = que.front();
+                      que.pop();
+                      nodePre->next = node; // 本层前一个节点next指向本节点
+                      nodePre = nodePre->next;
+                  }
+                  if (node->left) que.push(node->left);
+                  if (node->right) que.push(node->right);
+              }
+              nodePre->next = NULL; // 本层最后一个节点指向NULL
+          }
+          return root;
+  
+      }
+  };
+  ```
+-
+- ##
+- ## 填充每个节点的下一个右侧节点指针II
+- 题意，和上一题差不多，不过面对的二叉树不是完美二叉树
+- 方法，和上一题一样，不知此题有何意义
+- 解法略，同上
+-
+- ##
+- ## 二叉树的最大深度
+- 题意，即找出二叉树的根节点与其最远叶节点的距离
+- 方法，层序遍历时，记录层数即可
+- 陆爻齐的解法（和代码随想录差不多）
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      int maxDepth(TreeNode* root) {
+          int depth = 0;
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) {
+              rec.push(root);
+          }
+          
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              depth++;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  rec.pop();
+  
+                  if (cur->left != nullptr) rec_nextlevel.push(cur->left); // 存储下一层
+                  if (cur->right != nullptr) rec_nextlevel.push(cur->right);
+  
+              }
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return depth;
+      }
+  };
+  ```
+-
+- ##
+- ## 二叉树的最小深度
+- [111. 二叉树的最小深度 - 力扣（LeetCode）](https://leetcode.cn/problems/minimum-depth-of-binary-tree/)
+- 题目要求，找到最小深度，即第一个叶子节点出现的层数
+- 方法，每个点检测下，若是叶子节点，则返回当前层数，代码随想录的解法相对陆爻齐的解法重复检测孩子是否为空，陆爻齐 win ：）
+- 陆爻齐的解法
+  ```
+  /**
+   * Definition for a binary tree node.
+   * struct TreeNode {
+   *     int val;
+   *     TreeNode *left;
+   *     TreeNode *right;
+   *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+   *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+   * };
+   */
+  class Solution {
+  public:
+      int minDepth(TreeNode* root) {
+          int depth = 0;
+          queue<TreeNode*> rec; // 记录当前要遍历的层
+          if (root != nullptr) {
+              rec.push(root);
+          }
+          
+  
+          while(!rec.empty()) {
+              vector<int> rec_val;
+              queue<TreeNode*> rec_nextlevel;
+              depth++;
+              // 遍历一层
+              while(!rec.empty()) {
+                  TreeNode *cur = rec.front();
+                  rec.pop();
+                  int count = 0; // 记录有无孩子
+  
+                  // 存储下一层
+                  if (cur->left != nullptr) {
+                      rec_nextlevel.push(cur->left); 
+                      count++;
+                  }
+                  if (cur->right != nullptr) {
+                      rec_nextlevel.push(cur->right);
+                      count++;
+                  }
+  
+                  // 找到了第一个叶子节点
+                  if (count == 0) {
+                      return depth;
+                  }
+  
+              }
+              rec = rec_nextlevel; // 准备遍历下一层
+          }
+  
+          return depth;
+      }
+  };
+  ```
+  代码随想录的解法  
+  ```
+  class Solution {
+  public:
+      int minDepth(TreeNode* root) {
+          if (root == NULL) return 0;
+          int depth = 0;
+          queue<TreeNode*> que;
+          que.push(root);
+          while(!que.empty()) {
+              int size = que.size();
+              depth++; // 记录最小深度
+              for (int i = 0; i < size; i++) {
+                  TreeNode* node = que.front();
+                  que.pop();
+                  if (node->left) que.push(node->left);
+                  if (node->right) que.push(node->right);
+                  if (!node->left && !node->right) { // 当左右孩子都为空的时候，说明是最低点的一层了，退出
+                      return depth;
+                  }
+              }
+          }
+          return depth;
+      }
+  };
+  ```
 ## 翻转二叉树
 - [代码随想录](https://programmercarl.com/0226.%E7%BF%BB%E8%BD%AC%E4%BA%8C%E5%8F%89%E6%A0%91.html#%E6%8B%93%E5%B1%95)
 - [226. 翻转二叉树 - 力扣（LeetCode）](https://leetcode.cn/problems/invert-binary-tree/description/)
