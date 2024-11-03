@@ -1,0 +1,710 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="学习小结本周跟随《代码随想录》学习二叉树和二叉搜索树的相关题目，还在递归中主要学习了关于组合的一部分题目。 回溯，用代码随想录中的一句话概括：- for 循环横向遍历，递归纵向遍历，回溯调整结果集。 二叉树 二叉搜索树的最小绝对差 代码随想录 530. 二叉搜索树的最小绝对差 - 力扣（LeetCode） 题意，找二叉搜索树中任意两个节点两值之差的最小值 方法，由于二叉搜索树的本质是有序数组，按中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）">
+<meta property="og:url" content="http://example.com/2024/11/03/[Weekly%20Algorithm]%208%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B8%8E%E5%9B%9E%E6%BA%AF%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》学习二叉树和二叉搜索树的相关题目，还在递归中主要学习了关于组合的一部分题目。 回溯，用代码随想录中的一句话概括：- for 循环横向遍历，递归纵向遍历，回溯调整结果集。 二叉树 二叉搜索树的最小绝对差 代码随想录 530. 二叉搜索树的最小绝对差 - 力扣（LeetCode） 题意，找二叉搜索树中任意两个节点两值之差的最小值 方法，由于二叉搜索树的本质是有序数组，按中">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/leetcode.png">
+<meta property="article:published_time" content="2024-11-03T02:31:00.000Z">
+<meta property="article:modified_time" content="2024-11-03T04:04:34.959Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/leetcode.png">
+  
+  
+  
+  <title>【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一） - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-03 10:31" pubdate>
+          2024年11月3日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          28 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习二叉树和二叉搜索树的相关题目，还在递归中主要学习了关于组合的一部分题目。</p>
+<p>回溯，用代码随想录中的一句话概括：- for 循环横向遍历，递归纵向遍历，回溯调整结果集。</p>
+<h1 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h1><ul>
+<li><h2 id="二叉搜索树的最小绝对差"><a href="#二叉搜索树的最小绝对差" class="headerlink" title="二叉搜索树的最小绝对差"></a>二叉搜索树的最小绝对差</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0530.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E7%BB%9D%E5%AF%B9%E5%B7%AE.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/description/">530. 二叉搜索树的最小绝对差 - 力扣（LeetCode）</a></li>
+<li>题意，找二叉搜索树中任意两个节点两值之差的最小值</li>
+<li>方法，由于二叉搜索树的本质是有序数组，按中序遍历比较相邻节点之差</li>
+<li>陆爻齐的解法 与代码随想录思路相近<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs coq">/**<br> * <span class="hljs-keyword">Definition</span> <span class="hljs-keyword">for</span> a binary tree node.<br> * struct TreeNode &#123;<br> *     int val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() : val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x) : val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) : val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>public:<br>    TreeNode *pre = nullptr;<br>    int getMinimumDifference(TreeNode* root) &#123;<br>        int result = INT32_MAX;<br>        travel_cal(result, root);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br><br>    void travel_cal(int &amp;result, TreeNode *root) &#123;<br>        <span class="hljs-keyword">if</span> (root == nullptr) <span class="hljs-keyword">return</span>;<br><br>        // 下面是中序<br>        travel_cal(result, root-&gt;<span class="hljs-built_in">left</span>);<br>        <span class="hljs-keyword">if</span> (pre != nullptr &amp;&amp; (root-&gt;val - pre-&gt;val) &lt; result) &#123;<br>            result = (root-&gt;val - pre-&gt;val);<br>        &#125;<br>        pre = root;<br>        travel_cal(result, root-&gt;<span class="hljs-built_in">right</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="二叉搜索树的众数"><a href="#二叉搜索树的众数" class="headerlink" title="二叉搜索树的众数"></a>二叉搜索树的众数</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0501.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E4%BC%97%E6%95%B0.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数 - 力扣（LeetCode）</a></li>
+<li>题意就是找二叉搜索树的众数，但可能有多个众数</li>
+<li>方法，寻常方法便是遍历，hash 记录频次，转为 vector 排序取众数，时间复杂度 O(n^2)；但由于是二叉搜索树，可以用 O(n) 的方法，即中序遍历时就直接记录频次和当前最高频次的数字，更新频次时清空已记录的数字</li>
+<li>陆爻齐参考代码随想录的解法<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs excel">/**<br> * Definition for a binary tree node.<br> * struct TreeNode &#123;<br> *     <span class="hljs-built_in">int</span> val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() <span class="hljs-symbol">:</span> val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(<span class="hljs-built_in">int</span> x) <span class="hljs-symbol">:</span> val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(<span class="hljs-built_in">int</span> x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) <span class="hljs-symbol">:</span> val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>publ<span class="hljs-symbol">ic:</span><br>    // 准备<br>    vector&lt;<span class="hljs-built_in">int</span>&gt; result;<br>    <span class="hljs-built_in">int</span> max_count = INT32_MIN;<br>    <span class="hljs-built_in">int</span> <span class="hljs-built_in">count</span> = <span class="hljs-number">1</span>;<br>    TreeNode *pre = nullptr;<br><br>    vector&lt;<span class="hljs-built_in">int</span>&gt; findMode(TreeNode* root) &#123;<br>        travel_val(root);<br>        return result;<br>    &#125;<br><br>    void travel_val(TreeNode *root) &#123;<br>        <span class="hljs-built_in">if</span> (root == nullptr) return;<br><br>        // 总体依旧按中序遍历<br>        travel_val(root-&gt;<span class="hljs-built_in">left</span>);<br>        <span class="hljs-built_in">if</span> (pre != nullptr) &#123; // 更新频次计数<br>            <span class="hljs-built_in">if</span> (pre-&gt;val == root-&gt;val) &#123;<br>                <span class="hljs-built_in">count</span>++;<br>            &#125;<br>            else &#123;<br>                <span class="hljs-built_in">count</span> = <span class="hljs-number">1</span>;<br>            &#125;<br>        &#125;<br>        pre = root; // 更新上一个点<br>        <span class="hljs-built_in">if</span> (<span class="hljs-built_in">count</span> == max_count) &#123;<br>            result.push_back(root-&gt;val);<br>        &#125;<br>        else <span class="hljs-built_in">if</span> (<span class="hljs-built_in">count</span> &gt; max_count) &#123;<br>            max_count = <span class="hljs-built_in">count</span>;<br>            result.clear();<br>            result.push_back(root-&gt;val);<br>        &#125;<br>        travel_val(root-&gt;<span class="hljs-built_in">right</span>);<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="二叉树的最近公共祖先"><a href="#二叉树的最近公共祖先" class="headerlink" title="二叉树的最近公共祖先"></a>二叉树的最近公共祖先</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0236.%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/description/">236. 二叉树的最近公共祖先 - 力扣（LeetCode）</a></li>
+<li>题意，二叉树中无 val 相同点，给两个 val 不同点，找到它们的公共祖先</li>
+<li>方法，要找公共祖先，最好能自底向上遍历，最类似的遍历是后序遍历，让找到的两个 val 和公共祖先返回上去</li>
+<li>陆爻齐参考代码随想录思路的解法<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs coq">/**<br> * <span class="hljs-keyword">Definition</span> <span class="hljs-keyword">for</span> a binary tree node.<br> * struct TreeNode &#123;<br> *     int val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode(int x) : val(x), <span class="hljs-built_in">left</span>(NULL), <span class="hljs-built_in">right</span>(NULL) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>public:<br>    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;<br>        // 终止条件，使得上面的点可知道是否子树有 p q<br>        <span class="hljs-keyword">if</span> (root == nullptr |<span class="hljs-type">| root</span>-&gt;val == p-&gt;val |<span class="hljs-type">| root</span>-&gt;val == q-&gt;val) <span class="hljs-keyword">return</span> root;<br>        <br>        // 遍历左右子树<br>        TreeNode *<span class="hljs-built_in">left</span> = lowestCommonAncestor(root-&gt;<span class="hljs-built_in">left</span>, p, q);<br>        TreeNode *<span class="hljs-built_in">right</span> = lowestCommonAncestor(root-&gt;<span class="hljs-built_in">right</span>, p, q);<br><br>        // 若有 q 或 p，则返回<br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">left</span> == nullptr |<span class="hljs-type">| right</span> == nullptr) &#123;<br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">left</span> != nullptr) <span class="hljs-keyword">return</span> <span class="hljs-built_in">left</span>;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> <span class="hljs-built_in">right</span>;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123; // 若 q p都有了，那就返回公共祖先<br>            <span class="hljs-keyword">return</span> root;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="二叉搜索树的最近公共祖先"><a href="#二叉搜索树的最近公共祖先" class="headerlink" title="二叉搜索树的最近公共祖先"></a>二叉搜索树的最近公共祖先</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0235.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. 二叉搜索树的最近公共祖先 - 力扣（LeetCode）</a></li>
+<li>题意，与[[二叉树的最近公共祖先]]类似，不过环岛路二叉搜索树上</li>
+<li>方法，[[二叉树的最近公共祖先]]的解法也能用，不过二叉搜索树的有序特性能使得代码更简单。由于二叉搜索树中的节点值大于左子树所有节点并小于右子树所有节点，所以两节点的公共祖先的左子树有较小点而右子树有较大点。而从上往下，第一个值在 q 和 p之间的节点就是最近的祖先节点，暂时不知如何证明，姑且作为特性</li>
+<li>陆爻齐参照代码随想录思路的解法<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;<br>        <span class="hljs-keyword">if</span> (p-&gt;<span class="hljs-keyword">val</span> &lt; q-&gt;<span class="hljs-keyword">val</span>) swap(p, q); <span class="hljs-comment">// 确保 p 总是更大的那个</span><br>        <span class="hljs-keyword">return</span> findAncestor(root, p, q);<br>    &#125;<br><br>    TreeNode *findAncestor(TreeNode* root, TreeNode* p, TreeNode* q) &#123;<br>        <span class="hljs-comment">// 终止条件，防止空，虽然本题无太大必要</span><br>        <span class="hljs-keyword">if</span> (root == nullptr) <span class="hljs-keyword">return</span> root;<br><br>        <span class="hljs-keyword">if</span> (root-&gt;<span class="hljs-keyword">val</span> &lt; q-&gt;<span class="hljs-keyword">val</span>) &#123;<br>            <span class="hljs-keyword">return</span> findAncestor(root-&gt;right, p, q);<br>        &#125;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(root-&gt;<span class="hljs-keyword">val</span> &gt; p-&gt;<span class="hljs-keyword">val</span>) &#123;<br>            <span class="hljs-keyword">return</span> findAncestor(root-&gt;left, p, q);<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">return</span> root;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="二叉搜索树中的插入操作"><a href="#二叉搜索树中的插入操作" class="headerlink" title="二叉搜索树中的插入操作"></a>二叉搜索树中的插入操作</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0701.%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E6%8F%92%E5%85%A5%E6%93%8D%E4%BD%9C.html#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/description/">701. 二叉搜索树中的插入操作 - 力扣（LeetCode）</a></li>
+<li>题意，在二叉搜索树中插入点，并返回插入后的树</li>
+<li>方法，在[[二叉搜索树的搜索]]后的结束处插入即可，这是最简单朴实直观的办法，无需重构二叉搜索树</li>
+<li>陆爻齐参考代码随想录思路的解法<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs coq">/**<br> * <span class="hljs-keyword">Definition</span> <span class="hljs-keyword">for</span> a binary tree node.<br> * struct TreeNode &#123;<br> *     int val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() : val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x) : val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) : val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>public:<br>    TreeNode* insertIntoBST(TreeNode* root, int val) &#123;<br>        // 终止条件，找到插入地方<br>        <span class="hljs-keyword">if</span> (root == nullptr) &#123;<br>            TreeNode *result = new TreeNode(val);<br>            <span class="hljs-keyword">return</span> result;<br>        &#125;<br><br>        // 不会有相同值点的插入寻找<br>        <span class="hljs-keyword">if</span> (val &gt; root-&gt;val) &#123;<br>            root-&gt;<span class="hljs-built_in">right</span> = insertIntoBST(root-&gt;<span class="hljs-built_in">right</span>, val);<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123;<br>            root-&gt;<span class="hljs-built_in">left</span> = insertIntoBST(root-&gt;<span class="hljs-built_in">left</span>, val);<br>        &#125;<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="删除二叉搜索树中的节点"><a href="#删除二叉搜索树中的节点" class="headerlink" title="删除二叉搜索树中的节点"></a>删除二叉搜索树中的节点</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0450.%E5%88%A0%E9%99%A4%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-node-in-a-bst/description/">450. 删除二叉搜索树中的节点 - 力扣（LeetCode）</a></li>
+<li>题意，如题要删点后的树</li>
+<li>方法，删点有五种情况，1. 没找到，2. 点无子树，3.点只有左子树，4.点只有右子树，5.点左右子树都有。重点是第五种情况，需要把左子树放到右子树的最左节点的左子树，然后用右子树代替</li>
+<li>陆爻齐参考代码随想录思路的解法<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs xl"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for a binary tree node.</span><br><span class="hljs-comment"> * struct TreeNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     TreeNode *left;</span><br><span class="hljs-comment"> *     TreeNode *right;</span><br><span class="hljs-comment"> *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) &#123;&#125;</span><br><span class="hljs-comment"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) &#123;&#125;</span><br><span class="hljs-comment"> * &#125;;</span><br><span class="hljs-comment"> */</span><br>class Solution &#123;<br>public:<br>    TreeNode* deleteNode(TreeNode* root, int key) &#123;<br>        <span class="hljs-keyword">if</span> (root == nullptr) return nullptr;<br>        <br>        <span class="hljs-function"><span class="hljs-title">if</span> (root-&gt;</span>val != key) &#123; <span class="hljs-comment">// 没找到</span><br>            <span class="hljs-function"><span class="hljs-title">root</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> = deleteNode(root-&gt;</span>left, key);<br>            <span class="hljs-function"><span class="hljs-title">root</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">right</span> = deleteNode(root-&gt;</span>right, key);<br>        &#125;<br>        <span class="hljs-function"><span class="hljs-title">else</span> <span class="hljs-keyword">if</span> (root-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> == nullptr &amp;&amp; root-&gt;</span>right == nullptr) &#123; <span class="hljs-comment">// 都为空，直接返空</span><br>            delete root;<br>            return nullptr;<br>        &#125;<br>        <span class="hljs-function"><span class="hljs-title">else</span> <span class="hljs-keyword">if</span>(root-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> != nullptr &amp;&amp; root-&gt;</span>right == nullptr) &#123; <span class="hljs-comment">// 只有左</span><br>            T<span class="hljs-function"><span class="hljs-title">reeNode</span> *result = root-&gt;</span>left;<br>            delete root;<br>            return result;<br>        &#125;<br>        <span class="hljs-function"><span class="hljs-title">else</span> <span class="hljs-keyword">if</span>(root-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> == nullptr &amp;&amp; root-&gt;</span>right != nullptr) &#123; <span class="hljs-comment">// 只有右</span><br>            T<span class="hljs-function"><span class="hljs-title">reeNode</span> *result = root-&gt;</span>right;<br>            delete root;<br>            return result;<br>        &#125;<br>        <span class="hljs-keyword">else</span> &#123; <span class="hljs-comment">// 左右都有，把左放右的最左，返右</span><br>            T<span class="hljs-function"><span class="hljs-title">reeNode</span> *cur = root-&gt;</span>right;<br>            <span class="hljs-function"><span class="hljs-title">while</span>(cur-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> != nullptr) cur = cur-&gt;</span>left;<br>            <span class="hljs-function"><span class="hljs-title">cur</span>-&gt;</span><span class="hljs-function"><span class="hljs-title">left</span> = root-&gt;</span>left;<br>            <span class="hljs-function"><span class="hljs-title">cur</span> = root-&gt;</span>right;<br>            delete root;<br>            return cur;<br>        &#125;<br><br>        return root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="修剪二叉搜索树"><a href="#修剪二叉搜索树" class="headerlink" title="修剪二叉搜索树"></a>修剪二叉搜索树</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0669.%E4%BF%AE%E5%89%AA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trim-a-binary-search-tree/submissions/577278029/">669. 修剪二叉搜索树 - 力扣（LeetCode）</a></li>
+<li>题意，给出一个数值范围，要求二叉搜索树内的节点都得在这个范围内</li>
+<li>方法，直观一点可以转为数组重建二叉搜索树，略复杂；其实可以利用二叉搜索树性质，递归返回符合条件的节点来构建二叉搜索树</li>
+<li>陆爻齐参考代码随想录思路的解法<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs coq">/**<br> * <span class="hljs-keyword">Definition</span> <span class="hljs-keyword">for</span> a binary tree node.<br> * struct TreeNode &#123;<br> *     int val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() : val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x) : val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) : val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>public:<br>    TreeNode* trimBST(TreeNode* root, int low, int high) &#123;<br>        <span class="hljs-keyword">if</span> (root == nullptr) <span class="hljs-keyword">return</span> nullptr; // 一个终止条件<br><br>        // 由于二叉搜索树有序，当前根过小或过大就可以直接向另一方向搜索<br>        <span class="hljs-keyword">if</span> (root-&gt;val &lt; low) &#123;<br>            <span class="hljs-keyword">return</span> trimBST(root-&gt;<span class="hljs-built_in">right</span>, low, high);<br>        &#125; <br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (root-&gt;val &gt; high) &#123;<br>            <span class="hljs-keyword">return</span> trimBST(root-&gt;<span class="hljs-built_in">left</span>, low, high);<br>        &#125;<br><br>        // 即使根符合要求，不保证子树所有节点也符合<br>        root-&gt;<span class="hljs-built_in">left</span> = trimBST(root-&gt;<span class="hljs-built_in">left</span>, low, high);<br>        root-&gt;<span class="hljs-built_in">right</span> = trimBST(root-&gt;<span class="hljs-built_in">right</span>, low, high);<br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="将有序数组转换为二叉搜索树"><a href="#将有序数组转换为二叉搜索树" class="headerlink" title="将有序数组转换为二叉搜索树"></a>将有序数组转换为二叉搜索树</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0108.%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">108. 将有序数组转换为二叉搜索树 - 力扣（LeetCode）</a></li>
+<li>题意：将有序的升序数组转化为平衡二叉搜索树</li>
+<li>方法，平衡，要求点得从中间取，由于升序，故不断取中点递归即可</li>
+<li>陆爻齐参考代码随想录思路的解法<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs excel">/**<br> * Definition for a binary tree node.<br> * struct TreeNode &#123;<br> *     <span class="hljs-built_in">int</span> val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() <span class="hljs-symbol">:</span> val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(<span class="hljs-built_in">int</span> x) <span class="hljs-symbol">:</span> val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(<span class="hljs-built_in">int</span> x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) <span class="hljs-symbol">:</span> val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>publ<span class="hljs-symbol">ic:</span><br>    TreeNode* sortedArrayToBST(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums) &#123;<br>        return buildTree(nums, <span class="hljs-number">0</span>, nums.size());<br>    &#125;<br><br>    TreeNode *buildTree(vector&lt;<span class="hljs-built_in">int</span>&gt;&amp; nums, <span class="hljs-built_in">int</span> <span class="hljs-built_in">left</span>, <span class="hljs-built_in">int</span> <span class="hljs-built_in">right</span>) &#123;<br>        // 终止条件区间长度为<span class="hljs-number">0</span><br>        <span class="hljs-built_in">if</span> (<span class="hljs-built_in">left</span> == <span class="hljs-built_in">right</span>) &#123;<br>            return nullptr;<br>        &#125;<br><br>        // 中间，也就是当前的节点<br>        <span class="hljs-built_in">int</span> middle = (<span class="hljs-built_in">left</span> + <span class="hljs-built_in">right</span>) / <span class="hljs-number">2</span>;<br>        TreeNode *cur = new TreeNode(nums[middle]);<br>        cur-&gt;<span class="hljs-built_in">left</span> = buildTree(nums, <span class="hljs-built_in">left</span>, middle);<br>        cur-&gt;<span class="hljs-built_in">right</span> = buildTree(nums, middle + <span class="hljs-number">1</span>, <span class="hljs-built_in">right</span>);<br>        return cur;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="把二叉搜索树转换为累加树"><a href="#把二叉搜索树转换为累加树" class="headerlink" title="把二叉搜索树转换为累加树"></a>把二叉搜索树转换为累加树</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0108.%E5%B0%86%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E8%BD%AC%E6%8D%A2%E4%B8%BA%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-bst-to-greater-tree/">538. 把二叉搜索树转换为累加树 - 力扣（LeetCode）</a></li>
+<li>题意，在二叉搜索树上，从右向左，从下向上，把点的值累加上去</li>
+<li>方法，经观察，点加值的情况符合“右中左”的遍历顺序，故用一个变量记录遍历过的点的累加值，并按右中左来遍历</li>
+<li>参考代码随想录思路的解法<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs coq">/**<br> * <span class="hljs-keyword">Definition</span> <span class="hljs-keyword">for</span> a binary tree node.<br> * struct TreeNode &#123;<br> *     int val;<br> *     TreeNode *<span class="hljs-built_in">left</span>;<br> *     TreeNode *<span class="hljs-built_in">right</span>;<br> *     TreeNode() : val(<span class="hljs-number">0</span>), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x) : val(x), <span class="hljs-built_in">left</span>(nullptr), <span class="hljs-built_in">right</span>(nullptr) &#123;&#125;<br> *     TreeNode(int x, TreeNode *<span class="hljs-built_in">left</span>, TreeNode *<span class="hljs-built_in">right</span>) : val(x), <span class="hljs-built_in">left</span>(<span class="hljs-built_in">left</span>), <span class="hljs-built_in">right</span>(<span class="hljs-built_in">right</span>) &#123;&#125;<br> * &#125;;<br> */<br>class Solution &#123;<br>public:<br>    int pre = <span class="hljs-number">0</span>;<br>    TreeNode* convertBST(TreeNode* root) &#123;<br>        <span class="hljs-keyword">if</span> (root == nullptr) <span class="hljs-keyword">return</span> nullptr;<br>        root-&gt;<span class="hljs-built_in">right</span> = convertBST(root-&gt;<span class="hljs-built_in">right</span>);<br>        pre += root-&gt;val;<br>        root-&gt;val = pre;<br>        root-&gt;<span class="hljs-built_in">left</span> = convertBST(root-&gt;<span class="hljs-built_in">left</span>);<br><br>        <span class="hljs-keyword">return</span> root;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h1><ul>
+<li><h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0077.%E7%BB%84%E5%90%88.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/description/">77. 组合 - 力扣（LeetCode）</a></li>
+<li>题意，在 1-n 个数中，取 k 个数的所有组合</li>
+<li>方法，采用普通的回溯方法，注意优化方法，由于限制要 k 个，所以如果一层的 for 循环最多只要遍历到 n-(k-层数)+1 即可，加一是因为自己要求了左闭区间</li>
+<li>陆爻齐参考代码随想录思路的剪枝代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backtrack</span><span class="hljs-params">(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k, <span class="hljs-type">int</span> start_index)</span> </span>&#123;<br>        <span class="hljs-comment">// 终止条件保存结果</span><br>        <span class="hljs-keyword">if</span> (k == path.<span class="hljs-built_in">size</span>()) &#123;<br>            result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 寻找组合</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start_index; i &lt;= (n - (k - path.<span class="hljs-built_in">size</span>()) + <span class="hljs-number">1</span>); i++) &#123;<br>            path.<span class="hljs-built_in">push_back</span>(i);<br>            <span class="hljs-built_in">backtrack</span>(n, k, i<span class="hljs-number">+1</span>);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>        &#125;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    <br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combine</span>(<span class="hljs-type">int</span> n, <span class="hljs-type">int</span> k) &#123;<br>        <span class="hljs-comment">// 两个clear是为了保险</span><br>        result.<span class="hljs-built_in">clear</span>();<br>        path.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-built_in">backtrack</span>(n, k , <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br>        <br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="组合总和"><a href="#组合总和" class="headerlink" title="组合总和 |||"></a>组合总和 |||</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0216.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CIII.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iii/description/">216. 组合总和 III - 力扣（LeetCode）</a></li>
+<li>该题要求，收集所有从1-9中选取 k 个不重复的数字组成和为 n 的组合</li>
+<li>方法，就是在[[组合]]上简单改造终止条件为和为n，剪枝可从和入手，过大就剪</li>
+<li>陆爻齐的剪枝思路，和代码随想录思路差不多<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">private</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    vector&lt;<span class="hljs-type">int</span>&gt; path;<br>    <span class="hljs-type">int</span> sum = <span class="hljs-number">0</span>;<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">backTrack</span><span class="hljs-params">(<span class="hljs-type">int</span> k, <span class="hljs-type">int</span> n, <span class="hljs-type">int</span> start_index)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(sum &gt; n) &#123; <span class="hljs-comment">// 剪枝</span><br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (path.<span class="hljs-built_in">size</span>() == k) &#123; <span class="hljs-comment">// 终止条件</span><br>            <span class="hljs-keyword">if</span>(sum == n) result.<span class="hljs-built_in">push_back</span>(path);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-comment">// 单层处理</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start_index; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            path.<span class="hljs-built_in">push_back</span>(i);<br>            sum += i;<br>            <span class="hljs-built_in">backTrack</span>(k, n, i<span class="hljs-number">+1</span>);<br>            path.<span class="hljs-built_in">pop_back</span>();<br>            sum -= i;<br>        &#125;<br>    &#125;<br><span class="hljs-keyword">public</span>:<br>    vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; <span class="hljs-built_in">combinationSum3</span>(<span class="hljs-type">int</span> k, <span class="hljs-type">int</span> n) &#123;<br>        result.<span class="hljs-built_in">clear</span>();<br>        path.<span class="hljs-built_in">clear</span>();<br>        <span class="hljs-built_in">backTrack</span>(k, n, <span class="hljs-number">1</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="电话号码的字母组合"><a href="#电话号码的字母组合" class="headerlink" title="电话号码的字母组合"></a>电话号码的字母组合</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0017.%E7%94%B5%E8%AF%9D%E5%8F%B7%E7%A0%81%E7%9A%84%E5%AD%97%E6%AF%8D%E7%BB%84%E5%90%88.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/letter-combinations-of-a-phone-number/description/">17. 电话号码的字母组合 - 力扣（LeetCode）</a></li>
+<li>题意，电话号码中的2-9各对应几个字母，要求根据一串2-9的数字来排列出所有字母组合</li>
+<li>方法，在[[组合]]的基础上，该题有多个字母区间，可先用数组存下下标数字与字符串的对应，再做单层遍历</li>
+<li>陆爻齐参照代码随想录思路的解法<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs nim">class <span class="hljs-type">Solution</span> &#123;<br>private:<br>    vector&lt;<span class="hljs-type">string</span>&gt; <span class="hljs-built_in">result</span>;<br>    <span class="hljs-type">string</span> path;<br>    vector&lt;<span class="hljs-type">string</span>&gt; str_map = &#123;<br>        <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;&quot;</span>,<br>        <span class="hljs-string">&quot;abc&quot;</span>,<br>        <span class="hljs-string">&quot;def&quot;</span>,<br>        <span class="hljs-string">&quot;ghi&quot;</span>,<br>        <span class="hljs-string">&quot;jkl&quot;</span>,<br>        <span class="hljs-string">&quot;mno&quot;</span>,<br>        <span class="hljs-string">&quot;pqrs&quot;</span>,<br>        <span class="hljs-string">&quot;tuv&quot;</span>,<br>        <span class="hljs-string">&quot;wxyz&quot;</span><br>    &#125;;<br><br>    <span class="hljs-type">void</span> back_track(<span class="hljs-keyword">const</span> <span class="hljs-type">string</span> &amp;digits, <span class="hljs-type">int</span> start_index) &#123;<br>        <span class="hljs-keyword">if</span> (start_index == digits.size()) &#123;<br>            <span class="hljs-built_in">result</span>.push_back(path);<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-type">string</span> <span class="hljs-type">range</span> = str_map[<span class="hljs-type">int</span>(digits[start_index] - &#x27;<span class="hljs-number">0</span>&#x27;)];<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">auto</span> c : <span class="hljs-type">range</span>) &#123;<br>            path += c;<br>            back_track(digits, start_index+<span class="hljs-number">1</span>);<br>            path = path.substr(<span class="hljs-number">0</span>, path.size()-<span class="hljs-number">1</span>);<br>        &#125;<br>        <br>    &#125;<br>public:<br>    vector&lt;<span class="hljs-type">string</span>&gt; letterCombinations(<span class="hljs-type">string</span> digits) &#123;<br>        <span class="hljs-built_in">result</span>.clear();<br>        path.clear();<br>        <span class="hljs-keyword">if</span> (digits.size() == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-built_in">result</span>;<br>        back_track(digits, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">result</span>;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="组合总和-1"><a href="#组合总和-1" class="headerlink" title="组合总和"></a>组合总和</h2></li>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0039.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/description/">39. 组合总和 - 力扣（LeetCode）</a></li>
+<li>题意，从无重复元素且数字大于零的整形数组中可重复选取元素，选出所有和为 target 的组合</li>
+<li>方法，由于可重复选取，故在递归下一层时，不用令选值区间左侧+1来避免重复，且可通过排序然后剪去和大于目标的部分剪枝</li>
+<li>陆爻齐参考代码随想录思路的方法<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs stan">class Solution &#123;<br>private:<br>    <span class="hljs-type">vector</span>&lt;<span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; result;<br>    <span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt; path;<br><br>    <span class="hljs-type">void</span> back_track(<span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt; &amp;candidates, <span class="hljs-type">int</span> <span class="hljs-built_in">target</span>, <span class="hljs-type">int</span> <span class="hljs-built_in">sum</span>, <span class="hljs-type">int</span> start_index) &#123;<br>        <span class="hljs-comment">// 终止条件</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sum</span> &gt; <span class="hljs-built_in">target</span>) &#123;<br>            <span class="hljs-keyword">return</span>;<br>        &#125;<br><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">sum</span> == <span class="hljs-built_in">target</span>) result.push_back(path);<br>        <span class="hljs-comment">// 排序后，可根据和大于目标来剪枝</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = start_index; i &lt; candidates.<span class="hljs-built_in">size</span>() &amp;&amp; <span class="hljs-built_in">sum</span> + candidates[i] &lt;= <span class="hljs-built_in">target</span>; i++) &#123;<br>            path.push_back(candidates[i]);<br>            <span class="hljs-built_in">sum</span> += candidates[i];<br>            back_track(candidates, <span class="hljs-built_in">target</span>, <span class="hljs-built_in">sum</span>, i);<br>            <span class="hljs-built_in">sum</span> -= candidates[i];<br>            path.pop_back();<br>        &#125;<br><br><br>    &#125;<br>public:<br>    <span class="hljs-type">vector</span>&lt;<span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt;&gt; combinationSum(<span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; candidates, <span class="hljs-type">int</span> <span class="hljs-built_in">target</span>) &#123;<br>        result.clear();<br>        path.clear();<br>        sort(candidates.begin(), candidates.end()); <span class="hljs-comment">// 便于剪枝的排序</span><br>        back_track(candidates, <span class="hljs-built_in">target</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Algorithm/" class="print-no-link">#Algorithm</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）</div>
+      <div>http://example.com/2024/11/03/[Weekly Algorithm] 8算法周记之《代码随想录》二叉树（四）与回溯（一）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月3日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/27/%5BWeekly%20Algorithm%5D%207%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%89%EF%BC%89/" title="【Weekly Algorithm】算法周记之《代码随想录》二叉树（三）">
+                        <span class="hidden-mobile">【Weekly Algorithm】算法周记之《代码随想录》二叉树（三）</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
