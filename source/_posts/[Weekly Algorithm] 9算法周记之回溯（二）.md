@@ -1,5 +1,5 @@
 ---
-title: 【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）
+title: 【Weekly Algorithm】算法周记之回溯（二）
 tags: [Algorithm]
 index_img: /img/index/leetcode.png
 date: 2024-11-10 22:32:00
