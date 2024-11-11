@@ -13,7 +13,8 @@ hide: false
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE)
 - 由于链表结构特殊，移除操作需要对指针操作，稍微复杂点
 - 比较方便的方法是，用一个虚拟的指针头，将这个链表的删除操作转化为统一的链表中元素的移除
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {
@@ -56,7 +57,8 @@ hide: false
 - TODO 独立单链表实现一次
 - TODO 双链表独立实现一次
 -
--  ```
+- 参考代码随想录思路的解法
+  ```
   typedef struct _link {
       int val;
       struct _link *next = nullptr;
@@ -160,7 +162,8 @@ hide: false
 - 本题要求，将一个单链表顺序翻转过来
 - 有递归法、双指针法，时间复杂度皆为O（n），双指针空间复杂度O（1），递归O（n）
 - 双指针法如下
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {
@@ -193,7 +196,8 @@ hide: false
   - [代码随想录 (programmercarl.com)](https://programmercarl.com/0024.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html)
 - 该题就是要求把链表中每两个元素的顺序调换
 - 方法就是选定锚点，然后以锚点后两个交换
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {
@@ -235,7 +239,8 @@ hide: false
   - [代码随想录 (programmercarl.com)](https://programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html)
 - 题意易见
 - 一次遍历解决的方法是，用双指针，快指针先走N步，再两指针一起走，最后删除慢指针后面那个。
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {
@@ -277,7 +282,8 @@ hide: false
   - [代码随想录 (programmercarl.com)](https://programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html)
 - 即有两条长短不一的链表，在后面某一点交会到一条，找到交汇的那个点
 - 方法即是先找到两个链表的长度，然后让长短两条各有一指针从相同位置同时检测两指针是否相等，毕竟前面的长短不一的部分不可能交汇
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {
@@ -339,7 +345,8 @@ hide: false
 - 接着是入环点的问题，接下来就是数学为主的时间，设 head 到入环点距离 x，入环点到相遇点距离 y，相遇点到入环点距离 z，慢指针就走了 x+y，快指针走了 x+n* (y+z) +y （毕竟可能走了几圈），快指针移速为慢指针两倍，可列式子 2*(x+y) =  x+n* (y+z) +y，消减得 x = n(y+z) - y，变换得 x = (n-1)(y+z) + z，一看从相遇点开始走 z 步（可能加上好几圈）以及从头开始走的不就可以在入环点相遇了嘛。
   
   假设 n=1，x==z，两边直接相遇；n=2，相遇点处的指针多走一圈，也能相遇  
--  ```
+- 参考代码随想录思路的解法
+  ```
   /**
    * Definition for singly-linked list.
    * struct ListNode {

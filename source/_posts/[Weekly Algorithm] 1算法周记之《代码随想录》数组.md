@@ -15,7 +15,8 @@ hide: false
 ### 正例
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#%E6%80%BB%E7%BB%93)
 - 二分查找重点是搞清楚边界，下面是左闭右开的写法
--  ```
+- 参考代码随想录思路的解法
+  ```
   int func(vector<int> nums, int target) {
   	int left = 0, right = nums.size(), middle;
       while (left < right) {
@@ -164,7 +165,8 @@ public:
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE)
 - 暴力解法
   即每次遇到要删除的元素，就把数组后面每一位向左覆盖一位  
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       int removeElement(vector<int>& nums, int val) {
@@ -185,7 +187,8 @@ public:
   ```
 - 双指针法
   快指针去找元素，慢指针是新数组的元素  
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       int removeElement(vector<int>& nums, int val) {
@@ -206,7 +209,8 @@ public:
 - [26. 删除有序数组中的重复项 - 力扣（LeetCode）](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
 - 即数组去重
 - 双指针秒了
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       int removeDuplicates(vector<int>& nums) {
@@ -228,7 +232,8 @@ public:
 - [283. 移动零 - 力扣（LeetCode）](https://leetcode.cn/problems/move-zeroes/description/)
 - 即保持非零数字顺序，零全放右侧
 - 双指针解决，记得有个 swap 函数可用于向量就方便些，简单地说，就是让快指针去找非零数，然后替换到慢指针所在的地方，若快指针遇到零就不换，跳过就是。
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       void moveZeroes(vector<int>& nums) {
@@ -249,7 +254,8 @@ public:
 - 该题思路挺多，不过还得是双指针
 - 可以用栈来改两个字符串，陆爻齐选择用双指针来改两字符串，也就是用慢指针确认前面的字符是什么，快指针去找要放在字符串的字符，换到慢指针处，与移动零的区别是，遇到 ‘#’ 时，慢指针应向左一格，让下次的字符覆盖上个字符。
 - 也有思路从后向前双指针同时比较（退格键的左侧不重要，右侧可确定）
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       bool backspaceCompare(string s, string t) {
@@ -281,7 +287,8 @@ public:
 - [977. 有序数组的平方 - 力扣（LeetCode）](https://leetcode.cn/problems/squares-of-a-sorted-array/solutions/2806253/xiang-xiang-shuang-zhi-zhen-cong-da-dao-blda6/)
 - 即将非递减的数组（含负数），各位平方后再以非递减序列排成数组
 - 从两侧向中间检测，也是双指针罢
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       vector<int> sortedSquares(vector<int>& nums) {
@@ -311,7 +318,8 @@ public:
 - 该题要求一个数组中连续元素和大于 target 的最小长度是多少
 - 暴力解法可以用两个 for 循环嵌套，一个相当于起始，一个相当于终止，穷举出所有可能，不过时间复杂度为 O(n^2)
 - 那么接下来就是 O(n) 的滑动窗口啦，该方法用 for 循环遍历终止位置，当快指针已遍历的数值满足需求时，记录长度，同时慢指针也向右移动至不满足要求，此时快指针再向右移动找下一个满足需求的情况
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       int minSubArrayLen(int target, vector<int>& nums) {
@@ -337,7 +345,8 @@ public:
 - [904. 水果成篮 - 力扣（LeetCode）](https://leetcode.cn/problems/fruit-into-baskets/)
 - 该题就是求数组中最长的连续两数字序列长度
 - 要点是运用哈希表来做查重记录工作
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       int totalFruit(vector<int>& fruits) {
@@ -377,7 +386,8 @@ public:
 - [76. 最小覆盖子串 - 力扣（LeetCode）](https://leetcode.cn/problems/minimum-window-substring/)
 - 该题就是在字符串 s 上，找涵盖字符串 t 所有字符的最小字符子串
 - 只好用两字典存已有字符和目标字符，其余还是沿用滑动窗口，不过效率很低
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       unordered_map<char, int> cns, target;
@@ -440,7 +450,8 @@ public:
 - [代码随想录 (programmercarl.com)](https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html#%E6%80%9D%E8%B7%AF)
 - 即将数组以某种特定方式赋值排列
 - 没有特定的方法，重点是坚持循环不变原则，即有些处理时统一方法，比如螺旋矩阵换方向赋值时，可坚持左闭右开的原则赋值
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       vector<vector<int>> generateMatrix(int n) {
@@ -493,7 +504,8 @@ public:
 - 该题要将一个 m*n 的矩阵顺时针输出其中的内容
 - 代码随想录没解，暂时也没想到那个思路的延申
 - 可借鉴思路是，每次按向右，向下，向左，向上四次输出到头，每个方向走完，判断下下个方向是否还有路，无则马上退出
--  ```
+- 参考代码随想录思路的解法
+  ```
   class Solution {
   public:
       vector<int> spiralOrder(vector<vector<int>>& matrix) {
@@ -534,7 +546,8 @@ public:
 - 就是要短时间内多次求一个数组上一段区间的数之和
 - 要用到前缀和，也就是在初始化数组时，用另一个数组存当前下标之前所有数字的和（每次存新数就更新累加和即可）
 - 最后求区间和时，用前缀和数组的右下标减左下标即可
--  ```
+- 参考代码随想录思路的解法
+  ```
   #include <iostream>
   #include <vector>
   
@@ -570,7 +583,8 @@ public:
 - [44. 开发商购买土地（第五期模拟笔试） (kamacoder.com)](https://kamacoder.com/problempage.php?pid=1044)
 - 给一个 m*n 的数组，可能对每行每列横切/竖切，求两边差值最小值
 - 可前缀和记录横向或者竖向的前缀和，然后就可方便大量计算差值
--  ```
+- 参考代码随想录思路的解法
+  ```
   #include <iostream>
   #include <vector>
   
