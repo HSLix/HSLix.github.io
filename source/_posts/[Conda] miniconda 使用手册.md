@@ -99,3 +99,11 @@ cd C:\my_env
 # 退出环境
 .\Scripts\deactivate.bat
 ```
+
+## 修复无法激活环境的问题
+问题发生情景：在 activate 环境时，报错如 `UnicodeDecodeError: 'gbk' codec can't decode byte 0xae in position 790: illegal multibyte sequence
+Unexpected cygpath error ('NoneType' object has no attribute 'strip')`
+
+问题排查过程：经解读报错和查阅资料发现，该问题是由于 conda 在启动环境的过程中，读取到了非正常字符。想到最近安装了微信开发者工具，让环境变量的 Path 中出现了中文，故删除对应的环境路径，再启动环境就正常了
+
+总结：环境变量 Path 中出现的中文让 conda 激活环境失败
