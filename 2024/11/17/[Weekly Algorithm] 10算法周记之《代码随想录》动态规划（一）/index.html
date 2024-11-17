@@ -16,16 +16,16 @@
   <meta name="author" content="陆爻齐-LuYaoQi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="学习小结本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。《代码随想录》还提醒，调试重点是检查递推公式是否举例，检查打印 dp 数组是否和自己设想一致。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代此外除了寻常的二维数组动态规划，也尝试做滚动数组的练">
+    <meta name="description" content="学习小结本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。《代码随想录》还提醒，调试重点是检查递推公式是否举例，检查打印 dp 数组是否和自己设想一致。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代  此外除了寻常的二维数组动态规划，也尝试做滚动数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）.md">
 <meta property="og:url" content="http://example.com/2024/11/17/[Weekly%20Algorithm]%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
 <meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="学习小结本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。《代码随想录》还提醒，调试重点是检查递推公式是否举例，检查打印 dp 数组是否和自己设想一致。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代此外除了寻常的二维数组动态规划，也尝试做滚动数组的练">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。《代码随想录》还提醒，调试重点是检查递推公式是否举例，检查打印 dp 数组是否和自己设想一致。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代  此外除了寻常的二维数组动态规划，也尝试做滚动数组">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/index/leetcode.png">
 <meta property="article:published_time" content="2024-11-17T03:50:00.000Z">
-<meta property="article:modified_time" content="2024-11-17T04:01:08.833Z">
+<meta property="article:modified_time" content="2024-11-17T08:56:44.227Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
@@ -281,8 +281,9 @@
 <li>确定递推公式</li>
 <li>确定 dp 数组初始化</li>
 <li>确定遍历顺序</li>
-<li>举例分析 dp 数组是否如所想迭代<br>此外除了寻常的二维数组动态规划，也尝试做滚动数组的练习。</li>
+<li>举例分析 dp 数组是否如所想迭代</li>
 </ol>
+<p>此外除了寻常的二维数组动态规划，也尝试做滚动数组的练习。</p>
 <h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><ul>
 <li><h2 id="斐波那契数"><a href="#斐波那契数" class="headerlink" title="斐波那契数"></a>斐波那契数</h2></li>
 <li><p>题意，给一个数字 n，求斐波那契数中的第 n 个数</p>
@@ -310,8 +311,9 @@
 <li>确认 dp 数组及其下标含义，这里的 dp[i] 表示上到第 i 个台阶的方法；</li>
 <li>确认递推公式，从上面简单举例可见，dp[i]&#x3D;dp[i-1]+dp[i-2];也就是从 i-1 上一阶和 i-2 上两阶，若 i-2 上一阶就到 i-1 而不是 i 了；</li>
 <li>dp 数组初始化，由于题目也没说 0 层的初始化，那么直接初始化 dp[1]&#x3D;1;dp[2]&#x3D;2;应当是无异议的；</li>
+<li>确认遍历顺序，爬楼梯也是从前往后的  </li>
+<li>举例推导 dp 数组， 1 2 3 5 8 13 ……</li>
 </ol>
-<p>4.确认遍历顺序，爬楼梯也是从前往后的<br>  5. 举例推导 dp 数组， 1 2 3 5 8 13 ……</p>
 </li>
 <li><p>参考代码随想录思路的解法</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs perl"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>public:<br>    <span class="hljs-keyword">int</span> climbStairs(<span class="hljs-keyword">int</span> n) &#123;<br>        <span class="hljs-keyword">int</span> dp[n+<span class="hljs-number">1</span>]; <span class="hljs-regexp">//</span> 爬到第 i 楼梯的方法数<br>        <span class="hljs-keyword">if</span> (n &lt;= <span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> n;<br>        dp[<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">2</span>]=<span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; i++) &#123;<br>            dp[i] = dp[i-<span class="hljs-number">1</span>] + dp[i-<span class="hljs-number">2</span>]; <span class="hljs-regexp">//</span> 递推式<br>        &#125; <br>        <span class="hljs-keyword">return</span> dp[n];<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
@@ -342,9 +344,17 @@
 </li>
 <li><p>方法，五步法</p>
 <ol>
-<li>确认 dp 数组及其下标含义，dp[i][j] 表示到达 i，j 的路径和</li>
+<li><p>确认 dp 数组及其下标含义，dp[i][j] 表示到达 i，j 的路径和</p>
+</li>
+<li><p>确认递推式，由于一个格子可由上或左来，故 dp[i][j] &#x3D; dp[i-1][j]+dp[i][j-1];  </p>
+</li>
+<li><p>确认初始化，陆爻齐在递推过程中判别了边界，所以只初始化 dp[0][0]&#x3D;1; 不过要是不想在中间做判别，可以把边缘初始化了在递推，即 dp[0][<em>]&#x3D;0;dp[</em>][0]&#x3D;0;（这里的 * 泛指数字）</p>
+</li>
+<li><p>确认遍历顺序，从上向下，从左向右</p>
+</li>
+<li><p>举例……</p>
+</li>
 </ol>
-<p>2.确认递推式，由于一个格子可由上或左来，故 dp[i][j] &#x3D; dp[i-1][j]+dp[i][j-1];<br>  3. 确认初始化，陆爻齐在递推过程中判别了边界，所以只初始化 dp[0][0]&#x3D;1; 不过要是不想在中间做判别，可以把边缘初始化了在递推，即 dp[0][<em>]&#x3D;0;dp[</em>][0]&#x3D;0;（这里的 * 泛指数字）<br>  4. 确认遍历顺序，从上向下，从左向右<br>  5. 举例……</p>
 </li>
 <li><p>陆爻齐的解法</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">uniquePaths</span><span class="hljs-params">(<span class="hljs-type">int</span> m, <span class="hljs-type">int</span> n)</span> </span>&#123;<br>        vector&lt;vector&lt;<span class="hljs-type">int</span>&gt;&gt; dp = <span class="hljs-built_in">vector</span>(m,<span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt;(n, <span class="hljs-number">0</span>)); <span class="hljs-comment">// dp[i][j] 代表从左上角到 i，j 的路径数</span><br>        dp[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>; <span class="hljs-comment">// 由于递推是取上和左路径和，故得取 1</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; m; i++) &#123; <span class="hljs-comment">// 从上往下</span><br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; n; j++) &#123; <span class="hljs-comment">// 从左往右</span><br>                <span class="hljs-keyword">if</span> (i &gt; <span class="hljs-number">0</span>) &#123;<br>                    dp[i][j] += dp[i<span class="hljs-number">-1</span>][j];<br>                &#125;<br>                <span class="hljs-keyword">if</span> (j &gt; <span class="hljs-number">0</span>) &#123;<br>                    dp[i][j] += dp[i][j<span class="hljs-number">-1</span>];<br>                &#125;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[m<span class="hljs-number">-1</span>][n<span class="hljs-number">-1</span>];<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure>
