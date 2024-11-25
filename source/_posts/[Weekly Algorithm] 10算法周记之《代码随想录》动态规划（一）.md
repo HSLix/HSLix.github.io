@@ -1,5 +1,5 @@
 ---
-title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）.md
+title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）
 tags: [Algorithm]
 index_img: /img/index/leetcode.png
 date: 2024-11-17 11:50:00
