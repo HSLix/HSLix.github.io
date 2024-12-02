@@ -16,25 +16,24 @@
   <meta name="author" content="陆爻齐-LuYaoQi">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文assert课堂中在讲授函数，如 1234from math import pidef area_circle(r):    return r * r * pi 但老师提出，当r为-10时，函数不会报错，于是引入assert来检测">
+    <meta name="description" content="学习小结本周跟随《代码随想录》继续推进动态规划的相关学习，主要是完全背包的入门，体会其与 01 背包的不同与关联。 下周两门考试，教务脑子真是进了水，搞这么紧干嘛。 动态规划 完全背包理论 代码随想录  52. 携带研究材料（第七期模拟笔试）  题目，与 [[01背包理论]]的差别在于一个物品可携带多次，求最大价值  方法，  dp[j]，在遍历物品时，截止到空间为 j，可装入的最大价值 递推公式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点">
-<meta property="og:url" content="http://example.com/2024/02/29/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%954%20Lecture4%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/index.html">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）">
+<meta property="og:url" content="http://example.com/2024/12/01/[Weekly%20Algorithm]%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
 <meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文assert课堂中在讲授函数，如 1234from math import pidef area_circle(r):    return r * r * pi 但老师提出，当r为-10时，函数不会报错，于是引入assert来检测">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》继续推进动态规划的相关学习，主要是完全背包的入门，体会其与 01 背包的不同与关联。 下周两门考试，教务脑子真是进了水，搞这么紧干嘛。 动态规划 完全背包理论 代码随想录  52. 携带研究材料（第七期模拟笔试）  题目，与 [[01背包理论]]的差别在于一个物品可携带多次，求最大价值  方法，  dp[j]，在遍历物品时，截止到空间为 j，可装入的最大价值 递推公式">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/index/CS61A.png">
-<meta property="article:published_time" content="2024-02-29T13:27:00.000Z">
-<meta property="article:modified_time" content="2024-12-02T11:47:47.150Z">
+<meta property="og:image" content="http://example.com/img/index/leetcode.png">
+<meta property="article:published_time" content="2024-12-01T14:40:00.000Z">
+<meta property="article:modified_time" content="2024-12-02T11:47:47.154Z">
 <meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="Python">
-<meta property="article:tag" content="CS61A">
+<meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/index/CS61A.png">
+<meta name="twitter:image" content="http://example.com/img/index/leetcode.png">
   
   
   
-  <title>【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点 - LuYaoQi&#39;s Blogs</title>
+  <title>【Weekly Algorithm】算法周记之《代码随想录》动态规划（三） - LuYaoQi&#39;s Blogs</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -200,7 +199,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点"></span>
+            <span id="subtitle" data-typed-text="【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）"></span>
           
         </div>
 
@@ -211,8 +210,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 21:27" pubdate>
-          2024年2月29日 晚上
+        <time datetime="2024-12-01 22:40" pubdate>
+          2024年12月1日 晚上
         </time>
       </span>
     
@@ -223,7 +222,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          602 字
+          837 字
         
       </span>
     
@@ -234,7 +233,7 @@
         
         
         
-          6 分钟
+          7 分钟
         
       </span>
     
@@ -271,39 +270,62 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点</h1>
+            <h1 id="seo-header">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
-<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="assert"><a href="#assert" class="headerlink" title="assert"></a>assert</h3><p>课堂中在讲授函数，如</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">area_circle</span>(<span class="hljs-params">r</span>):<br>    <span class="hljs-keyword">return</span> r * r * pi<br></code></pre></td></tr></table></figure>
-<p>但老师提出，当r为-10时，函数不会报错，于是引入assert来检测参数</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> math <span class="hljs-keyword">import</span> pi<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">area_circle</span>(<span class="hljs-params">r</span>):<br>    <span class="hljs-comment"># 参数应为正数</span><br>    <span class="hljs-keyword">assert</span> r &gt; <span class="hljs-number">0</span>, <span class="hljs-string">&#x27;A length must be positive&#x27;</span><br>    <span class="hljs-keyword">return</span> r * r * pi<br><span class="hljs-keyword">assert</span> r &gt; <span class="hljs-number">0</span><br></code></pre></td></tr></table></figure>
-<p>也就是当r大于0时，无事发生；否则发生错误并提示后面的语句</p>
-<h3 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher-Order Functions"></a>Higher-Order Functions</h3><p>一开始读题并不懂，什么是高等级的函数呢？课上有个例子大致如下</p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs ruby"><span class="hljs-keyword">def</span> <span class="hljs-title function_">make_adder</span>(<span class="hljs-params">k</span>):<br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">adder</span>(<span class="hljs-params">n</span>):<br>        <span class="hljs-keyword">return</span> n + k<br>    <span class="hljs-keyword">return</span> adder<br></code></pre></td></tr></table></figure>
-<p>make_adder函数内又定义了个adder函数</p>
-<p>此时，如果调用make_adder(1)，会返回一个k为1的adder函数</p>
-<p>而如果调用make_adder(1)(2)，则相当于调用adder(2)，此时k&#x3D;1</p>
-<p>像这样的方式可以十分方便地减少重复代码，分离函数功能，更接近DRY(Don’t Repeat Yourself)</p>
-<h3 id="Lambda"><a href="#Lambda" class="headerlink" title="Lambda"></a>Lambda</h3><p>square &#x3D; lambda x: x * x<br>lambda表达式使得简单函数无需用def定义后再调用</p>
-<p>在python中，与def相比，lambda定义出的函数有一个特点，那就是没有内在自己的名字</p>
-<p>直接输入上式， square，会发现在内存中，square对应的函数其实是lambda，不叫square</p>
-<p>老师表示该功能在python中不常用，但其他有的地方会很重要，故学习并记录</p>
-<p>下面是一个稍微有些难度的例子，与lambda本身关系不大</p>
-<figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs gml"># 寻找到f值为True的正数<span class="hljs-variable language_">x</span><br>def search(f):<br>    <span class="hljs-variable language_">x</span> = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">while</span> True:<br>        <span class="hljs-keyword">if</span> f(<span class="hljs-variable language_">x</span>):<br>            <span class="hljs-keyword">return</span> <span class="hljs-variable language_">x</span><br>        <span class="hljs-variable language_">x</span> += <span class="hljs-number">1</span><br><br>def square(<span class="hljs-variable language_">x</span>):<br>    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">x</span> * <span class="hljs-variable language_">x</span><br><br># 可以求出<span class="hljs-variable language_">y</span>对应的<span class="hljs-variable language_">x</span>满足f（<span class="hljs-variable language_">x</span>） == <span class="hljs-variable language_">y</span><br>def inverse(f):<br>    <span class="hljs-keyword">return</span> lambda <span class="hljs-variable language_">y</span>: search(lambda <span class="hljs-variable language_">x</span>, f(<span class="hljs-variable language_">x</span>) == <span class="hljs-variable language_">y</span>)<br></code></pre></td></tr></table></figure>
-<p>这里的inverse函数在初次看的时候有些令人费解，但一点点看</p>
-<p>首先从输出结果</p>
-<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs isbl">&gt;&gt;&gt; <span class="hljs-variable">sqrt</span> = <span class="hljs-function"><span class="hljs-title">inverse</span>(<span class="hljs-variable">square</span>)</span><br>&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">square</span>(<span class="hljs-number">8</span>)</span><br><span class="hljs-number">64</span><br>&gt;&gt;&gt; <span class="hljs-function"><span class="hljs-title">sqrt</span>(<span class="hljs-number">64</span>)</span><br><span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
-<p>可见sqrt通过inverse承担了解平方的功能</p>
-<p>inverse中f对应的是square，而在search函数中的f对应的是lambda x, f(x) &#x3D;&#x3D; y</p>
-<p>sqrt(64)的64则是赋给了y，然后再在search中寻找让f(x) &#x3D;&#x3D; y成立的正数x并返回</p>
-<p>If的另一种表达<br>直接举栗子比较清晰</p>
-<p>x &#x3D; 0<br>x &#x3D; 1 if x &gt; 0 else x &#x3D; -1<br>x &gt; 0是条件，满足该条件时执行if前，否则执行else后</p>
-<p>当作拓展知识吧</p>
+                <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》继续推进动态规划的相关学习，主要是完全背包的入门，体会其与 01 背包的不同与关联。</p>
+<p>下周两门考试，教务脑子真是进了水，搞这么紧干嘛。</p>
+<h1 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h1><ul>
+<li><h2 id="完全背包理论"><a href="#完全背包理论" class="headerlink" title="完全背包理论"></a>完全背包理论</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80%E5%AE%8C%E5%85%A8%E8%83%8C%E5%8C%85.html#%E5%85%B6%E4%BB%96%E8%AF%AD%E8%A8%80%E7%89%88%E6%9C%AC">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1052">52. 携带研究材料（第七期模拟笔试）</a></p>
+</li>
+<li><p>题目，与 [[01背包理论]]的差别在于一个物品可携带多次，求最大价值</p>
+</li>
+<li><p>方法，</p>
+<ol>
+<li>dp[j]，在遍历物品时，截止到空间为 j，可装入的最大价值</li>
+<li>递推公式，dp[j]&#x3D;max(dp[j],dp[j-weigh[i]]+val[i])</li>
+<li>初始化，全 0</li>
+<li>遍历方向，重点，这是与 01 背包区别最大的地方，01 的滚动数组强调倒序遍历就是为了避免重复，在完全背包中，恰恰需要正序从而利用重复装入物品</li>
+<li>举例，……</li>
+</ol>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;vector&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-type">int</span> n, v;<br>    cin &gt;&gt; n &gt;&gt; v;<br>    vector&lt;<span class="hljs-type">int</span>&gt; weigh;<br>    vector&lt;<span class="hljs-type">int</span>&gt; val;<br>    <span class="hljs-comment">// 初始化输入</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-type">int</span> tmp_w, tmp_v;<br>        cin &gt;&gt; tmp_w &gt;&gt; tmp_v;<br>        weigh.<span class="hljs-built_in">push_back</span>(tmp_w);<br>        val.<span class="hljs-built_in">push_back</span>(tmp_v);<br>    &#125;<br>    <br>    <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(v<span class="hljs-number">+1</span>, <span class="hljs-number">0</span>)</span></span>;<br>    <br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i++) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = weigh[i]; j &lt;= v; j++) &#123;<br>            dp[j] = <span class="hljs-built_in">max</span>(dp[j], dp[j-weigh[i]]+val[i]);<br>        &#125;<br>    &#125;<br>    cout &lt;&lt; dp[v] &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><h2 id="零钱兑换II"><a href="#零钱兑换II" class="headerlink" title="零钱兑换II"></a>零钱兑换II</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0518.%E9%9B%B6%E9%92%B1%E5%85%91%E6%8D%A2II.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change-ii/description/">518. 零钱兑换 II - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意，给硬币面额和目标面额，求凑出目标面额的硬币组合数（ 122 和 221 算重复组合）</p>
+</li>
+<li><p>方法，</p>
+<ol>
+<li>dp[j] 是在目标面额为 j 时，组合数</li>
+<li>递推公式，dp[j] +&#x3D; dp[j-coin[i]]；</li>
+<li>初始化，由于递推公式，决定了 dp[0]&#x3D;1</li>
+<li>遍历方向，这是重点，不可颠倒，求组合数就要先遍历硬币面额，后遍历目标面额；求排列数就要先遍历目标面额，后遍历硬币面额；可以这么理解，先遍历硬币面额，就可以让后面 dp[j] 的硬币大小顺序固定，不会出现 221 这种情况。</li>
+<li>举例……</li>
+</ol>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">change</span><span class="hljs-params">(<span class="hljs-type">int</span> amount, vector&lt;<span class="hljs-type">int</span>&gt;&amp; coins)</span> </span>&#123;<br>        <span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">dp</span><span class="hljs-params">(amount<span class="hljs-number">+1</span>, <span class="hljs-number">0</span>)</span></span>; <span class="hljs-comment">// dp[j] 代表考虑前i种硬币，可以凑出多少种组合</span><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; coins.<span class="hljs-built_in">size</span>(); i++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = coins[i]; j &lt; amount<span class="hljs-number">+1</span>; j++) &#123;<br>                <span class="hljs-keyword">if</span> (dp[j] &lt; INT_MAX - dp[j-coins[i]]) <br>                    dp[j] += dp[j-coins[i]];<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> dp[amount];<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
+<li><h2 id="组合总和IV"><a href="#组合总和IV" class="headerlink" title="组合总和IV"></a>组合总和IV</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0377.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8C%E2%85%A3.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/description/">377. 组合总和 Ⅳ - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意，有一个整数数组与一个目标整数，求整数数组中和为目标数的排列数，其值必为 int 范围内</p>
+</li>
+<li><p>方法，与[[零钱兑换II]]相似，不同的是，求排列数需要先遍历背包容量，再遍历物品，才能达到取到乱序的效果</p>
+</li>
+<li><p>陆爻齐试探出的解法，与代码随想录思路相近</p>
+<figure class="highlight stan"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs stan">class Solution &#123;<br>public:<br>    <span class="hljs-type">int</span> combinationSum4(<span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt;&amp; nums, <span class="hljs-type">int</span> <span class="hljs-built_in">target</span>) &#123;<br>        <span class="hljs-comment">// dp[j] 即在目标为 j 时，元素组合个数</span><br>        <span class="hljs-type">vector</span>&lt;<span class="hljs-type">int</span>&gt; dp(<span class="hljs-built_in">target</span>+<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);<br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-built_in">target</span>+<span class="hljs-number">1</span>; j++) &#123;<br>            <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; nums.<span class="hljs-built_in">size</span>(); i++) &#123;<br>                <span class="hljs-keyword">if</span> (j &gt;= nums[i] &amp;&amp; dp[j] &lt; INT_MAX - dp[j-nums[i]]) dp[j] += dp[j-nums[i]];<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-built_in">target</span>];<br>    &#125;<br>&#125;;<br><br></code></pre></td></tr></table></figure></li>
+</ul>
 
                 
               </div>
@@ -316,9 +338,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Python/" class="print-no-link">#Python</a>
-      
-        <a href="/tags/CS61A/" class="print-no-link">#CS61A</a>
+        <a href="/tags/Algorithm/" class="print-no-link">#Algorithm</a>
       
     </div>
   
@@ -330,8 +350,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点</div>
-      <div>http://example.com/2024/02/29/[CS61A-Fall-2020]学习记录4 Lecture4中有意思的点/</div>
+      <div>【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</div>
+      <div>http://example.com/2024/12/01/[Weekly Algorithm] 12算法周记之《代码随想录》动态规划（三）/</div>
     </div>
     <div class="license-meta">
       
@@ -343,7 +363,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月29日</div>
+          <div>2024年12月1日</div>
         </div>
       
       
@@ -381,18 +401,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/25/%E3%80%90%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E3%80%91%E4%B8%80%E7%AB%99%E5%BC%8F%E8%A7%A3%E5%86%B3%E9%85%8D%E7%BD%AE%E5%9B%BE%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9CGNN%E7%8E%AF%E5%A2%83%E5%90%84%E7%A7%8D%E9%97%AE%E9%A2%98%E2%80%94%E2%80%94%E4%BB%A5%E9%85%8D%E7%BD%AEHopGNN%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83%E4%B8%BA%E4%BE%8B%E8%AE%B0%E5%BD%95/" title="【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/29/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%953%20Lab1%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" title="【CS61A-Fall-2020】学习记录三 Lab1 题解思路分享">
-                        <span class="hidden-mobile">【CS61A-Fall-2020】学习记录三 Lab1 题解思路分享</span>
+                      <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）">
+                        <span class="hidden-mobile">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
