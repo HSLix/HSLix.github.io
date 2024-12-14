@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>LuYaoQi's Blogs - Hello my World</title><meta name="author" content="陆爻齐-LuYaoQi"><meta name="copyright" content="陆爻齐-LuYaoQi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="normal wants to be special">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LuYaoQi&#39;s Blogs">
+<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="normal wants to be special">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/MagicGirl_White.jpg">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/img/MagicGirl_White.jpg"><link rel="shortcut icon" href="/img/MagicGirl.jpg"><link rel="canonical" href="http://example.com/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          const mediaQueryDark = window.matchMedia('(prefers-color-scheme: dark)')
+          const mediaQueryLight = window.matchMedia('(prefers-color-scheme: light)')
+          
+          if (theme === undefined) {
+            if (mediaQueryLight.matches) activateLightMode()
+            else if (mediaQueryDark.matches) activateDarkMode()
+            else {
+              const hour = new Date().getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            mediaQueryDark.addEventListener('change', () => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else {
+            theme === 'light' ? activateLightMode() : activateDarkMode()
+          }
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'LuYaoQi\'s Blogs',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">LuYaoQi's Blogs</span></a></span><div id="menus"></div></nav><div id="site-info"><h1 id="site-title">LuYaoQi's Blogs</h1></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts nc" id="recent-posts"><div class="recent-post-items"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/4d7f9b51.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-08T15:22:00.000Z" title="发表于 2024-12-08 23:22:00">2024-12-08</time></span></div><div class="content">学习小结本周跟随《代码随想录》继续推进动态规划的相关学习，不过周五和周日两门考试太重了，浅做两题，接下来非考试周就继续至少一天一道罢。 本周两道题是完全背包求排列数的应用题和完全背包求 组合&#x2F;排列 的最小组合数，要记得组合与排列的区别在于背包空间和物品的遍历先后顺序，先遍历物品就不会出现物品乱序填背包的情况，所以是求组合数；而先遍历背包空间，使得同一个空间能有相同物品按不同顺序摆放，则是求排列数。 动态规划 爬楼梯（进阶版） 代码随想录  57. 爬楼梯（第八期模拟笔试）  题意，给 n 个台阶，和一起最多能迈 m 个台阶，问有多少不同方法可爬顶端  方法，由于同一步子可迈多次，故为完全背包问题，而且求的是排列数，与[[组合总和IV]]类似  陆爻齐的解法 123456789101112131415161718192021222324#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int main() &#123;    int n, m;    while(cin...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/fa528234.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-12-01T14:40:00.000Z" title="发表于 2024-12-01 22:40:00">2024-12-01</time></span></div><div class="content">学习小结本周跟随《代码随想录》继续推进动态规划的相关学习，主要是完全背包的入门，体会其与 01 背包的不同与关联。 下周两门考试，教务脑子真是进了水，搞这么紧干嘛。 动态规划 完全背包理论 代码随想录  52. 携带研究材料（第七期模拟笔试）  题目，与 [[01背包理论]]的差别在于一个物品可携带多次，求最大价值  方法，  dp[j]，在遍历物品时，截止到空间为 j，可装入的最大价值 递推公式，dp[j]&#x3D;max(dp[j],dp[j-weigh[i]]+val[i]) 初始化，全 0 遍历方向，重点，这是与 01 背包区别最大的地方，01 的滚动数组强调倒序遍历就是为了避免重复，在完全背包中，恰恰需要正序从而利用重复装入物品 举例，……   参考代码随想录思路的解法 12345678910111213141516171819202122232425262728#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std;int main() &#123;    int n, v;   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/b74c2166.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-24T04:41:00.000Z" title="发表于 2024-11-24 12:41:00">2024-11-24</time></span></div><div class="content">学习小结本周跟随《代码随想录》继续推进动态规划的相关学习，由于期末月的到来，以及题目难度的增加，暂且将动态规划的学习进度放慢一点。下面继续巩固五步法。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代  只能感叹，这动态规划真是一百道题才入门啊。 动态规划 分割等和子集 代码随想录  416. 分割等和子集 - 力扣（LeetCode）  题意，给一个数组，返回判断该数组是否能平分为和相等的两部分  方法，直觉上，可以用回溯遍历树，找到那个子节点，但复杂度太高。本题其实就是 01 背包的应用，nums[i] 本身，是物品，重量，以及价值。数组能否平分和的本质，就是平分和的大小的背包能否被刚好装满，也就是下标与值相等。    参考代码随想录思路的代码 1234567891011121314151617class Solution &#123;public:    bool canPartition(vector&lt;int&gt;&amp; nums) &#123;        int sum =...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/875acdbe.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-17T03:50:00.000Z" title="发表于 2024-11-17 11:50:00">2024-11-17</time></span></div><div class="content">学习小结本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。《代码随想录》还提醒，调试重点是检查递推公式是否举例，检查打印 dp 数组是否和自己设想一致。  分析 dp 数组及其下标含义 确定递推公式 确定 dp 数组初始化 确定遍历顺序 举例分析 dp 数组是否如所想迭代  此外除了寻常的二维数组动态规划，也尝试做滚动数组的练习。 动态规划 斐波那契数 题意，给一个数字 n，求斐波那契数中的第 n 个数  方法，虽然就算不看代码随想录也能轻易写出，但简单题的重点在于熟悉套路方法，下面按五步分析  确定 dp 数组及其下标含义，这里的 dp[i] 代表斐波那契数中的第 i 个数 确认递推公式，题目给出 dp[i]=dp[i-1]+dp[i-2] dp 数组初始化，题目也给出dp[0]=0;dp[1]=1; 确定遍历顺序，从递推公式可见，就是从前向后（0-n）遍历 举例推导 dp 公式，0 1 1 2 3 5 8 13 21 ……   陆爻齐的解 1234567891011121314class...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/4ea07c12.html" title="【Weekly Algorithm】算法周记之《代码随想录》回溯（二）">【Weekly Algorithm】算法周记之《代码随想录》回溯（二）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-10T14:32:00.000Z" title="发表于 2024-11-10 22:32:00">2024-11-10</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习回溯的剩余题目，如八皇后，全排列等问题，当初看上去可怕的题目，在回溯的套路下，显得也没那么难，重点在于理解整个回溯的树遍历过程。 通常回溯部分的函数无返回值，但当回溯只求全树唯一一个解时，比如[[全排列]][[解数独]]，可将回溯函数返回值设为 bool 类型，在一个叶子为 true，层层上传，避免无用遍历。 回溯 组合总和II 代码随想录 40. 组合总和 II - 力扣（LeetCode） 题意，与[[组合总和III]]类似，但待选数组内出现重复元素，且结果的组合不能重复 方法，重点是分清两种去重，一种是同一树支的去重（纵向），一种是同一树层的去重（横向），两者都可以通过用 used 数组实现，前者要求 used 中同值点不可同时 true 才能加入结果，后者要求同值点必须 true 该点才能加入结果；换句话，used 中 ture 的点说明在同一树支（路径）上 参考代码随想录思路的解法123456789101112131415161718192021222324252627282930313233343536373839class...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/20b866e1.html" title="【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）">【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-11-03T02:31:00.000Z" title="发表于 2024-11-03 10:31:00">2024-11-03</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习二叉树和二叉搜索树的相关题目，还在递归中主要学习了关于组合的一部分题目。 回溯，用代码随想录中的一句话概括：- for 循环横向遍历，递归纵向遍历，回溯调整结果集。 二叉树 二叉搜索树的最小绝对差 代码随想录 530. 二叉搜索树的最小绝对差 - 力扣（LeetCode） 题意，找二叉搜索树中任意两个节点两值之差的最小值 方法，由于二叉搜索树的本质是有序数组，按中序遍历比较相邻节点之差 陆爻齐的解法 与代码随想录思路相近1234567891011121314151617181920212223242526272829303132/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *    ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/c9ad525.html" title="【Weekly Algorithm】算法周记之《代码随想录》二叉树（三）">【Weekly Algorithm】算法周记之《代码随想录》二叉树（三）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-27T13:11:00.000Z" title="发表于 2024-10-27 21:11:00">2024-10-27</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习二叉树和二叉搜索树的算法题目，比如完全二叉树的节点个数，平衡二叉树，二叉树的路径、二叉树的合并，二叉搜索树的检索和验证等。 二叉树 完全二叉树的节点个数 代码随想录 222. 完全二叉树的节点个数 - 力扣（LeetCode） 题意就是让你求一个完全二叉树的节点个数 方法有大致两种，一种是把这个当普通二叉树求，直接先序、中序、后序遍历都行，统计节点，时间复杂度 O(n)；第二种是利用完全二叉树的特性，由于完全二叉树可视作是满二叉树组成的二叉树，满二叉树的节点由深度 n，经 2^n - 1 计算得出。 陆爻齐的先序求法123456789101112131415161718192021222324252627/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr),...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/41847677.html" title="【Weekly Algorithm】算法周记之《代码随想录》二叉树（二）">【Weekly Algorithm】算法周记之《代码随想录》二叉树（二）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-20T14:12:00.000Z" title="发表于 2024-10-20 22:12:00">2024-10-20</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习二叉树的层序遍历，以及对于二叉树的翻转、对称，深度问题等。 二叉树 二叉树的层序遍历 代码随想录 (programmercarl.com) 102. 二叉树的层序遍历 - 力扣（LeetCode） 题意就是一层层地从左到右遍历二叉树 方法就是利用队列，把一层层排进去，一层层遍历，陆爻齐用两个队列实现这个操作，不过通过 for 循环，其实只要一个队列就行  陆爻齐的解法123456789101112131415161718192021222324252627282930313233343536373839/** * Definition for a binary tree node. * struct TreeNode &#123; *     int val; *     TreeNode *left; *     TreeNode *right; *     TreeNode() : val(0), left(nullptr), right(nullptr) &#123;&#125; *     TreeNode(int x) :...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/9bec6b3.html" title="【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）">【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-13T11:48:00.000Z" title="发表于 2024-10-13 19:48:00">2024-10-13</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习栈与队列和二叉树遍历的一部分，学到了栈和队列在算法中的应用，以及优先级队列的使用；此外还有二叉树的前中后序的递归、迭代、统一迭代方法。 栈与队列用栈实现队列 代码随想录 (programmercarl.com) 题意就是用栈实现队列的一部分功能 核心就是通过两栈，一个管输入，一个管输出，输出空了时，执行输出操作需从输入中把数字倒入输出的栈中 陆爻齐参考代码随想录思路的解法1234567891011121314151617181920212223242526272829303132333435363738394041424344class MyQueue &#123;public:    stack&lt;int&gt; in;    stack&lt;int&gt; out;    MyQueue() &#123;            &#125;        void push(int x) &#123;        in.push(x);    &#125;        int pop() &#123;        int num...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/62f68aed.html" title="【Weekly Algorithm】 算法周记之《代码随想录》字符串">【Weekly Algorithm】 算法周记之《代码随想录》字符串</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-10-06T05:45:00.000Z" title="发表于 2024-10-06 13:45:00">2024-10-06</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。 字符串简评究其本质而言，就是数组，只不过内容换成了字母。 反转字符串 代码随想录 (programmercarl.com) 就是把字符串前后翻转，和[[翻转链表]]相似 由于字符串可以随机读取，可以简单很多，直接 swap i 和 str.size()-1-i 的字符即可 陆爻齐参照代码随想录的解法123456789class Solution &#123;public:    void reverseString(vector&lt;char&gt;&amp; s) &#123;        int size = s.size();        for (int i = 0; i &lt; size / 2; i++) &#123;            swap(s[i],s[size - 1 - i]);        &#125;    &#125;&#125;;  反转字符串|| 代码随想录 (programmercarl.com) 与...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1b785190.html" title="【Weekly Algorithm】 算法周记之《代码随想录》哈希表">【Weekly Algorithm】 算法周记之《代码随想录》哈希表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-29T15:59:00.000Z" title="发表于 2024-09-29 23:59:00">2024-09-29</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习哈希表部分，较深入地了解了哈希表的相关算法题，结合数组、set、map完成题目，并利用双指针解决部分题目。 哈希表简评究其本质而言，就是数组，但可以通过给元素编码得其索引，以 O(1) 的效率访存，最适合检测该元素是否存在。## 有效的字母异位词- 代码随想录 (programmercarl.com)- 即检测一个字符串是否为另一个字符串的字母打散重组的单词- 字符可以通过 ASCII 码表来存储，遍历某个字符串，对应字符++，再遍历另一个对应字符–，最后所有字符都为 0 即为字母异位词1234567891011121314151617181920212223242526class Solution &#123;public:    bool isAnagram(string s, string t) &#123;        // 记录每个字符对应次数，相当于哈希表        int word_rec[26] = &#123;0&#125;;        // 遍历某个字符串，记录对应字符出现次数        for (auto c...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/695632.html" title="【Weekly Algorithm】 算法周记之《代码随想录》链表">【Weekly Algorithm】 算法周记之《代码随想录》链表</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-22T07:35:00.000Z" title="发表于 2024-09-22 15:35:00">2024-09-22</time></span></div><div class="content">学习小结本周跟随《代码随想录》学习链表部分，较深入地了解了链表的相关算法题，并利用双指针解决部分题目。 链表移除链表元素 代码随想录 (programmercarl.com) 由于链表结构特殊，移除操作需要对指针操作，稍微复杂点 比较方便的方法是，用一个虚拟的指针头，将这个链表的删除操作转化为统一的链表中元素的移除 参考代码随想录思路的解法1234567891011121314151617181920212223242526272829303132333435/** * Definition for singly-linked list. * struct ListNode &#123; *     int val; *     ListNode *next; *     ListNode() : val(0), next(nullptr) &#123;&#125; *     ListNode(int x) : val(x), next(nullptr) &#123;&#125; *     ListNode(int x, ListNode *next) : val(x),...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/c5d31b94.html" title="【Conda】 miniconda 使用手册">【Conda】 miniconda 使用手册</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-16T06:14:00.000Z" title="发表于 2024-09-16 14:14:00">2024-09-16</time></span></div><div class="content">前言本文是陆爻齐平时经常使用 conda 的一些记录，且作为复习笔记罢 正文创建环境conda create -n name python=3.9.*这条语句的意思是创建名字为 name，python 版本为 3.9 中最新的版本的环境，-n 后面跟名字，python 也可先不确定，但还没试过后面安 python。 查看环境conda env list会列出所有已有的虚拟环境 删除环境conda remove -n name --all删除名字为 name 的环境 克隆环境conda create -n name --clone other将名为 other 的环境复制到新环境 name 中 更改存储和环境的地方参考网址执行以下命令设置将虚拟环境安装到&#x2F;root&#x2F;autodl-tmp&#x2F;conda&#x2F;envs， 包缓存到&#x2F;root&#x2F;autodl-tmp&#x2F;conda&#x2F;pkgs 12345mkdir -p /root/autodl-tmp/conda/pkgsconda config --add...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/1709b771.html" title="【Weekly Algorithm】 算法周记之《代码随想录》数组">【Weekly Algorithm】 算法周记之《代码随想录》数组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-09-15T04:03:00.000Z" title="发表于 2024-09-15 12:03:00">2024-09-15</time></span></div><div class="content">学习小结前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。 也学到要坚持循环不变原则，即有些原则在循环中应保持不变，以统一后续操作，方便完成循环，具体可查看螺旋矩阵的部分。 数组二分查找正例 代码随想录 (programmercarl.com)  二分查找重点是搞清楚边界，下面是左闭右开的写法  参考代码随想录思路的解法 12345678910int func(vector&lt;int&gt; nums, int target) &#123;	int left = 0, right = nums.size(), middle;    while (left &lt; right) &#123;    	middle = (left + right) / 2;        if (nums[middle] &gt; target) right = middle;        else if (nums[middle] &lt; target) left = middle + 1;       ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/58db1e1b.html" title="【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享">【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-28T07:22:00.000Z" title="发表于 2024-08-28 15:22:00">2024-08-28</time></span></div><div class="content">前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 Higher-Order FunctionsQ1: ProductWrite a function called product that returns the product of the first n terms of a sequence. Specifically, product takes in an integer n and term, a single-argument function that determines a sequence. (That is, term(i) gives the ith term of the sequence.) product(n, term) should return term(1) * … * term(n). 1234567891011121314151617181920def product(n, term):   ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/posts/b47f5c1b.html" title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2024-08-13T12:08:00.000Z" title="发表于 2024-08-13 20:08:00">2024-08-13</time></span></div><div class="content">前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 正文Q1: WWPD: Lambda the Free有两个问题有点意思。 lambda 与参数1234&gt;&gt;&gt; b = lambda x: lambda: x  # Lambdas can return other lambdas!&gt;&gt;&gt; c = b(88)&gt;&gt;&gt; c______ 该问题看似只是普通的 lambda 中传 x，c 还传入了 x 参数值为 88 所以答案是 88 吗？ 当然不是，这个问题结合下面这个问题就很显然了。 12&gt;&gt;&gt; c()______ 那么想清楚这个问题的关键，就在于能否分辨 c 和 c() 的含义。 把 88 代入 c 的 lambda 式子，可以换成 c &#x3D; lambda : 88 本质上，c 其实还是个 lambda 式子，只不过无参数，所以直接调用 c 不会得到...</div></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="page-number" href="/page/3/#content-inner">3</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/MagicGirl_White.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">陆爻齐-LuYaoQi</div><div class="author-info-description">normal wants to be special</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">37</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4d7f9b51.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a><time datetime="2024-12-08T15:22:00.000Z" title="发表于 2024-12-08 23:22:00">2024-12-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/fa528234.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a><time datetime="2024-12-01T14:40:00.000Z" title="发表于 2024-12-01 22:40:00">2024-12-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/b74c2166.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a><time datetime="2024-11-24T04:41:00.000Z" title="发表于 2024-11-24 12:41:00">2024-11-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/875acdbe.html" title="【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a><time datetime="2024-11-17T03:50:00.000Z" title="发表于 2024-11-17 11:50:00">2024-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/4ea07c12.html" title="【Weekly Algorithm】算法周记之《代码随想录》回溯（二）">【Weekly Algorithm】算法周记之《代码随想录》回溯（二）</a><time datetime="2024-11-10T14:32:00.000Z" title="发表于 2024-11-10 22:32:00">2024-11-10</time></div></div></div></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/CS61A/" style="font-size: 1.39em; color: #99a4b4">CS61A</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 1.21em; color: #999ea4">杂谈</a> <a href="/tags/Conda/" style="font-size: 1.1em; color: #999">Conda</a> <a href="/tags/CINTA/" style="font-size: 1.1em; color: #999">CINTA</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 1.16em; color: #999b9e">播客笔记</a> <a href="/tags/Git/" style="font-size: 1.1em; color: #999">Git</a> <a href="/tags/Python/" style="font-size: 1.44em; color: #99a7ba">Python</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 1.16em; color: #999b9e">机器学习</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.27em; color: #99a0a9">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 1.16em; color: #999b9e">方法论</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.1em; color: #999">深度学习</a> <a href="/tags/JLU/" style="font-size: 1.33em; color: #99a2af">JLU</a> <a href="/tags/Algorithm/" style="font-size: 1.5em; color: #99a9bf">Algorithm</a></div></div><div class="card-widget card-archives">
+    <div class="item-headline">
+      <i class="fas fa-archive"></i>
+      <span>归档</span>
+      <a class="card-more-btn" href="/archives/" title="查看更多"><i class="fas fa-angle-right"></i></a>
+    </div>
+    <ul class="card-archive-list">
+  
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/12/">
+          <span class="card-archive-list-date">十二月 2024</span>
+          <span class="card-archive-list-count">2</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/11/">
+          <span class="card-archive-list-date">十一月 2024</span>
+          <span class="card-archive-list-count">4</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/10/">
+          <span class="card-archive-list-date">十月 2024</span>
+          <span class="card-archive-list-count">4</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/09/">
+          <span class="card-archive-list-date">九月 2024</span>
+          <span class="card-archive-list-count">4</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/08/">
+          <span class="card-archive-list-date">八月 2024</span>
+          <span class="card-archive-list-count">3</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/07/">
+          <span class="card-archive-list-date">七月 2024</span>
+          <span class="card-archive-list-count">9</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/06/">
+          <span class="card-archive-list-date">六月 2024</span>
+          <span class="card-archive-list-count">3</span>
+        </a>
+      </li>
+    
+      <li class="card-archive-list-item">
+        <a class="card-archive-list-link" href="/archives/2024/05/">
+          <span class="card-archive-list-date">五月 2024</span>
+          <span class="card-archive-list-count">1</span>
+        </a>
+      </li>
+    </ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站信息</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">37</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总浏览量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2024-12-14T02:08:53.233Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2024 By 陆爻齐-LuYaoQi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
