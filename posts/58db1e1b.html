@@ -1,0 +1,683 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 Higher-Order FunctionsQ1: ProductWrite a function called product that returns the product of the first n terms of a s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享">
+<meta property="og:url" content="http://example.com/posts/58db1e1b.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言观前提示，笔者写的代码答案放在 GitHub仓库 中，此处仅记录过程与心得。 此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会 Higher-Order FunctionsQ1: ProductWrite a function called product that returns the product of the first n terms of a s">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/CS61A.png">
+<meta property="article:published_time" content="2024-08-28T07:22:00.000Z">
+<meta property="article:modified_time" content="2024-12-14T02:24:58.092Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="CS61A">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/CS61A.png">
+  
+  
+  
+  <title>【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享 - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-28 15:22" pubdate>
+          2024年8月28日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
+<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
+<h2 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher-Order Functions"></a>Higher-Order Functions</h2><h3 id="Q1-Product"><a href="#Q1-Product" class="headerlink" title="Q1: Product"></a>Q1: Product</h3><p>Write a function called product that returns the product of the first n terms of a sequence. Specifically, product takes in an integer n and term, a single-argument function that determines a sequence. (That is, term(i) gives the ith term of the sequence.) product(n, term) should return term(1) * … * term(n).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">product</span>(<span class="hljs-params">n, term</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Return the product of the first n terms in a sequence.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    n: a positive integer</span><br><span class="hljs-string">    term:  a function that takes one argument to produce the term</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &gt;&gt;&gt; product(3, identity)  # 1 * 2 * 3</span><br><span class="hljs-string">    6</span><br><span class="hljs-string">    &gt;&gt;&gt; product(5, identity)  # 1 * 2 * 3 * 4 * 5</span><br><span class="hljs-string">    120</span><br><span class="hljs-string">    &gt;&gt;&gt; product(3, square)    # 1^2 * 2^2 * 3^2</span><br><span class="hljs-string">    36</span><br><span class="hljs-string">    &gt;&gt;&gt; product(5, square)    # 1^2 * 2^2 * 3^2 * 4^2 * 5^2</span><br><span class="hljs-string">    14400</span><br><span class="hljs-string">    &gt;&gt;&gt; product(3, increment) # (1+1) * (2+1) * (3+1)</span><br><span class="hljs-string">    24</span><br><span class="hljs-string">    &gt;&gt;&gt; product(3, triple)    # 1*3 * 2*3 * 3*3</span><br><span class="hljs-string">    162</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="A1"><a href="#A1" class="headerlink" title="A1"></a>A1</h3><p>题目大意是，用一个函数，计算从 1-n 经 term 函数处理之积</p>
+<p>嘛，用循环可以轻松解决，不过陆爻齐用了递归</p>
+<h3 id="Q2-Accumulate"><a href="#Q2-Accumulate" class="headerlink" title="Q2: Accumulate"></a>Q2: Accumulate</h3><p>Let’s take a look at how product is an instance of a more general function called accumulate, which we would like to implement:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs vim">def accumulate(fuse, start, n, term):<br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;Return the result of fusing together the first n terms in a sequence </span><br>    <span class="hljs-built_in">and</span> start.  The terms <span class="hljs-keyword">to</span> <span class="hljs-keyword">be</span> fused are term(<span class="hljs-number">1</span>), term(<span class="hljs-number">2</span>), ..., term(n). <br>    The <span class="hljs-keyword">function</span> <span class="hljs-title">fuse</span> is a two-argument commutative &amp; associative function.<br><br>    &gt;&gt;&gt; accumulate(<span class="hljs-built_in">add</span>, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, identity)  # <span class="hljs-number">0</span> + <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span> + <span class="hljs-number">4</span> + <span class="hljs-number">5</span><br>    <span class="hljs-number">15</span><br>    &gt;&gt;&gt; accumulate(<span class="hljs-built_in">add</span>, <span class="hljs-number">11</span>, <span class="hljs-number">5</span>, identity) # <span class="hljs-number">11</span> + <span class="hljs-number">1</span> + <span class="hljs-number">2</span> + <span class="hljs-number">3</span> + <span class="hljs-number">4</span> + <span class="hljs-number">5</span><br>    <span class="hljs-number">26</span><br>    &gt;&gt;&gt; accumulate(<span class="hljs-built_in">add</span>, <span class="hljs-number">11</span>, <span class="hljs-number">0</span>, identity) # <span class="hljs-number">11</span> (fuse <span class="hljs-keyword">is</span> never used)<br>    <span class="hljs-number">11</span><br>    &gt;&gt;&gt; accumulate(<span class="hljs-built_in">add</span>, <span class="hljs-number">11</span>, <span class="hljs-number">3</span>, square)   # <span class="hljs-number">11</span> + <span class="hljs-number">1</span>^<span class="hljs-number">2</span> + <span class="hljs-number">2</span>^<span class="hljs-number">2</span> + <span class="hljs-number">3</span>^<span class="hljs-number">2</span><br>    <span class="hljs-number">25</span><br>    &gt;&gt;&gt; accumulate(mul, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, square)    # <span class="hljs-number">2</span> * <span class="hljs-number">1</span>^<span class="hljs-number">2</span> * <span class="hljs-number">2</span>^<span class="hljs-number">2</span> * <span class="hljs-number">3</span>^<span class="hljs-number">2</span><br>    <span class="hljs-number">72</span><br>    &gt;&gt;&gt; # <span class="hljs-number">2</span> + (<span class="hljs-number">1</span>^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>) + (<span class="hljs-number">2</span>^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>) + (<span class="hljs-number">3</span>^<span class="hljs-number">2</span> + <span class="hljs-number">1</span>)<br>    &gt;&gt;&gt; accumulate(lambda <span class="hljs-keyword">x</span>, <span class="hljs-keyword">y</span>: <span class="hljs-keyword">x</span> + <span class="hljs-keyword">y</span> + <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, square)<br>    <span class="hljs-number">19</span><br>    <span class="hljs-string">&quot;&quot;</span><span class="hljs-comment">&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>accumulate has the following parameters:</p>
+<p>fuse: a two-argument function that specifies how the current term is fused with the previously accumulated terms<br>start: value at which to start the accumulation<br>n: a non-negative integer indicating the number of terms to fuse<br>term: a single-argument function; term(i) is the ith term of the sequence<br>Implement accumulate, which fuses the first n terms of the sequence defined by term with the start value using the fuse function.</p>
+<p>For example, the result of accumulate(add, 11, 3, square) is</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">add</span>(<span class="hljs-number">11</span>,  add(square(<span class="hljs-number">1</span>), add(square(<span class="hljs-number">2</span>),  square(<span class="hljs-number">3</span>)))) =<br>    <span class="hljs-attribute">11</span> +     square(<span class="hljs-number">1</span>) +    square(<span class="hljs-number">2</span>) + square(<span class="hljs-number">3</span>)    =<br>    <span class="hljs-attribute">11</span> +     <span class="hljs-number">1</span>         +    <span class="hljs-number">4</span>         + <span class="hljs-number">9</span>            = <span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
+<p>Assume that fuse is commutative, fuse(a, b) &#x3D;&#x3D; fuse(b, a), and associative, fuse(fuse(a, b), c) &#x3D;&#x3D; fuse(a, fuse(b, c)).</p>
+<p>Then, implement summation (from lecture) and product as one-line calls to accumulate.</p>
+<p>Important: Both summation_using_accumulate and product_using_accumulate should be implemented with a single line of code starting with return.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">summation_using_accumulate</span>(<span class="hljs-params">n, term</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Returns the sum: term(1) + ... + term(n), using accumulate.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &gt;&gt;&gt; summation_using_accumulate(5, square) # square(0) + square(1) + ... + square(4) + square(5)</span><br><span class="hljs-string">    55</span><br><span class="hljs-string">    &gt;&gt;&gt; summation_using_accumulate(5, triple) # triple(0) + triple(1) + ... + triple(4) + triple(5)</span><br><span class="hljs-string">    45</span><br><span class="hljs-string">    &gt;&gt;&gt; # This test checks that the body of the function is just a return statement.</span><br><span class="hljs-string">    &gt;&gt;&gt; import inspect, ast</span><br><span class="hljs-string">    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]</span><br><span class="hljs-string">    [&#x27;Expr&#x27;, &#x27;Return&#x27;]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> ____<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">product_using_accumulate</span>(<span class="hljs-params">n, term</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Returns the product: term(1) * ... * term(n), using accumulate.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &gt;&gt;&gt; product_using_accumulate(4, square) # square(1) * square(2) * square(3) * square()</span><br><span class="hljs-string">    576</span><br><span class="hljs-string">    &gt;&gt;&gt; product_using_accumulate(6, triple) # triple(1) * triple(2) * ... * triple(5) * triple(6)</span><br><span class="hljs-string">    524880</span><br><span class="hljs-string">    &gt;&gt;&gt; # This test checks that the body of the function is just a return statement.</span><br><span class="hljs-string">    &gt;&gt;&gt; import inspect, ast</span><br><span class="hljs-string">    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]</span><br><span class="hljs-string">    [&#x27;Expr&#x27;, &#x27;Return&#x27;]</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">return</span> ____<br></code></pre></td></tr></table></figure>
+<h3 id="A2"><a href="#A2" class="headerlink" title="A2"></a>A2</h3><p>题目大意，是先完成 accumulate 函数，这是一个用 fuse 处理 start、term(1) … term(n) 之间的函数，再用 accumulate 函数实现两个衍生的函数。</p>
+<p>没什么难点，想说的话同 A1</p>
+<h3 id="Q3-Make-Repeater"><a href="#Q3-Make-Repeater" class="headerlink" title="Q3: Make Repeater"></a>Q3: Make Repeater</h3><p>Implement the function make_repeater which takes a one-argument function f and a positive integer n. It returns a one-argument function, where make_repeater(f, n)(x) returns the value of f(f(…f(x)…)) in which f is applied n times to x. For example, make_repeater(square, 3)(5) squares 5 three times and returns 390625, just like square(square(square(5))).</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">make_repeater</span>(<span class="hljs-params">f, n</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Returns the function that computes the nth application of f.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &gt;&gt;&gt; add_three = make_repeater(increment, 3)</span><br><span class="hljs-string">    &gt;&gt;&gt; add_three(5)</span><br><span class="hljs-string">    8</span><br><span class="hljs-string">    &gt;&gt;&gt; make_repeater(triple, 5)(1) # 3 * (3 * (3 * (3 * (3 * 1))))</span><br><span class="hljs-string">    243</span><br><span class="hljs-string">    &gt;&gt;&gt; make_repeater(square, 2)(5) # square(square(5))</span><br><span class="hljs-string">    625</span><br><span class="hljs-string">    &gt;&gt;&gt; make_repeater(square, 3)(5) # square(square(square(5)))</span><br><span class="hljs-string">    390625</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="A3"><a href="#A3" class="headerlink" title="A3"></a>A3</h3><p>题目大意是，写一个函数，传入一个单参函数和数字 n，分别是处理参数的方式和次数，返回一个可传一个参数的函数。</p>
+<p>实现方式就是内部定个函数，把传入数字，用 f 执行 n 次即可，也不难</p>
+<h2 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h2><h3 id="Q4-Digit-Distance"><a href="#Q4-Digit-Distance" class="headerlink" title="Q4: Digit Distance"></a>Q4: Digit Distance</h3><p>For a given integer, the digit distance is the sum of the absolute differences between consecutive digits. For example:</p>
+<p>The digit distance of 6 is 0.<br>The digit distance of 61 is 5, as the absolute value of 6 - 1 is 5.<br>The digit distance of 71253 is 12 (6 + 1 + 3 + 2).<br>Write a function that determines the digit distance of a given positive integer. You must use recursion or the tests will fail.</p>
+<p>Hint: There are multiple valid ways of solving this problem! If you’re stuck, try writing out an iterative solution first, and then convert your iterative solution into a recursive one.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">digit_distance</span>(<span class="hljs-params">n</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Determines the digit distance of n.</span><br><span class="hljs-string"></span><br><span class="hljs-string">    &gt;&gt;&gt; digit_distance(3)</span><br><span class="hljs-string">    0</span><br><span class="hljs-string">    &gt;&gt;&gt; digit_distance(777)</span><br><span class="hljs-string">    0</span><br><span class="hljs-string">    &gt;&gt;&gt; digit_distance(314)</span><br><span class="hljs-string">    5</span><br><span class="hljs-string">    &gt;&gt;&gt; digit_distance(31415926535)</span><br><span class="hljs-string">    32</span><br><span class="hljs-string">    &gt;&gt;&gt; digit_distance(3464660003)</span><br><span class="hljs-string">    16</span><br><span class="hljs-string">    &gt;&gt;&gt; from construct_check import check</span><br><span class="hljs-string">    &gt;&gt;&gt; # ban all loops</span><br><span class="hljs-string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;digit_distance&#x27;,</span><br><span class="hljs-string">    ...       [&#x27;For&#x27;, &#x27;While&#x27;])</span><br><span class="hljs-string">    True</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="A4"><a href="#A4" class="headerlink" title="A4"></a>A4</h3><p>题目大意是，计算一个数字各位差绝对值之和，且不准用循环的方式。</p>
+<p>陆爻齐的思路是，每次取第一位和第二位数字差的绝对值加上 n 整除 10 后的数字，如此便可计算出各位差绝对值，与参考答案不谋而合捏。</p>
+<h3 id="Q5-Interleaved-Sum"><a href="#Q5-Interleaved-Sum" class="headerlink" title="Q5: Interleaved Sum"></a>Q5: Interleaved Sum</h3><p>Write a function interleaved_sum, which takes in a number n and two one-argument functions: odd_func and even_func. It applies odd_func to every odd number and even_func to every even number from 1 to n inclusive and returns the sum.</p>
+<p>For example, executing interleaved_sum(5, lambda x: x, lambda x: x * x) returns 1 + 2<em>2 + 3 + 4</em>4 + 5 &#x3D; 29.</p>
+<p>Important: Implement this function without using any loops or directly testing if a number is odd or even – aka modulos (%) are not allowed! Instead of directly checking whether a number is even or odd, start with 1, which you know is an odd number.</p>
+<p>Hint: Introduce an inner helper function that takes an odd number k and computes an interleaved sum from k to n (including n).</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs 1c">def interleaved_sum<span class="hljs-punctuation">(</span>n<span class="hljs-punctuation">,</span> odd_func<span class="hljs-punctuation">,</span> even_func<span class="hljs-punctuation">)</span><span class="hljs-punctuation">:</span><br>    <span class="hljs-string">&quot;&quot;&quot;Compute the sum odd_func(1) + even_func(2) + odd_func(3) + ..., up</span><br>    to n.<br><br>    &gt;&gt;&gt; identity <span class="hljs-punctuation">=</span> lambda x<span class="hljs-punctuation">:</span> x<br>    &gt;&gt;&gt; square <span class="hljs-punctuation">=</span> lambda x<span class="hljs-punctuation">:</span> x * x<br>    &gt;&gt;&gt; triple <span class="hljs-punctuation">=</span> lambda x<span class="hljs-punctuation">:</span> x * <span class="hljs-number">3</span><br>    &gt;&gt;&gt; interleaved_sum<span class="hljs-punctuation">(</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> identity<span class="hljs-punctuation">,</span> square<span class="hljs-punctuation">)</span> <span class="hljs-meta"># 1   + 2*2 + 3   + 4*4 + 5</span><br>    <span class="hljs-number">29</span><br>    &gt;&gt;&gt; interleaved_sum<span class="hljs-punctuation">(</span><span class="hljs-number">5</span><span class="hljs-punctuation">,</span> square<span class="hljs-punctuation">,</span> identity<span class="hljs-punctuation">)</span> <span class="hljs-meta"># 1*1 + 2   + 3*3 + 4   + 5*5</span><br>    <span class="hljs-number">41</span><br>    &gt;&gt;&gt; interleaved_sum<span class="hljs-punctuation">(</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span> triple<span class="hljs-punctuation">,</span> square<span class="hljs-punctuation">)</span>   <span class="hljs-meta"># 1*3 + 2*2 + 3*3 + 4*4</span><br>    <span class="hljs-number">32</span><br>    &gt;&gt;&gt; interleaved_sum<span class="hljs-punctuation">(</span><span class="hljs-number">4</span><span class="hljs-punctuation">,</span> square<span class="hljs-punctuation">,</span> triple<span class="hljs-punctuation">)</span>   <span class="hljs-meta"># 1*1 + 2*3 + 3*3 + 4*3</span><br>    <span class="hljs-number">28</span><br>    &gt;&gt;&gt; from construct_check import check<br>    &gt;&gt;&gt; check<span class="hljs-punctuation">(</span>HW_SOURCE_FILE<span class="hljs-punctuation">,</span> &#x27;interleaved_sum&#x27;<span class="hljs-punctuation">,</span> [&#x27;While&#x27;<span class="hljs-punctuation">,</span> &#x27;For&#x27;<span class="hljs-punctuation">,</span> &#x27;Mod&#x27;]<span class="hljs-punctuation">)</span> <span class="hljs-meta"># ban loops and %</span><br>    True<br>    &gt;&gt;&gt; check<span class="hljs-punctuation">(</span>HW_SOURCE_FILE<span class="hljs-punctuation">,</span> &#x27;interleaved_sum&#x27;<span class="hljs-punctuation">,</span> [&#x27;BitAnd&#x27;<span class="hljs-punctuation">,</span> &#x27;BitOr&#x27;<span class="hljs-punctuation">,</span> &#x27;BitXor&#x27;]<span class="hljs-punctuation">)</span> <span class="hljs-meta"># ban bitwise operators, don&#x27;t worry about these if you don&#x27;t know what they are</span><br>    True<br>    <span class="hljs-string">&quot;&quot;&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="A5"><a href="#A5" class="headerlink" title="A5"></a>A5</h3><p>题目大意，交错和，即对奇偶数各用奇偶的函数处理，再相加得和，不准使用循环和 %，以及位运算来禁止直接判断数字奇偶。</p>
+<p>此题，陆爻齐用了取巧的办法越过了检查，仍然直接判断奇偶，即用递归判断，n 次递归，用另一个变量 1&#x2F;0，以得出奇偶，下面是看了参考答案总结的思路。</p>
+<p>不知 n 的奇偶，但可以从 1 推到 n，于是可写个内部函数，计算 1 2 ……，两位两位地计算和，递归，最后返回结果即可</p>
+<h3 id="Q6-Count-Coins"><a href="#Q6-Count-Coins" class="headerlink" title="Q6: Count Coins"></a>Q6: Count Coins</h3><p>Given a positive integer total, a set of coins makes change for total if the sum of the values of the coins is total. Here we will use standard US Coin values: 1, 5, 10, 25. For example, the following sets make change for 15:</p>
+<p>15 1-cent coins<br>10 1-cent, 1 5-cent coins<br>5 1-cent, 2 5-cent coins<br>5 1-cent, 1 10-cent coins<br>3 5-cent coins<br>1 5-cent, 1 10-cent coin<br>Thus, there are 6 ways to make change for 15. Write a recursive function count_coins that takes a positive integer total and returns the number of ways to make change for total using coins.</p>
+<p>You can use either of the functions given to you:</p>
+<p>next_larger_coin will return the next larger coin denomination from the input, i.e. next_larger_coin(5) is 10.<br>next_smaller_coin will return the next smaller coin denomination from the input, i.e. next_smaller_coin(5) is 1.<br>Either function will return None if the next coin value does not exist<br>There are two main ways in which you can approach this problem. One way uses next_larger_coin, and another uses next_smaller_coin. It is up to you which one you want to use!</p>
+<p>Important: Use recursion; the tests will fail if you use loops.</p>
+<p>Hint: Refer to the implementation of count_partitions for an example of how to count the ways to sum up to a final value with smaller parts. If you need to keep track of more than one value across recursive calls, consider writing a helper function.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">next_larger_coin</span>(<span class="hljs-params">coin</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Returns the next larger coin in order.</span><br><span class="hljs-string">    &gt;&gt;&gt; next_larger_coin(1)</span><br><span class="hljs-string">    5</span><br><span class="hljs-string">    &gt;&gt;&gt; next_larger_coin(5)</span><br><span class="hljs-string">    10</span><br><span class="hljs-string">    &gt;&gt;&gt; next_larger_coin(10)</span><br><span class="hljs-string">    25</span><br><span class="hljs-string">    &gt;&gt;&gt; next_larger_coin(2) # Other values return None</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> coin == <span class="hljs-number">1</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">5</span><br>    <span class="hljs-keyword">elif</span> coin == <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">10</span><br>    <span class="hljs-keyword">elif</span> coin == <span class="hljs-number">10</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">25</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">next_smaller_coin</span>(<span class="hljs-params">coin</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Returns the next smaller coin in order.</span><br><span class="hljs-string">    &gt;&gt;&gt; next_smaller_coin(25)</span><br><span class="hljs-string">    10</span><br><span class="hljs-string">    &gt;&gt;&gt; next_smaller_coin(10)</span><br><span class="hljs-string">    5</span><br><span class="hljs-string">    &gt;&gt;&gt; next_smaller_coin(5)</span><br><span class="hljs-string">    1</span><br><span class="hljs-string">    &gt;&gt;&gt; next_smaller_coin(2) # Other values return None</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-keyword">if</span> coin == <span class="hljs-number">25</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">10</span><br>    <span class="hljs-keyword">elif</span> coin == <span class="hljs-number">10</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">5</span><br>    <span class="hljs-keyword">elif</span> coin == <span class="hljs-number">5</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">count_coins</span>(<span class="hljs-params">total</span>):<br>    <span class="hljs-string">&quot;&quot;&quot;Return the number of ways to make change using coins of value of 1, 5, 10, 25.</span><br><span class="hljs-string">    &gt;&gt;&gt; count_coins(15)</span><br><span class="hljs-string">    6</span><br><span class="hljs-string">    &gt;&gt;&gt; count_coins(10)</span><br><span class="hljs-string">    4</span><br><span class="hljs-string">    &gt;&gt;&gt; count_coins(20)</span><br><span class="hljs-string">    9</span><br><span class="hljs-string">    &gt;&gt;&gt; count_coins(100) # How many ways to make change for a dollar?</span><br><span class="hljs-string">    242</span><br><span class="hljs-string">    &gt;&gt;&gt; count_coins(200)</span><br><span class="hljs-string">    1463</span><br><span class="hljs-string">    &gt;&gt;&gt; from construct_check import check</span><br><span class="hljs-string">    &gt;&gt;&gt; # ban iteration</span><br><span class="hljs-string">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;count_coins&#x27;, [&#x27;While&#x27;, &#x27;For&#x27;])</span><br><span class="hljs-string">    True</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    <span class="hljs-string">&quot;*** YOUR CODE HERE ***&quot;</span><br></code></pre></td></tr></table></figure>
+<h3 id="A6"><a href="#A6" class="headerlink" title="A6"></a>A6</h3><p>题目大意，就是将给定的数字划分成 1、5、10、25 的组合，给出组合个数，不可使用循环。可借助已写好的 next_larger_coin 等函数</p>
+<p>此题可这么看，从一个数字向下蔓延分支，可大致分两类，一类是尝试用当前数字减去一次额度，一类是额度变化（变大变小都可），如此递归下去各种路线都可计算到。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Q5 和 Q6 都挺有思考的趣味，递归很早就学了，但体会递归的魅力，还是在此</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/CS61A/" class="print-no-link">#CS61A</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享</div>
+      <div>http://example.com/posts/58db1e1b.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/1709b771.html" title="【Weekly Algorithm】 算法周记之《代码随想录》数组">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【Weekly Algorithm】 算法周记之《代码随想录》数组</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/b47f5c1b.html" title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享">
+                        <span class="hidden-mobile">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

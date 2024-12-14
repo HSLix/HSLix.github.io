@@ -1,0 +1,690 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在这里。 该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。 闲话少说，下面是笔记正文。 第一章 整数与二进制1.1 二进制基本性质首先，有两条基本的性质  偶数二进制最末尾的比特是 0;奇数二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）">
+<meta property="og:url" content="http://example.com/posts/7f4d8767.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在这里。 该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。 闲话少说，下面是笔记正文。 第一章 整数与二进制1.1 二进制基本性质首先，有两条基本的性质  偶数二进制最末尾的比特是 0;奇数二">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/CINTA.png">
+<meta property="article:published_time" content="2024-07-09T15:39:00.000Z">
+<meta property="article:modified_time" content="2024-12-14T02:24:58.092Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="CINTA">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/CINTA.png">
+  
+  
+  
+  <title>【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除） - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-07-09 23:39" pubdate>
+          2024年7月9日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.9k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          17 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在<a target="_blank" rel="noopener" href="https://github.com/lbwang/CINTA-cn">这里</a>。</p>
+<p>该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。</p>
+<p>闲话少说，下面是笔记正文。</p>
+<h1 id="第一章-整数与二进制"><a href="#第一章-整数与二进制" class="headerlink" title="第一章 整数与二进制"></a>第一章 整数与二进制</h1><h2 id="1-1-二进制"><a href="#1-1-二进制" class="headerlink" title="1.1 二进制"></a>1.1 二进制</h2><h3 id="基本性质"><a href="#基本性质" class="headerlink" title="基本性质"></a>基本性质</h3><p>首先，有两条基本的性质</p>
+<ol>
+<li>偶数二进制最末尾的比特是 0;奇数二进制最末尾的比特是 1；</li>
+<li>在一个二进制数末尾增加一个 0 等同于在十进制中对这个数乘 2。<br>反过来说,对一个十进制数进行乘 2 操作等同于对其二进制表达左移一个比特。</li>
+</ol>
+<p>显然，比如 2 的二进制表示为 0010，3 为 0011， 4即 2*2 为0100。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>随后提出<strong>思考</strong>：请问,你认为对一个十进制数进行除 2 等于对其二进制表达右移一个比特吗?</p>
+<p>陆爻齐的回答是：是的，对 3，出 2 得 1.5，0011 右移一个比特得 0001.1，正好为 1.5。对 2， 除 2 得 1，0010 右移一个比特得 0001，正好为1。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>接着在基于“考虑任意自然数 n,所谓 2 的 n 次方 (2^n) 只是不断对 1 乘 n 次 2”给出了两条性质<br>3、给定任意自然数 n, 十进制数 2^n 的二进制数表达就是在 1 后加 n 个 0；<br>4、给定任意自然数 n, 十进制数 2^n − 1 的二进制数表达就是 n 个 1；</p>
+<p>结合一点例子就能认同，4 是 2 的 2 次方，即 1 后加 2 个 0，即 0100。1 是 2 的 0 次方，为 1 后加 0 个 0，即 0001。4 减 1 得 3，0011，就是 2 的 1 次方和 0 次方相加所得， 0011 &#x3D; 0010 + 0001；2^2 - 1 &#x3D; 2^1 + 2^0。</p>
+<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><p>接下来是作者给的<strong>思考</strong>，请将以上计算过程的结论归纳成一个定理,并证明。你可以使用任何的证明方法。<br>请问,以上“硬”算的方法能否推广为一种证明方法?</p>
+<p>陆爻齐认为，可以归纳为，对任意自然数 n+1（n&gt;&#x3D;0)，有$2^{(n+1)} &#x3D; \sum_0^n 2^n$</p>
+<h3 id="位置计数法"><a href="#位置计数法" class="headerlink" title="位置计数法"></a>位置计数法</h3><p>如此，便引入了位置计数法，即对任意整数 b，有 $b&#x3D;\sum_{i&#x3D;0}^{n-1}b_i2^i$，其中$b_i\in{0,1}$</p>
+<p>显然，取 10，即 1010，可以视为 $1010 &#x3D; 1<em>2^3 + 0</em>2^2 + 1<em>2^1 + 0</em>2^0$，换句话 10 &#x3D; 1<em>8 + 0</em>4 + 1<em>2 + 0</em>1。</p>
+<h2 id="加法与乘法"><a href="#加法与乘法" class="headerlink" title="加法与乘法"></a>加法与乘法</h2><h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><p>加法，大家都能想到 a+b，但要是不准用 + 呢？</p>
+<p>于是有下面这个加法的算法，C++ 实现如下</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs csharp"><span class="hljs-comment">// 输入：两个整数a和b的和</span><br><span class="hljs-comment">// 输出：a与b的和</span><br><span class="hljs-function"><span class="hljs-built_in">int</span> <span class="hljs-title">add</span> (<span class="hljs-params"><span class="hljs-built_in">int</span> a, <span class="hljs-built_in">int</span> b</span>)</span> &#123;<br>    <span class="hljs-comment">// cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br>    <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> a;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">add</span>(a^b, (a&amp;b)&lt;&lt;<span class="hljs-number">1</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>作者想表达计算机的本质是bit的异或、与及移位操作。</p>
+<h3 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h3><p>这里又是<strong>思考</strong>：要理解这个加法算法只需要地正确回答出以下三个问题:</p>
+<ol>
+<li>a ∧ b 得到的是什么?</li>
+<li>(b&amp;a) &lt;&lt; 1 得到的是什么?</li>
+<li>该算法为什么会终止?</li>
+</ol>
+<p>陆爻齐的回答是，</p>
+<ol>
+<li>a ^ b 得到的是 a 和 b 相加后，移位之后且还没计算进位的部分。异或操作是 10 和 01 得 1，11 或 00 得 0，1 与 0 相加，那位不用进位，留 1；而 0 + 0 或 1 + 1，则会在原地留 0，这正好符合异或操作的结果。</li>
+<li>(b&amp;a) &lt;&lt; 1 得到进位的部分，a&amp;b 的与操作就可以得到 1 + 1 的位，&lt;&lt; 1 是移位操作，根据上文，二进制乘 2，靠后面加个 0， 故向左移一位。</li>
+<li>算法之所以会终止，是因为从右向左，每次执行完进位操作一定能保证该位以右不会有可进位的位，如设第 1 位要进位，那么进位后第一位就确认为 1 或 0，但进位后可能导致下一位需要进位，若此时第二位要进位，那么就处理进位并确认第二位为 1 或 0，以此类推，处理至尽。因处理的数字是有限位数字，故算法一定能终止。</li>
+</ol>
+<h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><p>作者介绍了一种朴素乘法，即 a*b 的本质，是 b 个 a 相加。下面作者以此为例，从正确性、效率、优化三个角度分析该算法。</p>
+<p>显然，这种不断加的乘法时间复杂度为O（n）。</p>
+<p>然后是重点，递归版的“简单乘法”，C++ 实现如下。</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs gradle"><span class="hljs-keyword">int</span> <span class="hljs-keyword">multiply</span>(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b) &#123;<br>    <span class="hljs-comment">// cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><br>    <span class="hljs-keyword">if</span> (b == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br><br>    <span class="hljs-keyword">if</span> (is_even(b)) &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * <span class="hljs-keyword">multiply</span>(a, b &gt;&gt; <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">2</span> * <span class="hljs-keyword">multiply</span>(a, b &gt;&gt; <span class="hljs-number">1</span>) + a;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>其实这个程序可以这么理解，返 0 不用说，如果 b 是偶数，比如 0b100 是 8，a 随便取个数，比如 3，即 0b11，用 100 * 11 相当于 2 * （10 * 11），也等于 2 * （ 2 * （ 1 * 11）），最后省个 1，也就加个 a，综上。</p>
+<p>换个复杂点的例子，让 b 为 1010，那就可以看为 (1<em>2^4 + 0</em>2^3 + 1<em>2^2 + 0</em>2^1) * 3 。</p>
+<p>同时作者还补充，在附录 A 有更高效的乘法实现。</p>
+<h2 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h2><h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>首先得有个除法定理，对任意给定的整数 a 和 b,其中 b &gt; 0,存在唯一的整数对 q(商)和 r(余数)，使得 a &#x3D; qb + r 且 0 ≤ r &lt; b。</p>
+<p>然后，介绍了下良序原则和单射、满射、一一映射等概念，不过感觉在下面没啥用。</p>
+<p>然后是除法的实现，朴素除法与朴素乘法类似，是不断减去除数，至被除数比除数小时，相减次数为“商”，剩下的被除数为“余数”。</p>
+<h3 id="简单除法"><a href="#简单除法" class="headerlink" title="简单除法"></a>简单除法</h3><p>而简单除法的 C++ 实现如下</p>
+<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs nim">std::pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; m_divide(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b) &#123;<br>    // cout &lt;&lt; a &lt;&lt; <span class="hljs-string">&quot; &quot;</span> &lt;&lt; b &lt;&lt; endl;<br><br>    <span class="hljs-keyword">if</span> (a == <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-keyword">return</span> pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt;(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br>    &#125;<br><br>    std::pair&lt;<span class="hljs-type">int</span>, <span class="hljs-type">int</span>&gt; <span class="hljs-built_in">result</span> = m_divide(a &gt;&gt; <span class="hljs-number">1</span>, b);<br><br>    <span class="hljs-built_in">result</span>.first &lt;&lt;= <span class="hljs-number">1</span>; <span class="hljs-built_in">result</span>.second &lt;&lt;= <span class="hljs-number">1</span>;<br><br>    <span class="hljs-keyword">if</span> (a &amp; <span class="hljs-number">1</span>) &#123;<br>        <span class="hljs-built_in">result</span>.second += <span class="hljs-number">1</span>;<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">result</span>.second &gt;= b) &#123;<br>        <span class="hljs-built_in">result</span>.first += <span class="hljs-number">1</span>;<br>        <span class="hljs-built_in">result</span>.second -= b;<br>    &#125;<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">result</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>某种程度就是那个简单除法的逆运算捏，但我觉得我也不是那么明白，只能感受到，这是在不断对背除数除二，然后从左至右确认“商”，最后消除还不明白如何产生的误差来确认“余数”。</p>
+<h1 id="第一章-习题"><a href="#第一章-习题" class="headerlink" title="第一章 习题"></a>第一章 习题</h1><p>嘛，又不是正式上课，就选两道做做罢</p>
+<h2 id="1-判断奇偶的函数，c语言实现"><a href="#1-判断奇偶的函数，c语言实现" class="headerlink" title="1 判断奇偶的函数，c语言实现"></a>1 判断奇偶的函数，c语言实现</h2><p>判断奇数<br><code>int func (int a) &#123;   if (a &amp; 1) return True;   return False; &#125;</code><br>判断偶数<br><code>int func (int a) &#123;   if (a &amp; 1) return False;   return True; &#125;</code></p>
+<p>思想是，奇数的二进制表示中，最右位总为 1，只要 &amp; 上 1，就只会保留最右位，1 则奇数，0 则偶数。</p>
+<h2 id="2-判断-v-是否为-2-的某次方"><a href="#2-判断-v-是否为-2-的某次方" class="headerlink" title="2 判断 v 是否为 2 的某次方"></a>2 判断 v 是否为 2 的某次方</h2><p>两个思路</p>
+<ol>
+<li>若 v 为 2 的某次方，必表现为 100……0 的形式，那么用 while 循环从右至左判断，是否只有最后（最左）为 1 则是；</li>
+<li>若 v 为 2 的某次方，必在减 1 后，为 111……11 的形式，那么用相同位数的 111……11 与之异或，若最后得 0，则是；</li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>CINTA 第一章下来，我想我还是更优先看看 CSAPP 或许更好些，不过其中部分内容真是有意思，从二进制的角度看待加、乘、除，别有一番风味。另外也庆幸不是学校的专业课，不然又是一门备考时令人头疼的科目力</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CINTA/" class="print-no-link">#CINTA</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</div>
+      <div>http://example.com/posts/7f4d8767.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年7月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/9297ccf9.html" title="【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/6682ef88.html" title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学">
+                        <span class="hidden-mobile">【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

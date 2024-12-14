@@ -1,0 +1,891 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/MagicGirl.png">
+  <link rel="icon" href="/img/MagicGirl.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="陆爻齐-LuYaoQi">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="前言当这篇文章发布时，估计成品论文已经出来了，不过本文的目的是以一个 python 菜鸟和科研新手的角度，记录配置环境时发现和解决问题的记录，希望能帮到未来的自己和遇到类似报错的你。 本文大致分为三个板块，第一个 前言，第二个是 配置环境的具体记录（含各种报错），第三个则是 记录我总结的配置相关环境的办法。 注意陆爻齐在后续配置其它环境时也碰到了其它的问题，相关内容会记录到 补充内容。 配置环境的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录">
+<meta property="og:url" content="http://example.com/posts/47a73986.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言当这篇文章发布时，估计成品论文已经出来了，不过本文的目的是以一个 python 菜鸟和科研新手的角度，记录配置环境时发现和解决问题的记录，希望能帮到未来的自己和遇到类似报错的你。 本文大致分为三个板块，第一个 前言，第二个是 配置环境的具体记录（含各种报错），第三个则是 记录我总结的配置相关环境的办法。 注意陆爻齐在后续配置其它环境时也碰到了其它的问题，相关内容会记录到 补充内容。 配置环境的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/index/fluid_default.png">
+<meta property="article:published_time" content="2024-03-25T06:06:00.000Z">
+<meta property="article:modified_time" content="2024-12-14T02:24:58.096Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/index/fluid_default.png">
+  
+  
+  
+  <title>【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录 - LuYaoQi&#39;s Blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>陆爻齐-LuYaoQi&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/bg/Universe_Up.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-25 14:06" pubdate>
+          2024年3月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><a id="section1"></a><br>当这篇文章发布时，估计成品论文已经出来了，不过本文的目的是以一个 python 菜鸟和科研新手的角度，记录配置环境时发现和解决问题的记录，希望能帮到未来的自己和遇到类似报错的你。</p>
+<p>本文大致分为三个板块，第一个 <a href="#section1">前言</a>，第二个是 <a href="#section2">配置环境的具体记录（含各种报错）</a>，第三个则是 <a href="#section3">记录我总结的配置相关环境的办法</a>。</p>
+<p><strong>注意</strong><br>陆爻齐在后续配置其它环境时也碰到了其它的问题，相关内容会记录到 <a href="#section4">补充内容</a>。</p>
+<h1 id="配置环境的具体记录"><a href="#配置环境的具体记录" class="headerlink" title="配置环境的具体记录"></a>配置环境的具体记录</h1><p><a id="section2"></a></p>
+<h2 id="官方提示与配置设备"><a href="#官方提示与配置设备" class="headerlink" title="官方提示与配置设备"></a>官方提示与配置设备</h2><p>配环境，首先肯定先看官方怎么说<br><a target="_blank" rel="noopener" href="https://github.com/JC-202/HopGNN">HopGNN GitHub地址</a><br>无requirement，其中的Dependencies中内容是</p>
+<ul>
+<li>python 3.7.3</li>
+<li>pytorch 1.10.1</li>
+<li>dgl 0.6.0</li>
+<li>ogb 1.2.3</li>
+<li>torch-geometric 2.0.3</li>
+</ul>
+<p>而程序通过bash启动</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mipsasm"><span class="hljs-keyword">bash </span><span class="hljs-keyword">scripts/citation.sh</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">bash </span><span class="hljs-keyword">scripts/heterophily.sh</span><br><span class="hljs-keyword"></span><span class="hljs-keyword">bash </span><span class="hljs-keyword">scripts/large.sh </span><br></code></pre></td></tr></table></figure>
+
+
+<p>笔者采用anaconda3来配置环境，由于设备配有独立显卡，故决定下载cuda利用上gpu。</p>
+<h2 id="配置过程"><a href="#配置过程" class="headerlink" title="配置过程"></a>配置过程</h2><h3 id="bash配置"><a href="#bash配置" class="headerlink" title="bash配置"></a>bash配置</h3><p>第一个问题是安装的bash识别不到conda，而window的cmd可以，报错如下<br><code>bash: conda: command not found</code><br>故参考文章CSDN博客顺利解决：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Vertira/article/details/136271584">windows 中， bash: conda: command not found（已解决）</a></p>
+<p>但是，虽然能识别 conda 指令，却不能在打开终端后直接运行 conda acivate 命令，必须用 source activate 环境来启动，后面才能直接激活环境。不过并没有太大影响，故按下不表。</p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><p>conda python3.7.3<br>pytorch 1.10.1在torch官网下<br>dgl，ogb，和torch-geometric都在aconda搜索下载<br>均为对应版本</p>
+<p>然后运行<br>bash scripts&#x2F;citation.sh<br>提示缺少模块einops，conda install后，发现版本0.7.0不匹配，故降级0.6.0<br>然后提示缺少模块scikit-learn，conda install 1.0.2解决<br>接着提示缺少模块pandas，conda install 1.3.5<br>提示缺少tqdm，conda install 4.64.1</p>
+<p>现在不缺模块了，报错如下</p>
+<details> <summary>ErrorReport</summary>
+$ bash scripts/citation.sh
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 5, in <module>
+    from ogb.nodeproppred import PygNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\__init__.py", line 10, in <module>
+    from .dataset_dgl import DglNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\dataset_dgl.py", line 6, in <module>
+    from dgl.data.utils import load_graphs, save_graphs, Subset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 13, in <module>
+    from .backend import load_backend, backend_name
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 95, in <module>
+    load_backend(get_preferred_backend())
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 41, in load_backend
+    from .._ffi.base import load_tensor_adapter # imports DGL C library
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 44, in <module>
+    _LIB, _LIB_NAME, _DIR_NAME = _load_lib()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 33, in _load_lib
+    lib_path = libinfo.find_lib_path()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\libinfo.py", line 83, in find_lib_path
+    raise RuntimeError(message)
+RuntimeError: Cannot find the files.
+List of candidates:
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\libdgl.dll
+D:\anaconda3\envs\hopgnn\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\dgl.dll
+D:\anaconda3\envs\hopgnn\dgl.dll
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 5, in <module>
+    from ogb.nodeproppred import PygNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\__init__.py", line 10, in <module>
+    from .dataset_dgl import DglNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\dataset_dgl.py", line 6, in <module>
+    from dgl.data.utils import load_graphs, save_graphs, Subset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 13, in <module>
+    from .backend import load_backend, backend_name
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 95, in <module>
+    load_backend(get_preferred_backend())
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 41, in load_backend
+    from .._ffi.base import load_tensor_adapter # imports DGL C library
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 44, in <module>
+    _LIB, _LIB_NAME, _DIR_NAME = _load_lib()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 33, in _load_lib
+    lib_path = libinfo.find_lib_path()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\libinfo.py", line 83, in find_lib_path
+    raise RuntimeError(message)
+RuntimeError: Cannot find the files.
+List of candidates:
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\libdgl.dll
+D:\anaconda3\envs\hopgnn\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\dgl.dll
+D:\anaconda3\envs\hopgnn\dgl.dll
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 5, in <module>
+    from ogb.nodeproppred import PygNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\__init__.py", line 10, in <module>
+    from .dataset_dgl import DglNodePropPredDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\ogb\nodeproppred\dataset_dgl.py", line 6, in <module>
+    from dgl.data.utils import load_graphs, save_graphs, Subset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 13, in <module>
+    from .backend import load_backend, backend_name
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 95, in <module>
+    load_backend(get_preferred_backend())
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\backend\__init__.py", line 41, in load_backend
+    from .._ffi.base import load_tensor_adapter # imports DGL C library
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 44, in <module>
+    _LIB, _LIB_NAME, _DIR_NAME = _load_lib()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\base.py", line 33, in _load_lib
+    lib_path = libinfo.find_lib_path()
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\_ffi\libinfo.py", line 83, in find_lib_path
+    raise RuntimeError(message)
+RuntimeError: Cannot find the files.
+List of candidates:
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\libdgl.dll
+D:\anaconda3\envs\hopgnn\libdgl.dll
+D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\build\Release\dgl.dll
+D:\anaconda3\envs\hopgnn\lib\lib\dgl.dll
+D:\anaconda3\envs\hopgnn\dgl.dll
+</details>
+经分析，推测为dgl版本不匹配，更新为最新版仍不匹配，经搜索发现可发现解决方案无用
+
+<p>所以，我将除torch外的部分包都卸载，用pip重新安装最新版（<del>虽然犯了conda和pip混用的忌，但木得办法</del>）<br>pip将torch换为1.13，ogb换为1.3.6 dgl换为2.0.0 torch-geometric换为2.3.1<br>然后出现了新的报错</p>
+<details><summary>ErrorReport</summary>
+$ bash scripts/citation.sh
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 8, in <module>
+    from dgl.data import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 16, in <module>
+    from . import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\__init__.py", line 13, in <module>
+    from .dataloader import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\dataloader.py", line 27, in <module>
+    from ..distributed import DistGraph
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\__init__.py", line 5, in <module>
+    from .dist_graph import DistGraph, DistGraphServer, edge_split, node_split
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\dist_graph.py", line 37, in <module>
+    from .partition import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\partition.py", line 15, in <module>
+    from ..data.utils import load_graphs, load_tensors, save_graphs, save_tensors
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\__init__.py", line 7, in <module>
+    from . import citation_graph as citegrh
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\citation_graph.py", line 20, in <module>
+    from .dgl_dataset import DGLBuiltinDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\dgl_dataset.py", line 12, in <module>
+    from .utils import download, extract_archive, get_download_dir, makedirs
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\utils.py", line 14, in <module>
+    import requests
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\requests\__init__.py", line 43, in <module>
+    import urllib3
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\urllib3\__init__.py", line 42, in <module>
+    "urllib3 v2.0 only supports OpenSSL 1.1.1+, currently "
+ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'OpenSSL 1.1.0i  14 Aug 2018'. See: https://github.com/urllib3/urllib3/issues/2168
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 8, in <module>
+    from dgl.data import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 16, in <module>
+    from . import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\__init__.py", line 13, in <module>
+    from .dataloader import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\dataloader.py", line 27, in <module>
+    from ..distributed import DistGraph
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\__init__.py", line 5, in <module>
+    from .dist_graph import DistGraph, DistGraphServer, edge_split, node_split
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\dist_graph.py", line 37, in <module>
+    from .partition import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\partition.py", line 15, in <module>
+    from ..data.utils import load_graphs, load_tensors, save_graphs, save_tensors
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\__init__.py", line 7, in <module>
+    from . import citation_graph as citegrh
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\citation_graph.py", line 20, in <module>
+    from .dgl_dataset import DGLBuiltinDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\dgl_dataset.py", line 12, in <module>
+    from .utils import download, extract_archive, get_download_dir, makedirs
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\utils.py", line 14, in <module>
+    import requests
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\requests\__init__.py", line 43, in <module>
+    import urllib3
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\urllib3\__init__.py", line 42, in <module>
+    "urllib3 v2.0 only supports OpenSSL 1.1.1+, currently "
+ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'OpenSSL 1.1.0i  14 Aug 2018'. See: https://github.com/urllib3/urllib3/issues/2168
+Traceback (most recent call last):
+  File "train.py", line 8, in <module>
+    from datasets.dataloader import load_data
+  File "D:\Code\HopGNN\datasets\dataloader.py", line 8, in <module>
+    from dgl.data import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\__init__.py", line 16, in <module>
+    from . import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\__init__.py", line 13, in <module>
+    from .dataloader import *
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\dataloading\dataloader.py", line 27, in <module>
+    from ..distributed import DistGraph
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\__init__.py", line 5, in <module>
+    from .dist_graph import DistGraph, DistGraphServer, edge_split, node_split
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\dist_graph.py", line 37, in <module>
+    from .partition import (
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\distributed\partition.py", line 15, in <module>
+    from ..data.utils import load_graphs, load_tensors, save_graphs, save_tensors
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\__init__.py", line 7, in <module>
+    from . import citation_graph as citegrh
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\citation_graph.py", line 20, in <module>
+    from .dgl_dataset import DGLBuiltinDataset
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\dgl_dataset.py", line 12, in <module>
+    from .utils import download, extract_archive, get_download_dir, makedirs
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\dgl\data\utils.py", line 14, in <module>
+    import requests
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\requests\__init__.py", line 43, in <module>
+    import urllib3
+  File "D:\anaconda3\envs\hopgnn\lib\site-packages\urllib3\__init__.py", line 42, in <module>
+    "urllib3 v2.0 only supports OpenSSL 1.1.1+, currently "
+ImportError: urllib3 v2.0 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'OpenSSL 1.1.0i  14 Aug 2018'. See: https://github.com/urllib3/urllib3/issues/2168
+</details>
+
+<p>经查找，执行pip install urllib3&#x3D;&#x3D;1.26.15，解决<br>然后又出现<code>ModuleNotFoundError: No module named &#39;torch_sparse&#39;</code>，故pip安装torchsparse<br><code>ModuleNotFoundError: No module named &#39;torch_scatter&#39;</code> 故pip安装torchscatter<br><code>ModuleNotFoundError: No module named &#39;google_drive_downloader&#39;</code> 故pip安装</p>
+<p>再次运行，这次报错<code>AssertionError: Torch not compiled with CUDA enabled</code><br>然后发现torch版本不对，发现下的是cpu版本，故删除重下，pytroch1.13.1 cuda11.7 cudacnn8.9.7参照适配表应不冲突</p>
+<p>于是在配置正确的torch sca什么的之类后，成功跑通前两个，但第三个出现错误如下<br><code>ValueError: Cannot load file containing pickled data when allow_pickle=False</code></p>
+<p>经把对应地方 allow pickle变true后，错误变成了<br><code>OSError Failed to interpret file as a pickle</code></p>
+<p>经查询没有什么可用的办法，于是接下来八小时尝试了配置与要求环境一摸一样的环境，配置python版本更低的环境（参照一些github issue的回答，回退版本可能解决），但还是无果</p>
+<p>中间出现报错<br><code>RuntimeError: Not compiled with CUDA support</code><br>参考博客解决<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44501429/article/details/129178459">RuntimeError: Not compiled with CUDA support此类错误解决方案</a></p>
+<p>在经过学长解放思想，指点后，秉承能跑起来的就是好环境的原则，将python3.7更为python3.8，如此，便能下载更新的pytorch2.*版本。</p>
+<p>但仍没有突破，于是查到之前的错误可能是下载文件不完整，于是删掉库重新clone并下载文件后，又出现新的错误报告<br><code>AttributeError: module numpy has no attribute int</code><br>参考文章 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46669612/article/details/129624331">AttributeError: module numpy has no attribute int .报错解决方案</a><br>经查询，numpy回退1.22.2后解决，这下彻底解决</p>
+<p>同时又用之前的python3.7试着跑第三条，仍然报错，说明还是要结合python3.8以上版本的这个环境</p>
+<h1 id="配置环境参考流程（运用Nvidia-GPU，pytorch、pyg的环境）"><a href="#配置环境参考流程（运用Nvidia-GPU，pytorch、pyg的环境）" class="headerlink" title="配置环境参考流程（运用Nvidia GPU，pytorch、pyg的环境）"></a>配置环境参考流程（运用Nvidia GPU，pytorch、pyg的环境）</h1><p><a id="section3"></a></p>
+<p>首先是确认，设备有 nvidia 显卡</p>
+<p>然后查看是否满足配置 CUDA 的环境，nvidia 控制面板-系统信息-组件中的 3d 设置右侧产品名称的右侧有 CUDA 后面一串数字，这就是自己电脑支持的 CUDA 版本，一般选择配套的，作者有时候会选择略低于这个的版本，不能高于。具体情况视情况而定。</p>
+<p>接着结合自己的需求和 <a target="_blank" rel="noopener" href="https://blog.csdn.net/u011489887/article/details/135250561">pytorch与cuda版本对应关系汇总</a> 来确定要下载的CUDA版本和pytorch版本</p>
+<p>再到 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">CUDA官网</a> 下载cuda版本，安装用自定义，一般只用下CUDA即可，安装后配置环境变量并测试。此处安装程序开始选择的文件夹是临时安装文件夹，安装完成后会自行删除。</p>
+<p>再到下载cuDNN，根据对应版本在 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/rdp/cudnn-archive">cuDNN官网</a> 下载即可（第一次下载需要注册账号），下载后将文件夹的bin，include，lib三个文件夹“替换”（直接拷贝即可）CUDA安装位置内的同名文件夹，再配置对应环境变量后验证</p>
+<p>下面到 <a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/#conda">pytorch官网</a> 下载对应 torch 版本，也可以自行在这个<a target="_blank" rel="noopener" href="http://download.pytorch.org/whl/torch_stable.html">网站</a>下载（笔者偏向使用后者）</p>
+<p>最后，如果要用到 pyg，就可以参考自己的 pytorch 版本和 CUDA 版本，在 <a target="_blank" rel="noopener" href="https://data.pyg.org/whl/">该网站</a> 按需下载库，然后直接 pip install torch-geometric。（应该 pyg 下最新就行）<br>PS：cp38 代表适配 python 3.8</p>
+<p>对于多个 CUDA 版本的管理，笔者参考 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50677040/article/details/132131346">这篇博客</a></p>
+<p>参考博客如下，后面再用我自己的话做个综合<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/by99031433/article/details/127721199">pytorch1.13安装</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/shdabai/article/details/131248257">window11系统CUDA、cuDNN 安装以及环境变量配置</a></p>
+<h1 id="补充内容"><a href="#补充内容" class="headerlink" title="补充内容"></a>补充内容</h1><p><a id="section4"></a></p>
+<h2 id="dgl"><a href="#dgl" class="headerlink" title="dgl"></a>dgl</h2><p>dgl 也分 cpu 和 gpu 版本，可以到 <a target="_blank" rel="noopener" href="https://www.dgl.ai/pages/start.html">官网</a> 找到对应的下载方式，当然也有类似 torch 的离线下载方式，在这个 <a target="_blank" rel="noopener" href="https://data.dgl.ai/wheels/repo.html">网站</a>。</p>
+<p><strong>注意</strong>，该网站对 cuda 的 dgl 版本较为落后，最新不过 1.0.0，想要更新的 cuda 版本需要略微改动网址，该网址为 <a target="_blank" rel="noopener" href="https://data.dgl.ai/wheels/repo.html">https://data.dgl.ai/wheels/repo.html</a> ，只要改成 <a target="_blank" rel="noopener" href="https://data.dgl.ai/wheels/cu116/repo.html">https://data.dgl.ai/wheels/cu116/repo.html</a> 就能获取到 1.0.0 以上的 cuda11.6 的 dgl，你学废了吗：）</p>
+<p>dgl 的数据集会放在根目录的 .dgl 文件夹下，linux 系统中，可输入 <code>cd ~</code>进入根目录，然后通过 <code>ls -al</code> 来详细输出每个文件找到文件夹，接着可通过 <code>cd .dgl</code> 进入数据集文件夹，可以自行寻找数据集放入其中使用。</p>
+<h2 id="报错-Device-API-gpu-is-not-enabled-Please-install-the-cuda-version-of-dgl"><a href="#报错-Device-API-gpu-is-not-enabled-Please-install-the-cuda-version-of-dgl" class="headerlink" title="报错 Device API gpu is not enabled. Please install the cuda version of dgl"></a>报错 Device API gpu is not enabled. Please install the cuda version of dgl</h2><p>可以尝试回退dgl对应的cuda版本，参照<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/434494642">该文章</a>cuda11.3装 dgl-cuda113 报错，可以装 dgl-cuda110 试试</p>
+<h2 id="报错-RuntimeError-Could-not-infer-dtype-of-numpy-int64"><a href="#报错-RuntimeError-Could-not-infer-dtype-of-numpy-int64" class="headerlink" title="报错 RuntimeError: Could not infer dtype of numpy.int64"></a>报错 RuntimeError: Could not infer dtype of numpy.int64</h2><p>如果最后一条语句来自 dgl，很可能是因为 numpy 版本过新，即 numpy 的 2.* 版本，回退到 1.* 的版本即可解决</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://github.com/DLR-RM/stable-baselines3/issues/1960">GitHub</a></p>
+<h2 id="报错-AttributeError-module-‘dgl-function’-has-no-attribute-‘copy-src’"><a href="#报错-AttributeError-module-‘dgl-function’-has-no-attribute-‘copy-src’" class="headerlink" title="报错 AttributeError: module ‘dgl.function’ has no attribute ‘copy_src’"></a>报错 AttributeError: module ‘dgl.function’ has no attribute ‘copy_src’</h2><p>该报错是因为 dgl 版本过新，该函数自 1.* 版本开始就删掉了，回退之前版本即可解决，比如 0.9.1</p>
+<p>参考 <a target="_blank" rel="noopener" href="https://github.com/XingyanLiu/CAME/issues/24">GitHub</a></p>
+<h2 id="多个-CUDA-可能发生的环境-CUDA-不变化问题"><a href="#多个-CUDA-可能发生的环境-CUDA-不变化问题" class="headerlink" title="多个 CUDA 可能发生的环境 CUDA 不变化问题"></a>多个 CUDA 可能发生的环境 CUDA 不变化问题</h2><p>通过修改环境变量 Path 几个 CUDA 的顺序确实能改变在命令行窗口输入<code>nvcc -V</code>显示的版本号，不过，一旦 conda create 了一个环境，那么环境里的 CUDA 就固定了，不可更换（至少此时笔者还不知如何更换）</p>
+<h2 id="离线-pip-安装-torch-问题报错"><a href="#离线-pip-安装-torch-问题报错" class="headerlink" title="离线 pip 安装 torch 问题报错"></a>离线 pip 安装 torch 问题报错</h2><figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-built_in">WARNING</span>: Retrying (Retry(total=<span class="hljs-number">4</span>, <span class="hljs-keyword">connect</span>=<span class="hljs-keyword">None</span>, <span class="hljs-keyword">read</span>=<span class="hljs-keyword">None</span>, redirect=<span class="hljs-keyword">None</span>, status=<span class="hljs-keyword">None</span>)) <span class="hljs-keyword">after</span> <span class="hljs-keyword">connection</span> broken <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;SSLError(SSLError(1, &#x27;</span>[SSL: KRB5_S_TKT_NYV] unexpected eof <span class="hljs-keyword">while</span> reading (_ssl.c:<span class="hljs-number">1091</span>)<span class="hljs-string">&#x27;))&#x27;</span>: /simple/typing-extensions/<br><span class="hljs-built_in">WARNING</span>: Retrying (Retry(total=<span class="hljs-number">3</span>, <span class="hljs-keyword">connect</span>=<span class="hljs-keyword">None</span>, <span class="hljs-keyword">read</span>=<span class="hljs-keyword">None</span>, redirect=<span class="hljs-keyword">None</span>, status=<span class="hljs-keyword">None</span>)) <span class="hljs-keyword">after</span> <span class="hljs-keyword">connection</span> broken <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;SSLError(SSLError(1, &#x27;</span>[SSL: KRB5_S_TKT_NYV] unexpected eof <span class="hljs-keyword">while</span> reading (_ssl.c:<span class="hljs-number">1091</span>)<span class="hljs-string">&#x27;))&#x27;</span>: /simple/typing-extensions/<br><span class="hljs-built_in">WARNING</span>: Retrying (Retry(total=<span class="hljs-number">2</span>, <span class="hljs-keyword">connect</span>=<span class="hljs-keyword">None</span>, <span class="hljs-keyword">read</span>=<span class="hljs-keyword">None</span>, redirect=<span class="hljs-keyword">None</span>, status=<span class="hljs-keyword">None</span>)) <span class="hljs-keyword">after</span> <span class="hljs-keyword">connection</span> broken <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;SSLError(SSLError(1, &#x27;</span>[SSL: KRB5_S_TKT_NYV] unexpected eof <span class="hljs-keyword">while</span> reading (_ssl.c:<span class="hljs-number">1091</span>)<span class="hljs-string">&#x27;))&#x27;</span>: /simple/typing-extensions/<br><span class="hljs-built_in">WARNING</span>: Retrying (Retry(total=<span class="hljs-number">1</span>, <span class="hljs-keyword">connect</span>=<span class="hljs-keyword">None</span>, <span class="hljs-keyword">read</span>=<span class="hljs-keyword">None</span>, redirect=<span class="hljs-keyword">None</span>, status=<span class="hljs-keyword">None</span>)) <span class="hljs-keyword">after</span> <span class="hljs-keyword">connection</span> broken <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;SSLError(SSLError(1, &#x27;</span>[SSL: KRB5_S_TKT_NYV] unexpected eof <span class="hljs-keyword">while</span> reading (_ssl.c:<span class="hljs-number">1091</span>)<span class="hljs-string">&#x27;))&#x27;</span>: /simple/typing-extensions/<br><span class="hljs-built_in">WARNING</span>: Retrying (Retry(total=<span class="hljs-number">0</span>, <span class="hljs-keyword">connect</span>=<span class="hljs-keyword">None</span>, <span class="hljs-keyword">read</span>=<span class="hljs-keyword">None</span>, redirect=<span class="hljs-keyword">None</span>, status=<span class="hljs-keyword">None</span>)) <span class="hljs-keyword">after</span> <span class="hljs-keyword">connection</span> broken <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;SSLError(SSLError(1, &#x27;</span>[SSL: KRB5_S_TKT_NYV] unexpected eof <span class="hljs-keyword">while</span> reading (_ssl.c:<span class="hljs-number">1091</span>)<span class="hljs-string">&#x27;))&#x27;</span>: /simple/typing-extensions/<br>Could <span class="hljs-keyword">not</span> <span class="hljs-keyword">fetch</span> URL https://pypi.org/simple/typing-extensions/: There was a problem confirming the ssl certificate: HTTPSConnectionPool(host=<span class="hljs-string">&#x27;pypi.org&#x27;</span>, port=<span class="hljs-number">443</span>): Max retries exceeded <span class="hljs-keyword">with</span> url: /simple/typing-extensions/ (Caused <span class="hljs-keyword">by</span> SSLError(SSLError(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;[SSL: KRB5_S_TKT_NYV] unexpected eof while reading (_ssl.c:1091)&#x27;</span>))) - skipping<br><span class="hljs-keyword">INFO</span>: pip <span class="hljs-keyword">is</span> looking at multiple versions <span class="hljs-keyword">of</span> torch <span class="hljs-keyword">to</span> determine which <span class="hljs-keyword">version</span> <span class="hljs-keyword">is</span> compatible <span class="hljs-keyword">with</span> other requirements. This could take a <span class="hljs-keyword">while</span>.<br>ERROR: Could <span class="hljs-keyword">not</span> find a <span class="hljs-keyword">version</span> that satisfies the requirement typing-extensions (<span class="hljs-keyword">from</span> torch) (<span class="hljs-keyword">from</span> versions: <span class="hljs-keyword">none</span>)<br>ERROR: <span class="hljs-keyword">No</span> matching distribution <span class="hljs-built_in">found</span> <span class="hljs-keyword">for</span> typing-extensions<br></code></pre></td></tr></table></figure>
+<p>很显然，这是网络问题，笔者在关闭梯子后问题消失</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>小小 Python 环境配得汗流浃背，本以为此前经历了 LALC 的磨练能顺利些，不曾想如此“有意思”，希望本文的记录有所帮助</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" class="print-no-link">#机器学习</a>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录</div>
+      <div>http://example.com/posts/47a73986.html</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>陆爻齐-LuYaoQi</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by-nc/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="NC - 非商业性使用">
+                    <i class="iconfont icon-nc"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/b0ef00bb.html" title="【方法论】如何读论文 李沐视频笔记">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">【方法论】如何读论文 李沐视频笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/3308aad7.html" title="【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点">
+                        <span class="hidden-mobile">【CS61A-Fall-2020】学习记录四 Lecture4中有意思的点</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
