@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-11-17 11:50:00
 hide: false
+abbrlink: 875acdbe
+date: 2024-11-17 11:50:00
 ---
 # 学习小结
 本周跟随《代码随想录》开始学习动态规划的相关题目，从基础的斐波那契数到爬楼梯，再到 01 背包问题，慢慢熟悉动态规划的五步法。

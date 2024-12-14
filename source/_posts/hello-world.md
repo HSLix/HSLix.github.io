@@ -1,7 +1,9 @@
 ---
 title: Hello World
-tags: [杂谈]
+tags:
+  - 杂谈
 index_img: /img/index/fluid_default.png
+abbrlink: 4a17b156
 date: 2024-07-19 22:00:00
 ---
 这是陆爻齐用 github page 和 hexo 搭建的自己的博客！

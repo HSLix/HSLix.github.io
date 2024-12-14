@@ -1,7 +1,9 @@
 ---
 title: 【Conda】 miniconda 使用手册
-tags: [Conda]
+tags:
+  - Conda
 index_img: /img/index/miniconda_logo.png
+abbrlink: c5d31b94
 date: 2024-09-16 14:14:00
 ---
 # 前言

@@ -1,7 +1,10 @@
 ---
 title: 【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享
-tags: [Python, CS61A]
+tags:
+  - Python
+  - CS61A
 index_img: /img/index/CS61A.png
+abbrlink: b47f5c1b
 date: 2024-08-13 20:08:00
 ---
 ## 前言

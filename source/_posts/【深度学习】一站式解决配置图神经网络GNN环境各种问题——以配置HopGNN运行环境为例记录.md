@@ -1,9 +1,13 @@
 ---
 title: 【深度学习】一站式解决配置图神经网络 GNN 环境各种问题——以配置 HopGNN 运行环境为例记录
-tags: [Python, 机器学习, 深度学习]
+tags:
+  - Python
+  - 机器学习
+  - 深度学习
 index_img: /img/index/fluid_default.png
-date: 2024-03-25 14:06:00
 hide: false
+abbrlink: 47a73986
+date: 2024-03-25 14:06:00
 ---
 # 前言
 <a id="section1"></a>

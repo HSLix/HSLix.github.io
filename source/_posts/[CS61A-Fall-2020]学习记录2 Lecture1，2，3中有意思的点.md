@@ -1,7 +1,10 @@
 ---
 title: 【CS61A-Fall-2020】学习记录二 Lecture1，2，3中有意思的点
-tags: [Python, CS61A]
+tags:
+  - Python
+  - CS61A
 index_img: /img/index/CS61A.png
+abbrlink: df4994c9
 date: 2024-02-29 19:28:00
 ---
 ## 前言

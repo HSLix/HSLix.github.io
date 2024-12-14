@@ -1,7 +1,10 @@
 ---
 title: 【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享
-tags: [Python, CS61A]
+tags:
+  - Python
+  - CS61A
 index_img: /img/index/CS61A.png
+abbrlink: 58db1e1b
 date: 2024-08-28 15:22:00
 ---
 ## 前言

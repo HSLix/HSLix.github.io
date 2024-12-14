@@ -1,7 +1,10 @@
 ---
 title: 【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学
-tags: [JLU, 数据结构与算法]
+tags:
+  - JLU
+  - 数据结构与算法
 index_img: /img/index/JLUTongZhi.png
+abbrlink: 6682ef88
 date: 2024-07-04 12:00:00
 ---
 # 前言

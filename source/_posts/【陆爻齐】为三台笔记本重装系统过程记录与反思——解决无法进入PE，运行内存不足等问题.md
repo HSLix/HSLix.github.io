@@ -1,7 +1,9 @@
 ---
 title: 【陆爻齐】为三台笔记本重装系统过程记录与反思——解决无法进入PE，运行内存不足等问题
-tags: [杂谈]
+tags:
+  - 杂谈
 index_img: /img/index/OldComputer.png
+abbrlink: 5fa462b0
 date: 2024-01-16 17:02:00
 ---
 # 前言  

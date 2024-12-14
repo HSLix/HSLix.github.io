@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】 算法周记之《代码随想录》哈希表
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-09-29 23:59:00
 hide: false
+abbrlink: 1b785190
+date: 2024-09-29 23:59:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习哈希表部分，较深入地了解了哈希表的相关算法题，结合数组、set、map完成题目，并利用双指针解决部分题目。

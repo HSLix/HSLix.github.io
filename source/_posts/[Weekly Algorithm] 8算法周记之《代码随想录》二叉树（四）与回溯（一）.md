@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-11-03 10:31:00
 hide: false
+abbrlink: 20b866e1
+date: 2024-11-03 10:31:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习二叉树和二叉搜索树的相关题目，还在递归中主要学习了关于组合的一部分题目。

@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》二叉树（二）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-10-20 22:12:00
 hide: false
+abbrlink: '41847677'
+date: 2024-10-20 22:12:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习二叉树的层序遍历，以及对于二叉树的翻转、对称，深度问题等。

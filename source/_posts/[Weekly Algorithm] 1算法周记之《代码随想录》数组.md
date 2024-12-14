@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】 算法周记之《代码随想录》数组
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-09-15 12:03:00
 hide: false
+abbrlink: 1709b771
+date: 2024-09-15 12:03:00
 ---
 # 学习小结
 前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。

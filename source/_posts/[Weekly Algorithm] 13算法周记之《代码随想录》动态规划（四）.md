@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-12-08 23:22:00
 hide: false
+abbrlink: 4d7f9b51
+date: 2024-12-08 23:22:00
 ---
 # 学习小结
 本周跟随《代码随想录》继续推进动态规划的相关学习，不过周五和周日两门考试太重了，浅做两题，接下来非考试周就继续至少一天一道罢。

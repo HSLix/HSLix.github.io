@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-12-01 22:40:00
 hide: false
+abbrlink: fa528234
+date: 2024-12-01 22:40:00
 ---
 # 学习小结
 本周跟随《代码随想录》继续推进动态规划的相关学习，主要是完全背包的入门，体会其与 01 背包的不同与关联。

@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-10-13 19:48:00
 hide: false
+abbrlink: 9bec6b3
+date: 2024-10-13 19:48:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习栈与队列和二叉树遍历的一部分，学到了栈和队列在算法中的应用，以及优先级队列的使用；此外还有二叉树的前中后序的递归、迭代、统一迭代方法。

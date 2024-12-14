@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》回溯（二）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-11-10 22:32:00
 hide: false
+abbrlink: 4ea07c12
+date: 2024-11-10 22:32:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习回溯的剩余题目，如八皇后，全排列等问题，当初看上去可怕的题目，在回溯的套路下，显得也没那么难，重点在于理解整个回溯的树遍历过程。

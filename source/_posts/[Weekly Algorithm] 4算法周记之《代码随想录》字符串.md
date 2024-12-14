@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】 算法周记之《代码随想录》字符串
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-10-06 13:45:00
 hide: false
+abbrlink: 62f68aed
+date: 2024-10-06 13:45:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。

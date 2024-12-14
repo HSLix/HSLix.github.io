@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-11-24 12:41:00
 hide: false
+abbrlink: b74c2166
+date: 2024-11-24 12:41:00
 ---
 # 学习小结
 本周跟随《代码随想录》继续推进动态规划的相关学习，由于期末月的到来，以及题目难度的增加，暂且将动态规划的学习进度放慢一点。下面继续巩固五步法。

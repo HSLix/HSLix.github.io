@@ -1,7 +1,9 @@
 ---
 title: 【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）
-tags: [CINTA]
+tags:
+  - CINTA
 index_img: /img/index/CINTA.png
+abbrlink: 7f4d8767
 date: 2024-07-09 23:39:00
 ---
 # 前言

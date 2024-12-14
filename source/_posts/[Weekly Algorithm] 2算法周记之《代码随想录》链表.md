@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】 算法周记之《代码随想录》链表
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-09-22 15:35:00
 hide: false
+abbrlink: '695632'
+date: 2024-09-22 15:35:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习链表部分，较深入地了解了链表的相关算法题，并利用双指针解决部分题目。

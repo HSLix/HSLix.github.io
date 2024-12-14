@@ -1,9 +1,11 @@
 ---
 title: 【Weekly Algorithm】算法周记之《代码随想录》二叉树（三）
-tags: [Algorithm]
+tags:
+  - Algorithm
 index_img: /img/index/leetcode.png
-date: 2024-10-27 21:11:00
 hide: false
+abbrlink: c9ad525
+date: 2024-10-27 21:11:00
 ---
 # 学习小结
 本周跟随《代码随想录》学习二叉树和二叉搜索树的算法题目，比如完全二叉树的节点个数，平衡二叉树，二叉树的路径、二叉树的合并，二叉搜索树的检索和验证等。
