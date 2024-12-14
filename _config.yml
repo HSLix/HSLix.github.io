@@ -97,8 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: fluid
-theme: butterfly
+theme: fluid
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -106,7 +105,7 @@ deploy:
   type: git
   repo: git@github.com:HSLix/HSLix.github.io.git
   branch: main
-  
+
 ## abbrlink config
 abbrlink:
   alg: crc32      #support crc16(default) and crc32 进制
