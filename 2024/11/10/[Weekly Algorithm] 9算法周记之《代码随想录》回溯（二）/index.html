@@ -1,320 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>【Weekly Algorithm】算法周记之《代码随想录》回溯（二） | LuYaoQi&#39;s Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="学习小结本周跟随《代码随想录》学习回溯的剩余题目，如八皇后，全排列等问题，当初看上去可怕的题目，在回溯的套路下，显得也没那么难，重点在于理解整个回溯的树遍历过程。 通常回溯部分的函数无返回值，但当回溯只求全树唯一一个解时，比如[[全排列]][[解数独]]，可将回溯函数返回值设为 bool 类型，在一个叶子为 true，层层上传，避免无用遍历。 回溯 组合总和II 代码随想录 40. 组合总和 II">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》回溯（二）">
-<meta property="og:url" content="http://example.com/2024/11/10/[Weekly%20Algorithm]%209%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%9E%E6%BA%AF%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
-<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="学习小结本周跟随《代码随想录》学习回溯的剩余题目，如八皇后，全排列等问题，当初看上去可怕的题目，在回溯的套路下，显得也没那么难，重点在于理解整个回溯的树遍历过程。 通常回溯部分的函数无返回值，但当回溯只求全树唯一一个解时，比如[[全排列]][[解数独]]，可将回溯函数返回值设为 bool 类型，在一个叶子为 true，层层上传，避免无用遍历。 回溯 组合总和II 代码随想录 40. 组合总和 II">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-10T14:32:00.000Z">
-<meta property="article:modified_time" content="2025-02-24T13:13:19.977Z">
-<meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="Algorithm">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+extends includes/layout.pug
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    article#article-container.container.post-content
+      if theme.noticeOutdate.enable && page.noticeOutdate !== false
+        include includes/post/outdate-notice.pug
+      else
+        !=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (page.tags.length > 0 && theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hello my World</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-      <div class="outer">
-        <section id="main"><article id="post-[Weekly Algorithm] 9算法周记之《代码随想录》回溯（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/11/10/%5BWeekly%20Algorithm%5D%209%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%9E%E6%BA%AF%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date">
-  <time class="dt-published" datetime="2024-11-10T14:32:00.000Z" itemprop="datePublished">2024-11-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      【Weekly Algorithm】算法周记之《代码随想录》回溯（二）
-    </h1>
-  
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习回溯的剩余题目，如八皇后，全排列等问题，当初看上去可怕的题目，在回溯的套路下，显得也没那么难，重点在于理解整个回溯的树遍历过程。</p>
-<p>通常回溯部分的函数无返回值，但当回溯只求全树唯一一个解时，比如[[全排列]][[解数独]]，可将回溯函数返回值设为 bool 类型，在一个叶子为 true，层层上传，避免无用遍历。</p>
-<h1 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h1><ul>
-<li><h2 id="组合总和II"><a href="#组合总和II" class="headerlink" title="组合总和II"></a>组合总和II</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0040.%E7%BB%84%E5%90%88%E6%80%BB%E5%92%8CII.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/description/">40. 组合总和 II - 力扣（LeetCode）</a></li>
-<li>题意，与[[组合总和III]]类似，但待选数组内出现重复元素，且结果的组合不能重复</li>
-<li>方法，重点是分清两种去重，一种是同一树支的去重（纵向），一种是同一树层的去重（横向），两者都可以通过用 used 数组实现，前者要求 used 中同值点不可同时 true 才能加入结果，后者要求同值点必须 true 该点才能加入结果；换句话，used 中 ture 的点说明在同一树支（路径）上</li>
-<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line">    void back_track(vector&lt;int&gt; &amp;candidates, int target, vector&lt;int&gt; &amp;used, int sum, int start_index) &#123;</span><br><span class="line">        // 终止条件，和过大或相等</span><br><span class="line">        if (sum &gt; target) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (sum == target) &#123;</span><br><span class="line">            result.push_back(path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        for (int i = start_index; i &lt; candidates.size(); i++) &#123;</span><br><span class="line">            // 去重，used[i-1] true 说明在同一个路径上</span><br><span class="line">            // used[i-1] flase 说明在同一层，属于要去除的情况</span><br><span class="line">            if (i &gt; 0 &amp;&amp; candidates[i] == candidates[i-1] &amp;&amp; used[i-1] == false) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            used[i] = true;</span><br><span class="line">            path.push_back(candidates[i]);</span><br><span class="line">            sum += candidates[i];</span><br><span class="line">            back_track(candidates, target, used, sum, i+1);</span><br><span class="line">            sum -= candidates[i];</span><br><span class="line">            path.pop_back();</span><br><span class="line">            used[i] = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; combinationSum2(vector&lt;int&gt;&amp; candidates, int target) &#123;</span><br><span class="line">        vector&lt;int&gt; used = vector&lt;int&gt;(candidates.size());</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        sort(candidates.begin(), candidates.end()); // 使数组有序</span><br><span class="line">        back_track(candidates, target, used, 0, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><h2 id="分割回文串"><a href="#分割回文串" class="headerlink" title="分割回文串"></a>分割回文串</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0131.%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/description/">131. 分割回文串 - 力扣（LeetCode）</a></li>
-<li>题意，给一个字符串，把字符串分成多个回文串组成的字符串数组，返回所有组合</li>
-<li>方法，难点有两，一是如何分割字符串，二是如何判断回文串。<br>对于一，采用 start_index 作为本层分割字符串的起点，用 for 循环决定重点，递归更新 start_index；对于二，就用 for 循环前后检测是否相等，可以用动态规划优化速度，但太麻烦了，等dp学完再回来罢：）  </li>
-<li>参照代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    bool isRevStr(string s) &#123; // 判断回文串，前读和后读一样，其实前半和后半一样就行</span><br><span class="line">        for (int i = 0, j = s.size()-1; i &lt; j; i++,j--) &#123;</span><br><span class="line">            if (s[i] != s[j]) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; path;</span><br><span class="line"></span><br><span class="line">    void back_track(string s, int start_index) &#123;</span><br><span class="line">        if (start_index &gt;= s.size()) &#123; // start_index 为分割线，分割到字符串外说明前面都割好了</span><br><span class="line">            result.push_back(path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = start_index; i &lt; s.size(); i++) &#123; </span><br><span class="line">            // 从 start_index 到 i 割串，检测</span><br><span class="line">            string tmp = s.substr(start_index, i-start_index+1);</span><br><span class="line">            //cout &lt;&lt; tmp &lt;&lt; endl;</span><br><span class="line">            if (isRevStr(tmp)) &#123;</span><br><span class="line">                path.push_back(tmp);</span><br><span class="line">                back_track(s, i+1);</span><br><span class="line">                path.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; partition(string s) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        back_track(s, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><h2 id="复原IP地址"><a href="#复原IP地址" class="headerlink" title="复原IP地址"></a>复原IP地址</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0093.%E5%A4%8D%E5%8E%9FIP%E5%9C%B0%E5%9D%80.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/description/">93. 复原 IP 地址 - 力扣（LeetCode）</a></li>
-<li>题意，有一串数字，可能是 IP 地址，要求返回该数字可能组成所有有效的 IP 地址（最少4位、最多12位，中间有三个点分隔的数字字符串）</li>
-<li>方法，与[[分割回文串]]类似，但这里限制了分割的个数，所以需要变量记录，且注意前导0和把字符串转整数的操作</li>
-<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;string&gt; result;</span><br><span class="line"></span><br><span class="line">    bool isValid(const string &amp;s, int start_index, int end_index) &#123;</span><br><span class="line">        // 满足字符串是0-255，无前导0，且是数字</span><br><span class="line">        if (start_index &gt; end_index) &#123; // 去除最后 i+2 后 start_index 比 end 大的情况，下面代码没考虑</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (s[start_index] == &#x27;0&#x27; &amp;&amp; start_index != end_index) &#123; // 前导0</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int num = 0; // 记录数值</span><br><span class="line">        for (int i = start_index; i &lt;= end_index; i++) &#123;</span><br><span class="line">            num *=10;</span><br><span class="line">            char c = s[i];</span><br><span class="line">            if (c &lt; &#x27;0&#x27; || c &gt; &#x27;9&#x27;) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">            num += int(c - &#x27;0&#x27;);</span><br><span class="line">            if (num &gt; 255) &#123;// 过大</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void backTrack(string s, int start_index, int point_num) &#123;</span><br><span class="line">        if (point_num == 3 &amp;&amp; isValid(s, start_index, s.size()-1)) &#123;</span><br><span class="line">            result.push_back(s);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">        for (int i = start_index; i &lt; s.size(); i++) &#123;</span><br><span class="line">            if (isValid(s, start_index, i)) &#123;</span><br><span class="line">                s.insert(s.begin()+i+1, &#x27;.&#x27;); // 采用插点的方式来分割字符串，插入点的下标为 i+1</span><br><span class="line">                point_num++;</span><br><span class="line">                backTrack(s, i+2, point_num);</span><br><span class="line">                point_num--;</span><br><span class="line">                s.erase(s.begin()+i+1);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                break; // 要么数组过大，要么有非法字符，后面的都一定不符合</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;string&gt; restoreIpAddresses(string s) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        if (s.size() &lt; 4 || s.size() &gt; 12) &#123; // ip 地址最少4位，每处最多3位，共12位</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        backTrack(s, 0, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><h2 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0078.%E5%AD%90%E9%9B%86.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/description/">78. 子集 - 力扣（LeetCode）</a></li>
-<li>题意，给一个整数数组，求其所有子集</li>
-<li>方法，回溯，注意由于集合内无序性，元素不能重复；该题其实遍历了树上所有节点，而之前的组合、分割则是收集树中的叶子节点。</li>
-<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line"></span><br><span class="line">    void backTrack(vector&lt;int&gt; &amp;nums, int start_index) &#123;</span><br><span class="line">        if (start_index &gt; nums.size()) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        result.push_back(path);</span><br><span class="line">        for (int i = start_index; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            path.push_back(nums[i]);</span><br><span class="line">            backTrack(nums, i+1);</span><br><span class="line">            path.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; subsets(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        backTrack(nums, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><h2 id="子集II"><a href="#子集II" class="headerlink" title="子集II"></a>子集II</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0090.%E5%AD%90%E9%9B%86II.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/description/">90. 子集 II - 力扣（LeetCode）</a></li>
-<li>题意，相比[[子集]]，数组中会有重复的数字元素，求的结果子集仍然要求一样</li>
-<li>方法，类似[[组合总和II]]，通过 used 去除同层同值的节点造成子集重复的问题</li>
-<li>陆爻齐自己解法（与代码随想录思路相近）<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line"></span><br><span class="line">    void backTrack(vector&lt;int&gt; &amp;nums, int start_index, vector&lt;int&gt; &amp;used) &#123;</span><br><span class="line">        // 记录结果，遍历每个节点</span><br><span class="line">        result.push_back(path);</span><br><span class="line">        if (start_index &gt;= nums.size()) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = start_index; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            // 排除那些同层同值的节点</span><br><span class="line">            if (i&gt;0 &amp;&amp; nums[i] == nums[i-1] &amp;&amp; used[i-1] == false) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            used[i] = true;</span><br><span class="line">            path.push_back(nums[i]);</span><br><span class="line">            backTrack(nums, i+1, used);</span><br><span class="line">            path.pop_back();</span><br><span class="line">            used[i] = false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; subsetsWithDup(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        // 需要有序才能方便去除同层相同数，不排序的话需要哈希表</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        vector&lt;int&gt; used = vector&lt;int&gt;(nums.size());</span><br><span class="line">        backTrack(nums, 0, used);</span><br><span class="line">        return result; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="非递减子序列"><a href="#非递减子序列" class="headerlink" title="非递减子序列"></a>非递减子序列</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0491.%E9%80%92%E5%A2%9E%E5%AD%90%E5%BA%8F%E5%88%97.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/description/">491. 非递减子序列 - 力扣（LeetCode）</a></li>
-<li>题意，给一个数组，要求返回其中所有至少长度为2的递增子序列</li>
-<li>方法，看似与[[子集II]]相似，只要排下序，回溯即可；其实不行，因为一旦排序，整个序列都是递增的，那么如何去重呢？那就要用到 hash。不过本地的数字大小在 -100 到 100，所以用大小为 201 的数组把数字映射上去即可</li>
-<li>参考代码随想录思路的代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line"></span><br><span class="line">    void backTrack(vector&lt;int&gt; &amp;nums, int start_index) &#123;</span><br><span class="line">        if (path.size() &gt;= 2) &#123;</span><br><span class="line">            result.push_back(path); // 添加结果条件</span><br><span class="line">            // 不需要 return，因为需要遍历整个树的节点</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        vector&lt;int&gt; used = vector&lt;int&gt;(201); // 把-100至100两个个数，映射到0-200 的数组上</span><br><span class="line">        for (int i = start_index; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            if (used[nums[i]+100] == 1) continue; // 去重</span><br><span class="line">            if (path.size() &gt; 0 &amp;&amp; nums[i] &lt; path[path.size()-1]) continue; // 使得新加值不小于path末值</span><br><span class="line">            used[nums[i]+100] = 1; // 只管本层去重，所以记录有就行，不需要恢复0</span><br><span class="line">            path.push_back(nums[i]);</span><br><span class="line">            backTrack(nums, i+1);</span><br><span class="line">            path.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; findSubsequences(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        backTrack(nums, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a>全排列</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0046.%E5%85%A8%E6%8E%92%E5%88%97.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/description/">46. 全排列 - 力扣（LeetCode）</a></li>
-<li>题意，把一个无重复数字的数组所有可能的全排列按任意顺序返回答案</li>
-<li>方法，运用回溯，不过由于要求全排列，也就是可能之前的值在下面也用得到，所以不用 start_index</li>
-<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line"></span><br><span class="line">    void backTrack(vector&lt;int&gt; &amp;nums,vector&lt;int&gt; &amp;used) &#123;</span><br><span class="line">        if (path.size() == nums.size()) &#123; // 到叶子节点，说明全排列完成</span><br><span class="line">            result.push_back(path);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            if (used[i] == 1) continue; // 排除用过数字的情况</span><br><span class="line">            used[i] = 1;</span><br><span class="line">            path.push_back(nums[i]);</span><br><span class="line">            backTrack(nums, used);</span><br><span class="line">            path.pop_back();</span><br><span class="line">            used[i] = 0;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; permute(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        vector&lt;int&gt; used = vector&lt;int&gt;(nums.size());</span><br><span class="line">        backTrack(nums, used);</span><br><span class="line">        return result</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="全排列II"><a href="#全排列II" class="headerlink" title="全排列II"></a>全排列II</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0047.%E5%85%A8%E6%8E%92%E5%88%97II.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">47. 全排列 II - 力扣（LeetCode）</a></li>
-<li>题意，与[[全排列]]类似，但数组中出现重复元素</li>
-<li>方法，在[[全排列]]的基础上，加入去重，不过这个去重其实在树枝去重和树层去重都是可以的，但对树层去重效率会高很多，可以举个【1，1，1】的例子试试</li>
-<li>参考代码随想录思路的代码<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">    vector&lt;int&gt; path;</span><br><span class="line">    void backTrack(vector&lt;int&gt; &amp;nums, vector&lt;int&gt; &amp;used) &#123;</span><br><span class="line">        if (path.size() == nums.size()) &#123;</span><br><span class="line">            result.push_back(path);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            if (i&gt;0 &amp;&amp; nums[i] == nums[i-1] &amp;&amp; used[i-1]==0) continue;</span><br><span class="line">            if (used[i] == 0) &#123;</span><br><span class="line">                used[i] = 1;</span><br><span class="line">                path.push_back(nums[i]);</span><br><span class="line">                backTrack(nums, used);</span><br><span class="line">                path.pop_back();</span><br><span class="line">                used[i] = 0;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; permuteUnique(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        path.clear();</span><br><span class="line">        vector&lt;int&gt; used(nums.size());// 映射这个值是否用过</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        backTrack(nums, used);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="重新安排行程"><a href="#重新安排行程" class="headerlink" title="重新安排行程"></a>重新安排行程</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0332.%E9%87%8D%E6%96%B0%E5%AE%89%E6%8E%92%E8%A1%8C%E7%A8%8B.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reconstruct-itinerary/description/">332. 重新安排行程 - 力扣（LeetCode）</a></li>
-<li>题意，给一系列大小为 2 的字符串数组，当作机票的出发地和目的地，要求从 JFK 出发，每张票要用且只能使用一次，要求最后返回一条有效路程，若有多个有效路程则返回字典序最小的那条</li>
-<li>方法，主要是如何在回溯过程中记录回溯历程，这里使用了一个 unordered_map&lt;string, map&lt;string, int&gt;&gt; 来记录，翻译为自然语言，就是 unordered_map&lt;出发地, map&lt;目的地，票数&gt;&gt;，map是有序的，直接遍历就是字典序从小到大</li>
-<li>参考代码随想录思路的方法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;string&gt; result;</span><br><span class="line"></span><br><span class="line">    unordered_map&lt;string,map&lt;string, int&gt;&gt; rec_tic;</span><br><span class="line"></span><br><span class="line">    bool backTrack(int ticket_num) &#123;</span><br><span class="line">        if (ticket_num + 1 == result.size()) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        map&lt;string, int&gt; &amp;target = rec_tic[result[result.size()-1]];</span><br><span class="line">        for (pair&lt;const string, int&gt; &amp;travel : target) &#123;</span><br><span class="line">            if (travel.second &gt; 0) &#123;</span><br><span class="line">                travel.second--;</span><br><span class="line">                result.push_back(travel.first);</span><br><span class="line">                if (backTrack(ticket_num)) return true;</span><br><span class="line">                result.pop_back();</span><br><span class="line">                travel.second++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;string&gt; findItinerary(vector&lt;vector&lt;string&gt;&gt;&amp; tickets) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        rec_tic.clear();</span><br><span class="line"></span><br><span class="line">        for (vector&lt;string&gt; tic : tickets) &#123;</span><br><span class="line">            rec_tic[tic[0]][tic[1]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        result.push_back(&quot;JFK&quot;);</span><br><span class="line">        backTrack(tickets.size());</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="N皇后"><a href="#N皇后" class="headerlink" title="N皇后"></a>N皇后</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0051.N%E7%9A%87%E5%90%8E.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">51. N 皇后 - 力扣（LeetCode）</a></li>
-<li>题意，国际棋盘上，皇后这个棋子同行、同列、两斜线上都是唯一，给棋盘大小，要求摆皇后的所有方案</li>
-<li>方法，把行作为递归深度，到底就是得出结果，然后代入回溯模板即可，由于在二维数组上（棋盘）从上往下遍历，故检查下棋位置是否合法只要检测上面即可</li>
-<li>参考代码随想录思路的方法，时隔许久再做，好像也没那么恐怖哈<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; result;</span><br><span class="line">    vector&lt;string&gt; chess_board;</span><br><span class="line"></span><br><span class="line">    bool isValid(int row, int col, int n) &#123;</span><br><span class="line"></span><br><span class="line">        // 检查同列</span><br><span class="line">        for (int i = 0; i &lt; row; i++) &#123;</span><br><span class="line">            if (chess_board[i][col] == &#x27;Q&#x27;) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; </span><br><span class="line">        // 由于由上向下，故向上检查斜角即可</span><br><span class="line">        // 检查左上方的，45度</span><br><span class="line">        for (int i = row - 1, j = col - 1; i &gt;= 0 &amp;&amp; j &gt;= 0; i--, j--) &#123;</span><br><span class="line">            if (chess_board[i][j] == &#x27;Q&#x27;) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 检查右上方，135度</span><br><span class="line">        for (int i = row - 1, j = col + 1; i &gt;= 0 &amp;&amp; j &lt; n; i--, j++) &#123;</span><br><span class="line">            if (chess_board[i][j] == &#x27;Q&#x27;) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void backTrack(int n, int row) &#123;</span><br><span class="line">        if (row == n) &#123;</span><br><span class="line">            result.push_back(chess_board);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int col = 0; col &lt; n; col++) &#123;</span><br><span class="line">            if (isValid(row, col, n)) &#123;</span><br><span class="line">                chess_board[row][col] = &#x27;Q&#x27;;</span><br><span class="line">                backTrack(n, row+1);</span><br><span class="line">                chess_board[row][col] = &#x27;.&#x27;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;string&gt;&gt; solveNQueens(int n) &#123;</span><br><span class="line">        result.clear();</span><br><span class="line">        chess_board.clear();</span><br><span class="line">        chess_board = vector&lt;string&gt;(n, string(n, &#x27;.&#x27;));</span><br><span class="line">        backTrack(n, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-<li><h2 id="解数独"><a href="#解数独" class="headerlink" title="解数独"></a>解数独</h2></li>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0037.%E8%A7%A3%E6%95%B0%E7%8B%AC.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></li>
-<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/submissions/579312550/">37. 解数独 - 力扣（LeetCode）</a></li>
-<li>题意，给出一个二维数组，其中待填部分为 .，要求填入合适数字完成数独</li>
-<li>方法，和[[八皇后]]类似的棋盘问题，也是需要二重回溯，区别就是在判断终止条件，由于该题需要遍历一整棵树找一个合理方案，故让回溯方法返回布尔值，以去除不必要的遍历。</li>
-<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">private:</span><br><span class="line">    bool isValid(int row, int col, char k, vector&lt;vector&lt;char&gt;&gt; &amp;board, int size) &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123; // 同列是否有相同值</span><br><span class="line">            if (board[i][col] == k) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (int j = 0; j &lt; size; j++) &#123; // 同行是否有相同值</span><br><span class="line">            if (board[row][j] == k) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int start_row = row/3*3; // 同九方格起始坐标</span><br><span class="line">        int start_col = col/3*3;</span><br><span class="line">        for (int i = start_row; i &lt; start_row + 3; i++) &#123;</span><br><span class="line">            for (int j = start_col; j &lt; start_col + 3; j++)</span><br><span class="line">            if (board[i][j] == k) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool backTrack(vector&lt;vector&lt;char&gt;&gt; &amp;board, int size) &#123;</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; size; j++) &#123;</span><br><span class="line">                if (board[i][j] != &#x27;.&#x27;) continue;</span><br><span class="line">                for (char k = &#x27;1&#x27;; k &lt;= &#x27;9&#x27;; k++) &#123;</span><br><span class="line">                    if (isValid(i, j, k, board, size)) &#123;</span><br><span class="line">                        board[i][j] = k;</span><br><span class="line">                        if (backTrack(board, size)) return true;</span><br><span class="line">                        board[i][j] = &#x27;.&#x27;;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                return false; // 如果有一个可填处 9 个值都填不了，那么这个方案不可行</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true; // 如果全填完了，说明必定出现答案了</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">    void solveSudoku(vector&lt;vector&lt;char&gt;&gt;&amp; board) &#123;</span><br><span class="line">        backTrack(board, board.size());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/11/10/[Weekly%20Algorithm]%209%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%9E%E6%BA%AF%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="cm7j3jecn002110ag85fhehoj" data-title="【Weekly Algorithm】算法周记之《代码随想录》回溯（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/11/03/%5BWeekly%20Algorithm%5D%208%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E5%9B%9B%EF%BC%89%E4%B8%8E%E5%9B%9E%E6%BA%AF%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">【Weekly Algorithm】算法周记之《代码随想录》二叉树（四）与回溯（一）</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/12/%5BWeekly%20Algorithm%5D%2015%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%85%AD%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（六）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 陆爻齐-LuYaoQi<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments !== false && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})

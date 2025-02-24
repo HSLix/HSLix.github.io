@@ -1,330 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>【Weekly Algorithm】 算法周记之《代码随想录》字符串 | LuYaoQi&#39;s Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="学习小结本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。 字符串简评究其本质而言，就是数组，只不过内容换成了字母。 反转字符串 代码随想录 (programmercarl.com) 就是把字符串前后翻转，和[[翻转链表]]相似 由于字符串可以随机读取，可以简单很多，直接 swap i 和 str.size()-1-i 的字符即可 陆爻齐参照代">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【Weekly Algorithm】 算法周记之《代码随想录》字符串">
-<meta property="og:url" content="http://example.com/2024/10/06/[Weekly%20Algorithm]%204%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/index.html">
-<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="学习小结本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。 字符串简评究其本质而言，就是数组，只不过内容换成了字母。 反转字符串 代码随想录 (programmercarl.com) 就是把字符串前后翻转，和[[翻转链表]]相似 由于字符串可以随机读取，可以简单很多，直接 swap i 和 str.size()-1-i 的字符即可 陆爻齐参照代">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-06T05:45:00.000Z">
-<meta property="article:modified_time" content="2025-02-24T13:13:19.973Z">
-<meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="Algorithm">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+extends includes/layout.pug
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    article#article-container.container.post-content
+      if theme.noticeOutdate.enable && page.noticeOutdate !== false
+        include includes/post/outdate-notice.pug
+      else
+        !=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (page.tags.length > 0 && theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hello my World</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-      <div class="outer">
-        <section id="main"><article id="post-[Weekly Algorithm] 4算法周记之《代码随想录》字符串" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/10/06/%5BWeekly%20Algorithm%5D%204%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
-  <time class="dt-published" datetime="2024-10-06T05:45:00.000Z" itemprop="datePublished">2024-10-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      【Weekly Algorithm】 算法周记之《代码随想录》字符串
-    </h1>
-  
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习字符串部分，较深入地了解了字符串的相关算法题，除了双指针，还有 KMP 算法。</p>
-<h1 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h1><h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>究其本质而言，就是数组，只不过内容换成了字母。</p>
-<h2 id="反转字符串"><a href="#反转字符串" class="headerlink" title="反转字符串"></a>反转字符串</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0344.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></li>
-<li>就是把字符串前后翻转，和[[翻转链表]]相似</li>
-<li>由于字符串可以随机读取，可以简单很多，直接 <code>swap</code> i 和 str.size()-1-i 的字符即可</li>
-<li>陆爻齐参照代码随想录的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void reverseString(vector&lt;char&gt;&amp; s) &#123;</span><br><span class="line">        int size = s.size();</span><br><span class="line">        for (int i = 0; i &lt; size / 2; i++) &#123;</span><br><span class="line">            swap(s[i],s[size - 1 - i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h2 id="反转字符串-1"><a href="#反转字符串-1" class="headerlink" title="反转字符串||"></a>反转字符串||</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0541.%E5%8F%8D%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2II.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
-<li>与 [[反转字符串]] 类似，不过要求每 2k 个字符的前 k 个字符反转</li>
-<li>方法不难，可以像陆爻齐这样把两个阶段分开，也可像代码随想录这样合一起处理，不过还是要注意循环不变原则，比如反转字符串保持左闭右闭的区间</li>
-<li>陆爻齐的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string reverseStr(string s, int k) &#123;</span><br><span class="line">        int begin = 0, end = s.size() - 1;</span><br><span class="line">        int size = s.size();</span><br><span class="line"></span><br><span class="line">        // 先处理了大于 2k 的情况</span><br><span class="line">        while(size &gt; 2 * k) &#123;</span><br><span class="line">            rev_str(s, begin, begin + k - 1);</span><br><span class="line">            begin += 2 * k;</span><br><span class="line">            size -= 2 * k;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 单独处理小于等于 k 的情况</span><br><span class="line">        if (size &gt;= k) &#123;</span><br><span class="line">            rev_str(s, begin, begin + k - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            rev_str(s, begin, begin + size - 1);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 反转字符串单独实现，左闭右闭</span><br><span class="line">    void rev_str(string &amp;s, int begin, int end) &#123;</span><br><span class="line">        int size = end - begin + 1;</span><br><span class="line">        //cout &lt;&lt; &quot;rec: &quot;;</span><br><span class="line">        /*for (int i = begin; i &lt;= end; i++) &#123;</span><br><span class="line">            cout &lt;&lt; s[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;*/</span><br><span class="line">        //cout &lt;&lt; endl &lt;&lt; endl;</span><br><span class="line">        for (int i = 0; i &lt; size / 2; i++) &#123;</span><br><span class="line">            swap(s[begin + i], s[end - i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li>代码随想录的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void reverse(string&amp; s, int start, int end) &#123;</span><br><span class="line">        for (int i = start, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            swap(s[i], s[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    string reverseStr(string s, int k) &#123;</span><br><span class="line">        for (int i = 0; i &lt; s.size(); i += (2 * k)) &#123;</span><br><span class="line">            // 1. 每隔 2k 个字符的前 k 个字符进行反转</span><br><span class="line">            // 2. 剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符</span><br><span class="line">            if (i + k &lt;= s.size()) &#123;</span><br><span class="line">                reverse(s, i, i + k - 1);</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            // 3. 剩余字符少于 k 个，则将剩余字符全部反转。</span><br><span class="line">            reverse(s, i, s.size() - 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="替换数字"><a href="#替换数字" class="headerlink" title="替换数字"></a>替换数字</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/kamacoder/0054.%E6%9B%BF%E6%8D%A2%E6%95%B0%E5%AD%97.html#%E6%80%9D%E8%B7%AF">替换数字 | 代码随想录 (programmercarl.com)</a></li>
-</ul>
-</li>
-<li>题意是让字符串中的数字，替换为 “number”</li>
-<li>最普通的方法是从前往后遍历，对于数字，则将后面的字母向后移位，插入 “number”，但时间复杂度为 O(n^2)，如果创建新的字符串来辅助，那么空间复杂度就高了（JAVA 好像不能对字符串直接修改，必须辅助来着）</li>
-<li>比较好的方法是，先遍历字符串，确认其中数字个数，然后直接对字符串重定大小，从后向前填充，遇到数字就倒着写 number</li>
-<li>陆爻齐参考代码随想录思路的解法</li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    string s;// 存储字符串</span><br><span class="line">    int count;// 记录字符串中数字个数</span><br><span class="line">    </span><br><span class="line">    while(cin &gt;&gt; s) &#123; //只要一直有输入就不会停止</span><br><span class="line">        int ori_size = s.size(); //记录原来大小</span><br><span class="line">        count = 0;</span><br><span class="line">        for(auto c : s) &#123; // 计算数字个数</span><br><span class="line">            if (int(c) &lt; int(&#x27;a&#x27;)) &#123;</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        s.resize(s.size() + 5 * count); // 重置字符串大小</span><br><span class="line">        </span><br><span class="line">        int index = ori_size - 1;// 对原内容遍历下标</span><br><span class="line">        int input_ind = s.size() - 1;// 插入下标</span><br><span class="line">        </span><br><span class="line">        while(input_ind &gt; 0) &#123; // 从后向前遍历</span><br><span class="line">            if (int(s[index]) &lt; int(&#x27;a&#x27;)) &#123;  // 对数字从后向前替换numver</span><br><span class="line">                s[input_ind--] = &#x27;r&#x27;;</span><br><span class="line">                s[input_ind--] = &#x27;e&#x27;;</span><br><span class="line">                s[input_ind--] = &#x27;b&#x27;;</span><br><span class="line">                s[input_ind--] = &#x27;m&#x27;;</span><br><span class="line">                s[input_ind--] = &#x27;u&#x27;;</span><br><span class="line">                s[input_ind--] = &#x27;n&#x27;;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                s[input_ind--] = s[index]; // 对非数字直接替换</span><br><span class="line">            &#125;</span><br><span class="line">            index--;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="翻转字符串里的单词"><a href="#翻转字符串里的单词" class="headerlink" title="翻转字符串里的单词"></a>翻转字符串里的单词</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0151.%E7%BF%BB%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E7%9A%84%E5%8D%95%E8%AF%8D.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></p>
-</li>
-<li><p>本题要求只是翻转字符串中每个单词，单词内不翻转，若遇到多个空格，则合并一个</p>
-</li>
-<li><p>整体分三步：</p>
-<ol>
-<li>去除多余空格</li>
-<li>整体翻转</li>
-<li>局部翻转单词</li>
-</ol>
-</li>
-<li><p>第一步可以遍历然后erase，但erase时间复杂度O(n)，这样第一步复杂度O(n^2)，虽然也能过，但有更好的方法；这里就要用到[[移除元素]]中用到的双指针，同样的方法可以消除多余空格，区别就是每次消除前，先自己补个空格</p>
-</li>
-<li><p>第二步和第三步用[[反转字符串]]即可，注意第三步对每个单词反转时，由于默认用左闭右闭的反转函数，遍历的变量 i 是可以取到 s.size() 的。</p>
-</li>
-<li><p>陆爻齐参考代码随想录思路的解法</p>
-</li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string reverseWords(string s) &#123;</span><br><span class="line">        removeExactSpaces(s);</span><br><span class="line">        reverseStr(s, 0, s.size() - 1);</span><br><span class="line"></span><br><span class="line">        int start = 0;</span><br><span class="line">        for (int i = 0; i &lt;= s.size(); i++) &#123; // 由于反转对i-1，i可以取s.size()</span><br><span class="line">            if (s[i] == &#x27; &#x27; || i == s.size()) &#123;</span><br><span class="line">                reverseStr(s, start, i - 1);</span><br><span class="line">                start = i+1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return s;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 左闭右闭区间交换</span><br><span class="line">    void reverseStr(string &amp;s, int begin, int end) &#123;</span><br><span class="line">        for (int i = begin, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">            swap(s[i], s[j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void removeExactSpaces(string &amp;s) &#123;</span><br><span class="line">        // 参考此前的移除元素，双指针O(n)</span><br><span class="line">        int slow = 0;</span><br><span class="line">        int size = s.size();</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">            if (s[i] != &#x27; &#x27;) &#123;</span><br><span class="line">                if (slow != 0) &#123;</span><br><span class="line">                    s[slow++] = &#x27; &#x27;;</span><br><span class="line">                &#125;</span><br><span class="line">                while (i &lt; size &amp;&amp; s[i] != &#x27; &#x27;) &#123;</span><br><span class="line">                    s[slow++] = s[i++];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //cout &lt;&lt; slow &lt;&lt; endl;</span><br><span class="line">        s.resize(slow);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="右旋字符串"><a href="#右旋字符串" class="headerlink" title="右旋字符串"></a>右旋字符串</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/kamacoder/0055.%E5%8F%B3%E6%97%8B%E5%AD%97%E7%AC%A6%E4%B8%B2.html">右旋字符串 | 代码随想录 (programmercarl.com)</a></li>
-<li>题意就是要求将一个字符串的后 k 个字符放前面</li>
-<li>不难，最容易想到的方法就是新建个字符串，先把后 k 个放前面，再回头放前面；BUT！！如果不准用辅助空间呢？（又是排除 JAVA 的一集）</li>
-<li>答案是通过 [[反转字符串]]，整体反转，再将前 k 个（也就是后面 k 个字符反转过来的部分）和后面部分分别反转即可</li>
-<li>陆爻齐参考代码随想录思路的解法</li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 左闭右闭反转</span><br><span class="line">void reverse_str(string &amp;s, int begin, int end) &#123;</span><br><span class="line">    for (int i = begin, j = end; i &lt; j; i++, j--) &#123;</span><br><span class="line">        swap(s[i], s[j]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    string s;</span><br><span class="line">    int k;</span><br><span class="line">    cin &gt;&gt; k &gt;&gt; s;</span><br><span class="line">    int size = s.size();</span><br><span class="line">    reverse_str(s, 0, size-1); // 整体反转</span><br><span class="line">    // 两部分分别反转</span><br><span class="line">    reverse_str(s, 0, k-1);</span><br><span class="line">    reverse_str(s, k, size-1);</span><br><span class="line">    cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="实现strStr"><a href="#实现strStr" class="headerlink" title="实现strStr()"></a>实现strStr()</h2><ul>
-<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0028.%E5%AE%9E%E7%8E%B0strStr.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
-<li>即求出一个文本串中模板串第一次出现的首字母下标</li>
-<li>本题利用暴力解法也可 AC，即对每个字符起都循环遍历模板串是否匹配，但想比较好地完成此题，就不得不提到 [[KMP算法]]，本题也就可是KMP匹配成功后立即返回即可</li>
-<li>陆爻齐参考代码随想录思路的解法</li>
-</ul>
-  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void getNext(int *next, string s) &#123;</span><br><span class="line">        int j = -1;</span><br><span class="line">        next[0] = j;</span><br><span class="line">        int size = s.size();</span><br><span class="line">        for (int i = 1; i &lt; size; i++) &#123; // 循环不变原则，i为后缀末下标，j为前缀末下标</span><br><span class="line">            while (j &gt;= 0 &amp;&amp; s[i] != s[j + 1]) &#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">            if (s[i] == s[j + 1]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int strStr(string haystack, string needle) &#123;</span><br><span class="line">        if (needle.size() == 0) &#123;</span><br><span class="line">            return 0;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        vector&lt;int&gt; next(needle.size());</span><br><span class="line">        getNext(&amp;next[0], needle);</span><br><span class="line">        int j = -1;</span><br><span class="line">        for(int i = 0; i &lt; haystack.size(); i++) &#123;</span><br><span class="line">            while(j &gt;= 0 &amp;&amp; haystack[i] != needle[j + 1]) &#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">            if (haystack[i] == needle[j + 1]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (j == (needle.size() - 1)) &#123; // 可理解为结果是 i -</span><br><span class="line">                return (i - needle.size() + 1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return -1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="重复的子字符串"><a href="#重复的子字符串" class="headerlink" title="重复的子字符串"></a>重复的子字符串</h2><ul>
-<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0459.%E9%87%8D%E5%A4%8D%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></p>
-</li>
-<li><p>即判断字符串是否由自身的子字符串组成</p>
-</li>
-<li><p>方法大致有三个</p>
-<ol>
-<li>暴力解法，O(n^2)时间复杂度，中间可以只遍历一半字符串优化</li>
-</ol>
-<p>2.移动匹配，把字符串*2拼一起，掐头去尾，若中间有字符串，则是<br>  3. [[KMP算法]] ，若KMP找到最长相同前后缀所不包含的串长度可整除字符串，则是</p>
-</li>
-<li><p>移动匹配：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool repeatedSubstringPattern(string s) &#123;</span><br><span class="line">        string ss = s + s;</span><br><span class="line">        // 掐头去尾</span><br><span class="line">        ss.erase(ss.begin());</span><br><span class="line">        ss.erase(ss.end() - 1);</span><br><span class="line">        // 如果中间出现原串，说明确实是</span><br><span class="line">        if (ss.find(s) != string::npos) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-<li><p>KMP</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void getNext(int *next, string s) &#123;</span><br><span class="line">        int j = -1;</span><br><span class="line">        next[0] = j;</span><br><span class="line">        for (int i = 1; i &lt; s.size(); i++) &#123;</span><br><span class="line">            while (j &gt;= 0 &amp;&amp; s[i] != s[j + 1]) &#123;</span><br><span class="line">                j = next[j];</span><br><span class="line">            &#125;</span><br><span class="line">            if (s[i] == s[j + 1]) &#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">            next[i] = j;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    bool repeatedSubstringPattern(string s) &#123;</span><br><span class="line">        if (s.size() == 0) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        vector&lt;int&gt; next(s.size());</span><br><span class="line">        getNext(&amp;next[0], s);</span><br><span class="line">        int len = s.size();</span><br><span class="line">        // 只要最长前后缀在末尾大于零，且剩余部分长度整除字符串</span><br><span class="line">        if (next[len - 1] != -1 &amp;&amp; len % (len - (next[len - 1] + 1)) == 0) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/10/06/[Weekly%20Algorithm]%204%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-id="cm7j3jeck001p10ag9khn6up0" data-title="【Weekly Algorithm】 算法周记之《代码随想录》字符串" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/10/13/%5BWeekly%20Algorithm%5D%205%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%A0%88%E4%B8%8E%E9%98%9F%E5%88%97%E4%B8%8E%E4%BA%8C%E5%8F%89%E6%A0%91%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          【Weekly Algorithm】算法周记之《代码随想录》栈与队列与二叉树（一）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/09/29/%5BWeekly%20Algorithm%5D%203%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%93%88%E5%B8%8C%E8%A1%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">【Weekly Algorithm】 算法周记之《代码随想录》哈希表</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/12/%5BWeekly%20Algorithm%5D%2015%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%85%AD%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（六）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 陆爻齐-LuYaoQi<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments !== false && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})

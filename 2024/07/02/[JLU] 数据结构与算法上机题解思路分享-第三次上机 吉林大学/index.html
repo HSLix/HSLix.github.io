@@ -1,330 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学 | LuYaoQi&#39;s Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 正文A 图的创建分数 10作者 朱允刚单位 吉林大学请编写程序创建一个有向图。有向图中包含n个顶点，编号为0至n-1。 输入格式:输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学">
-<meta property="og:url" content="http://example.com/2024/07/02/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/index.html">
-<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 正文A 图的创建分数 10作者 朱允刚单位 吉林大学请编写程序创建一个有向图。有向图中包含n个顶点，编号为0至n-1。 输入格式:输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-02T15:27:00.000Z">
-<meta property="article:modified_time" content="2025-02-24T13:13:19.965Z">
-<meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="JLU">
-<meta property="article:tag" content="数据结构与算法">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+extends includes/layout.pug
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    article#article-container.container.post-content
+      if theme.noticeOutdate.enable && page.noticeOutdate !== false
+        include includes/post/outdate-notice.pug
+      else
+        !=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (page.tags.length > 0 && theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hello my World</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-      <div class="outer">
-        <section id="main"><article id="post-[JLU] 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/07/02/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
-  <time class="dt-published" datetime="2024-07-02T15:27:00.000Z" itemprop="datePublished">2024-07-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学
-    </h1>
-  
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
-<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
-<p>希望你能在这里找到你想要的:)</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="A-图的创建"><a href="#A-图的创建" class="headerlink" title="A 图的创建"></a>A 图的创建</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序创建一个有向图。有向图中包含n个顶点，编号为0至n-1。</p>
-<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过20000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。</p>
-<p>输出格式:<br>按顶点编号递增顺序输出每个顶点引出的边，每个顶点占一行，若某顶点没有引出边，则不输出。每行表示一个顶点引出的所有边，格式为a:(a,b,w)……，表示有向边a-&gt;b的权值为w，a引出的多条边按编号b的递增序排列。</p>
-<p>输入样例:<br>7 7<br>0 1 5<br>0 3 7<br>0 6 6<br>1 2 4<br>2 5 1<br>3 5 3<br>6 5 4</p>
-<p>输出样例:<br>0:(0,1,5)(0,3,7)(0,6,6)<br>1:(1,2,4)<br>2:(2,5,1)<br>3:(3,5,3)<br>6:(6,5,4)</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>500 ms<br>内存限制<br>20 MB</p>
-<hr>
-<p>该题只是图的创建，众所周知，图可以用邻接矩阵或邻接链表实现，这里采用了邻接链表，只要记录边和权值即可。</p>
-<hr>
-<h2 id="B-图的删边操作"><a href="#B-图的删边操作" class="headerlink" title="B 图的删边操作"></a>B 图的删边操作</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序对给定的有向图删除若干条边。有向图中包含n个顶点，编号为0至n-1。</p>
-<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过1000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。随后一行为一个整数k，表示删除的边的条数，接下来k行，每行为2个非负整数a、b，表示待删除的边为a-&gt;b。保证删除的边一定在原图中。</p>
-<p>输出格式:<br>输出执行删边操作之后的图。每行表示一个顶点引出的所有边，格式为a:(a,b,w)……，表示有向边a-&gt;b的权值为w，a引出的多条边按编号b的递增序排列。若某顶点没有引出边，则不输出。</p>
-<p>输入样例:<br>7 7<br>0 1 5<br>0 3 7<br>0 6 6<br>1 2 4<br>2 5 1<br>3 5 3<br>6 5 4<br>2<br>2 5<br>0 1</p>
-<p>输出样例:<br>0:(0,3,7)(0,6,6)<br>1:(1,2,4)<br>3:(3,5,3)<br>6:(6,5,4)</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>200 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>图的创建同上图，这里的删边如果是邻接链表注意要删除时，确保不要一删就删了多个就行</p>
-<hr>
-<h2 id="C-图深度优先遍历"><a href="#C-图深度优先遍历" class="headerlink" title="C 图深度优先遍历"></a>C 图深度优先遍历</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>编写程序对给定的有向图（不一定连通）进行深度优先遍历，图中包含n个顶点，编号为0至n-1。本题限定在深度优先遍历过程中，如果同时出现多个待访问的顶点，则优先选择编号最小的一个进行访问，以顶点0为遍历起点。</p>
-<p>输入格式:<br>输入第一行为两个整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过50。接下来e行表示每条边的信息，每行为两个整数a、b，表示该边的端点编号，但各边并非按端点编号顺序排列。</p>
-<p>输出格式:<br>输出为一行整数，每个整数后一个空格，即该有向图的深度优先遍历结点序列。</p>
-<p>输入样例1:<br>3 3<br>0 1<br>1 2<br>0 2<br>输出样例1:<br>0 1 2<br>输入样例2:<br>4 4<br>0 2<br>0 1<br>1 2<br>3 0<br>输出样例2:<br>0 1 2 3<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>创建图后，进行DFS就行了，没啥讲的</p>
-<p>要不简单讲下DFS或BFS好了，就是从一个点入手，搜寻该点所连的所有点并加入数组中，无论栈或队列，记录然后提出一点，继续搜寻，加入记录，往复至无点可寻。</p>
-<p>嘛，突然想起，如果前这几道题都用邻接矩阵，或许实现就简单很多了</p>
-<hr>
-<h2 id="D-单源最短路径"><a href="#D-单源最短路径" class="headerlink" title="D 单源最短路径"></a>D 单源最短路径</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序求给定正权有向图的单源最短路径长度。图中包含n个顶点，编号为0至n-1，以顶点0作为源点。</p>
-<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过1000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。</p>
-<p>输出格式:<br>输出为一行整数，为按顶点编号顺序排列的源点0到各顶点的最短路径长度（不含源点到源点），每个整数后一个空格。如源点到某顶点无最短路径，则不输出该条路径长度。</p>
-<p>输入样例:<br>4 4<br>0 1 1<br>0 3 1<br>1 3 1<br>2 0 1<br>输出样例:<br>1 1<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>20 MB</p>
-<hr>
-<p>就是迪杰斯特拉算法的使用，没有什么可以引申的</p>
-<hr>
-<h2 id="E-双十一"><a href="#E-双十一" class="headerlink" title="E 双十一"></a>E 双十一</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>双十一期间，某著名电商平台“东东”为应对销售高峰，准备在n个城市中再增加一个自营仓库，其要求是该仓库设在n个城市中的某个城市，且距离其他所有城市的最短距离之和最小。请编写程序帮助“东东”找出设立仓库的地点。假定n个城市编号为0至n-1，它们之间至少有一个城市与其他所有城市可及。</p>
-<p>输入格式:<br>输入包含多组数据。每组数据第一行为两个正整数n和e，均不超过100。n表示城市数。接下来e行表示两个城市间的距离信息，每行为3个非负整数a、b、c，其中a和b表示两个城市编号，c表示城市间的距离。</p>
-<p>提示：可使用EOF判断输入结束。</p>
-<p>输出格式:<br>输出为一个整数，表示建立仓库的城市编号，如多个城市满足要求，则输出编号最小者。</p>
-<p>输入样例:<br>6 5<br>0 1 1<br>0 2 1<br>0 3 1<br>0 4 1<br>0 5 1<br>4 5<br>0 1 1<br>0 2 5<br>1 2 2<br>1 3 4<br>2 3 1</p>
-<p>输出样例:<br>0<br>1</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>该题的本质是找到一个到其它点距离之和最小的点，理所当然地应该使用Prim算法，求出各个点到其它所有点距离之和最短。</p>
-<hr>
-<h2 id="F-任务拓扑排序"><a href="#F-任务拓扑排序" class="headerlink" title="F 任务拓扑排序"></a>F 任务拓扑排序</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>一个工程被分解成n个子任务，编号为0至n-1。要完成整个工程需要完成所有的子任务。其中一些子任务必须先于另外一些子任务被完成。给定各子任务之间的先后关系，请编写程序给出一个合理的任务完成顺序，若工程不可行，程序亦能识别。</p>
-<p>输入格式:<br>输入第一行为两个整数n和e，均不超过100。n表示子任务数。接下来e行，表示已知的两个子任务间的先后关系，每行为两个整数a和b，表示任务a必须先于任务b完成。</p>
-<p>输出格式:<br>若工程不可行（一些子任务以自己为先决条件），输出“unworkable project”；若工程可行，输出为1行整数，每个整数后一个空格，为n个子任务的编号，表示子任务的完成顺序，如果有多种可能的顺序，则输出字典序最小者。</p>
-<p>注：字典序，即对象在字典中的顺序。对于两个数字序列，从第一个数字开始比较，当某一个位置的数字不同时，该位置数字较小的序列，字典序较小，例如1 2 3 9比1 2 4 5小，1 2 8 9比1 2 10 3小。</p>
-<p>输入样例1:<br>3 2<br>0 1<br>1 2<br>输出样例1:<br>0 1 2<br>输入样例2:<br>3 3<br>0 1<br>1 2<br>2 0<br>输出样例2:<br>unworkable project<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>拓扑排序，内容也是书上有的，简单说，就是从没有指着的点开始，把这个点弹出，并把点所连的点被连的标记数–，然后再从标记数0的点挑个点重复过程。</p>
-<p>还有个字典序，无论字母、数字，是不是从前往后一个个比较，比如返回a &lt; b，true则a字典序比b小。</p>
-<hr>
-<h2 id="G-关键路径"><a href="#G-关键路径" class="headerlink" title="G 关键路径"></a>G 关键路径</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>假定一个工程由若干子任务构成，使用一个包含n个顶点、e条边的AOE网表示该工程，顶点编号为1至n，有向边表示该工程的每个子任务，边的权值表示完成该子任务所需的时间，假定网中只含一个源点和一个汇点。请编写程序求出该工程的所有关键活动，并计算完成该工程所需的最短时间。</p>
-<p>输入格式:<br>每个测试点包含多组测试数据。每组数据第一行为2个整数n和e，均不超过200，分别表示AOE网的顶点数和边数。接下来e行表示每条边的信息，每行为3个正整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并不一定按端点编号顺序排列，且各顶点并不一定按拓扑序排列。</p>
-<p>输出格式:<br>对每组数据，若工程不可行（AOE网中存在环），输出“unworkable project”；若工程可行，则输出第一行为完成工程所需的最短时间，并从第2行开始输出关键活动，每个关键活动占一行，格式为i-&gt;j，其中i和j表示关键活动所在边的端点编号。各关键活动输出顺序为：按i的递增顺序输出，若多个关键活动的i值相同，则按j的递增顺序输出。</p>
-<p>输入样例:<br>4 4<br>1 2 6<br>1 3 4<br>2 4 1<br>3 4 1</p>
-<p>输出样例:<br>7<br>1-&gt;2<br>2-&gt;4</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>简单的说，是计算最早完成时间与最晚完成时间相等的点，输出即可。</p>
-<p>回头来看，这就是动态规划啊</p>
-<hr>
-<h2 id="H-联盟数目"><a href="#H-联盟数目" class="headerlink" title="H 联盟数目"></a>H 联盟数目</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>艾迪是一家集团公司的老板，该集团包含n家公司，为了管理公司，艾迪会时常通过网络向各公司发送消息。各公司间的网络是单向的，每个公司都有一个分发列表，表示其能向哪些公司直接传达消息。例如A公司的分发列表为B、C，表示A可将消息直接传送给B和C（由于网络是单向的，B或C不一定能向A传送消息），这样艾迪若想向A、B、C公司发送消息，则只需向A发送消息即可，随后A可将消息传送到B和C。</p>
-<p>为了便于管理各公司，艾迪打算将n家公司分成若干组，每组称为一个区域联盟，每组满足如下条件：组内的任意公司消息互相可达。即对于组内任意公司u和v，u可将消息传送到v（可由u直接传送到v，也可通过组内其他公司中转传送到v），v也可将消息传送到u。可以认为一个公司可以将消息传送给自己，即一个公司可以自成一组。</p>
-<p>艾迪希望组的数量尽可能少，即在满足上述条件的情况下，每组包含的公司数目尽可能多。</p>
-<p>现给定每个公司的分发列表，请编写程序告知艾迪，他的集团最少能分成多少组。</p>
-<p>输入格式:<br>第一行包含一个整数T (1≤T≤100)表示数据组数。对于每组数据，第一行为一个整数n (2≤n≤100)，表示公司数目，公司编号为1到n。随后n行，第i行包含若干整数，表示第i个公司的分发列表，每行以0结尾。</p>
-<p>输出格式:<br>对于每组数据，输出一行，为一个整数，表示组数。</p>
-<p>输入样例:<br>3<br>5<br>2 4 3 0<br>4 5 0<br>0<br>0<br>1 0<br>3<br>2 0<br>0<br>2 1 0<br>3<br>2 0<br>3 0<br>0</p>
-<p>输出样例:<br>3<br>3<br>3</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>这个点相对前面比较偏，实际上是要找到尽可能大的连通组，采用WarShall算法，找到各个组的最大闭包。</p>
-<hr>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本次上机简答考察了图的基本使用，创建、遍历、删除等，然后又加了点场景考察迪杰斯特拉算法和普利姆算法，最后搞了应该比较难反应过来的WarShall算法，算是把书上的内容过了一遍力，加油罢</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/02/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec6000l10agc6ofcvi8" data-title="【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/07/03/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/07/01/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/12/%5BWeekly%20Algorithm%5D%2015%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%85%AD%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（六）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 陆爻齐-LuYaoQi<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments !== false && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})

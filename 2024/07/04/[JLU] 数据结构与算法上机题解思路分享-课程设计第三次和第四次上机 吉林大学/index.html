@@ -1,315 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  
-  <title>【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学 | LuYaoQi&#39;s Blogs</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 第三次上机 A 手撕BST分数 50作者 朱允刚单位 吉林大学对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学">
-<meta property="og:url" content="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/index.html">
-<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
-<meta property="og:description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 第三次上机 A 手撕BST分数 50作者 朱允刚单位 吉林大学对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-07-04T04:00:00.000Z">
-<meta property="article:modified_time" content="2025-02-24T13:13:19.967Z">
-<meta property="article:author" content="陆爻齐-LuYaoQi">
-<meta property="article:tag" content="JLU">
-<meta property="article:tag" content="数据结构与算法">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+extends includes/layout.pug
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+block content
+  #post
+    if top_img === false
+      include includes/header/post-info.pug
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+    article#article-container.container.post-content
+      if theme.noticeOutdate.enable && page.noticeOutdate !== false
+        include includes/post/outdate-notice.pug
+      else
+        !=page.content
+    include includes/post/post-copyright.pug
+    .tag_share
+      if (page.tags.length > 0 && theme.post_meta.post.tags)
+        .post-meta__tag-list
+          each item, index in page.tags.data
+            a(href=url_for(item.path)).post-meta__tags #[=item.name]
+      include includes/third-party/share/index.pug
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+    if theme.reward.enable && theme.reward.QR_code
+      !=partial('includes/post/reward', {}, {cache: true})
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Hello my World</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
+    //- ad
+    if theme.ad && theme.ad.post
+      .ads-wrap!=theme.ad.post
 
-      <div class="outer">
-        <section id="main"><article id="post-[JLU] 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/07/04/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
-  <time class="dt-published" datetime="2024-07-04T04:00:00.000Z" itemprop="datePublished">2024-07-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="p-name article-title" itemprop="headline name">
-      【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学
-    </h1>
-  
+    if theme.post_pagination
+      include includes/pagination.pug
+    if theme.related_post && theme.related_post.enable
+      != related_posts(page,site.posts)
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
-<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
-<p>希望你能在这里找到你想要的:)</p>
-<h1 id="第三次上机"><a href="#第三次上机" class="headerlink" title="第三次上机"></a>第三次上机</h1><hr>
-<h2 id="A-手撕BST"><a href="#A-手撕BST" class="headerlink" title="A 手撕BST"></a>A 手撕BST</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。</p>
-<p>bst.png</p>
-<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10^5，树高不超过10^4。</p>
-<p>输出格式:<br>输出经上述操作后得到的二叉查找树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
-<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13</p>
-<p>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
-<p>20 11 8 4 9 31 25 24 27 35 40 </p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>500 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
-<hr>
-<p>二叉查找树的插入和查找都不算难，但删除需要注意的是，如果要删的节点有两个子节点，则将该节点的右子树中最小的节点与之交换，并执行从右子树中删除该最小点的任务。其余与普通的二叉树一样操作。</p>
-<hr>
-<h2 id="B-手撕AVL树（基础版）"><a href="#B-手撕AVL树（基础版）" class="headerlink" title="B 手撕AVL树（基础版）"></a>B 手撕AVL树（基础版）</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的高度平衡树（AVL树）进行若干插入或删除操作，请输出最后得到的AVL树。</p>
-<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
-<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
-<p>输出格式:<br>输出经上述操作后得到的高度平衡树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
-<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13<br>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
-<p>20 8 4 11 9 31 25 24 27 35 40<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
-<hr>
-<p>二叉平衡树的插入和删除也是思维不复杂，但实现很麻烦的东西，我只能说，为了使程序的逻辑尽可能清晰，尽量把功能打包成函数，比如一个节点的高度什么的</p>
-<hr>
-<h2 id="C-手撕红黑树"><a href="#C-手撕红黑树" class="headerlink" title="C 手撕红黑树"></a>C 手撕红黑树</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的红黑树（Red-Black Tree, RBT）进行若干插入或删除操作，请输出最后的红黑树。</p>
-<p>rbt.png</p>
-<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
-<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
-<p>输出格式:<br>输出经上述操作后得到的红黑树的中根序列和先根序列，序列中对于每个结点输出其关键词和颜色（红色用R表示，黑色用B表示），每个元素后一个空格，两个序列之间用空行间隔。</p>
-<p>输入样例:<br>5<br>Insert 8<br>Insert 9<br>Insert 3<br>Insert 4<br>Insert 5</p>
-<p>输出样例:<br>3 R 4 B 5 R 8 B 9 B </p>
-<p>8 B 4 B 3 R 5 R 9 B </p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
-<hr>
-<p>红黑树这题，也差一个点没过，故不作思路解析</p>
-<hr>
-<h1 id="第四次上机"><a href="#第四次上机" class="headerlink" title="第四次上机"></a>第四次上机</h1><hr>
-<h2 id="A-手撕STL-sort（进阶版）"><a href="#A-手撕STL-sort（进阶版）" class="headerlink" title="A 手撕STL sort（进阶版）"></a>A 手撕STL sort（进阶版）</h2><p>分数 100<br>作者 朱允刚<br>单位 吉林大学<br>事实上，STL的sort函数在上一题（基础版）的基础上，还采用了下列优化手段，以进一步提升快速排序算法的效率。</p>
-<p>（3）“三数取中”选基准元素。不是选取第一个元素作为基准元素，而是在当前子数组中选取3个元素，取中间大的那个元素作为基准元素。从而保证选出的基准元素不是子数组的最小元素，也不是最大元素，避免Partition分到子数组最边上，以降低最坏情况发生的概率。<br>为确保本题答案唯一，本算法的实现请以教材为准，即普林斯顿大学Sedgewick教授给出的方法：若当前子数组是R[m]…R[n]，选取R[m]、R[(m+n)&#x2F;2]和R[n]的中位数作为基准元素。先将R[(m+n)&#x2F;2]与R[m+1]交换；若R[m+1]比R[n]大，交换二者；若R[m]比R[n]大，交换二者；若R[m+1]比R[m]大，交换二者。</p>
-<p>（4）尾递归转为循环。即将传统快速排序代码</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void QuickSort(int R[],int m,int n)&#123;</span><br><span class="line">   if(n - m + 1 &gt; threshold)&#123;</span><br><span class="line">        int j = Partition(R, m, n); </span><br><span class="line">        QuickSort(R, m, j-1);  //递归处理左区间</span><br><span class="line">        QuickSort(R, j+1, n);  //递归处理右区间，尾递归</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>转换为</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void QuickSort(int R[],int m,int n)&#123;</span><br><span class="line">   while(n - m + 1 &gt; threshold)&#123;    //注意此处不是if，而是while</span><br><span class="line">        int j = Partition(R, m, n); </span><br><span class="line">        QuickSort(R, m, j-1);  //递归处理左区间</span><br><span class="line">        m = j+1;  //通过while循环处理右区间，从而消除尾递归</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>即先递归处理左区间，后循环处理右区间，从而消除一个尾递归，以减少递归调用带来的时空消耗。<br>这里需注意，尾递归转循环后，转入堆排序的时机不仅仅是递归深度达到2logn，而是递归深度和while循环迭代的次数加一起达到2logn时转入堆排序。</p>
-<p>（5）优先处理短区间。在上述策略（4）的基础上进一步改进，不是按固定次序处理左右子区间（每次都先处理左区间、后处理右区间），而是先（通过递归）处理左右两个子区间中“较短的那个区间”，然后再（通过循环）处理两个子区间中“较长的那个区间”。从而使每次递归处理的子数组长度至少缩减一半，使最坏情况下递归深度（算法最坏情况空间复杂度）为logn。</p>
-<p>（6）三路分划（3-Way Partition）。当重复元素很多时，传统快速排序效率较低。可修改Partition操作，不是把当前数组划分为两部分，而是三部分：小于基准元素K的元素放在左边，等于K的元素放在中间，大于K的元素在右边。接下来仅需对小于K的左半部分子数组和大于K的右半部分子数组进行排序。中间等于K的所有元素都已就位，无需处理。<br>为确保本题答案唯一，此处请采用如下做法：若当前子数组是R[m]…R[n]，可设置3个指针，前指针i，中指针j，后指针k。初始时i和j指向第一个元素，k指向最后一个元素；指针j从左往右扫描数组：</p>
-<p>若R[j]小于基准元素，交换R[j]和R[i], i++, j++；<br>若R[j]大于基准元素，交换R[j]和R[k], k–；<br>若R[j]等于基准元素，j++；<br>通过指针j的遍历，使小于基准元素的元素换到当前子数组左侧，大于基准元素的元素换到右侧。当j扫描完当前子数组后，R[m]…R[i-1]即小于基准元素的元素，R[i]…R[k]即等于基准元素的元素，R[k+1]…R[n]即大于基准元素的元素。</p>
-<p>在本题中，请你在之前实现的STL sort()初级版的基础上，进一步实现上述优化策略。</p>
-<p>提示：本题只需把原来的Partition改为3-way Partition，并使用“三数取中”法选择基准元素。<br>在快速排序函数里，改为“尾递归转循环 + 先处理短区间”。你可以在Visual Studio里对sort函数右键点击“转到定义”，查看VS中STL的sort()实现细节<br>vstudio sort转到定义图片.jpg</p>
-<p>函数接口定义：<br>void sort(int *R, int n);<br>功能为对整数R[1]…R[n]递增排序。</p>
-<p>裁判测试程序样例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int threshold;</span><br><span class="line"></span><br><span class="line">// 请在这里补充你的代码，即你所实现的sort函数</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    int a[50010];</span><br><span class="line">    scanf(&quot;%d %d&quot;, &amp;n, &amp;threshold);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;a[i]);</span><br><span class="line">    </span><br><span class="line">    sort(a,n);</span><br><span class="line">    </span><br><span class="line">    printf(&quot;Final:&quot;);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        printf(&quot;%d &quot;,a[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>备注：提交代码时，只需提交sort函数以及你自定义的其他函数，不用提交#include或者main函数等内容。</p>
-<p>输入格式:<br>输入第一行为2个正整数n和threshold，n为待排序的元素个数，不超过50000，threshold为改用插入排序的阈值，不超过20，含义如上所述。第二行为n个空格间隔的整数。本题中读入数据的操作无需你来实现，而由框架程序完成。</p>
-<p>输出格式:<br>输出第一行为以depth_limit:开头的整数，表示转为堆排序的递归深度，即⌊2log<br>2n⌋。从第二行开始，输出对某子数组转为堆排序后，该子数组初始建堆的结果，每个元素后一个空格，每个堆占一行，以Heap:开头。注意，可能不止一个堆。接下来下一行，输出n个整数，每个整数后一个空格，为快速排序所有递归退出后，插入排序执行前的数组元素，以Intermediate:开头。最后一行为n整数，每个整数后一个空格，表示排序后的数组，以Final:开头（最后一行由框架程序完成，无需你来输出）。</p>
-<p>输入样例1：<br>10 2<br>10 9 8 7 6 5 4 3 2 1</p>
-<p>输出样例1：<br>depth_limit:6<br>Intermediate:1 2 3 5 4 6 7 8 9 10<br>Final:1 2 3 4 5 6 7 8 9 10 </p>
-<p>输入样例2：<br>60 2<br>66 61 92 22 50 80 39 2 25 60 49 17 37 19 24 57 40 82 11 52 45 0 33 78 32 25 19 42 92 50 39 87 74 87 56 79 63 63 80 83 50 3 87 2 91 77 87 10 59 23 25 6 49 85 9 95 60 16 28 1<br>输出样例2：<br>depth_limit:11<br>Intermediate:1 0 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 32 28 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95<br>Final:0 1 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 28 32 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95 </p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>此题基于课程设计第二次上机A题，而且改进方法都在题目里，是在不行，朱老师的ppt里有来着？</p>
-<hr>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>好像又没啥可结的，总之就这样罢</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec8000u10ag48qgd8vj" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2024/07/09/%5BCINTA%5D%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2024/07/03/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2025/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</a>
-          </li>
-        
-          <li>
-            <a href="/2025/01/12/%5BWeekly%20Algorithm%5D%2015%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%85%AD%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（六）</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2025 陆爻齐-LuYaoQi<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
-</html>
+    if page.comments !== false && theme.comments.use
+      - var commentsJsLoad = true
+      !=partial('includes/third-party/comments/index', {}, {cache: true})
