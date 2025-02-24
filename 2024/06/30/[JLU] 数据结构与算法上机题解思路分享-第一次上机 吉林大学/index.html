@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学 | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库是JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 正文 A 调皮的哈利分数 30作者 朱允刚单位 吉林大学贝蒂是个打字高手，打字时有不看屏幕的习惯。在一次贝蒂打字时，调皮的哈利常常趁贝蒂不注意按下Home键、End键、左右方向键和退格键。当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学">
+<meta property="og:url" content="http://example.com/2024/06/30/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库是JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 正文 A 调皮的哈利分数 30作者 朱允刚单位 吉林大学贝蒂是个打字高手，打字时有不看屏幕的习惯。在一次贝蒂打字时，调皮的哈利常常趁贝蒂不注意按下Home键、End键、左右方向键和退格键。当">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-06-30T14:54:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.965Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="JLU">
+<meta property="article:tag" content="数据结构与算法">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[JLU] 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/30/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-06-30T14:54:00.000Z" itemprop="datePublished">2024-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库是<a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><hr>
+<h2 id="A-调皮的哈利"><a href="#A-调皮的哈利" class="headerlink" title="A 调皮的哈利"></a>A 调皮的哈利</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>贝蒂是个打字高手，打字时有不看屏幕的习惯。在一次贝蒂打字时，调皮的哈利常常趁贝蒂不注意按下Home键、End键、左右方向键和退格键。当Home键被按下时，输入光标会跳到文本最开头；当End键被按下时，输入光标会跳到文本末尾；当左&#x2F;右方向键被按下时，输入光标会向左&#x2F;右移动一位；当退格键被按下时，输入光标左面的一个字符会被删除。现给出贝蒂和哈利按键的字符串，其中’{‘表示Home键，’}’表示End键，’&lt;’表示左方向键，’&gt;’表示右方向键，’#’表示退格键，其余字符均表示输入的内容，请输出屏幕上最终显示的文本。</p>
+<p>img.jpg</p>
+<p>输入格式:<br>输入一个字符串，长度不超过5×10<br>4<br> ，包含大小写字母、空格、下划线、{、}、&lt;、&gt;、#，表示贝蒂和哈利的按键序列。</p>
+<p>输出格式:<br>输出为屏幕上最终显示的字符串。</p>
+<p>输入样例1:<br>jlu_cc{i_love_}st</p>
+<p>输出样例1:<br>i_love_jlu_ccst<br>输入样例2:<br>stre&lt;&lt;aaa</p>
+<p>输出样例2:<br>staaare<br>输入样例3:<br>xxx&gt;&gt;&gt;yyy##z&lt;&lt;&gt;k</p>
+<p>输出样例3:<br>xxxykz<br>输入样例4:<br>abcd{efghi}jklm{nopq}rs{t}uvwxyz</p>
+<p>输出样例4:<br>tnopqefghiabcdjklmrsuvwxyz<br>代码长度限制<br>16 KB<br>时间限制<br>25 ms<br>内存限制<br>10 MB</p>
+<hr>
+<p>从题目可以知道，题目要求对于内部的数据结构有着频繁的更改，所以在我们已知的数据结构中，可以考虑采用链表来进行实现。</p>
+<p>同时也能注意到，对于字符串的处理，有一些如同转义字符一样的特殊字符，将这些特殊字符的处理编为函数，也是一个不错的选择。</p>
+<p>此外，也建议想象自己操纵着光标，输入时向光标左边插字，删除时删除左边的字这样。</p>
+<hr>
+<p>##B 括号匹配<br>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序判断一个包含“（”和“）”的括号序列是否匹配。如匹配则输出Match；如不匹配，计算出使该序列变为匹配序列所需添加的最少括号数目（只允许在该序列开始和结尾处添加括号），并输出经添加最少括号后得到的合法匹配序列。</p>
+<p>输入格式:<br>输入为若干行，每行一个字符串，包含不超过10 ^ 5个括号。输入行数不超过10行。</p>
+<p>输出格式:<br>对于输入的每个括号序列输出1行或2行信息。若输入的括号序列匹配，则输出Match。若不匹配，则输出分为2行，第1行为一个整数，表示将该序列变为匹配序列所需添加的最少括号数目，第2行为一个字符串，表示经添加最少括号后得到的合法匹配序列。</p>
+<p>输入样例:<br>(())()<br>)(<br>()))((</p>
+<p>输出样例:<br>Match<br>2<br>()()<br>4<br>((()))(())</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>20 ms<br>内存限制<br>10 MB</p>
+<hr>
+<p>该题目与课内某题很像，通过栈记录匹配与否，再实现补充即可</p>
+<p>由于全是小括号，基本不用考虑在哪里补充，缺几个左括号就直接向左补，缺几个右括号直接向右补即可</p>
+<hr>
+<h2 id="C-表达式求值"><a href="#C-表达式求值" class="headerlink" title="C 表达式求值"></a>C 表达式求值</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>给定一个中缀表达式，请编写程序计算该表达式的值。表达式包含+、-、*、\、^、(、)，所有运算均为二元运算，操作数均为正整数，但可能不止一位，不超过10位。运算结果为整数，值域为[−2^31,2^<br>31)。除法运算结果若为小数则进行截尾取整。若除法运算中除数为0，则输出INVALID。幂运算须自行实现，不允许调用pow等系统函数。测试数据保证幂运算中指数为非负，底数不为0。</p>
+<p>输入格式:<br>输入为多行，每行为一个长度不超过1000的字符串，表示中缀表达式。</p>
+<p>输出格式:<br>对每个表达式输出一行：为一个整数（表达式的值）或为一个字符串INVALID。</p>
+<p>输入样例:<br>5+(10<em>2)-6<br>8</em>(999+1)<br>1+5&#x2F;(1-1)<br>7*2^3</p>
+<p>输出样例:<br>19<br>8000<br>INVALID<br>56<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>经典的中缀表达式转后缀表达式，基本与课本一样，不过需要快速幂来减少时间消耗，毕竟只有50ms嘛</p>
+<p>陆爻齐采用了专门的函数判断符号优先级，是否为括号的函数来事得程序条理更清晰些，为了省事，或许能够统一个函数，直接用数字区分类别，不过更耗点脑子罢</p>
+<hr>
+<h2 id="D-EDG"><a href="#D-EDG" class="headerlink" title="D EDG"></a>D EDG</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>2021年11月6日，英雄联盟全球总决赛打响，中国电子竞技战队Edward Gaming（EDG）以3:2力克韩国强敌DWG KIA（DK）战队，历史上首次夺得全球总冠军。一时间全网沸腾，大家纷纷在社交平台上直呼“edgnb”。现给定一段文本，请编写程序识别出连续的k个“edgnb”组成的字符串在该文本中出现了多少次。</p>
+<p>输入格式:<br>第一行为1个整数T，表示数据组数。对于每组数据，第一行为1个字符串，表示给定的文本。第二行为1个整数k，含义如题目所述。（1≤T≤10。各组数据给定的字符串长度之和不超过10<br>5<br> ，且字符串中只包含a-z的小写字母。k≥1且k×5小于给定字符串长度）。</p>
+<p>输出格式:<br>对于每组数据输出一行，为1个整数，表示所求的出现次数。</p>
+<p>输入样例:<br>5<br>xyzedgnbabcedgnb<br>1<br>xyzedgnbabcedgnb<br>2<br>defedgnbedgnbxyz<br>2<br>edgnbedgnbedgnb<br>2<br>fxedgnbedgnbedgnbedgnbmem<br>3</p>
+<p>输出样例:<br>2<br>0<br>1<br>2<br>2</p>
+<p>数据规模:<br>测试点0：5≤T≤10，400≤T个字符串长度之和≤500，k&#x3D;1<br>测试点1：5≤T≤10，400≤T个字符串长度之和≤500，k≥1<br>测试点2：5≤T≤10，4000≤T个字符串长度之和≤5000，k≥1<br>测试点3：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1<br>测试点4：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>400 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>这个题的实质是从字符串中匹配符合的字符串，而且不单单是匹配单个edgnb出现次数，而是可能变长的。只要理解了这一点，接下来只要实现经典的kmp就成功了。</p>
+<p>你问kmp是什么？我也不知道捏（毕竟过去一年力</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这次上机实验主要考察了对链表、字符串匹配和操作，思考量肯定是有的，不过这里面很多东西我确实还是没有理解啊，纵使当时写下来了，现在也全忘了，hhh</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/30/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgr000muwaggohl136f" data-title="【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/07/01/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/06/09/%5BJLU%5D%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【JLU】 吉林大学校园网上网攻略汇总与补充</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

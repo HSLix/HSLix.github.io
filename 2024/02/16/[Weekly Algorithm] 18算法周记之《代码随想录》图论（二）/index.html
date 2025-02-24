@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Weekly Algorithm】算法周记之《代码随想录》图论（二） | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="学习小结本周跟随《代码随想录》继续学习关于图论的知识，主要是学习岛屿，也就是 bfs&#x2F;dfs 的经典应用。同时还有[[字符串接龙]]这种新颖的图论题目，才知道各种字符串也能抽象为一个图。 图论 岛屿数量广搜版 代码随想录  99. 岛屿数量  直接说明区别和放代码好力，代码就是在[[岛屿数量深搜版]]的基础上做了一点更改，原本的搜索函数不断递归向深了探索，现在是用队列（栈也可，区别在于遍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》图论（二）">
+<meta property="og:url" content="http://example.com/2024/02/16/[Weekly%20Algorithm]%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》继续学习关于图论的知识，主要是学习岛屿，也就是 bfs&#x2F;dfs 的经典应用。同时还有[[字符串接龙]]这种新颖的图论题目，才知道各种字符串也能抽象为一个图。 图论 岛屿数量广搜版 代码随想录  99. 岛屿数量  直接说明区别和放代码好力，代码就是在[[岛屿数量深搜版]]的基础上做了一点更改，原本的搜索函数不断递归向深了探索，现在是用队列（栈也可，区别在于遍">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-16T14:11:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.971Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[Weekly Algorithm] 18算法周记之《代码随想录》图论（二）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-02-16T14:11:00.000Z" itemprop="datePublished">2024-02-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Weekly Algorithm】算法周记之《代码随想录》图论（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》继续学习关于图论的知识，主要是学习岛屿，也就是 bfs&#x2F;dfs 的经典应用。同时还有[[字符串接龙]]这种新颖的图论题目，才知道各种字符串也能抽象为一个图。</p>
+<h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><ul>
+<li><h2 id="岛屿数量广搜版"><a href="#岛屿数量广搜版" class="headerlink" title="岛屿数量广搜版"></a>岛屿数量广搜版</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0099.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%95%B0%E9%87%8F%E5%B9%BF%E6%90%9C.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1171">99. 岛屿数量</a></p>
+</li>
+<li><p>直接说明区别和放代码好力，代码就是在[[岛屿数量深搜版]]的基础上做了一点更改，原本的搜索函数不断递归向深了探索，现在是用队列（栈也可，区别在于遍历顺序）来记录要遍历的区块，再按顺序处理</p>
+</li>
+<li><p>修改后的代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int dir[4][2] = &#123;0, 1, 1, 0, -1, 0, 0, -1&#125;;</span><br><span class="line">void bfs(const vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;bool&gt;&gt; &amp;visited, int x, int y) &#123;</span><br><span class="line">    queue&lt;pair&lt;int, int&gt;&gt; q;</span><br><span class="line">    q.push(make_pair(x, y));</span><br><span class="line">    while (!q.empty()) &#123;</span><br><span class="line">        int tmpx = q.front().first;</span><br><span class="line">        int tmpy = q.front().second;</span><br><span class="line">        q.pop();</span><br><span class="line">        for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">            int nextx = tmpx + dir[i][0];</span><br><span class="line">            int nexty = tmpy + dir[i][1];</span><br><span class="line">            if (nextx &lt; 0 || nextx &gt;= grid.size() || nexty &lt; 0 || nexty &gt;= grid[0].size()) continue;</span><br><span class="line">            if (!visited[nextx][nexty] &amp;&amp; grid[nextx][nexty] == 1) &#123;</span><br><span class="line">                visited[nextx][nexty] = true;</span><br><span class="line">                q.push(make_pair(nextx, nexty));</span><br><span class="line">                // dfs(grid, visited, nextx, nexty);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; visited(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    </span><br><span class="line">    int result = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (!visited[i][j] &amp;&amp; grid[i][j] == 1) &#123;</span><br><span class="line">                visited[i][j] = true;</span><br><span class="line">                result++;</span><br><span class="line">                bfs(grid, visited, i, j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="岛屿的最大面积"><a href="#岛屿的最大面积" class="headerlink" title="岛屿的最大面积"></a>岛屿的最大面积</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0100.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%9C%80%E5%A4%A7%E9%9D%A2%E7%A7%AF.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1172">100. 岛屿的最大面积</a></p>
+</li>
+<li><p>题意：给一个二维数组，求其中纵横相连最大区块面积</p>
+</li>
+<li><p>方法：dfs&#x2F;bfs</p>
+</li>
+<li><p>从零手搓代码，重点在于visited的更新要及时，这也是易忘点<br>第一次把visited放再递归前，少了第一块的计算，故最后会多1<br>下面是最后修正的正确代码  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int result = 0;</span><br><span class="line"></span><br><span class="line">int dr[4][2] = &#123;1, 0, 0, 1, -1, 0, 0, -1&#125;;</span><br><span class="line"></span><br><span class="line">void dfs(const vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;int&gt;&gt; &amp;visited, int &amp;cur_area, int x, int y) &#123;</span><br><span class="line">    cur_area++;</span><br><span class="line">    visited[x][y] = 1;</span><br><span class="line">    //cout &lt;&lt; &quot;visiting:&quot; &lt;&lt; x &lt;&lt; &quot; &quot; &lt;&lt; y &lt;&lt; endl;</span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int tmpx = x + dr[i][0];</span><br><span class="line">        int tmpy = y + dr[i][1];</span><br><span class="line">        if (tmpx &lt; 0 || tmpx &gt;= grid.size() || tmpy &lt; 0 || tmpy &gt;= grid[0].size()) continue;</span><br><span class="line">        if (grid[tmpx][tmpy] == 1 &amp;&amp; visited[tmpx][tmpy] == 0) &#123;</span><br><span class="line">            dfs(grid, visited, cur_area, tmpx, tmpy);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; visited(grid);</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            int cur_area = 0;</span><br><span class="line">            if (!(grid[i][j] == 1 &amp;&amp; visited[i][j] == 0)) continue;</span><br><span class="line">            dfs(grid, visited, cur_area, i, j);</span><br><span class="line">            if (cur_area &gt; result) result = cur_area;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="孤岛的总面积"><a href="#孤岛的总面积" class="headerlink" title="孤岛的总面积"></a>孤岛的总面积</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0101.%E5%AD%A4%E5%B2%9B%E7%9A%84%E6%80%BB%E9%9D%A2%E7%A7%AF.html">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1173">101. 孤岛的总面积</a></p>
+</li>
+<li><p>题意：求没有与边缘相连的纵横相连区块的总面积</p>
+</li>
+<li><p>方法：先对边缘的岛屿用dfs&#x2F;bfs，排除这些区块，然后再遍历中间的面积。</p>
+</li>
+<li><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int dr[4][2] = &#123;0, 1, 0, -1, 1, 0, -1, 0&#125;;</span><br><span class="line"></span><br><span class="line">void dfs(vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;bool&gt;&gt; &amp;visited, int x, int y) &#123;</span><br><span class="line">    visited[x][y] = true;</span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int nextx = x + dr[i][0];</span><br><span class="line">        int nexty = y + dr[i][1];</span><br><span class="line">        if (nextx &lt; 0 || nextx &gt;= grid.size() || nexty &lt; 0 || nexty &gt;= grid[0].size()) continue;</span><br><span class="line">        if (!visited[nextx][nexty] &amp;&amp; grid[nextx][nexty] == 1) &#123;</span><br><span class="line">            dfs(grid, visited, nextx, nexty);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; visited(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        if (grid[i][0] == 1 &amp;&amp; !visited[i][0]) &#123;</span><br><span class="line">            dfs(grid, visited, i, 0);</span><br><span class="line">        &#125;</span><br><span class="line">        if (grid[i][m-1] &amp;&amp; !visited[i][m-1]) &#123;</span><br><span class="line">            dfs(grid, visited, i, m-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        if (grid[0][i] == 1 &amp;&amp; !visited[0][i]) &#123;</span><br><span class="line">            dfs(grid, visited, 0, i);</span><br><span class="line">        &#125;</span><br><span class="line">        if (grid[n-1][i] &amp;&amp; !visited[n-1][i]) &#123;</span><br><span class="line">            dfs(grid, visited, n-1, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int result = 0;</span><br><span class="line">    for (int i = 1; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 1; j &lt; m; j++) &#123;</span><br><span class="line">            if (!visited[i][j] &amp;&amp; grid[i][j] == 1) &#123;</span><br><span class="line">                result++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="沉没孤岛"><a href="#沉没孤岛" class="headerlink" title="沉没孤岛"></a>沉没孤岛</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0102.%E6%B2%89%E6%B2%A1%E5%AD%A4%E5%B2%9B.html">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1174">102. 沉没孤岛</a></p>
+</li>
+<li><p>题意：就是求孤岛之外的面积之和</p>
+</li>
+<li><p>方法：[[孤岛的总面积]]的小变式，只要在计算边缘区块时计算面积就行</p>
+</li>
+<li><p>代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int dr[4][2] = &#123;0, 1, 0, -1, 1, 0, -1, 0&#125;;</span><br><span class="line"></span><br><span class="line">void dfs(vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;bool&gt;&gt; &amp;visited, int x, int y) &#123;</span><br><span class="line">    visited[x][y] = true;</span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int nextx = x + dr[i][0];</span><br><span class="line">        int nexty = y + dr[i][1];</span><br><span class="line">        if (nextx &lt; 0 || nextx &gt;= grid.size() || nexty &lt; 0 || nexty &gt;= grid[0].size()) continue;</span><br><span class="line">        if (!visited[nextx][nexty] &amp;&amp; grid[nextx][nexty] == 1) &#123;</span><br><span class="line">            dfs(grid, visited, nextx, nexty);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; visited(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        if (grid[i][0] == 1 &amp;&amp; !visited[i][0]) &#123;</span><br><span class="line">            dfs(grid, visited, i, 0);</span><br><span class="line">        &#125;</span><br><span class="line">        if (grid[i][m-1] &amp;&amp; !visited[i][m-1]) &#123;</span><br><span class="line">            dfs(grid, visited, i, m-1);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        if (grid[0][i] == 1 &amp;&amp; !visited[0][i]) &#123;</span><br><span class="line">            dfs(grid, visited, 0, i);</span><br><span class="line">        &#125;</span><br><span class="line">        if (grid[n-1][i] &amp;&amp; !visited[n-1][i]) &#123;</span><br><span class="line">            dfs(grid, visited, n-1, i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (visited[i][j] == true) &#123;</span><br><span class="line">                cout &lt;&lt; &quot;1 &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                cout &lt;&lt; &quot;0 &quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="水流问题"><a href="#水流问题" class="headerlink" title="水流问题"></a>水流问题</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0103.%E6%B0%B4%E6%B5%81%E9%97%AE%E9%A2%98.html#%E4%BC%98%E5%8C%96">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1175">103. 水流问题</a></p>
+</li>
+<li><p>题意：给一个数组，找其中所有能够到达（左||上）&amp;&amp;（右||下）从高到低（同值也行）的格子</p>
+</li>
+<li><p>方法：普通思路是对每一个格子都做遍历，看是否能到两种边界。但是复杂度过高。反过来，从两种边界逆流遍历，再求两次遍历的交集即可获得格子</p>
+</li>
+<li><p>参考代码随想录思路的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n, m;</span><br><span class="line">int dir[4][2] = &#123;-1, 0, 0, -1, 1, 0, 0, 1&#125;;</span><br><span class="line">void dfs(vector&lt;vector&lt;int&gt;&gt;&amp; grid, vector&lt;vector&lt;bool&gt;&gt;&amp; visited, int x, int y) &#123;</span><br><span class="line">    if (visited[x][y]) return;</span><br><span class="line"></span><br><span class="line">    visited[x][y] = true;</span><br><span class="line"></span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int nextx = x + dir[i][0];</span><br><span class="line">        int nexty = y + dir[i][1];</span><br><span class="line">        if (nextx &lt; 0 || nextx &gt;= n || nexty &lt; 0 || nexty &gt;= m) continue;</span><br><span class="line">        if (grid[x][y] &gt; grid[nextx][nexty]) continue; // 注意：这里是从低向高遍历</span><br><span class="line"></span><br><span class="line">        dfs (grid, visited, nextx, nexty);</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    </span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 逆流遍历,这些本质上就是visited</span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; firstBoard(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; secondBoard(firstBoard);</span><br><span class="line">    </span><br><span class="line">    // 从第一组边界和第二组边界分别逆推</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        dfs(grid, firstBoard, i, 0);</span><br><span class="line">        dfs(grid, secondBoard, i, m-1);</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        dfs(grid, firstBoard, 0, i);</span><br><span class="line">        dfs(grid, secondBoard, n-1, i);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 遍历并输出最终结果</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (firstBoard[i][j] &amp;&amp; secondBoard[i][j]) &#123;</span><br><span class="line">                cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; j &lt;&lt; endl;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+<li><h2 id="建造最大工岛"><a href="#建造最大工岛" class="headerlink" title="建造最大工岛"></a>建造最大工岛</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0104.%E5%BB%BA%E9%80%A0%E6%9C%80%E5%A4%A7%E5%B2%9B%E5%B1%BF.html#%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1176">104. 建造最大岛屿</a></p>
+</li>
+<li><p>题意：给一个二维数组，沿用上面的岛屿设定，不过本题可以最多填充一块陆地，求填充完最大的陆地面积</p>
+</li>
+<li><p>方法：普通的暴力思路是对每块海洋求四边的陆地和；优化后，先把所有陆地给遍历，求各陆地面积，避免暴力思路中的重复遍历。</p>
+<p>实现的重点在于，考虑全陆地的情况，并且要考虑到四边的陆地可能是同一块陆地，所以要去重。  </p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;unordered_map&gt;</span><br><span class="line">#include &lt;unordered_set&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n, m;</span><br><span class="line"></span><br><span class="line">int dr[4][2] = &#123;0, 1, 0, -1, 1, 0, -1, 0&#125;;</span><br><span class="line"></span><br><span class="line">void dfs(vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;bool&gt;&gt; &amp;visited, int x, int y, int &amp;count, int mark) &#123;</span><br><span class="line">    // 加速返回</span><br><span class="line">    if (visited[x][y] || grid[x][y] == 0) return;</span><br><span class="line">    count++;</span><br><span class="line">    visited[x][y] = true;</span><br><span class="line">    grid[x][y] = mark;</span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int nextx = x + dr[i][0];</span><br><span class="line">        int nexty = y + dr[i][1];</span><br><span class="line">        if (nextx &lt; 0 || nextx &gt;= n || nexty &lt; 0 || nexty &gt;= m) continue;</span><br><span class="line">        if (grid[nextx][nexty] == 1 &amp;&amp; !visited[nextx][nexty]) &#123;</span><br><span class="line">            dfs(grid, visited, nextx, nexty, count, mark);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; visited(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    unordered_map&lt;int, int&gt; gridNum;</span><br><span class="line">    </span><br><span class="line">    int flagNum = 2;</span><br><span class="line">    bool isAllGrid = true;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (grid[i][j] == 0) isAllGrid = false;</span><br><span class="line">            int count = 0;</span><br><span class="line">            if (!visited[i][j] &amp;&amp; grid[i][j] == 1) &#123;</span><br><span class="line">                dfs(grid, visited, i, j, count, flagNum);</span><br><span class="line">                gridNum[flagNum] = count;</span><br><span class="line">                //cout &lt;&lt; &quot;flagNum:&quot; &lt;&lt; flagNum &lt;&lt; &quot;; count:&quot; &lt;&lt; count &lt;&lt; endl;</span><br><span class="line">                flagNum++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    if (isAllGrid) &#123;</span><br><span class="line">        cout &lt;&lt; n*m &lt;&lt; endl;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    unordered_set&lt;int&gt; visitGrid;</span><br><span class="line">    int result = 0;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (grid[i][j] != 0) continue;</span><br><span class="line">            visitGrid.clear();</span><br><span class="line">            int area = 1;</span><br><span class="line">            //cout &lt;&lt; &quot;出发：&quot; &lt;&lt; i &lt;&lt; j &lt;&lt; endl;</span><br><span class="line">            for (int k = 0; k &lt; 4; k++) &#123;</span><br><span class="line">                int nx = i + dr[k][0];</span><br><span class="line">                int ny = j + dr[k][1];</span><br><span class="line">                //cout &lt;&lt; &quot;查看：&quot; &lt;&lt; nx &lt;&lt; ny &lt;&lt; endl;</span><br><span class="line">                if (nx &lt; 0 || nx &gt;= n || ny &lt; 0 || ny &gt;= m || grid[nx][ny] == 0) continue;</span><br><span class="line">                if (visitGrid.count(grid[nx][ny])) continue;</span><br><span class="line">                area += gridNum[grid[nx][ny]];</span><br><span class="line">                //cout &lt;&lt; &quot;发现：&quot; &lt;&lt; grid[nx][ny] &lt;&lt; &quot;;gridNum:&quot; &lt;&lt; gridNum[grid[nx][ny]] &lt;&lt; &quot;;area:&quot; &lt;&lt; area &lt;&lt; endl;</span><br><span class="line">                visitGrid.insert(grid[nx][ny]);</span><br><span class="line">            &#125;</span><br><span class="line">            result = max(result, area);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="字符串接龙"><a href="#字符串接龙" class="headerlink" title="字符串接龙"></a>字符串接龙</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0110.%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%8E%A5%E9%BE%99.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1183">110. 字符串接龙</a></p>
+</li>
+<li><p>题意：给一个起始字符串和终止字符串，以及一系列字符串，求起始字符串每次更改一个字符，从这些字符串最少更改几步到终止字符串。</p>
+</li>
+<li><p>方法：看作从起始字符串开始的无向图，向周围bfs（bfs比dfs更方便找最短路径），也就是逐个尝试26字母。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt; </span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;unordered_set&gt;</span><br><span class="line">#include &lt;unordered_map&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    string beginStr, endStr, str;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    unordered_set&lt;string&gt; strSet;</span><br><span class="line">    cin &gt;&gt; beginStr &gt;&gt; endStr;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        cin &gt;&gt; str;</span><br><span class="line">        strSet.insert(str);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 记录字符串是否访问，以及访问到字符串的路径长度</span><br><span class="line">    unordered_map&lt;string, int&gt; visitMap; </span><br><span class="line">    </span><br><span class="line">    // 为了bfs的队列</span><br><span class="line">    queue&lt;string&gt; que;</span><br><span class="line">    que.push(beginStr);</span><br><span class="line">    </span><br><span class="line">    // 起始的长度为1</span><br><span class="line">    visitMap.insert(make_pair(beginStr, 1));</span><br><span class="line">    </span><br><span class="line">    while(!que.empty()) &#123;</span><br><span class="line">        string word = que.front();</span><br><span class="line">        que.pop();</span><br><span class="line">        int path = visitMap[word];</span><br><span class="line">        </span><br><span class="line">        // 对于word逐个字符尝试替换，然后匹配strSet</span><br><span class="line">        for (int i = 0; i &lt; word.size(); i++) &#123;</span><br><span class="line">            string newWord = word;</span><br><span class="line">            </span><br><span class="line">            // 遍历所有字母</span><br><span class="line">            for (int j = 0; j &lt; 26; j++) &#123;</span><br><span class="line">                newWord[i] = j + &#x27;a&#x27;;</span><br><span class="line">                // 到达重点，直接结束</span><br><span class="line">                if (newWord == endStr) &#123;</span><br><span class="line">                    cout &lt;&lt; path+1 &lt;&lt; endl;</span><br><span class="line">                    return 0;</span><br><span class="line">                &#125;</span><br><span class="line">                // 与字典匹配且没有匹配过</span><br><span class="line">                if (strSet.find(newWord) != strSet.end() &amp;&amp;</span><br><span class="line">                visitMap.find(newWord) == visitMap.end()) &#123;</span><br><span class="line">                    // 记录访问结果，并添加队列</span><br><span class="line">                    visitMap.insert(make_pair(newWord, path+1));</span><br><span class="line">                    que.push(newWord);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 无结果</span><br><span class="line">    cout &lt;&lt; 0 &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/16/[Weekly%20Algorithm]%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/" data-id="cm7j3ftgz001euwag82ms6p5e" data-title="【Weekly Algorithm】算法周记之《代码随想录》图论（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【Weekly Algorithm】算法周记之《代码随想录》图论（三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

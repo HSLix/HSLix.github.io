@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一） | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="学习小结本周跟随《代码随想录》学习关于单调栈的知识，同时开启图论。 单调栈通过保持一个栈从栈顶到栈底的递增或是递减序列，来解决找一个元素左&#x2F;右的“第一个”更大&#x2F;更小元素。 图论则是初窥dfs的门路，虽然道理一年前早在算法课学过考过，但现在也得复习才能捡回来。 单调栈 每日温度 代码随想录  739. 每日温度 - 力扣（LeetCode）  题意：给一个整数数组，求每个数字右侧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）">
+<meta property="og:url" content="http://example.com/2024/02/09/[Weekly%20Algorithm]%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》学习关于单调栈的知识，同时开启图论。 单调栈通过保持一个栈从栈顶到栈底的递增或是递减序列，来解决找一个元素左&#x2F;右的“第一个”更大&#x2F;更小元素。 图论则是初窥dfs的门路，虽然道理一年前早在算法课学过考过，但现在也得复习才能捡回来。 单调栈 每日温度 代码随想录  739. 每日温度 - 力扣（LeetCode）  题意：给一个整数数组，求每个数字右侧">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-09T11:12:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.970Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[Weekly Algorithm] 17算法周记之《代码随想录》单调栈和图论（一）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-02-09T11:12:00.000Z" itemprop="datePublished">2024-02-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习关于单调栈的知识，同时开启图论。</p>
+<p>单调栈通过保持一个栈从栈顶到栈底的递增或是递减序列，来解决找一个元素左&#x2F;右的“第一个”更大&#x2F;更小元素。</p>
+<p>图论则是初窥dfs的门路，虽然道理一年前早在算法课学过考过，但现在也得复习才能捡回来。</p>
+<h1 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h1><ul>
+<li><h2 id="每日温度"><a href="#每日温度" class="headerlink" title="每日温度"></a>每日温度</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0739.%E6%AF%8F%E6%97%A5%E6%B8%A9%E5%BA%A6.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/">739. 每日温度 - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意：给一个整数数组，求每个数字右侧比该数字更大的间距</p>
+</li>
+<li><p>方法：暴力解法就是O(n^2)的遍历。更高效率的方法是使用单调栈，所谓的单调栈就是从栈顶到栈底递增或递减的，如此排列，就能方便找任意元素的左右第一个更大更小的元素。</p>
+<p>比如本题是找右边更大的，那么遍历数组时，遇到更小或相等的元素就直接入栈，而遇到更大的元素就弹栈，直到触底或碰到大元素再入栈，其中弹栈的元素就能记录本元素的下标与当时元素下标之差。  </p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; dailyTemperatures(vector&lt;int&gt;&amp; temperatures) &#123;</span><br><span class="line">        vector&lt;int&gt; result(temperatures.size(), 0);</span><br><span class="line"></span><br><span class="line">        stack&lt;int&gt; st;</span><br><span class="line"></span><br><span class="line">        st.push(0);</span><br><span class="line"></span><br><span class="line">        for (int i = 1; i &lt; temperatures.size(); i++) &#123;</span><br><span class="line">            if (temperatures[i] &lt;= temperatures[st.top()]) &#123;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                while(!st.empty() &amp;&amp; temperatures[i] &gt; temperatures[st.top()]) &#123;</span><br><span class="line">                    result[st.top()] = i - st.top();</span><br><span class="line">                    st.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="下一个更大的元素I"><a href="#下一个更大的元素I" class="headerlink" title="下一个更大的元素I"></a>下一个更大的元素I</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0496.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0I.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">496. 下一个更大元素 I - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意：给两个整数数组，找一个数组在另一个数组对应元素的下一个更大元素的集合。</p>
+</li>
+<li><p>方法：用哈希建立两个数组元素和下标的对应，单调栈则实现元素的下一个更大的元素。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; nextGreaterElement(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">        // 按照代码随想录思路，用哈希表构建两数组之间的映射，然后得出nums2单调栈，由此就得到了结果</span><br><span class="line">        unordered_map&lt;int, int&gt; umap; // 从nums2数字到nums1对应数字下标的映射</span><br><span class="line">        for (int i = 0; i &lt; nums1.size(); i++) &#123;</span><br><span class="line">            umap[nums1[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 求nums2单调栈</span><br><span class="line">        // vector&lt;int&gt; next(nums2.size(), -1);</span><br><span class="line">        stack&lt;int&gt; st;</span><br><span class="line">        vector&lt;int&gt; result(nums1.size(), -1);</span><br><span class="line">        if (result.size() == 1) return result;</span><br><span class="line">        st.push(0);</span><br><span class="line"></span><br><span class="line">        for(int i = 1; i &lt; nums2.size(); i++) &#123;</span><br><span class="line">            if (nums2[i] &lt;= nums2[st.top()]) &#123;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                while(!st.empty() &amp;&amp; nums2[i] &gt; nums2[st.top()]) &#123;</span><br><span class="line">                    // next[st.top()] = i - st.top();</span><br><span class="line">                    if (umap.count(nums2[st.top()]) &gt; 0) &#123;</span><br><span class="line">                        result[umap[nums2[st.top()]]] = nums2[i];</span><br><span class="line">                    &#125;</span><br><span class="line">                    st.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="下一个更大的元素II"><a href="#下一个更大的元素II" class="headerlink" title="下一个更大的元素II"></a>下一个更大的元素II</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0503.%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%9B%B4%E5%A4%A7%E5%85%83%E7%B4%A0II.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/description/">503. 下一个更大元素 II - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意：和[[下一个更大的元素I]]相似，但是下一个更大元素要看循环数组。</p>
+</li>
+<li><p>方法：解决循环以往就有把数组循环乘二的情况，但是这种处理方式对于空间稍显浪费，所以还有一种方式，就是循环时当作两倍的情况。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; nextGreaterElements(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        vector&lt;int&gt; result(nums.size(), -1);</span><br><span class="line"></span><br><span class="line">        stack&lt;int&gt; st;</span><br><span class="line">        st.push(0);</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; nums.size()*2; i++) &#123;</span><br><span class="line">            if (nums[i % nums.size()] &lt;= nums[st.top()]) &#123;</span><br><span class="line">                st.push(i % nums.size());</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                while(!st.empty() &amp;&amp; nums[i % nums.size()] &gt; nums[st.top()]) &#123;</span><br><span class="line">                    result[st.top()] = nums[i % nums.size()];</span><br><span class="line">                    st.pop();</span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i % nums.size());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/0042.%E6%8E%A5%E9%9B%A8%E6%B0%B4.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">42. 接雨水 - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意，给一个高度数组，每个数字代表柱子高度，求下完雨后，柱子之间积水量</p>
+</li>
+<li><p>方法，暴力解法，按行或列求，以按列为例，对每一列求其左右最高柱子高度，取最小值，与该列高度差为该列水量。优化方法是用双指针，分别从两侧向另一侧遍历，求每个柱子一侧方向的最高柱子，这样就避免了暴力方法中重复求两侧柱子高度的浪费；</p>
+<p>重点在于单调栈方法，按行求，单调栈保持递增（栈顶到栈底），具体处理方法写在注释中  </p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int trap(vector&lt;int&gt;&amp; height) &#123;</span><br><span class="line">        stack&lt;int&gt; st;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        st.push(0);</span><br><span class="line">        for (int i = 1; i &lt; height.size(); i++) &#123;</span><br><span class="line">            // 三种情况</span><br><span class="line">            // 第一种，后续柱子高度低于栈顶，则直接入栈</span><br><span class="line">            if (height[i] &lt; height[st.top()]) &#123;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            // 第二种，后续柱子高度与栈顶一致，则更新栈顶，坐标保留靠右的</span><br><span class="line">            // 因为如果右侧有凹陷，计算积水的左侧左边起始是从靠右的柱子开始计算</span><br><span class="line">            else if (height[i] == height[st.top()]) &#123;</span><br><span class="line">                st.pop();</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            // 第三种，后续柱子比栈顶高，开始计算积水</span><br><span class="line">            // 总得来说，就是计算i，栈顶和栈顶前一个柱子三个柱子之间的积水</span><br><span class="line">            // 高度上，取左右两柱子的最小值，宽度上，就计算左右柱子的间隔就好</span><br><span class="line">            // 上述步骤循环，直至新柱子小于栈顶位置再入栈（或者栈空）</span><br><span class="line">            // 计算完成后，左侧柱子在栈顶位置，还有计算价值，毕竟说不定后续用作底部柱子使用</span><br><span class="line">            else &#123;</span><br><span class="line">                while(!st.empty() &amp;&amp; height[i] &gt; height[st.top()]) &#123;</span><br><span class="line">                    int bottom = height[st.top()];</span><br><span class="line">                    st.pop();</span><br><span class="line">                    if (!st.empty()) &#123; // 防止遇到没有左侧柱子的情况</span><br><span class="line">                        int h = min(height[i], height[st.top()]) - bottom;</span><br><span class="line">                        int w = i - st.top() - 1;</span><br><span class="line">                        sum += h*w;</span><br><span class="line">                    &#125;</span><br><span class="line">                    </span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="柱状图中最大的矩形"><a href="#柱状图中最大的矩形" class="headerlink" title="柱状图中最大的矩形"></a>柱状图中最大的矩形</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0084.%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/largest-rectangle-in-histogram/submissions/597563485/">84. 柱状图中最大的矩形 - 力扣（LeetCode）</a></p>
+</li>
+<li><p>题意：给一个柱状图（数组表示）求其中最大矩形面积</p>
+</li>
+<li><p>方法：实际上与[[接雨水]]相似，但是单调栈方向相反，[[接雨水]]栈顶到栈底递增，如此就能对于每个柱子找到旁边更大的柱子；这里则是递减，找到更小的柱子，以两侧小柱子为下标区间，乘以基准柱子高度，就是一块矩形面积</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int largestRectangleArea(vector&lt;int&gt;&amp; heights) &#123;</span><br><span class="line">        heights.insert(heights.begin(), 0);</span><br><span class="line">        heights.push_back(0);</span><br><span class="line">        stack&lt;int&gt; st;// 存储下标</span><br><span class="line">        int result = 0;</span><br><span class="line">        </span><br><span class="line">        st.push(0);</span><br><span class="line">        for (int i = 1; i &lt; heights.size(); i++) &#123;</span><br><span class="line">            if (heights[st.top()] &lt; heights[i]) &#123;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            else if (heights[st.top()] == heights[i]) &#123;</span><br><span class="line">                st.pop();</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                while(!st.empty() &amp;&amp; heights[st.top()] &gt; heights[i]) &#123;</span><br><span class="line">                    int mid = st.top();</span><br><span class="line">                    st.pop();</span><br><span class="line">                    if (!st.empty()) &#123;</span><br><span class="line">                        int left = st.top();</span><br><span class="line">                        int right = i;</span><br><span class="line">                        int w = right - left - 1;</span><br><span class="line">                        int h = heights[mid];</span><br><span class="line">                        result = max(result, h * w);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                st.push(i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><ul>
+<li><h2 id="所有可达路径"><a href="#所有可达路径" class="headerlink" title="所有可达路径"></a>所有可达路径</h2></li>
+<li><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0098.%E6%89%80%E6%9C%89%E5%8F%AF%E8%BE%BE%E8%B7%AF%E5%BE%84.html#%E6%9C%AC%E9%A2%98%E4%BB%A3%E7%A0%81">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1170">98. 所有可达路径</a></li>
+<li>题意：给一个无环有向图，要求一个初次节点到末尾节点的所有路径</li>
+<li>方法：dfs，重点在于具体的实现方法，注意邻接矩阵的vector长度，是n+1，因为题目的编号是1-n。还有题目的输出示例格式要求。</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">vector&lt;int&gt; path;</span><br><span class="line"></span><br><span class="line">void dfs(vector&lt;vector&lt;int&gt;&gt; &amp;g, int vis, int end) &#123;</span><br><span class="line">    if (vis == end) &#123;</span><br><span class="line">        result.push_back(path);</span><br><span class="line">        // cout &lt;&lt; &quot;path:&quot; &lt;&lt; endl;;</span><br><span class="line">        // for (int i = 0; i &lt; path.size(); i++) &#123;</span><br><span class="line">        //     cout &lt;&lt; path[i] &lt;&lt; &quot; &quot;;</span><br><span class="line">        // &#125;</span><br><span class="line">        // cout &lt;&lt; endl;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 1; i &lt;= end; i++) &#123;</span><br><span class="line">        if (g[vis][i] == 1) &#123;</span><br><span class="line">            path.push_back(i);</span><br><span class="line">            dfs(g, i, end);</span><br><span class="line">            path.pop_back();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    </span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    // 用邻接矩阵来存储看看</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; g(n+1, vector&lt;int&gt;(n+1, 0));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        int s, t;</span><br><span class="line">        cin &gt;&gt; s &gt;&gt; t;</span><br><span class="line">        g[s][t] = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    path.push_back(1);</span><br><span class="line">    dfs(g, 1, n);</span><br><span class="line">    </span><br><span class="line">    if (result.size() == 0) &#123;</span><br><span class="line">        cout &lt;&lt; &quot;-1&quot; &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; result.size(); i++) &#123;</span><br><span class="line">        vector&lt;int&gt; &amp;t = result[i];</span><br><span class="line">        for (int j = 0; j &lt; t.size()-1; j++) &#123;</span><br><span class="line">            cout &lt;&lt; t[j] &lt;&lt; &quot; &quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; t[t.size()-1] &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="岛屿数量深搜版"><a href="#岛屿数量深搜版" class="headerlink" title="岛屿数量深搜版"></a>岛屿数量深搜版</h2></li>
+<li><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0099.%E5%B2%9B%E5%B1%BF%E7%9A%84%E6%95%B0%E9%87%8F%E6%B7%B1%E6%90%9C.html#%E6%80%9D%E8%B7%AF">代码随想录</a></li>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1171">99. 岛屿数量</a></li>
+<li>题意：给一个二维数组，数组中横纵相连视为一个岛，求岛屿数量</li>
+<li>方法：dfs，模板题，重点在于注意数组的存储</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int dir[4][2] = &#123;0, 1, 1, 0, -1, 0, 0, -1&#125;;</span><br><span class="line">void dfs(const vector&lt;vector&lt;int&gt;&gt; &amp;grid, vector&lt;vector&lt;bool&gt;&gt; &amp;visited, int x, int y) &#123;</span><br><span class="line">    for (int i = 0; i &lt; 4; i++) &#123;</span><br><span class="line">        int nextx = x + dir[i][0];</span><br><span class="line">        int nexty = y + dir[i][1];</span><br><span class="line">        if (nextx &lt; 0 || nextx &gt;= grid.size() || nexty &lt; 0 || nexty &gt;= grid[0].size()) continue;</span><br><span class="line">        if (!visited[nextx][nexty] &amp;&amp; grid[nextx][nexty] == 1) &#123;</span><br><span class="line">            visited[nextx][nexty] = true;</span><br><span class="line">            dfs(grid, visited, nextx, nexty);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;bool&gt;&gt; visited(n, vector&lt;bool&gt;(m, false));</span><br><span class="line">    </span><br><span class="line">    int result = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (!visited[i][j] &amp;&amp; grid[i][j] == 1) &#123;</span><br><span class="line">                visited[i][j] = true;</span><br><span class="line">                result++;</span><br><span class="line">                dfs(grid, visited, i, j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/09/[Weekly%20Algorithm]%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/" data-id="cm7j3ftgy001buwag2eoca4jr" data-title="【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【Weekly Algorithm】算法周记之《代码随想录》图论（二）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

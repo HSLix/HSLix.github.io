@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决 | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="问题背景可能是在 clone 某仓库后出现形如下面报错 12345678910111213$ git clone https:&#x2F;&#x2F;github.com&#x2F;*.gitCloning into &#x27;*&#x27;...remote: Enumerating objects: *, done.remote: Counting objects: 100% (*&#x2F;*), done.remote: Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决">
+<meta property="og:url" content="http://example.com/2024/05/04/[Git%20Error]error%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="问题背景可能是在 clone 某仓库后出现形如下面报错 12345678910111213$ git clone https:&#x2F;&#x2F;github.com&#x2F;*.gitCloning into &#x27;*&#x27;...remote: Enumerating objects: *, done.remote: Counting objects: 100% (*&#x2F;*), done.remote: Co">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-04T06:48:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.964Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[Git Error]error Invalid path 报错，clone 失败，文件夹空白问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%5BGit%20Error%5Derror%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T06:48:00.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><p>可能是在 clone 某仓库后出现形如下面报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/*.git</span><br><span class="line">Cloning into &#x27;*&#x27;...</span><br><span class="line">remote: Enumerating objects: *, done.</span><br><span class="line">remote: Counting objects: 100% (*/*), done.</span><br><span class="line">remote: Compressing objects: 100% (*/*), done.</span><br><span class="line">remote: Total * (delta *), reused * (delta *), pack-reused *</span><br><span class="line">Receiving objects: 100% (*/*), * MiB | 8.40 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (*/*), done.</span><br><span class="line">error: invalid path &#x27;*.md&#x27;</span><br><span class="line">fatal: unable to checkout working tree</span><br><span class="line">warning: Clone succeeded, but checkout failed.</span><br><span class="line">You can inspect what was checked out with &#x27;git status&#x27;</span><br><span class="line">and retry with &#x27;git restore --source=HEAD :/&#x27;</span><br></pre></td></tr></table></figure>
+<p>而且仓库里除了.git文件夹就“一尘不染”。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>在仓库的文件夹中打开终端，并输入<br><code>git config core.protectNTFS false</code><br>大致意思是关闭文件保护之类的，然后切换为刚刚的分支，如<br><code>git checkout main</code><br>然后文件夹就正常咯</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>一个简单记录，并非笔者原创的方法，只是想以自己的方式记录该方法。</p>
+<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zackary/p/13702643.html">https://www.cnblogs.com/zackary/p/13702643.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/[Git%20Error]error%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="cm7j3ftgp000fuwaghjo19ha9" data-title="【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【方法论】再论如何读书——对过去阅读的总结与对未来的要求
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【方法论】如何读论文 李沐视频笔记</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

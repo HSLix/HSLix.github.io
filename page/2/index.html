@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="normal wants to be special">
+<meta property="og:type" content="website">
+<meta property="og:title" content="LuYaoQi&#39;s Blogs">
+<meta property="og:url" content="http://example.com/page/2/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="normal wants to be special">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-[CS61A-Fall-2020]学习记录6 Lab2 题解思路分享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/13/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" class="article-date">
+  <time class="dt-published" datetime="2024-08-13T12:08:00.000Z" itemprop="datePublished">2024-08-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/08/13/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/">【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
+<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="Q1-WWPD-Lambda-the-Free"><a href="#Q1-WWPD-Lambda-the-Free" class="headerlink" title="Q1: WWPD: Lambda the Free"></a>Q1: WWPD: Lambda the Free</h3><p>有两个问题有点意思。</p>
+<h4 id="lambda-与参数"><a href="#lambda-与参数" class="headerlink" title="lambda 与参数"></a>lambda 与参数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; b = lambda x: lambda: x  # Lambdas can return other lambdas!</span><br><span class="line">&gt;&gt;&gt; c = b(88)</span><br><span class="line">&gt;&gt;&gt; c</span><br><span class="line">______</span><br></pre></td></tr></table></figure>
+<p>该问题看似只是普通的 lambda 中传 x，c 还传入了 x 参数值为 88</p>
+<p>所以答案是 88 吗？</p>
+<p>当然不是，这个问题结合下面这个问题就很显然了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; c()</span><br><span class="line">______</span><br></pre></td></tr></table></figure>
+<p>那么想清楚这个问题的关键，就在于能否分辨 c 和 c() 的含义。</p>
+<p>把 88 代入 c 的 lambda 式子，可以换成</p>
+<p>c &#x3D; lambda : 88</p>
+<p>本质上，c 其实还是个 lambda 式子，只不过无参数，所以直接调用 c 不会得到 88，还得象征性地传入无参数调用才行。</p>
+<h4 id="print-与-lambda"><a href="#print-与-lambda" class="headerlink" title="print 与 lambda"></a>print 与 lambda</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; print_lambda = lambda z: print(z)  # When is the return expression of a lambda expression executed?</span><br><span class="line">&gt;&gt;&gt; one_thousand = print_lambda(1000)</span><br><span class="line">______</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; one_thousand</span><br><span class="line">______</span><br></pre></td></tr></table></figure>
+
+<p>这个 print_lambda 只是一个把传入参数直接 print 出来的函数罢了，那么第一个空当然是 1000 啦。</p>
+<p>嗯嗯，对，不过重点是第二个空的答案，这个 print_lambda 到底把什么赋予给 one_thousand 了？</p>
+<p>有同学会说，不是 1000 吗？</p>
+<p>不是哟，之所以第一个空会是 1000，是因为在赋值的过程前，先执行尽右侧函数时，print 的。</p>
+<p>排除了 1000，这又不是 Function（print_lambda 才是 Function，代入了参数后就不是啦），不是 Error，排除了所有可能，只能是 None 了。</p>
+<p>想想也是，print 也没有返回，None 也是理所应当。</p>
+<h3 id="Q2-WWPD-Higher-Order-Functions"><a href="#Q2-WWPD-Higher-Order-Functions" class="headerlink" title="Q2: WWPD: Higher Order Functions"></a>Q2: WWPD: Higher Order Functions</h3><p>值得注意的就一个点</p>
+<p>如果有 return 而无变量承接，那 return * 就会相当于 print(*)。</p>
+<h3 id="Q3-Lambdas-and-Currying"><a href="#Q3-Lambdas-and-Currying" class="headerlink" title="Q3: Lambdas and Currying"></a>Q3: Lambdas and Currying</h3><p>需要通过多个 () 调用，说明内部有几层 def。</p>
+<h3 id="Q4-Count-van-Count"><a href="#Q4-Count-van-Count" class="headerlink" title="Q4: Count van Count"></a>Q4: Count van Count</h3><p>要仔细看好，在测试里面，输入的 condition 的输入参数情况如何，输出如何。</p>
+<h3 id="Q5-Make-Adder"><a href="#Q5-Make-Adder" class="headerlink" title="Q5: Make Adder"></a>Q5: Make Adder</h3><p>不难，题目也说了，不会就放这个 <a target="_blank" rel="noopener" href="https://pythontutor.com/cp/composingprograms.html#mode=edit">视觉化网站</a> 看看结果</p>
+<h3 id="Q6-Lambda-the-Environment-Diagram"><a href="#Q6-Lambda-the-Environment-Diagram" class="headerlink" title="Q6: Lambda the Environment Diagram"></a>Q6: Lambda the Environment Diagram</h3><p>同 Q5</p>
+<h3 id="Q7-Composite-Identity-Function"><a href="#Q7-Composite-Identity-Function" class="headerlink" title="Q7: Composite Identity Function"></a>Q7: Composite Identity Function</h3><p>本质就是让你写个函数，返回对于 n ，先 f 后 g 与 先 g 后 f 是否相等，同时用上题目里的 compose1 函数。</p>
+<h3 id="Q8-I-Heard-You-Liked-Functions…Q8"><a href="#Q8-I-Heard-You-Liked-Functions…Q8" class="headerlink" title="Q8: I Heard You Liked Functions…Q8"></a>Q8: I Heard You Liked Functions…Q8</h3><p>这个问题有点意思，题目本质是要求给个函数，可以自定义循环对一个数字按顺序循环执行的次数和数字大小。</p>
+<p>陆爻齐的思路是，先写一个可以根据循环次数，返回应该执行函数的函数，比如 i &#x3D;&#x3D; 1 时，返回 f1，i &#x3D;&#x3D; 4 时，也返回 f1 这样。暂且叫 get_todo。</p>
+<p>然后写个循环，i &lt;&#x3D; n，对数字 num，代入执行 n 次 get_todo(i) 函数，结束。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>听完课可以锻炼英语听力，同时也对这个 higher order function 有了更深的感触，期待后续课程：）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/08/13/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" data-id="cm7j3ftgm0009uwag41s60sbl" data-title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-【播客笔记】 《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" class="article-date">
+  <time class="dt-published" datetime="2024-08-03T06:03:00.000Z" itemprop="datePublished">2024-08-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/">【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是陆爻齐收听了 <strong>纵横四海</strong> 的播客 <strong>《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海</strong>，做的一点笔记</p>
+<p>也就是对播客里一些内容的总结、思考和理解，权当作记录罢</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="爱的定义"><a href="#爱的定义" class="headerlink" title="爱的定义"></a>爱的定义</h3><p>爱是一种行动（activity），并不能用“激情”带来的生理性好感来完全指代，并非天定，而是用行动维护、培养出来的责任。</p>
+<p>这种行动，必须是自发的。</p>
+<p>倘若一名丈夫被妻子说了后，马上做了几件家务讨其欢心，后又疏懒，说一下动一下，则不算爱的行动；</p>
+<p>若是该丈夫在认识到自己的疏忽后，在日常中主动分担部分家务，这个属于爱的行动。</p>
+<h3 id="爱的意义"><a href="#爱的意义" class="headerlink" title="爱的意义"></a>爱的意义</h3><p>消除人生孤离感的“终极武器”。</p>
+<p>作者认为，人生于家，成年断亲后，需要填补这份离开亲人的孤离感。有人沉迷酒色，用过度放纵自己，刺激感官麻木自己；有人趋同他人，在与小集团同化中寻求认同。</p>
+<p>而爱，正是消除孤离感的良方妙药。</p>
+<p>不拘泥于男女，亲人，人人皆可有爱，从细节处关心即可。</p>
+<h3 id="爱的实质"><a href="#爱的实质" class="headerlink" title="爱的实质"></a>爱的实质</h3><p>提供创造性的互助</p>
+<p>来个一个不算恰当、意会即可的例子</p>
+<p>老师辅导时，最喜欢看到的情形是，学生经过主动思考，讲述自己的探索历程，遇到困难尝试客服，经讨论交流和老师一起探寻得到结果；</p>
+<p>与之相对，最令老师头疼的是，毫无思考，只来问老师此题怎解，从头到尾跟着老师思路，不能创造性的吸收知识，而是被动地塞入，老师便会感到枯燥乏味。</p>
+<p>总得来说，互相给予创造力便是。</p>
+<p>再拿情侣为例</p>
+<p>有人认为热恋期的“激情”才是爱，这段蜜月一过便分道扬镳，因为他无法从对方那里找到所谓的“新鲜感”。</p>
+<p>如果两人相爱，互相在日常中关心对方，记住对方的喜好，近日安排，时不时安排小礼物、小惊喜，无数个这样感动的瞬间，是否能连成一生呢？（还在 go）</p>
+<h3 id="爱的实践"><a href="#爱的实践" class="headerlink" title="爱的实践"></a>爱的实践</h3><p>自爱，就是关心自己的健康，不但身体，还有心理。平日是否过于忙碌，疏于放松；平日是否过于愤慨，没有发泄。适当安排假期或许不错，但这算奢望罢。</p>
+<p>男女&#x2F;亲人之爱，是否设身处地为人着想，是否从小处都有关心对方，行动帮助对方。</p>
+<h2 id="一点总结"><a href="#一点总结" class="headerlink" title="一点总结"></a>一点总结</h2><p>让陆爻齐对于爱确实有了一些新的想法，找到伴侣不应只是等待，爱是行动，培养出来的。</p>
+<p>不过现阶段还是提升自己更为重要，这些经验或许大四闲暇就能用上呢。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3fth80021uwagdmgv9h7y" data-title="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/19/hello-world/" class="article-date">
+  <time class="dt-published" datetime="2024-07-19T14:00:00.000Z" itemprop="datePublished">2024-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/19/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>这是陆爻齐用 github page 和 hexo 搭建的自己的博客！</p>
+<p>是参考了 <a target="_blank" rel="noopener" href="https://0xffff.one/d/544">0xffff</a>、<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dt4y1Q7UE/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">b站视频教程</a> 和 <a target="_blank" rel="noopener" href="https://hexo.fluid-dev.com/docs/guide/#%E6%96%87%E7%AB%A0%E6%8E%92%E5%BA%8F">fluid 使用手册</a> 慢慢开始完善的</p>
+<p>陆爻齐后续也写一篇 blog 来总结下博客的配置好了</p>
+<p>总之，先把博客园的文章按时间顺序慢慢搬过来好了</p>
+<p>Hello，World！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/19/hello-world/" data-id="cm7j3fth70020uwagcy8igsys" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-【播客笔记】《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！ 纵横四海" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/19/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%E3%80%8A%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%97%E9%AA%97%E3%80%8B%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E6%AF%8F%E4%B8%AA%E5%A5%B3%E7%94%9F%E7%9C%8B%E5%AE%8C%E8%BF%99%E6%9C%AC%E4%B9%A6%E5%86%8D%E5%8E%BB%E6%81%8B%E7%88%B1%EF%BC%81%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" class="article-date">
+  <time class="dt-published" datetime="2024-07-19T08:05:00.000Z" itemprop="datePublished">2024-07-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/19/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%E3%80%8A%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%97%E9%AA%97%E3%80%8B%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E6%AF%8F%E4%B8%AA%E5%A5%B3%E7%94%9F%E7%9C%8B%E5%AE%8C%E8%BF%99%E6%9C%AC%E4%B9%A6%E5%86%8D%E5%8E%BB%E6%81%8B%E7%88%B1%EF%BC%81%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/">【播客笔记】《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！ 纵横四海</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这是陆爻齐收听了 <strong>纵横四海</strong> 的播客 <strong>《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！</strong>，做的一点笔记</p>
+<p>也就是一些内容的总结和思考理解，权当作记录罢</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="被骗者与骗者"><a href="#被骗者与骗者" class="headerlink" title="被骗者与骗者"></a>被骗者与骗者</h3><p>有两点比较重要</p>
+<ol>
+<li>人往往是很感性化的，难以理性地处理每件事</li>
+<li>骗者之所以能得手，很可能是因为其自身生理特性，以及社会环境的滋养</li>
+</ol>
+<p>对于第一点，主持人是以自己出售二手家居为例子说明，原本认为麻烦不想自己做打包发邮件，后因与一个顾客聊天而改变主意。</p>
+<p>还介绍了一种现象，即一个人当接收了过多的信息，会本能地放弃选择，进入容易被操控的状态。这点很容易理解，高考是选择题怎么都不会，就开始放弃用理智选择了，“三长一短选最短”……</p>
+<p>而第二点有两个小点</p>
+<ol>
+<li>生理特性，主持人介绍骗者的脑部很可能与普通人有差别，比如缺少共情能力，使其不会因欺骗他人而产生内疚等道德约束；接近黑暗三角人格（自恋、心理变态、马基雅维利主义）什么的</li>
+<li>社会环境，不是因为环境“坏”，恰恰是因为环境“好”，当大多数人都互相信任时，欺骗者往往可以从中轻松获利</li>
+</ol>
+<h3 id="有趣的打断效应"><a href="#有趣的打断效应" class="headerlink" title="有趣的打断效应"></a>有趣的打断效应</h3><p>名字是瞎编的，但理论确实存在。例子便是金牌销售员的一个策略，在顾客对一件商品的购买踌躇不定时，不断用言语打断思考，用“此外，该商品还有***好处”之类的话，阻止顾客深入思考，往往能促进购买</p>
+<h3 id="被骗的必要条件"><a href="#被骗的必要条件" class="headerlink" title="被骗的必要条件"></a>被骗的必要条件</h3><ol>
+<li>渴望某项事务</li>
+<li>相信某项事务的发生</li>
+<li>坚定自己不会受骗</li>
+</ol>
+<p>以普通父母被骗买保健药品为例，父母退休后清闲又有点空虚，听到周围亲戚、同事、朋友逝去的消息，渴望健康，满足条件一；</p>
+<p>接触骗者，建立信任关系，开始逐渐相信保健药品的功效，相信购买并使用保健药品能得到健康，满足条件二；</p>
+<p>面对子女的劝说，摆出“我是你爸，不用你教”坚定自己没有受骗，拒绝事实，这与和骗者的信任关系产生冲突引发“认知失调”，容易受到操控，满足条件三；</p>
+<p>不过这只是个简陋的经典模型，实际上的骗局大致会像下一个小节一样</p>
+<h3 id="欺骗“万用术”流程"><a href="#欺骗“万用术”流程" class="headerlink" title="欺骗“万用术”流程"></a>欺骗“万用术”流程</h3><ol>
+<li>搜寻猎物，很难有一种能骗所有人的骗局，骗者往往是搜集到足够的情报，找到最适合的猎物，量身制定骗局才下手；</li>
+<li>建立情感交流，如第一部分所说，人往往是感性的，一旦产生情感交流，就能够提升骗者的信任关系，并泄露更多情报；<br>而骗者实现该步骤并不会太困难，毕竟第一步就已经找好猎物，并有猎物的大量情报，而猎物一无所知，只会认为面前的人很懂自己，是命运的“挚友”。</li>
+<li>讲故事，比如经典的“卖茶女”，讲述自己困苦的经历博取同情，随后请求经济帮助，无经验者确实容易中招；</li>
+<li>一般来说，在上一步就能收网，但还可以继续等待受骗者加码，这一点陆爻齐也难以理解但也存在；<br>比如一个人被骗转去 20000 元救急，过了一个月没声响，开始模糊认为自己被骗了，产生痛苦的感情且渴望弥补，此时骗者突然联系过来，用看似合适的理由稳住受骗者，随后进一步索取钱财还是什么的就另说了</li>
+</ol>
+<h3 id="防骗手段"><a href="#防骗手段" class="headerlink" title="防骗手段"></a>防骗手段</h3><p>难，因为这是与本能对抗，简单的说就是，不满足受骗的必要条件，从而避免被选为猎物</p>
+<p>其中主持人认为，相信某项事务的发生 相对容易处理，可以通过日常熏陶自己谨慎行事改善；对于父母，只能不断反复强调，熏陶。</p>
+<p>陆爻齐认为，还是欲望被利用的问题，“贪”，所以陆爻齐对于别人的建议回想两件事</p>
+<ol>
+<li>这么好的东西，为什么你自己不搞，告诉我让我搞呢？</li>
+<li>你是与这件事有什么关系，站在什么立场说的话？（既得利益者……）</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/19/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%E3%80%8A%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%97%E9%AA%97%E3%80%8B%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E6%AF%8F%E4%B8%AA%E5%A5%B3%E7%94%9F%E7%9C%8B%E5%AE%8C%E8%BF%99%E6%9C%AC%E4%B9%A6%E5%86%8D%E5%8E%BB%E6%81%8B%E7%88%B1%EF%BC%81%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3fth80023uwagdrbz9sq8" data-title="【播客笔记】《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！ 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[CS61A-Fall-2020]学习记录5 Project1 The Game of Hog 中有意思的点" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/18/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%955%20Project1%20The%20Game%20of%20Hog%20%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/" class="article-date">
+  <time class="dt-published" datetime="2024-07-17T16:58:00.000Z" itemprop="datePublished">2024-07-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/18/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%955%20Project1%20The%20Game%20of%20Hog%20%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/">【CS61A-Fall-2020】学习记录五 Project1 The Game of Hog 中有意思的点</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
+<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
+<h2 id="函数参数前的"><a href="#函数参数前的" class="headerlink" title="函数参数前的*"></a>函数参数前的*</h2><p>在项目原文件中的dice.py 里的 make_test_dice函数采用这样的方式传参</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">def make_test_dice(*outcomes):</span><br><span class="line">  # 省略内容</span><br><span class="line">  pass</span><br></pre></td></tr></table></figure>
+
+<p>我记得python中没像c那样的指针，于是查询资料，小结如下<br>函数参数前一颗*会识别为元组，两颗则识别为字典</p>
+<p>比如我要是传 make_test_dice(1, 2, 4, 3)，outcomes就是元组(1, 2, 4, 3)</p>
+<p>举一个稍微复合一点点的例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def foo(a, b=10, *args, **kwargs):</span><br><span class="line">    print (a)</span><br><span class="line">    print (b)</span><br><span class="line">    print (args)</span><br><span class="line">    print (kwargs)</span><br><span class="line"></span><br><span class="line">foo(1, 2, 3, 4, e=5, f=6, g=7)</span><br></pre></td></tr></table></figure>
+
+<p>上述例子来自菜鸟教程，运行结果为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">(3, 4)</span><br><span class="line">&#123;&#x27;e&#x27;: 5, &#x27;f&#x27;: 6, &#x27;g&#x27;:7&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可发现除了定好的a、b，c和d都纳入元组中，而efg有&#x3D;赋值，作为字典看待</p>
+<p>上面的例子都发生在定义函数参数列表，如果在调用时有*说明什么呢？</p>
+<p>再看一个例子</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def func(num1, num2):</span><br><span class="line">  print(num1, num2)</span><br><span class="line"></span><br><span class="line">num = [1, 2]</span><br><span class="line">func(*num)</span><br></pre></td></tr></table></figure>
+
+<p>运行结果为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+<p>一个参数变两，*在这里起到了解压参数列表的作用<br>但笔者尚未想到该功能应用的方便之处</p>
+<h2 id="Higher-Order-Function-高阶函数"><a href="#Higher-Order-Function-高阶函数" class="headerlink" title="Higher Order Function 高阶函数"></a>Higher Order Function 高阶函数</h2><p>这是一个让陆爻齐觉得十分精妙的功能，以函数为参数并返回函数，从 C 初学者的角度来说，太抽象了</p>
+<p>就是在 Problem 7 的答案代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def announce_highest(who, last_score=0, running_high=0):</span><br><span class="line">    &quot;&quot;&quot;Return a commentary function that announces when WHO&#x27;s score</span><br><span class="line">    increases by more than ever before in the game.</span><br><span class="line"></span><br><span class="line">    NOTE: the following game is not possible under the rules, it&#x27;s just</span><br><span class="line">    an example for the sake of the doctest</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; f0 = announce_highest(1) # Only announce Player 1 score gains</span><br><span class="line">    &gt;&gt;&gt; f1 = f0(12, 0)</span><br><span class="line">    &gt;&gt;&gt; f2 = f1(12, 9)</span><br><span class="line">    9 point(s)! The most yet for Player 1</span><br><span class="line">    &gt;&gt;&gt; f3 = f2(20, 9)</span><br><span class="line">    &gt;&gt;&gt; f4 = f3(20, 30)</span><br><span class="line">    21 point(s)! The most yet for Player 1</span><br><span class="line">    &gt;&gt;&gt; f5 = f4(20, 47) # Player 1 gets 17 points; not enough for a new high</span><br><span class="line">    &gt;&gt;&gt; f6 = f5(21, 47)</span><br><span class="line">    &gt;&gt;&gt; f7 = f6(21, 77)</span><br><span class="line">    30 point(s)! The most yet for Player 1</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    assert who == 0 or who == 1, &#x27;The who argument should indicate a player.&#x27;</span><br><span class="line">    # BEGIN PROBLEM 7</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line">    def say(new_score_0, new_score_1, last_running_high = running_high):</span><br><span class="line">        if who == 0:</span><br><span class="line">            new_score = new_score_0</span><br><span class="line">            new_running_high = new_score_0 - last_score</span><br><span class="line">        else:</span><br><span class="line">            new_score = new_score_1</span><br><span class="line">            new_running_high = new_score_1 - last_score</span><br><span class="line"></span><br><span class="line">        if new_running_high &gt; last_running_high:</span><br><span class="line">            last_running_high = new_running_high</span><br><span class="line">            print(str(new_running_high),&quot;point(s)! The most yet for Player &quot; + str(who))</span><br><span class="line">        </span><br><span class="line">        new_run_high = last_running_high</span><br><span class="line">        </span><br><span class="line">        return announce_highest(who, new_score, new_run_high)</span><br><span class="line">        </span><br><span class="line">    return say</span><br><span class="line">    # END PROBLEM 7</span><br></pre></td></tr></table></figure>
+
+<p>这段代码就是记录玩家 1 或 2 分数变化的幅度，并在最大幅度记录更新时 print 的函数。</p>
+<p>传统函数（指 C&#x2F;C++ 这种）要实现这种记录更新，必须在外部存储，用类或者其它外部变量什么的，因为函数一旦执行完毕，内部空间将全部释放。</p>
+<p>下面对该代码做点拆解，忽略 say 的内容、断言、测试和注释，可看成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def announce_highest(who, last_score=0, running_high=0):</span><br><span class="line">    # BEGIN PROBLEM 7</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line">    def say(new_score_0, new_score_1, last_running_high = running_high):</span><br><span class="line">        pass</span><br><span class="line">        </span><br><span class="line">    return say</span><br><span class="line">    # END PROBLEM 7</span><br></pre></td></tr></table></figure>
+
+<p>可见，调用 announce_highest 的本质是获取到一个 say 函数，每次调用 say 函数，我们都期待它能检测是否要更新记录，而不断地更新最大幅度，则要不断地获取并调用 say 函数，那让 say 返回获取 say 函数的函数就解决了这个问题，即下面代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">def announce_highest(who, last_score=0, running_high=0):</span><br><span class="line">    # BEGIN PROBLEM 7</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br><span class="line">    def say(new_score_0, new_score_1, last_running_high = running_high):</span><br><span class="line"> </span><br><span class="line">        pass</span><br><span class="line"></span><br><span class="line">        return announce_highest(who, new_score, new_run_high)</span><br><span class="line">        </span><br><span class="line">    return say</span><br><span class="line">    # END PROBLEM 7</span><br></pre></td></tr></table></figure>
+
+<p>再看测试代码就清晰多了</p>
+<p><code>&gt;&gt;&gt; f0 = announce_highest(1) # Only announce Player 1 score gains</code> 这里的 f0 实际上是 who 为 1 时的 say 函数</p>
+<p><code>&gt;&gt;&gt; f1 = f0(12, 0)</code> f1 的本质是代入 new_score_0 &#x3D; 12 和 new_score_1 &#x3D; 0 的 say 函数执行后，返回的新的 say 函数。你问 announce_highest 去哪了？announce_highest 也返回的 say 函数，只是没有参数代入的 say 函数而已</p>
+<p>其它测试语句以上述类推</p>
+<p>后面在 <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/higher-order-functions-in-python/">geek for geek</a> 进行了更深入的学习，发现此前在 LALC 用的迭代器就是高阶函数的运用</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/18/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%955%20Project1%20The%20Game%20of%20Hog%20%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/" data-id="cm7j3ftgk0005uwagdtfs24jd" data-title="【CS61A-Fall-2020】学习记录五 Project1 The Game of Hog 中有意思的点" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[Datawhale AI 夏令营] 机器学习 Task1 体验记录 思考 补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/11/%5BDatawhale%20AI%20%E5%A4%8F%E4%BB%A4%E8%90%A5%5D%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20Task1%20%E4%BD%93%E9%AA%8C%E8%AE%B0%E5%BD%95%20%E6%80%9D%E8%80%83%20%E8%A1%A5%E5%85%85/" class="article-date">
+  <time class="dt-published" datetime="2024-07-11T14:43:00.000Z" itemprop="datePublished">2024-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/11/%5BDatawhale%20AI%20%E5%A4%8F%E4%BB%A4%E8%90%A5%5D%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20Task1%20%E4%BD%93%E9%AA%8C%E8%AE%B0%E5%BD%95%20%E6%80%9D%E8%80%83%20%E8%A1%A5%E5%85%85/">【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>首先感谢 Datawhale 组织这个活动，让我有机会入门机器学习。</p>
+<p>嘛，不过这个 Task1 只要跟着速通手册运行给定程序，再拿结果去提交，体验下过程而已，于我而言，更为宝贵的地方是后续的“加餐”，也就是分析题目，精读代码的部分</p>
+<h1 id="“加餐”小结"><a href="#“加餐”小结" class="headerlink" title="“加餐”小结"></a>“加餐”小结</h1><h2 id="分析题目"><a href="#分析题目" class="headerlink" title="分析题目"></a>分析题目</h2><p>赛题任务是：通过多个房屋历史电力消耗数据等信息，预测房屋对应电力的消耗。</p>
+<p>这是所谓的“时间序列问题”，简单地说就是分析数据和预测趋势。</p>
+<p>说起来，大一的课程设计也简单做过所谓的“酒吧销量预测”功能，当时是采用“线性回归”来着。</p>
+<p>而要解决这样的问题，就大致有建立传统时间序列模型、机器学习模型、深度学习模型的方法。</p>
+<p>这三种方法各有利弊，按适合处理数据集规模大小和预测能力升序，按解释性和计算资源降序。</p>
+<h2 id="分析代码"><a href="#分析代码" class="headerlink" title="分析代码"></a>分析代码</h2><p>先贴出代码好了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"># 1. 导入需要用到的相关库</span><br><span class="line"># 导入 pandas 库，用于数据处理和分析</span><br><span class="line">import pandas as pd</span><br><span class="line"># 导入 numpy 库，用于科学计算和多维数组操作</span><br><span class="line">import numpy as np</span><br><span class="line"></span><br><span class="line"># 2. 读取训练集和测试集</span><br><span class="line"># 使用 read_csv() 函数从文件中读取训练集数据，文件名为 &#x27;train.csv&#x27;</span><br><span class="line">train = pd.read_csv(&#x27;train.csv&#x27;)</span><br><span class="line"># 使用 read_csv() 函数从文件中读取测试集数据，文件名为 &#x27;train.csv&#x27;</span><br><span class="line">test = pd.read_csv(&#x27;test.csv&#x27;)</span><br><span class="line"></span><br><span class="line"># 3. 计算训练数据最近11-20单位时间内对应id的目标均值</span><br><span class="line"></span><br><span class="line">target_mean = train[train[&#x27;dt&#x27;]&lt;=20].groupby([&#x27;id&#x27;])[&#x27;target&#x27;].mean().reset_index()</span><br><span class="line"></span><br><span class="line"># 4. 将target_mean作为测试集结果进行合并</span><br><span class="line">test = test.merge(target_mean, on=[&#x27;id&#x27;], how=&#x27;left&#x27;)</span><br><span class="line"></span><br><span class="line"># 5. 保存结果文件到本地</span><br><span class="line">test[[&#x27;id&#x27;,&#x27;dt&#x27;,&#x27;target&#x27;]].to_csv(&#x27;submit.csv&#x27;, index=None)</span><br></pre></td></tr></table></figure>
+
+<p>如果只是想了解思路，那么看完速通手册，大致读读注释即可，不过陆爻齐喜欢再深入一点点。</p>
+<p>比如，为啥只要11-20天数据，1-20不行吗，reset_index()是什么函数？</p>
+<p>要理解处理数据的方式，可以看看数据本身的样子，不过这里吐槽下，我还是第一次见到 WPS 会说太大了，受不了：）</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202407/3207177-20240711214834025-1250283106.png" alt="WPS说太大了"></p>
+<p>回到正题，来看看这数据集究竟长啥样</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202407/3207177-20240711215329507-2023937455.png" alt="train pic 1"></p>
+<p>……………………………………………………</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202407/3207177-20240711215338956-1671382801.png" alt="train pic 2"></p>
+<p>显然，图中 id 是房子编号，dt 是日期，type 是房子类型（暂且用不到），target 是用电量。</p>
+<p>所以，代码<code>target_mean = train[train[&#39;dt&#39;]&lt;=20].groupby([&#39;id&#39;])[&#39;target&#39;].mean().reset_index()</code>翻译为自然语言，就是：以 id 为分组标识（想起了 mysql ），选择其中日期 dt 小于等于 20 的数据，计算均值并重置索引。</p>
+<p>重置索引的具体解释，可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/keye/p/11229863.html">这篇文章</a>。</p>
+<p>如此，target_mean 相当于下面数据</p>
+<p>id          target<br>00037f39cf  39.6543<br>……</p>
+<p>而代码<code>test = test.merge(target_mean, on=[&#39;id&#39;], how=&#39;left&#39;)</code>则将上面刚得的 target_mean 与 test 左外连接。</p>
+<p>先看看test长啥样好了</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202407/3207177-20240711222938772-1741838916.png" alt="test"></p>
+<p>图片不用多加解释，其实所谓的左外连接（又想起 mysql 了），就是把 test 以 id 为组，连到右边的 target_mean，离散数学的映射中算是“满射”</p>
+<p>举个栗子，test 中，id 00037f39cf 有十条，区别只有 id 1-10，而target_mean 中，id 00037f39cf 只有一条数据，也就是上面的</p>
+<p>id          target<br>00037f39cf  39.6543</p>
+<p>于是按 id 连接，将相同 id 对应进行连接，也就是在 test 的基础上，把 target_mean 同 id 那条数据中，除 id 自己外的属性，连接到 test 上，如</p>
+<p>id          dt     type     target<br>00037f39cf  1      2        39.6543<br>00037f39cf  2      2        39.6543<br>00037f39cf  3      2        39.6543<br>……</p>
+<p>最后一条代码，即只保留该数据的id dt target，保存为新的表格 csv 文件，也就是那个 submit.csv。</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202407/3207177-20240711223939047-1629152698.png" alt="submit example"></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>Task1 本身操作很简单，要理解也不难，对于陆爻齐这样稍微有点基础知识也算有趣，后续推荐的 Pandas 学习的第十章也是时序预测（笑，期待 Task2。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/11/[Datawhale%20AI%20%E5%A4%8F%E4%BB%A4%E8%90%A5]%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20Task1%20%E4%BD%93%E9%AA%8C%E8%AE%B0%E5%BD%95%20%E6%80%9D%E8%80%83%20%E8%A1%A5%E5%85%85/" data-id="cm7j3ftgn000cuwagfv1k7ikh" data-title="【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[CINTA] 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/09/%5BCINTA%5D%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-07-09T15:39:00.000Z" itemprop="datePublished">2024-07-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/09/%5BCINTA%5D%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/">【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在<a target="_blank" rel="noopener" href="https://github.com/lbwang/CINTA-cn">这里</a>。</p>
+<p>该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。</p>
+<p>闲话少说，下面是笔记正文。</p>
+<h1 id="第一章-整数与二进制"><a href="#第一章-整数与二进制" class="headerlink" title="第一章 整数与二进制"></a>第一章 整数与二进制</h1><h2 id="1-1-二进制"><a href="#1-1-二进制" class="headerlink" title="1.1 二进制"></a>1.1 二进制</h2><h3 id="基本性质"><a href="#基本性质" class="headerlink" title="基本性质"></a>基本性质</h3><p>首先，有两条基本的性质</p>
+<ol>
+<li>偶数二进制最末尾的比特是 0;奇数二进制最末尾的比特是 1；</li>
+<li>在一个二进制数末尾增加一个 0 等同于在十进制中对这个数乘 2。<br>反过来说,对一个十进制数进行乘 2 操作等同于对其二进制表达左移一个比特。</li>
+</ol>
+<p>显然，比如 2 的二进制表示为 0010，3 为 0011， 4即 2*2 为0100。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>随后提出<strong>思考</strong>：请问,你认为对一个十进制数进行除 2 等于对其二进制表达右移一个比特吗?</p>
+<p>陆爻齐的回答是：是的，对 3，出 2 得 1.5，0011 右移一个比特得 0001.1，正好为 1.5。对 2， 除 2 得 1，0010 右移一个比特得 0001，正好为1。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>接着在基于“考虑任意自然数 n,所谓 2 的 n 次方 (2^n) 只是不断对 1 乘 n 次 2”给出了两条性质<br>3、给定任意自然数 n, 十进制数 2^n 的二进制数表达就是在 1 后加 n 个 0；<br>4、给定任意自然数 n, 十进制数 2^n − 1 的二进制数表达就是 n 个 1；</p>
+<p>结合一点例子就能认同，4 是 2 的 2 次方，即 1 后加 2 个 0，即 0100。1 是 2 的 0 次方，为 1 后加 0 个 0，即 0001。4 减 1 得 3，0011，就是 2 的 1 次方和 0 次方相加所得， 0011 &#x3D; 0010 + 0001；2^2 - 1 &#x3D; 2^1 + 2^0。</p>
+<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><p>接下来是作者给的<strong>思考</strong>，请将以上计算过程的结论归纳成一个定理,并证明。你可以使用任何的证明方法。<br>请问,以上“硬”算的方法能否推广为一种证明方法?</p>
+<p>陆爻齐认为，可以归纳为，对任意自然数 n+1（n&gt;&#x3D;0)，有$2^{(n+1)} &#x3D; \sum_0^n 2^n$</p>
+<h3 id="位置计数法"><a href="#位置计数法" class="headerlink" title="位置计数法"></a>位置计数法</h3><p>如此，便引入了位置计数法，即对任意整数 b，有 $b&#x3D;\sum_{i&#x3D;0}^{n-1}b_i2^i$，其中$b_i\in{0,1}$</p>
+<p>显然，取 10，即 1010，可以视为 $1010 &#x3D; 1<em>2^3 + 0</em>2^2 + 1<em>2^1 + 0</em>2^0$，换句话 10 &#x3D; 1<em>8 + 0</em>4 + 1<em>2 + 0</em>1。</p>
+<h2 id="加法与乘法"><a href="#加法与乘法" class="headerlink" title="加法与乘法"></a>加法与乘法</h2><h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><p>加法，大家都能想到 a+b，但要是不准用 + 呢？</p>
+<p>于是有下面这个加法的算法，C++ 实现如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 输入：两个整数a和b的和</span><br><span class="line">// 输出：a与b的和</span><br><span class="line">int add (int a, int b) &#123;</span><br><span class="line">    // cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">    if (b == 0) return a;</span><br><span class="line">    return add(a^b, (a&amp;b)&lt;&lt;1);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作者想表达计算机的本质是bit的异或、与及移位操作。</p>
+<h3 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h3><p>这里又是<strong>思考</strong>：要理解这个加法算法只需要地正确回答出以下三个问题:</p>
+<ol>
+<li>a ∧ b 得到的是什么?</li>
+<li>(b&amp;a) &lt;&lt; 1 得到的是什么?</li>
+<li>该算法为什么会终止?</li>
+</ol>
+<p>陆爻齐的回答是，</p>
+<ol>
+<li>a ^ b 得到的是 a 和 b 相加后，移位之后且还没计算进位的部分。异或操作是 10 和 01 得 1，11 或 00 得 0，1 与 0 相加，那位不用进位，留 1；而 0 + 0 或 1 + 1，则会在原地留 0，这正好符合异或操作的结果。</li>
+<li>(b&amp;a) &lt;&lt; 1 得到进位的部分，a&amp;b 的与操作就可以得到 1 + 1 的位，&lt;&lt; 1 是移位操作，根据上文，二进制乘 2，靠后面加个 0， 故向左移一位。</li>
+<li>算法之所以会终止，是因为从右向左，每次执行完进位操作一定能保证该位以右不会有可进位的位，如设第 1 位要进位，那么进位后第一位就确认为 1 或 0，但进位后可能导致下一位需要进位，若此时第二位要进位，那么就处理进位并确认第二位为 1 或 0，以此类推，处理至尽。因处理的数字是有限位数字，故算法一定能终止。</li>
+</ol>
+<h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><p>作者介绍了一种朴素乘法，即 a*b 的本质，是 b 个 a 相加。下面作者以此为例，从正确性、效率、优化三个角度分析该算法。</p>
+<p>显然，这种不断加的乘法时间复杂度为O（n）。</p>
+<p>然后是重点，递归版的“简单乘法”，C++ 实现如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int multiply(int a, int b) &#123;</span><br><span class="line">    // cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    if (b == 0) return 0;</span><br><span class="line"></span><br><span class="line">    if (is_even(b)) &#123;</span><br><span class="line">        return 2 * multiply(a, b &gt;&gt; 1);</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        return 2 * multiply(a, b &gt;&gt; 1) + a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实这个程序可以这么理解，返 0 不用说，如果 b 是偶数，比如 0b100 是 8，a 随便取个数，比如 3，即 0b11，用 100 * 11 相当于 2 * （10 * 11），也等于 2 * （ 2 * （ 1 * 11）），最后省个 1，也就加个 a，综上。</p>
+<p>换个复杂点的例子，让 b 为 1010，那就可以看为 (1<em>2^4 + 0</em>2^3 + 1<em>2^2 + 0</em>2^1) * 3 。</p>
+<p>同时作者还补充，在附录 A 有更高效的乘法实现。</p>
+<h2 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h2><h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>首先得有个除法定理，对任意给定的整数 a 和 b,其中 b &gt; 0,存在唯一的整数对 q(商)和 r(余数)，使得 a &#x3D; qb + r 且 0 ≤ r &lt; b。</p>
+<p>然后，介绍了下良序原则和单射、满射、一一映射等概念，不过感觉在下面没啥用。</p>
+<p>然后是除法的实现，朴素除法与朴素乘法类似，是不断减去除数，至被除数比除数小时，相减次数为“商”，剩下的被除数为“余数”。</p>
+<h3 id="简单除法"><a href="#简单除法" class="headerlink" title="简单除法"></a>简单除法</h3><p>而简单除法的 C++ 实现如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">std::pair&lt;int, int&gt; m_divide(int a, int b) &#123;</span><br><span class="line">    // cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    if (a == 0) &#123;</span><br><span class="line">        return pair&lt;int, int&gt;(0, 0);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::pair&lt;int, int&gt; result = m_divide(a &gt;&gt; 1, b);</span><br><span class="line"></span><br><span class="line">    result.first &lt;&lt;= 1; result.second &lt;&lt;= 1;</span><br><span class="line"></span><br><span class="line">    if (a &amp; 1) &#123;</span><br><span class="line">        result.second += 1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (result.second &gt;= b) &#123;</span><br><span class="line">        result.first += 1;</span><br><span class="line">        result.second -= b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>某种程度就是那个简单除法的逆运算捏，但我觉得我也不是那么明白，只能感受到，这是在不断对背除数除二，然后从左至右确认“商”，最后消除还不明白如何产生的误差来确认“余数”。</p>
+<h1 id="第一章-习题"><a href="#第一章-习题" class="headerlink" title="第一章 习题"></a>第一章 习题</h1><p>嘛，又不是正式上课，就选两道做做罢</p>
+<h2 id="1-判断奇偶的函数，c语言实现"><a href="#1-判断奇偶的函数，c语言实现" class="headerlink" title="1 判断奇偶的函数，c语言实现"></a>1 判断奇偶的函数，c语言实现</h2><p>判断奇数<br><code>int func (int a) &#123;   if (a &amp; 1) return True;   return False; &#125;</code><br>判断偶数<br><code>int func (int a) &#123;   if (a &amp; 1) return False;   return True; &#125;</code></p>
+<p>思想是，奇数的二进制表示中，最右位总为 1，只要 &amp; 上 1，就只会保留最右位，1 则奇数，0 则偶数。</p>
+<h2 id="2-判断-v-是否为-2-的某次方"><a href="#2-判断-v-是否为-2-的某次方" class="headerlink" title="2 判断 v 是否为 2 的某次方"></a>2 判断 v 是否为 2 的某次方</h2><p>两个思路</p>
+<ol>
+<li>若 v 为 2 的某次方，必表现为 100……0 的形式，那么用 while 循环从右至左判断，是否只有最后（最左）为 1 则是；</li>
+<li>若 v 为 2 的某次方，必在减 1 后，为 111……11 的形式，那么用相同位数的 111……11 与之异或，若最后得 0，则是；</li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>CINTA 第一章下来，我想我还是更优先看看 CSAPP 或许更好些，不过其中部分内容真是有意思，从二进制的角度看待加、乘、除，别有一番风味。另外也庆幸不是学校的专业课，不然又是一门备考时令人头疼的科目力</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/09/[CINTA]%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" data-id="cm7j3ftga0000uwag9e4jho0i" data-title="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/04/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-07-04T04:00:00.000Z" itemprop="datePublished">2024-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/04/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="第三次上机"><a href="#第三次上机" class="headerlink" title="第三次上机"></a>第三次上机</h1><hr>
+<h2 id="A-手撕BST"><a href="#A-手撕BST" class="headerlink" title="A 手撕BST"></a>A 手撕BST</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。</p>
+<p>bst.png</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10^5，树高不超过10^4。</p>
+<p>输出格式:<br>输出经上述操作后得到的二叉查找树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13</p>
+<p>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
+<p>20 11 8 4 9 31 25 24 27 35 40 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>500 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>二叉查找树的插入和查找都不算难，但删除需要注意的是，如果要删的节点有两个子节点，则将该节点的右子树中最小的节点与之交换，并执行从右子树中删除该最小点的任务。其余与普通的二叉树一样操作。</p>
+<hr>
+<h2 id="B-手撕AVL树（基础版）"><a href="#B-手撕AVL树（基础版）" class="headerlink" title="B 手撕AVL树（基础版）"></a>B 手撕AVL树（基础版）</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的高度平衡树（AVL树）进行若干插入或删除操作，请输出最后得到的AVL树。</p>
+<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
+<p>输出格式:<br>输出经上述操作后得到的高度平衡树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>16<br>Insert 17<br>Insert 31<br>Insert 13<br>Insert 11<br>Insert 20<br>Insert 35<br>Insert 25<br>Insert 8<br>Insert 4<br>Insert 11<br>Insert 24<br>Insert 40<br>Insert 27<br>Insert 9<br>Remove 17<br>Remove 13<br>输出样例:<br>4 8 9 11 20 24 25 27 31 35 40 </p>
+<p>20 8 4 11 9 31 25 24 27 35 40<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>二叉平衡树的插入和删除也是思维不复杂，但实现很麻烦的东西，我只能说，为了使程序的逻辑尽可能清晰，尽量把功能打包成函数，比如一个节点的高度什么的</p>
+<hr>
+<h2 id="C-手撕红黑树"><a href="#C-手撕红黑树" class="headerlink" title="C 手撕红黑树"></a>C 手撕红黑树</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>对一棵初始为空的红黑树（Red-Black Tree, RBT）进行若干插入或删除操作，请输出最后的红黑树。</p>
+<p>rbt.png</p>
+<p>备注：<br>（1）当有多种旋转方案时，优先选择旋转次数少的方案。<br>（2）70%的测试点只包含插入操作，如果你只实现插入操作，也能获得70%的分数。</p>
+<p>输入格式:<br>输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10<br>5<br> 。</p>
+<p>输出格式:<br>输出经上述操作后得到的红黑树的中根序列和先根序列，序列中对于每个结点输出其关键词和颜色（红色用R表示，黑色用B表示），每个元素后一个空格，两个序列之间用空行间隔。</p>
+<p>输入样例:<br>5<br>Insert 8<br>Insert 9<br>Insert 3<br>Insert 4<br>Insert 5</p>
+<p>输出样例:<br>3 R 4 B 5 R 8 B 9 B </p>
+<p>8 B 4 B 3 R 5 R 9 B </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>红黑树这题，也差一个点没过，故不作思路解析</p>
+<hr>
+<h1 id="第四次上机"><a href="#第四次上机" class="headerlink" title="第四次上机"></a>第四次上机</h1><hr>
+<h2 id="A-手撕STL-sort（进阶版）"><a href="#A-手撕STL-sort（进阶版）" class="headerlink" title="A 手撕STL sort（进阶版）"></a>A 手撕STL sort（进阶版）</h2><p>分数 100<br>作者 朱允刚<br>单位 吉林大学<br>事实上，STL的sort函数在上一题（基础版）的基础上，还采用了下列优化手段，以进一步提升快速排序算法的效率。</p>
+<p>（3）“三数取中”选基准元素。不是选取第一个元素作为基准元素，而是在当前子数组中选取3个元素，取中间大的那个元素作为基准元素。从而保证选出的基准元素不是子数组的最小元素，也不是最大元素，避免Partition分到子数组最边上，以降低最坏情况发生的概率。<br>为确保本题答案唯一，本算法的实现请以教材为准，即普林斯顿大学Sedgewick教授给出的方法：若当前子数组是R[m]…R[n]，选取R[m]、R[(m+n)&#x2F;2]和R[n]的中位数作为基准元素。先将R[(m+n)&#x2F;2]与R[m+1]交换；若R[m+1]比R[n]大，交换二者；若R[m]比R[n]大，交换二者；若R[m+1]比R[m]大，交换二者。</p>
+<p>（4）尾递归转为循环。即将传统快速排序代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void QuickSort(int R[],int m,int n)&#123;</span><br><span class="line">   if(n - m + 1 &gt; threshold)&#123;</span><br><span class="line">        int j = Partition(R, m, n); </span><br><span class="line">        QuickSort(R, m, j-1);  //递归处理左区间</span><br><span class="line">        QuickSort(R, j+1, n);  //递归处理右区间，尾递归</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转换为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void QuickSort(int R[],int m,int n)&#123;</span><br><span class="line">   while(n - m + 1 &gt; threshold)&#123;    //注意此处不是if，而是while</span><br><span class="line">        int j = Partition(R, m, n); </span><br><span class="line">        QuickSort(R, m, j-1);  //递归处理左区间</span><br><span class="line">        m = j+1;  //通过while循环处理右区间，从而消除尾递归</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>即先递归处理左区间，后循环处理右区间，从而消除一个尾递归，以减少递归调用带来的时空消耗。<br>这里需注意，尾递归转循环后，转入堆排序的时机不仅仅是递归深度达到2logn，而是递归深度和while循环迭代的次数加一起达到2logn时转入堆排序。</p>
+<p>（5）优先处理短区间。在上述策略（4）的基础上进一步改进，不是按固定次序处理左右子区间（每次都先处理左区间、后处理右区间），而是先（通过递归）处理左右两个子区间中“较短的那个区间”，然后再（通过循环）处理两个子区间中“较长的那个区间”。从而使每次递归处理的子数组长度至少缩减一半，使最坏情况下递归深度（算法最坏情况空间复杂度）为logn。</p>
+<p>（6）三路分划（3-Way Partition）。当重复元素很多时，传统快速排序效率较低。可修改Partition操作，不是把当前数组划分为两部分，而是三部分：小于基准元素K的元素放在左边，等于K的元素放在中间，大于K的元素在右边。接下来仅需对小于K的左半部分子数组和大于K的右半部分子数组进行排序。中间等于K的所有元素都已就位，无需处理。<br>为确保本题答案唯一，此处请采用如下做法：若当前子数组是R[m]…R[n]，可设置3个指针，前指针i，中指针j，后指针k。初始时i和j指向第一个元素，k指向最后一个元素；指针j从左往右扫描数组：</p>
+<p>若R[j]小于基准元素，交换R[j]和R[i], i++, j++；<br>若R[j]大于基准元素，交换R[j]和R[k], k–；<br>若R[j]等于基准元素，j++；<br>通过指针j的遍历，使小于基准元素的元素换到当前子数组左侧，大于基准元素的元素换到右侧。当j扫描完当前子数组后，R[m]…R[i-1]即小于基准元素的元素，R[i]…R[k]即等于基准元素的元素，R[k+1]…R[n]即大于基准元素的元素。</p>
+<p>在本题中，请你在之前实现的STL sort()初级版的基础上，进一步实现上述优化策略。</p>
+<p>提示：本题只需把原来的Partition改为3-way Partition，并使用“三数取中”法选择基准元素。<br>在快速排序函数里，改为“尾递归转循环 + 先处理短区间”。你可以在Visual Studio里对sort函数右键点击“转到定义”，查看VS中STL的sort()实现细节<br>vstudio sort转到定义图片.jpg</p>
+<p>函数接口定义：<br>void sort(int *R, int n);<br>功能为对整数R[1]…R[n]递增排序。</p>
+<p>裁判测试程序样例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int threshold;</span><br><span class="line"></span><br><span class="line">// 请在这里补充你的代码，即你所实现的sort函数</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    int a[50010];</span><br><span class="line">    scanf(&quot;%d %d&quot;, &amp;n, &amp;threshold);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;a[i]);</span><br><span class="line">    </span><br><span class="line">    sort(a,n);</span><br><span class="line">    </span><br><span class="line">    printf(&quot;Final:&quot;);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        printf(&quot;%d &quot;,a[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>备注：提交代码时，只需提交sort函数以及你自定义的其他函数，不用提交#include或者main函数等内容。</p>
+<p>输入格式:<br>输入第一行为2个正整数n和threshold，n为待排序的元素个数，不超过50000，threshold为改用插入排序的阈值，不超过20，含义如上所述。第二行为n个空格间隔的整数。本题中读入数据的操作无需你来实现，而由框架程序完成。</p>
+<p>输出格式:<br>输出第一行为以depth_limit:开头的整数，表示转为堆排序的递归深度，即⌊2log<br>2n⌋。从第二行开始，输出对某子数组转为堆排序后，该子数组初始建堆的结果，每个元素后一个空格，每个堆占一行，以Heap:开头。注意，可能不止一个堆。接下来下一行，输出n个整数，每个整数后一个空格，为快速排序所有递归退出后，插入排序执行前的数组元素，以Intermediate:开头。最后一行为n整数，每个整数后一个空格，表示排序后的数组，以Final:开头（最后一行由框架程序完成，无需你来输出）。</p>
+<p>输入样例1：<br>10 2<br>10 9 8 7 6 5 4 3 2 1</p>
+<p>输出样例1：<br>depth_limit:6<br>Intermediate:1 2 3 5 4 6 7 8 9 10<br>Final:1 2 3 4 5 6 7 8 9 10 </p>
+<p>输入样例2：<br>60 2<br>66 61 92 22 50 80 39 2 25 60 49 17 37 19 24 57 40 82 11 52 45 0 33 78 32 25 19 42 92 50 39 87 74 87 56 79 63 63 80 83 50 3 87 2 91 77 87 10 59 23 25 6 49 85 9 95 60 16 28 1<br>输出样例2：<br>depth_limit:11<br>Intermediate:1 0 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 32 28 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95<br>Final:0 1 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 28 32 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>此题基于课程设计第二次上机A题，而且改进方法都在题目里，是在不行，朱老师的ppt里有来着？</p>
+<hr>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>好像又没啥可结的，总之就这样罢</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgt000tuwag0dqz3wew" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/03/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-07-03T14:58:00.000Z" itemprop="datePublished">2024-07-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/03/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="第一次上机"><a href="#第一次上机" class="headerlink" title="第一次上机"></a>第一次上机</h1><hr>
+<h2 id="A-网络布线"><a href="#A-网络布线" class="headerlink" title="A 网络布线"></a>A 网络布线</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>2024年亚洲杯足球赛刚刚落下帷幕，赛前人们普遍预测：本届比赛中日韩是最强的，冠军也会从日韩中产生……随着东道主卡塔尔队的夺冠，这一预言未能成真。</p>
+<p>但我们这里要研究的是另一个问题，亚洲杯赛期间需要保证运动员公寓网络畅通，以使运动员都能正常上网。</p>
+<p>假定公寓楼内有n个房间，编号为0…n−1，每个房间都需要网络连接。房间 i 有网络，当且仅当满足如下2个条件之一：</p>
+<p>（1）房间 i 安装了路由器（成本为 ri&gt;0）</p>
+<p>（2）房间 i 和房间 j 有网线连接且房间 j 有网络（在房间 i 和房间 j 之间布置网线的成本为 fij&gt;0）</p>
+<p>假定你是赛事组委会的网络工程师，请编写程序设计一个网络布线方案（哪些房间安装路由器，哪些房间之间布置网线），使得所有房间都有网络，且总成本最小。</p>
+<p>例如下图包含7个房间和10个可能的连接，安装路由器的成本为括号内数字，房间之间布置网线的成本为边的权值。其解决方案为右下图，即在房间1和4安装路由器，并进行图中的网线布置。总成本为120。</p>
+<p>img.png</p>
+<p>输入格式:<br>输入第一行为两个正整数n和e；n为房间数，不超过600；e为可能的连接数，不超过2×10^5。接下来一行为n个空格间隔的正整数，第i个整数(i≥0)表示在房间i安装路由器的成本。接下来e行，每行为3个非负整数i、j、f，表示在房间i和房间j之间布置网线的成本为f。</p>
+<p>输出格式:<br>输出为一个整数，表示最优网络布线方案的成本。</p>
+<p>输入样例:<br>7 10<br>60 10 35 55 40 70 70<br>0 1 20<br>0 4 75<br>0 3 45<br>1 3 50<br>1 2 15<br>2 6 5<br>5 6 45<br>4 5 5<br>3 5 25<br>3 6 65</p>
+<p>输出样例:<br>120</p>
+<p>提示:<br>可引入一个虚拟顶点，将该顶点与其他所有顶点用边相连，边权等于那些顶点的权值。进而形成一个新图，对新图求最小支撑树。注意本题顶点编号从0开始。<br>image.png<br>image.png</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>60 ms<br>内存限制<br>64 MB<br>栈限制<br>8</p>
+<hr>
+<p>思路都在提示里，唯一能补充的就是构造最小支撑树的算法，有Kruskal或Prim，本质就是在不产生回路的情况下，从最小边或某一点为角度切入，不断选取权值最小的边，并通过栈或队列存储下次可能检查的边或点</p>
+<hr>
+<h2 id="B-社交网络"><a href="#B-社交网络" class="headerlink" title="B 社交网络"></a>B 社交网络</h2><p>分数 50<br>作者 朱允刚<br>单位 吉林大学<br>可以将n个QQ用户间的好友关系建模为一个包含n个顶点的无向图，顶点编号为1至n，每个顶点对应一个用户，若2个用户i和j是QQ好友，则在顶点i和j之间连接一条边，并根据用户间的亲密度对该边附以一个权值c<br>ij。在该图中，可以利用两个顶点间的最短路径长度衡量两个用户的关系密切程度，也可以利用经过一个顶点的最短路径数目来衡量一个用户在关系网络中的影响力，具体地，我们定义用户k在QQ关系网络中的“影响力”为：</p>
+<p>333.png</p>
+<p>其中Nij 为顶点i到j的最短路径数目，Nijk 为顶点i到j的所有最短路径中经过顶点k的最短路径数目（上述二值可能超出int型范围，请使用long long类型）。Dij 表示i到j的最短路径长度。</p>
+<p>现给定一个如上描述的无向图，请编写程序，计算每个顶点的“影响力”，假定给定的图是连通的。</p>
+<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，接下来e行表示每条边的信息，每行为3个正整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。</p>
+<p>n≤100，e≤5000，c≤1000，任意两点间的最短路径数目≤10<br>10</p>
+<p>输出格式:<br>输出为n行，每行一个实数，精确到小数点后3位，第i行为顶点i的影响力。</p>
+<p>输入样例:<br>4 4<br>3 2 6<br>4 3 1<br>1 3 9<br>4 1 1</p>
+<p>输出样例:<br>0.000<br>0.000<br>30.000<br>20.000</p>
+<p>解释:<br>对于顶点1：边2-3、3-4、2-4的最短路径均不经过顶点1，故顶点1的影响力为0.</p>
+<p>对于顶点3：<br>顶点1到2的最短路径共1条，长度为8，经过点3，顶点2到4的最短路径共1条，长度为7，经过点3，顶点1到4的最短路径共1条，但不经过点3。<br>故f(3)&#x3D;D 12 ∗1+D 24 ∗1+D 14 ∗0+D 21 ∗1+D 42 ∗1+D 41 ∗0&#x3D;8+7+0+8+7+0&#x3D;30.000</p>
+<p>提示:<br>若顶点a到顶点b有x条路径，点b到点c有y条路径，则a经过b到达c的路径有x*y条。</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>该程序的本质要求需要所有点到其余点的最短路径，以计算得出所谓的“影响力”。那么就有迪杰斯特拉算法和Floyd算法给选择。通常来说，点少边多适合Floyd，点多边少适合迪杰斯特拉算法。</p>
+<p>陆爻齐在本题采用Floyd算法，得出所有的最短路径，然后遍历所有路径来统计影响力即可。</p>
+<hr>
+<h1 id="第二次上机"><a href="#第二次上机" class="headerlink" title="第二次上机"></a>第二次上机</h1><hr>
+<h2 id="A-手撕STL-sort（基础版）"><a href="#A-手撕STL-sort（基础版）" class="headerlink" title="A 手撕STL sort（基础版）"></a>A 手撕STL sort（基础版）</h2><p>分数 40<br>作者 朱允刚<br>单位 吉林大学<br>C++ STL是Standard Template Library的简称，即标准模板库。简单来说，STL将常用的数据结构与算法进行了封装，用户需要时可以直接调用，不用重新开发。排序算法sort( )是STL包含的一个重要算法。</p>
+<p>STL中的sort()函数基于快速排序算法实现，众所众知，快速排序是目前已知平均情况下最快的排序算法，被IEEE评选为20世纪十大算法之一，但其最坏情况下时间复杂度会退化为O(n 2 )。STL中的sort()对传统快速排序做了巧妙的改进，使其最坏情况下时间复杂度也能维持在O(nlogn)，它是如何实现的呢？</p>
+<p>（1）快速排序算法最坏情况下时间复杂度退化为O(n 2 )的主要原因是，每次划分（Partition）操作时，都分在子数组的最边上，导致递归深度恶化为O(n)层。而STL的sort()在Partition操作有恶化倾向时，能够自我侦测，转而改为堆排序，使效率维持在堆排序的O(nlogn)。其具体方法是：侦测快速排序的递归深度，当递归深度达到⌊2log 2 n⌋&#x3D;O(logn)层时，强行停止递归，转而对当前处理的子数组进行堆排序。</p>
+<p>（2）此外，传统的快速排序在数据量很小时，为极小的子数组产生许多的递归调用，得不偿失。为此，STL的sort()进行了优化，在小数据量的情况下改用插入排序。具体做法是：当递归处理的子数组长度（子数组包含的元素个数）小于等于某个阈值threshold 时，停止处理并退出本层递归，使当前子数组停留在“接近排序但尚未完成”的状态，最后待所有递归都退出后，再对整个序列进行一次插入排序（注意不是对当前处理的子数组进行插入排序，而是在快速排序的所有递归完全退出后，对整个数组统一进行一次插入排序）。实验表明，此种策略有着良好的效率，因为插入排序在面对“接近有序”的序列时拥有良好的性能。</p>
+<p>在本题中，请你按照上述思路，自己实现STL的sort()函数。</p>
+<p>备注：Partition操作选取第1个元素作为基准元素。Partition操作的不同实现可能导致不同的输出结果，为保证输出结果唯一，该操作的实现请以教材为准，即Hoare提出快速排序算法时最早给出的Partition实现</p>
+<p>函数接口定义：<br>void sort(int *R, int n);<br>功能为对整数R[1]…R[n]递增排序。</p>
+<p>裁判测试程序样例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;stdlib.h&gt;</span><br><span class="line">#include&lt;math.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int threshold;</span><br><span class="line"></span><br><span class="line">//请在这里补充你的代码，即你所实现的sort函数</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n,i;</span><br><span class="line">    int a[50010];</span><br><span class="line">    scanf(&quot;%d %d&quot;, &amp;n, &amp;threshold);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;a[i]);</span><br><span class="line">    </span><br><span class="line">    sort(a,n);</span><br><span class="line">    </span><br><span class="line">    printf(&quot;Final:&quot;);</span><br><span class="line">    for (i = 1; i &lt;= n; i++)</span><br><span class="line">        printf(&quot;%d &quot;,a[i]);</span><br><span class="line">    printf(&quot;\n&quot;);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>备注：提交代码时，只需提交sort函数以及你自定义的其他函数，不用提交#include或者main函数等内容。</p>
+<p>输入格式:<br>输入第一行为2个正整数n和threshold，n为待排序的元素个数，不超过50000，threshold为改用插入排序的阈值，不超过20，含义如上所述。第二行为n个空格间隔的整数。本题中读入数据的操作无需你来实现，而由框架程序完成。</p>
+<p>输出格式:<br>输出第一行为以depth_limit:开头的整数，表示转为堆排序的递归深度，即⌊2log 2 n⌋。从第二行开始，输出对某子数组转为堆排序后，该子数组初始建堆的结果，每个元素后一个空格，每个堆占一行，以Heap:开头。注意，可能不止一个堆。接下来下一行，输出n个整数，每个整数后一个空格，为快速排序所有递归退出后，插入排序执行前的数组元素，以Intermediate:开头。最后一行为n整数，每个整数后一个空格，表示排序后的数组，以Final:开头（最后一行由框架程序完成，无需你来输出）。</p>
+<p>输入样例1：<br>10 2<br>10 9 8 7 6 5 4 3 2 1</p>
+<p>输出样例1：<br>depth_limit:6<br>Heap:7 6 5 4<br>Intermediate:1 2 3 4 5 6 7 8 9 10<br>Final:1 2 3 4 5 6 7 8 9 10 </p>
+<p>输入样例2：<br>60 2<br>66 61 92 22 50 80 39 2 25 60 49 17 37 19 24 57 40 82 11 52 45 0 33 78 32 25 19 42 92 50 39 87 74 87 56 79 63 63 80 83 50 3 87 2 91 77 87 10 59 23 25 6 49 85 9 95 60 16 28 1 </p>
+<p>输出样例2：<br>depth_limit:11<br>Heap:24 19 23 19 17 22<br>Intermediate:1 0 2 2 3 6 10 9 11 16 17 19 19 22 23 24 25 25 25 28 32 33 37 39 39 42 40 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 77 74 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95<br>Final:0 1 2 2 3 6 9 10 11 16 17 19 19 22 23 24 25 25 25 28 32 33 37 39 39 40 42 45 49 49 50 50 50 52 56 57 59 60 60 61 63 63 66 74 77 78 79 80 80 82 83 85 87 87 87 87 91 92 92 95 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>这题思维上并无难点，堆排序，插入排序，快速排序都是基础要掌握的排序方式，但由于要检查一些中间输出，会限定得很死。</p>
+<p>简要说下陆爻齐程序的大致思路好了，排序大体分两块，快排和插排，毕竟堆排是在快排中可能进入的，插排是快排完成后才开始的。快排的每层都会检测深度是否足够转化为堆排或是否要退出等待插排。至于快排的细节，如题所说，以教材相关内容为准吧，是在不行再看看老师ppt</p>
+<hr>
+<h2 id="B-排序"><a href="#B-排序" class="headerlink" title="B 排序"></a>B 排序</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序对不超过50000个整数递增排序。<br>备注：本题不允许使用STL sort()或qsort()等现成的排序库函数。</p>
+<p>输入格式:<br>输入第一行一个正整数n，表示待排序的元素个数。第二行为n个整数，表示待排序的元素。n不超过50000。</p>
+<p>输出格式:<br>输出为一行，表示排序结果，每个整数后一个空格。</p>
+<p>输入样例:<br>5<br>5 4 3 2 1</p>
+<p>输出样例:<br>1 2 3 4 5 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>5000 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>时间上限制很松，冒泡应该也行，其实把上道题写好的排序拉下来也行。</p>
+<hr>
+<h2 id="C-智能提示"><a href="#C-智能提示" class="headerlink" title="C 智能提示"></a>C 智能提示</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>百度、谷歌等搜索引擎，以及输入法等各种软件通常包含这样一个功能，当用户在输入框输入信息时，软件会提供一种“智能提示”。对用户所输入的信息，自动补全、列出可能的完整单词，提示给用户，以方便用户输入，提升用户体验。</p>
+<p>pic.jpg</p>
+<p>这个功能是如何实现的呢？一种典型的实现方式是，在系统后台维护一个字典，当用户输入字符时，在字典中查找以用户当前输入的字符串为前缀的全部单词，选取其中历史使用率最高的若干单词作为候选词，建议给用户。</p>
+<p>请编写程序实现上述功能。</p>
+<p>备注：这里约定一个字符串不能称为自己的前缀。若用户输入的字符串恰好是字典中的一个单词，则该单词不必向用户建议。</p>
+<p>输入格式:<br>输入第一行为3个正整数n、m、k。n为字典中单词个数。m为用户查询数，即用户输入的单词个数。对于用户输入的每个字符串，程序需要返回字典中以该字符串为前缀的、历史使用频率最高的k个单词。接下来n行，表示字典信息，每行为1个整数和1个字符串，整数表示单词的历史使用频率，字符串表示单词，请注意，单词包含的每个字符为a-z的小写字母或0-9的数字，即数字也可能构成字典中的单词。字典内的单词并非按使用频率有序存放。接下来m行，表示用户的查询，每行为一个a-z的小写字母或0-9的数字组成的字符串，表示用户的查询。另外请注意，由于字典往往是在用户历史数据的基础上加工而得，所以字典中可能出现重复单词，若某个单词在字典中出现多次，则其历史使用频率以最高者为准。 (n ≤ 10000, m ≤ 20000, k ≤ 10, 每个单词长度不超过20，单词历史使用频率小于2<br>31<br> )</p>
+<p>输出格式:<br>对于用户输入的每个字符串，按使用频率降序输出字典中以该字符串为前缀的、历史使用频率最高的k个单词，每个占1行。若多个单词历史使用频率相同，则字典序靠前的单词排名靠前。若单词中包含数字，则字典序以ACSII码判定，即0&lt;1&lt;2&lt;…&lt;9&lt;a&lt;b&lt;c&lt;…&lt;z。若字典中满足输出条件的单词个数大于0小于k，则有多少就输出多少个。若字典中没有满足输出条件的单词，则输出“no suggestion”。针对用户每个查询所输出的信息，用空行间隔。</p>
+<p>输入样例:<br>20 3 4<br>1827187200	the<br>1595609600	to<br>1107331800	that<br>401542500	this<br>334039800	they<br>282026500	their<br>250991700	them<br>196118888	these<br>150877900	than<br>144968100	time<br>125563600	then<br>109336600	two<br>196120000	there<br>87862100	those<br>79292500	through<br>75885600	the<br>71578000	think<br>67462300	2<br>65648600	tx356<br>57087700	though<br>th<br>xxx<br>the<br>输出样例:<br>the<br>that<br>this<br>they</p>
+<p>no suggestion</p>
+<p>they<br>their<br>them<br>there</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>800 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<h2 id="D-智能提示（时间限制更严格）"><a href="#D-智能提示（时间限制更严格）" class="headerlink" title="D 智能提示（时间限制更严格）"></a>D 智能提示（时间限制更严格）</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>题目内容与前一题完全一致，但时间限制更为严格，若上题程序效率足够高，可直接将代码提交至本题。</p>
+<p>备注：本题的测试点其实就是上一题的测试点4、5。如果上一题测试点4、5能在60ms内通过，本题就可以通过了。</p>
+<p>输入格式:<br>与前一题相同。</p>
+<p>输出格式:<br>与前一题相同。</p>
+<p>输入样例:<br>与前一题相同。<br>输出样例:<br>与前一题相同。<br>代码长度限制<br>16 KB<br>时间限制<br>60 ms<br>内存限制<br>64 MB<br>栈限制<br>8192 KB</p>
+<hr>
+<p>CD两题一起讲，毕竟D就是C更严格时间限制罢了。</p>
+<p>该题实际上是想学生建立字典树，并做一点改良，先从字典树简单说说好了，就如同此前的树一般，只不过树里面存的是单个字母，从树的根，也就是最“上面”的顶点往“下”走到叶子节点，途径字母组成单词，这便是字典树。</p>
+<p>只要建立了字典树，并输出指定节点的所有叶子节点，就算是解决了C题。</p>
+<p>那么如何解决D题呢？两个思路</p>
+<p>其一是减少输入输出所消耗的时间，常用C++打OI的同学可能疑惑，已经给cin、cout加速了，还要继续优化吗？要的，陆爻齐最后用了scanf和printf才过，所以要把所有cout换printf和cin换scanf；</p>
+<p>其二是优化中间步骤，其实我们细想下，在字典树的建立，查找对应点和搜寻点对应所有叶子节点哪个最复杂、很可能消耗最多时间呢？当然是搜寻叶子节点，毕竟同样的单词前缀，可对应的单词几乎无穷无尽。但其实，如果在建立字典树的时候，我们就把一个单词放进节点里，最后直接从该节点读取词，岂不美哉</p>
+<p>有同学读完并实践完上述两点，发现还不够，就来说：陆爻齐，你骗人，还不行。确实，还差点，最后一点在于每个节点所存储的词可能太多了，要找出10个历史频率最高，同历史频率，字典序最低的词，还需要在每次把词放节点里时做下排序。这里可以用sort排序配合自己写的比较函数，这部分内容不会建议google一下或者bing一下。</p>
+<hr>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>数据结构课程设计的前两次上机主要考察了图、排序和字典树，字典树的这两题很有趣，除了比较费时间、费精力、费脑子外挺好的：）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/03/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgt000uuwaghstj6qhl" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/02/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-07-02T15:27:00.000Z" itemprop="datePublished">2024-07-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/02/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="A-图的创建"><a href="#A-图的创建" class="headerlink" title="A 图的创建"></a>A 图的创建</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序创建一个有向图。有向图中包含n个顶点，编号为0至n-1。</p>
+<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过20000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。</p>
+<p>输出格式:<br>按顶点编号递增顺序输出每个顶点引出的边，每个顶点占一行，若某顶点没有引出边，则不输出。每行表示一个顶点引出的所有边，格式为a:(a,b,w)……，表示有向边a-&gt;b的权值为w，a引出的多条边按编号b的递增序排列。</p>
+<p>输入样例:<br>7 7<br>0 1 5<br>0 3 7<br>0 6 6<br>1 2 4<br>2 5 1<br>3 5 3<br>6 5 4</p>
+<p>输出样例:<br>0:(0,1,5)(0,3,7)(0,6,6)<br>1:(1,2,4)<br>2:(2,5,1)<br>3:(3,5,3)<br>6:(6,5,4)</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>500 ms<br>内存限制<br>20 MB</p>
+<hr>
+<p>该题只是图的创建，众所周知，图可以用邻接矩阵或邻接链表实现，这里采用了邻接链表，只要记录边和权值即可。</p>
+<hr>
+<h2 id="B-图的删边操作"><a href="#B-图的删边操作" class="headerlink" title="B 图的删边操作"></a>B 图的删边操作</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序对给定的有向图删除若干条边。有向图中包含n个顶点，编号为0至n-1。</p>
+<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过1000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。随后一行为一个整数k，表示删除的边的条数，接下来k行，每行为2个非负整数a、b，表示待删除的边为a-&gt;b。保证删除的边一定在原图中。</p>
+<p>输出格式:<br>输出执行删边操作之后的图。每行表示一个顶点引出的所有边，格式为a:(a,b,w)……，表示有向边a-&gt;b的权值为w，a引出的多条边按编号b的递增序排列。若某顶点没有引出边，则不输出。</p>
+<p>输入样例:<br>7 7<br>0 1 5<br>0 3 7<br>0 6 6<br>1 2 4<br>2 5 1<br>3 5 3<br>6 5 4<br>2<br>2 5<br>0 1</p>
+<p>输出样例:<br>0:(0,3,7)(0,6,6)<br>1:(1,2,4)<br>3:(3,5,3)<br>6:(6,5,4)</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>200 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>图的创建同上图，这里的删边如果是邻接链表注意要删除时，确保不要一删就删了多个就行</p>
+<hr>
+<h2 id="C-图深度优先遍历"><a href="#C-图深度优先遍历" class="headerlink" title="C 图深度优先遍历"></a>C 图深度优先遍历</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>编写程序对给定的有向图（不一定连通）进行深度优先遍历，图中包含n个顶点，编号为0至n-1。本题限定在深度优先遍历过程中，如果同时出现多个待访问的顶点，则优先选择编号最小的一个进行访问，以顶点0为遍历起点。</p>
+<p>输入格式:<br>输入第一行为两个整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过50。接下来e行表示每条边的信息，每行为两个整数a、b，表示该边的端点编号，但各边并非按端点编号顺序排列。</p>
+<p>输出格式:<br>输出为一行整数，每个整数后一个空格，即该有向图的深度优先遍历结点序列。</p>
+<p>输入样例1:<br>3 3<br>0 1<br>1 2<br>0 2<br>输出样例1:<br>0 1 2<br>输入样例2:<br>4 4<br>0 2<br>0 1<br>1 2<br>3 0<br>输出样例2:<br>0 1 2 3<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>创建图后，进行DFS就行了，没啥讲的</p>
+<p>要不简单讲下DFS或BFS好了，就是从一个点入手，搜寻该点所连的所有点并加入数组中，无论栈或队列，记录然后提出一点，继续搜寻，加入记录，往复至无点可寻。</p>
+<p>嘛，突然想起，如果前这几道题都用邻接矩阵，或许实现就简单很多了</p>
+<hr>
+<h2 id="D-单源最短路径"><a href="#D-单源最短路径" class="headerlink" title="D 单源最短路径"></a>D 单源最短路径</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序求给定正权有向图的单源最短路径长度。图中包含n个顶点，编号为0至n-1，以顶点0作为源点。</p>
+<p>输入格式:<br>输入第一行为两个正整数n和e，分别表示图的顶点数和边数，其中n不超过20000，e不超过1000。接下来e行表示每条边的信息，每行为3个非负整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并非按端点编号顺序排列。</p>
+<p>输出格式:<br>输出为一行整数，为按顶点编号顺序排列的源点0到各顶点的最短路径长度（不含源点到源点），每个整数后一个空格。如源点到某顶点无最短路径，则不输出该条路径长度。</p>
+<p>输入样例:<br>4 4<br>0 1 1<br>0 3 1<br>1 3 1<br>2 0 1<br>输出样例:<br>1 1<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>20 MB</p>
+<hr>
+<p>就是迪杰斯特拉算法的使用，没有什么可以引申的</p>
+<hr>
+<h2 id="E-双十一"><a href="#E-双十一" class="headerlink" title="E 双十一"></a>E 双十一</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>双十一期间，某著名电商平台“东东”为应对销售高峰，准备在n个城市中再增加一个自营仓库，其要求是该仓库设在n个城市中的某个城市，且距离其他所有城市的最短距离之和最小。请编写程序帮助“东东”找出设立仓库的地点。假定n个城市编号为0至n-1，它们之间至少有一个城市与其他所有城市可及。</p>
+<p>输入格式:<br>输入包含多组数据。每组数据第一行为两个正整数n和e，均不超过100。n表示城市数。接下来e行表示两个城市间的距离信息，每行为3个非负整数a、b、c，其中a和b表示两个城市编号，c表示城市间的距离。</p>
+<p>提示：可使用EOF判断输入结束。</p>
+<p>输出格式:<br>输出为一个整数，表示建立仓库的城市编号，如多个城市满足要求，则输出编号最小者。</p>
+<p>输入样例:<br>6 5<br>0 1 1<br>0 2 1<br>0 3 1<br>0 4 1<br>0 5 1<br>4 5<br>0 1 1<br>0 2 5<br>1 2 2<br>1 3 4<br>2 3 1</p>
+<p>输出样例:<br>0<br>1</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>该题的本质是找到一个到其它点距离之和最小的点，理所当然地应该使用Prim算法，求出各个点到其它所有点距离之和最短。</p>
+<hr>
+<h2 id="F-任务拓扑排序"><a href="#F-任务拓扑排序" class="headerlink" title="F 任务拓扑排序"></a>F 任务拓扑排序</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>一个工程被分解成n个子任务，编号为0至n-1。要完成整个工程需要完成所有的子任务。其中一些子任务必须先于另外一些子任务被完成。给定各子任务之间的先后关系，请编写程序给出一个合理的任务完成顺序，若工程不可行，程序亦能识别。</p>
+<p>输入格式:<br>输入第一行为两个整数n和e，均不超过100。n表示子任务数。接下来e行，表示已知的两个子任务间的先后关系，每行为两个整数a和b，表示任务a必须先于任务b完成。</p>
+<p>输出格式:<br>若工程不可行（一些子任务以自己为先决条件），输出“unworkable project”；若工程可行，输出为1行整数，每个整数后一个空格，为n个子任务的编号，表示子任务的完成顺序，如果有多种可能的顺序，则输出字典序最小者。</p>
+<p>注：字典序，即对象在字典中的顺序。对于两个数字序列，从第一个数字开始比较，当某一个位置的数字不同时，该位置数字较小的序列，字典序较小，例如1 2 3 9比1 2 4 5小，1 2 8 9比1 2 10 3小。</p>
+<p>输入样例1:<br>3 2<br>0 1<br>1 2<br>输出样例1:<br>0 1 2<br>输入样例2:<br>3 3<br>0 1<br>1 2<br>2 0<br>输出样例2:<br>unworkable project<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>拓扑排序，内容也是书上有的，简单说，就是从没有指着的点开始，把这个点弹出，并把点所连的点被连的标记数–，然后再从标记数0的点挑个点重复过程。</p>
+<p>还有个字典序，无论字母、数字，是不是从前往后一个个比较，比如返回a &lt; b，true则a字典序比b小。</p>
+<hr>
+<h2 id="G-关键路径"><a href="#G-关键路径" class="headerlink" title="G 关键路径"></a>G 关键路径</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>假定一个工程由若干子任务构成，使用一个包含n个顶点、e条边的AOE网表示该工程，顶点编号为1至n，有向边表示该工程的每个子任务，边的权值表示完成该子任务所需的时间，假定网中只含一个源点和一个汇点。请编写程序求出该工程的所有关键活动，并计算完成该工程所需的最短时间。</p>
+<p>输入格式:<br>每个测试点包含多组测试数据。每组数据第一行为2个整数n和e，均不超过200，分别表示AOE网的顶点数和边数。接下来e行表示每条边的信息，每行为3个正整数a、b、c，其中a和b表示该边的端点编号，c表示权值。各边并不一定按端点编号顺序排列，且各顶点并不一定按拓扑序排列。</p>
+<p>输出格式:<br>对每组数据，若工程不可行（AOE网中存在环），输出“unworkable project”；若工程可行，则输出第一行为完成工程所需的最短时间，并从第2行开始输出关键活动，每个关键活动占一行，格式为i-&gt;j，其中i和j表示关键活动所在边的端点编号。各关键活动输出顺序为：按i的递增顺序输出，若多个关键活动的i值相同，则按j的递增顺序输出。</p>
+<p>输入样例:<br>4 4<br>1 2 6<br>1 3 4<br>2 4 1<br>3 4 1</p>
+<p>输出样例:<br>7<br>1-&gt;2<br>2-&gt;4</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>简单的说，是计算最早完成时间与最晚完成时间相等的点，输出即可。</p>
+<p>回头来看，这就是动态规划啊</p>
+<hr>
+<h2 id="H-联盟数目"><a href="#H-联盟数目" class="headerlink" title="H 联盟数目"></a>H 联盟数目</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>艾迪是一家集团公司的老板，该集团包含n家公司，为了管理公司，艾迪会时常通过网络向各公司发送消息。各公司间的网络是单向的，每个公司都有一个分发列表，表示其能向哪些公司直接传达消息。例如A公司的分发列表为B、C，表示A可将消息直接传送给B和C（由于网络是单向的，B或C不一定能向A传送消息），这样艾迪若想向A、B、C公司发送消息，则只需向A发送消息即可，随后A可将消息传送到B和C。</p>
+<p>为了便于管理各公司，艾迪打算将n家公司分成若干组，每组称为一个区域联盟，每组满足如下条件：组内的任意公司消息互相可达。即对于组内任意公司u和v，u可将消息传送到v（可由u直接传送到v，也可通过组内其他公司中转传送到v），v也可将消息传送到u。可以认为一个公司可以将消息传送给自己，即一个公司可以自成一组。</p>
+<p>艾迪希望组的数量尽可能少，即在满足上述条件的情况下，每组包含的公司数目尽可能多。</p>
+<p>现给定每个公司的分发列表，请编写程序告知艾迪，他的集团最少能分成多少组。</p>
+<p>输入格式:<br>第一行包含一个整数T (1≤T≤100)表示数据组数。对于每组数据，第一行为一个整数n (2≤n≤100)，表示公司数目，公司编号为1到n。随后n行，第i行包含若干整数，表示第i个公司的分发列表，每行以0结尾。</p>
+<p>输出格式:<br>对于每组数据，输出一行，为一个整数，表示组数。</p>
+<p>输入样例:<br>3<br>5<br>2 4 3 0<br>4 5 0<br>0<br>0<br>1 0<br>3<br>2 0<br>0<br>2 1 0<br>3<br>2 0<br>3 0<br>0</p>
+<p>输出样例:<br>3<br>3<br>3</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>这个点相对前面比较偏，实际上是要找到尽可能大的连通组，采用WarShall算法，找到各个组的最大闭包。</p>
+<hr>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>本次上机简答考察了图的基本使用，创建、遍历、删除等，然后又加了点场景考察迪杰斯特拉算法和普利姆算法，最后搞了应该比较难反应过来的WarShall算法，算是把书上的内容过了一遍力，加油罢</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/02/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgs000ouwag1g6o9vq8" data-title="【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 数据结构与算法上机题解思路分享-第二次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/07/01/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-07-01T14:05:00.000Z" itemprop="datePublished">2024-07-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/07/01/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><hr>
+<h2 id="A-二叉树的创建与遍历"><a href="#A-二叉树的创建与遍历" class="headerlink" title="A 二叉树的创建与遍历"></a>A 二叉树的创建与遍历</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>通过带空指针信息的先根序列（亦称先序序列）创建二叉树，并进行先根（先序）、中根（中序）、后根（后序）遍历。二叉树结点数据域值为不等于0的整数（可能是正数也可能是负数），空指针用0表示，例如1 5 8 0 0 0 6 0 0表示如下图的二叉树。</p>
+<p>输入格式:<br>输入为一组用空格间隔的整数，表示带空指针信息的二叉树先根序列。其中空指针信息用0表示。二叉树结点个数不超过150000，高度不超过6000。输入数据保证二叉树各结点数据值互不相等。</p>
+<p>输出格式:<br>输出为3行整数，每个整数后一个空格。第1行为该二叉树的先根序列，第2行为中根序列，第3行为后根序列。</p>
+<p>输入样例:<br>1 5 8 0 0 0 6 0 0<br>输出样例:<br>1 5 8 6<br>8 5 1 6<br>8 5 6 1<br>代码长度限制<br>16 KB<br>时间限制<br>200 ms<br>内存限制<br>20 MB</p>
+<hr>
+<p>这道题没什么好解析的，从先根序列造二叉树，可以采用递归的方法，0则结束，否则就以该值创节点，并进入左节点的函数和右节点的函数。</p>
+<hr>
+<h2 id="B-二叉树查找结点及父结点"><a href="#B-二叉树查找结点及父结点" class="headerlink" title="B 二叉树查找结点及父结点"></a>B 二叉树查找结点及父结点</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>编写程序在二叉树中查找给定结点及父结点。二叉树结点的数据域值不等于0的整数。</p>
+<p>输入格式:<br>输入第1行为一组用空格间隔的整数，表示带空指针信息的二叉树先根序列，其中空指针用0表示。例如1 5 8 0 0 0 6 0 0表示如下图的二叉树。第2行为整数m，表示查询个数。接下来m行，每行为一个不等于0的整数K，表示要查找的结点的数据值。m不超过100，二叉树结点个数不超过150000，高度不超过6000。输入数据保证二叉树各结点数据值互不相等。</p>
+<p>输出格式:<br>输出为m行，每行1个整数，表示被查找结点K的父结点数据值，若二叉树中无结点K或结点K无父结点，则输出0。</p>
+<p>输入样例:<br>1 5 8 0 0 0 6 0 0<br>3<br>8<br>1<br>6<br>输出样例:<br>5<br>0<br>1<br>代码长度限制<br>16 KB<br>时间限制<br>300 ms<br>内存限制<br>20 MB</p>
+<hr>
+<p>造树的函数可以复用上一题，本体考察的查找，更没有啥可以说的，你可以任选先、中、后三种顺序都可以</p>
+<hr>
+<h2 id="C-二叉树删除子树"><a href="#C-二叉树删除子树" class="headerlink" title="C 二叉树删除子树"></a>C 二叉树删除子树</h2><p>分数 10<br>作者 朱允刚<br>单位 吉林大学<br>编写程序对给定二叉树执行若干次删除子树操作，输出每次删除子树后剩余二叉树的中根序列。二叉树结点的数据域值为不等于0的整数。每次删除操作是在上一次删除操作后剩下的二叉树上执行。</p>
+<p>输入格式:<br>输入第1行为一组用空格间隔的整数，表示带空指针信息的二叉树先根序列，其中空指针信息用0表示。例如1 5 8 0 0 0 6 0 0表示如下图的二叉树。第2行为整数m，表示要进行的删除操作次数。接下来m行，每行一个不等于0的整数K，表示要删除以K为根的子树。m不超过100，二叉树结点个数不超过5000。输入数据保证各结点数据值互不相等，且删除子树后二叉树不为空。</p>
+<p>输出格式:<br>输出为m行，每行为一组整数，表示执行删除操作后剩余二叉树的中根序列（中根序列中每个整数后一个空格）。若要删除的子树不在当前二叉树中，则该行输出0（0后无空格）。</p>
+<p>输入样例:<br>1 5 8 0 0 0 6 0 0<br>3<br>5<br>8<br>6<br>输出样例:<br>1 6<br>0<br>1<br>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>10 MB</p>
+<hr>
+<p>此题可以分解为两部分，第一部分是找到要删的点，第二部分是执行删除。寻找部分就是第二题，那么我们实际上可以专注于如何执行二叉树的删除了。</p>
+<p>那么什么是删除呢？可表现为其父节点对应指针为空，那么空间要不要释放呢？随你喜欢，毕竟答案检验是遍历，与内存无关：）所以把父节点对应指针置空即可。</p>
+<p>整体的构造是递归，若没找到则向两子树找，找到就删除对应子树，没找到回报个0</p>
+<hr>
+<h2 id="D-重建二叉树"><a href="#D-重建二叉树" class="headerlink" title="D 重建二叉树"></a>D 重建二叉树</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>给定非空二叉树的中根序列和后根序列，请编写程序创建该二叉树，计算其高度和先根序列；如给定的中根和后根序列不合法，则亦能识别。</p>
+<p>输入格式:<br>输入包含多组数据（不超过10组），每组为两行字符串，第一行表示某二叉树的后根序列，第二行表示其中根序列。结点的值均为A-Z的大写字母，故二叉树结点个数不超过26，且保证输入的两个序列都是结点的全排列，但不一定是合法的中根和后根序列。输入保证不是空二叉树。</p>
+<p>输出格式:<br>对于每组数据，如果输入的序列不合法（不是同一棵树的中根序列和后根序列），则输出INVALID；若输入序列合法，输出为两行，第一行为一个整数，表示该二叉树的高度，第二行为一个字符串，表示该二叉树的先根序列。</p>
+<p>输入样例1:<br>CEFDBHGA<br>CBEDFAGH<br>CBEDFAGH<br>CEFDBHGA<br>BCA<br>CAB</p>
+<p>输出样例1:<br>3<br>ABCDEFGH<br>INVALID<br>INVALID</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>本题也是书上有的内容此处就简单叙述下要点，中根和后根序列分别给了不同的信息，后根的最后一个表示该树的中点，也就是最上面那个，根据中点就可以从中根序列中找到该树的左子树有什么点，右子树有什么点。</p>
+<p>而这样的分割可以不断递归，毕竟一个二叉树的左子树也是二叉树，只要不断地将子树的中后序列分割出来，总有左右子树只剩一点或者无点的情况，然后再不断组装回去，最后就得到了二叉树</p>
+<hr>
+<h2 id="E-二叉树路径和"><a href="#E-二叉树路径和" class="headerlink" title="E 二叉树路径和"></a>E 二叉树路径和</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>编写程序找出二叉树中和最大的路径，二叉树结点为不等于0的整数。本题的“路径”限定为以根结点为起点，以叶结点为终点的路径。路径的和，即该路径所包含的所有结点的数据值之和。</p>
+<p>输入格式:<br>输入为一组用空格间隔的整数，个数不超过100个，表示带空指针信息的二叉树先根序列。</p>
+<p>输出格式:<br>输出为两行，第一行为该二叉树路径和的最大值，第二行为一组整数，每个整数后一个空格，即该最大路径包含的结点值（按从根的叶的顺序），如果存在多条满足条件路径，则输出最左边一条。</p>
+<p>输入样例1:<br>1 2 0 0 3 0 0<br>输出样例1:<br>4<br>1 3<br>输入样例2:<br>-1 2 0 0 3 0 0<br>输出样例2:<br>2<br>-1 3<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>像这种寻找一条最优路的方法，基础办法有深度优先算法DFS或广度优先算法BFS。</p>
+<p>以DFS为例，大致就是用栈（其实就是一个数组加指针）来记录路径，然后遍历一遍二叉树，以DFS或BFS的方式，到底时与已有路径记录比较，保留更大的</p>
+<hr>
+<h2 id="F-哈夫曼树编码"><a href="#F-哈夫曼树编码" class="headerlink" title="F 哈夫曼树编码"></a>F 哈夫曼树编码</h2><p>此题不做分享，毕竟陆爻齐也差一个点，没资格说话</p>
+<hr>
+<h2 id="G-S遍历"><a href="#G-S遍历" class="headerlink" title="G S遍历"></a>G S遍历</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>二叉树的“S遍历”定义为从根结点开始，先自右向左遍历，然后下一层自左向右遍历，再下一层自右向左遍历，以此类推…。例如下图所示二叉树的S遍历序列为1 2 3 6 5 4 7 8。现给定一棵非空二叉树，结点数据域值为互不相等且不等于0的正整数，同时给定两个正整数a和b，请编写程序输出结点a和b间的S遍历序列。</p>
+<p>555.jpg</p>
+<p>输入格式:<br>输入第一行为1组用空格间隔的正整数，表示带空指针信息的二叉树先根序列，二叉树结点个数不超过150000，高度不超过5000。第二行为两个正整数a和b，含义如题目所述，保证a和b一定在二叉树中，且在S遍历序列中a在b的前边。</p>
+<p>输出格式:<br>输出为一行整数，每个整数后一个空格，表示数据值为a和b的两个结点间的S遍历序列。</p>
+<p>输入样例1:<br>1 2 4 0 0 0 3 5 7 0 0 8 0 0 6 0 0<br>1 8<br>输出样例1:<br>1 2 3 6 5 4 7 8<br>输入样例2:<br>1 2 0 4 0 7 0 0 3 5 0 0 6 8 20 0 0 21 0 0 0<br>6 8<br>输出样例2:<br>6 5 4 7 8<br>输入样例3:<br>1 2 0 3 4 5 0 0 6 0 0 0 7 0 8 9 10 0 0 11 0 0 0<br>1 11<br>输出样例3:<br>1 2 7 8 3 4 9 11<br>输入样例4:<br>2 4 3 0 0 8 0 0 10 5 7 9 0 0 1 0 0 17 0 0 6 0 0<br>2 9<br>输出样例4:<br>2 4 10 6 5 8 3 7 17 1 9<br>数据规模:<br>测试点0-2、5-9：结点个数≤50，树高≤20<br>测试点3：4500≤结点个数≤5500，4000≤树高≤5000<br>测试点4：130000≤结点个数≤150000，10≤树高≤20</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>100 ms<br>内存限制<br>20 MB</p>
+<hr>
+<p>此题看似是一个十分繁琐的搜索，但其实就是考察对于基本数据结构栈和队列的用法。</p>
+<p>陆爻齐采用了栈来解决该问题，也就是用两个栈，分别存储向左和向右遍历时存储的点，然后向左向右分别用不同的顺序把点加进栈，模拟出所谓的S型</p>
+<hr>
+<h2 id="H-衣服挂游戏"><a href="#H-衣服挂游戏" class="headerlink" title="H 衣服挂游戏"></a>H 衣服挂游戏</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>有n个衣服挂，编号为1至n，初始时按顺序挂在一个晾衣杆上，每个衣挂自成一列（即相当于有n列，每列只含一个衣挂）。</p>
+<p>1.jpg</p>
+<p>爸爸让艾迪做如下操作“x y”，表示将衣挂x所在的列放在衣挂y所在的列下面，即把x所在列的第一个衣挂，挂在y所在列的最下面的衣挂下面，如果x和y已在同一列里，则忽略该操作。例如上图执行操作“3 5”后，得到下图：</p>
+<p>2.jpg</p>
+<p>再执行操作“3 2”后，得到下图：</p>
+<p>3.jpg</p>
+<p>爸爸给出一系列指令，请编写程序，输出艾迪完成爸爸的所有操作后，每个衣挂所在的列的第一个衣挂的编号。</p>
+<p>输入格式:<br>每个测试点包含多组测试数据，第一行1个整数 T ，表示测试数据组数。对于每组数据，第一行两个整数 n 和 m，分别表示衣挂个数和操作次数。接下来 m 行，每行两个整数x和y，表示爸爸让艾迪执行的一个操作。T≤5，1≤n, m≤30000，1≤x, y≤n。</p>
+<p>输出格式:<br>输出为T 行，每行为 n个整数a1 a2 … an ，每个整数后一个空格，ai(1≤i≤n)表示衣挂i所在列的第一个衣挂的编号。</p>
+<p>输入样例:<br>2<br>4 2<br>2 1<br>4 3<br>5 4<br>1 2<br>2 3<br>4 5<br>1 3</p>
+<p>输出样例:<br>1 1 3 3<br>3 3 3 5 5 </p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>80 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>该题的本质是考察并查集的创建和使用，像这种很喜欢溯源的，并查集往往都能比较好的解决。</p>
+<p>再简单说下陆爻齐认为的并查集吧，并查集往往用数组实现，用下标表示其编号，而存储的数字则为其父亲的编号，也就是父节点的下标。</p>
+<p>题中正好n个衣架，编号1-n，正好对应数组，把x挂y上，完全可以把x上的数字改成y；这是x无父节点的情况，若x有父节点，当然先要追溯到其曾曾祖父，把老人家挂y上。</p>
+<hr>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这次上机主要考查了二叉树的创建、查找、删除等，还有并查集的使用，利用上机题巩固所学不失为一种好方法：）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/07/01/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgs000quwag9ofbc0sr" data-title="【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/30/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
+  <time class="dt-published" datetime="2024-06-30T14:54:00.000Z" itemprop="datePublished">2024-06-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/30/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
+<p>这里只是思路解析的博客，代码仓库是<a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
+<p>希望你能在这里找到你想要的:)</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><hr>
+<h2 id="A-调皮的哈利"><a href="#A-调皮的哈利" class="headerlink" title="A 调皮的哈利"></a>A 调皮的哈利</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>贝蒂是个打字高手，打字时有不看屏幕的习惯。在一次贝蒂打字时，调皮的哈利常常趁贝蒂不注意按下Home键、End键、左右方向键和退格键。当Home键被按下时，输入光标会跳到文本最开头；当End键被按下时，输入光标会跳到文本末尾；当左&#x2F;右方向键被按下时，输入光标会向左&#x2F;右移动一位；当退格键被按下时，输入光标左面的一个字符会被删除。现给出贝蒂和哈利按键的字符串，其中’{‘表示Home键，’}’表示End键，’&lt;’表示左方向键，’&gt;’表示右方向键，’#’表示退格键，其余字符均表示输入的内容，请输出屏幕上最终显示的文本。</p>
+<p>img.jpg</p>
+<p>输入格式:<br>输入一个字符串，长度不超过5×10<br>4<br> ，包含大小写字母、空格、下划线、{、}、&lt;、&gt;、#，表示贝蒂和哈利的按键序列。</p>
+<p>输出格式:<br>输出为屏幕上最终显示的字符串。</p>
+<p>输入样例1:<br>jlu_cc{i_love_}st</p>
+<p>输出样例1:<br>i_love_jlu_ccst<br>输入样例2:<br>stre&lt;&lt;aaa</p>
+<p>输出样例2:<br>staaare<br>输入样例3:<br>xxx&gt;&gt;&gt;yyy##z&lt;&lt;&gt;k</p>
+<p>输出样例3:<br>xxxykz<br>输入样例4:<br>abcd{efghi}jklm{nopq}rs{t}uvwxyz</p>
+<p>输出样例4:<br>tnopqefghiabcdjklmrsuvwxyz<br>代码长度限制<br>16 KB<br>时间限制<br>25 ms<br>内存限制<br>10 MB</p>
+<hr>
+<p>从题目可以知道，题目要求对于内部的数据结构有着频繁的更改，所以在我们已知的数据结构中，可以考虑采用链表来进行实现。</p>
+<p>同时也能注意到，对于字符串的处理，有一些如同转义字符一样的特殊字符，将这些特殊字符的处理编为函数，也是一个不错的选择。</p>
+<p>此外，也建议想象自己操纵着光标，输入时向光标左边插字，删除时删除左边的字这样。</p>
+<hr>
+<p>##B 括号匹配<br>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序判断一个包含“（”和“）”的括号序列是否匹配。如匹配则输出Match；如不匹配，计算出使该序列变为匹配序列所需添加的最少括号数目（只允许在该序列开始和结尾处添加括号），并输出经添加最少括号后得到的合法匹配序列。</p>
+<p>输入格式:<br>输入为若干行，每行一个字符串，包含不超过10 ^ 5个括号。输入行数不超过10行。</p>
+<p>输出格式:<br>对于输入的每个括号序列输出1行或2行信息。若输入的括号序列匹配，则输出Match。若不匹配，则输出分为2行，第1行为一个整数，表示将该序列变为匹配序列所需添加的最少括号数目，第2行为一个字符串，表示经添加最少括号后得到的合法匹配序列。</p>
+<p>输入样例:<br>(())()<br>)(<br>()))((</p>
+<p>输出样例:<br>Match<br>2<br>()()<br>4<br>((()))(())</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>20 ms<br>内存限制<br>10 MB</p>
+<hr>
+<p>该题目与课内某题很像，通过栈记录匹配与否，再实现补充即可</p>
+<p>由于全是小括号，基本不用考虑在哪里补充，缺几个左括号就直接向左补，缺几个右括号直接向右补即可</p>
+<hr>
+<h2 id="C-表达式求值"><a href="#C-表达式求值" class="headerlink" title="C 表达式求值"></a>C 表达式求值</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>给定一个中缀表达式，请编写程序计算该表达式的值。表达式包含+、-、*、\、^、(、)，所有运算均为二元运算，操作数均为正整数，但可能不止一位，不超过10位。运算结果为整数，值域为[−2^31,2^<br>31)。除法运算结果若为小数则进行截尾取整。若除法运算中除数为0，则输出INVALID。幂运算须自行实现，不允许调用pow等系统函数。测试数据保证幂运算中指数为非负，底数不为0。</p>
+<p>输入格式:<br>输入为多行，每行为一个长度不超过1000的字符串，表示中缀表达式。</p>
+<p>输出格式:<br>对每个表达式输出一行：为一个整数（表达式的值）或为一个字符串INVALID。</p>
+<p>输入样例:<br>5+(10<em>2)-6<br>8</em>(999+1)<br>1+5&#x2F;(1-1)<br>7*2^3</p>
+<p>输出样例:<br>19<br>8000<br>INVALID<br>56<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>经典的中缀表达式转后缀表达式，基本与课本一样，不过需要快速幂来减少时间消耗，毕竟只有50ms嘛</p>
+<p>陆爻齐采用了专门的函数判断符号优先级，是否为括号的函数来事得程序条理更清晰些，为了省事，或许能够统一个函数，直接用数字区分类别，不过更耗点脑子罢</p>
+<hr>
+<h2 id="D-EDG"><a href="#D-EDG" class="headerlink" title="D EDG"></a>D EDG</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>2021年11月6日，英雄联盟全球总决赛打响，中国电子竞技战队Edward Gaming（EDG）以3:2力克韩国强敌DWG KIA（DK）战队，历史上首次夺得全球总冠军。一时间全网沸腾，大家纷纷在社交平台上直呼“edgnb”。现给定一段文本，请编写程序识别出连续的k个“edgnb”组成的字符串在该文本中出现了多少次。</p>
+<p>输入格式:<br>第一行为1个整数T，表示数据组数。对于每组数据，第一行为1个字符串，表示给定的文本。第二行为1个整数k，含义如题目所述。（1≤T≤10。各组数据给定的字符串长度之和不超过10<br>5<br> ，且字符串中只包含a-z的小写字母。k≥1且k×5小于给定字符串长度）。</p>
+<p>输出格式:<br>对于每组数据输出一行，为1个整数，表示所求的出现次数。</p>
+<p>输入样例:<br>5<br>xyzedgnbabcedgnb<br>1<br>xyzedgnbabcedgnb<br>2<br>defedgnbedgnbxyz<br>2<br>edgnbedgnbedgnb<br>2<br>fxedgnbedgnbedgnbedgnbmem<br>3</p>
+<p>输出样例:<br>2<br>0<br>1<br>2<br>2</p>
+<p>数据规模:<br>测试点0：5≤T≤10，400≤T个字符串长度之和≤500，k&#x3D;1<br>测试点1：5≤T≤10，400≤T个字符串长度之和≤500，k≥1<br>测试点2：5≤T≤10，4000≤T个字符串长度之和≤5000，k≥1<br>测试点3：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1<br>测试点4：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1</p>
+<p>代码长度限制<br>16 KB<br>时间限制<br>400 ms<br>内存限制<br>64 MB</p>
+<hr>
+<p>这个题的实质是从字符串中匹配符合的字符串，而且不单单是匹配单个edgnb出现次数，而是可能变长的。只要理解了这一点，接下来只要实现经典的kmp就成功了。</p>
+<p>你问kmp是什么？我也不知道捏（毕竟过去一年力</p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这次上机实验主要考察了对链表、字符串匹配和操作，思考量肯定是有的，不过这里面很多东西我确实还是没有理解啊，纵使当时写下来了，现在也全忘了，hhh</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/30/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgr000muwaggohl136f" data-title="【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[JLU] 吉林大学校园网上网攻略汇总与补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/09/%5BJLU%5D%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/" class="article-date">
+  <time class="dt-published" datetime="2024-06-09T12:21:00.000Z" itemprop="datePublished">2024-06-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/09/%5BJLU%5D%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/">【JLU】 吉林大学校园网上网攻略汇总与补充</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如题，陆爻齐为了汇集一下觉得比较有用的 JLU 校园网相关的资源，同时对于一些比较重要但比较少被提及的地方做点补充而写本文。</p>
+<p>希望能对吉林大学（也许）的各位有所帮助</p>
+<p>如果陆爻齐再次重装系统，或许也用的到罢：）</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="现有攻略推介"><a href="#现有攻略推介" class="headerlink" title="现有攻略推介"></a>现有攻略推介</h2><h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><ul>
+<li><h4 id="官方老文"><a href="#官方老文" class="headerlink" title="官方老文"></a>官方老文</h4></li>
+</ul>
+<p>如果你会搜索下“吉林大学 校园网”，那么第一个网址大概就是这个 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1095.htm">吉林大学校园网入网指南</a> </p>
+<p>实际上，这篇文章有点老，JLU校园网手机无线网络配置也得看 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1988.htm">JLU.WIFI使用指南</a> ，而且其它配电脑部分篇幅较为冗余，反正我是太长，不看！！！（笑</p>
+<ul>
+<li><h4 id="官方新文"><a href="#官方新文" class="headerlink" title="官方新文"></a>官方新文</h4></li>
+</ul>
+<p>所以，可以参考这个应该比较难搜出来的 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1718.htm">校园网入网指南（新生版）</a></p>
+<p>相较而言，简洁不少（果然还是新生版攻略好用<br><a id="line_turation"></a></p>
+<ul>
+<li><h4 id="有线网"><a href="#有线网" class="headerlink" title="有线网"></a>有线网</h4></li>
+</ul>
+<p>而如果想配置有线网，那么可以参考 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1113/1727.htm">有线网络配置及登陆方法</a></p>
+<p>PS：<del>登录</del> VS 登陆</p>
+<p>如果你是小白建议看看下面的<a href="#line">补充</a></p>
+<ul>
+<li><h4 id="官方的常见问题与解答"><a href="#官方的常见问题与解答" class="headerlink" title="官方的常见问题与解答"></a>官方的常见问题与解答</h4></li>
+</ul>
+<p>有点老，仅供参考罢<br><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wxwlxgywjd_y_.htm">无线网络相关业务解答（一）</a></p>
+<p><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wxwlxgywjd_e_.htm">无线网络相关业务解答（二）</a></p>
+<p><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wlcjwtjd.htm">网络常见问题解答</a></p>
+<p>里面有官方24小时答疑电话，这个应该最有用罢</p>
+<h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><p>嘛，有个叫 JLUBOOK 的组织做了些攻略，2022年的，算比较新啦，在此贴贴</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1te4y1f7Xv/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.2（Windows＆Android校园网入网以及邮箱获取教程）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cP411V7Bt/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.3（Mac开通校园网）</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eW4y1t7UF/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.4（Apple设备连接校园网）</a></p>
+<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="关于收费"><a href="#关于收费" class="headerlink" title="关于收费"></a>关于收费</h3><p>目前JLU  校园网是不限流量 20r&#x2F;月，一次校园网需要充满 100 开户（如果没记错的），免费月为 2 月和 7 月，详细可以看下图</p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202406/3207177-20240609194449184-142657213.png" alt="校园网常见问题"></p>
+<p>也就是说，8 月前其实可以推掉校园网省 20r，下学期再开通，这样就省了一个月，但要花点时间重新配置（笑</p>
+<h3 id="充值"><a href="#充值" class="headerlink" title="充值"></a>充值</h3><p>如果没记错，月末或月初有几天不能充值续费，在乎这方面的同学建议早充早用，等发现用不了再充可能得难受几天。</p>
+<h3 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h3><ul>
+<li><p>范围上，基本覆盖全校区，但在人多的时候很不太好用，比如饭点的日新楼，还有像基础园澡堂这样就是没覆盖的（别问我怎么知道的</p>
+</li>
+<li><p>速度上无线基本在 8m 到几十m之间，但有线网极快，平时就几百m，状态好的时候可以上 1g，所以建议经常下载什么的，能配有线尽量配</p>
+</li>
+<li><p>稳定性上，PC的无线网络时不时会自己中断，要手动重连；而且有时明明关掉了，没有启动，又说正在运行而无法打开；笔记本电脑合上后也会自动断开，无法忍受的同学可以看看 <a href="#other_ser">其他客户端</a>，陆爻齐未来也打算写个新的客户端来使用，不过可能到时也用不着了</p>
+</li>
+</ul>
+<p><a id="line"></a></p>
+<h3 id="有线网配置补充与全流程参考"><a href="#有线网配置补充与全流程参考" class="headerlink" title="有线网配置补充与全流程参考"></a>有线网配置补充与全流程参考</h3><p>有线网和无线网不同的是，光靠文字或视频攻略可能无法配置，还需要购买硬件，比如网线、转换器什么的</p>
+<p>1.首先，要确认自己的设备是否有网线接口，类似下图，如果有，请继续下面；如果没有却仍考虑有线网，可先查询自己设备有无 type-c 接口以及网卡是否支持通过 type-c 接口上网（近几年电脑大多支持），然后购买相关拓展坞（比如有 type-c 转网口的），再继续 </p>
+<p><img src="https://img2024.cnblogs.com/blog/3207177/202406/3207177-20240609200724266-1733097933.png" alt="网口示例"></p>
+<p>2.然后要确认好宿舍的路由器在哪里，自己桌子附近有无前辈留下的网线<del>遗产</del>，确认其是否连接到路由器上，如果有网线且连接看似正常，那么就回到 <a href="#line_turation">上面</a> 参照攻略尝试连接</p>
+<p>3.如果连接失败，且在电话咨询学校网络中心后仍无法解决，建议更换网线，百兆够用，千兆更流畅，类别不重要。</p>
+<p><a id="other_ser"></a></p>
+<h3 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h3><p>在GitHub，你吉老学长们做了不同版本开源的客户端，虽然可能有点老，不过你吉的客户端应该更老，该兴趣的同学可以自行下载体验</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>没啥好总结，有用就行：）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/09/[JLU]%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/" data-id="cm7j3ftgp000huwagaw00g1zv" data-title="【JLU】 吉林大学校园网上网攻略汇总与补充" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-【方法论】再论如何读书——对过去阅读的总结与对未来的要求" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/" class="article-date">
+  <time class="dt-published" datetime="2024-06-08T12:12:00.000Z" itemprop="datePublished">2024-06-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/">【方法论】再论如何读书——对过去阅读的总结与对未来的要求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>陆爻齐在以前曾花心思读了不少关于“如何阅读”这个主题的书，有时对某条表示“顿悟”，然后做了几次就往在一边，什么笔记法啊，阅读法啊，大多十分的繁杂，连把整个流程走完一边都十分繁琐无聊，坚持下去于陆爻齐而言就是天方夜谭。在偶然瞥见某篇文章时，突然又有所顿悟，希望能把这个简单的思维贯彻执行，也在此作下记录。</p>
+<h1 id="知以阅读，行以实践"><a href="#知以阅读，行以实践" class="headerlink" title="知以阅读，行以实践"></a>知以阅读，行以实践</h1><h2 id="知行如何合一"><a href="#知行如何合一" class="headerlink" title="知行如何合一"></a>知行如何合一</h2><p>先摆结论，陆爻齐提倡“知行合一”，可以大致分两个场景</p>
+<ul>
+<li>带有强烈目的性的情况，也就是为了高效地获取知识而阅读，那么应该是“边做边读”最为有效，即一边阅读知识，一边将所读所学付诸实践。合适的时候，可以辅以康奈尔笔记这种“笔记”方法帮助记忆巩固。这种情景往往出现在大学牲速成期末考试中，或者狂热地为了实现某个目的而学习的过程中。</li>
+<li>然后就是其它部分，也就是几乎没有目的性，平时随意阅读的时候，这种情形陆爻齐不推荐将阅读所得以“笔记”方式记录，但通过博客、视频等方式将所学输出是推荐的。</li>
+<li>书是为人而看的。为了看书而看书，容易只会享受知识流淌过脑子的感觉。看书只是为了找到与自己共鸣的部分，即使一本书只有一句有用，那便足矣，充分吸收这句带来的益处便好。</li>
+</ul>
+<h2 id="脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰"><a href="#脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰" class="headerlink" title="脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰"></a>脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰</h2><p>这里说说陆爻齐的理由吧。</p>
+<p>上大学来，陆爻齐曾尝试过自主泛读所谓的“杂书”，也做了些所谓“笔记”，但现在回顾，所写所记，全部忘在角落蒙尘，若非今日书写此文，定会继续被遗忘。即使未来真的遇到能用里面的知识解决问题，陆爻齐也一定会几乎从零开始。</p>
+<p>与之相对，陆爻齐为了解决重装系统、电脑故障、自己的项目维护问题甚至期末考试等，而学到的东西即使有段时间未碰，也深深印刻在脑内。</p>
+<p>陆爻齐也并非没有尝试解决几乎无目的性学习这种情况的问题，当前想到的便是采用“输出”来实现“知行合一”，比如写博客、做视频。这也正是陆爻齐写<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luyaoqi/p/17968076">重装系统记录</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luyaoqi/p/18172286">Git报错解决</a>等文章的用意。写完博客，这些知识也就在我试图输出的时候，通过整理很好地吸收了。</p>
+<p>陆爻齐在想，或许是所谓阅读得来的知识对人脑而言还是过于抽象了。简单的说，平时使用没用过的东西，比起把“使用说明”背下来，直接上手使用实践或许带来的印象更为深刻吧。</p>
+<h2 id="细谈阅读过程"><a href="#细谈阅读过程" class="headerlink" title="细谈阅读过程"></a>细谈阅读过程</h2><p>除了应试需要将规定内容几乎一字不落地吸收外，其他情况下可按几步走</p>
+<ol>
+<li>看目录，锁定感兴趣&#x2F;最需要的部分</li>
+<li>浏览（1）锁定的部分，适当的时候略览与所需也匹配的部分</li>
+<li>实践，输出所学内容</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>综上，除了带有强烈目的性，容易达成“知行合一”情景的阅读场景，其余场景也要尽量达成“知行合一”。谨以此文，献给为曾经如何读书而迷茫的陆爻齐，让他今后不再烦恼于此</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/" data-id="cm7j3fth90025uwag42mph88c" data-title="【方法论】再论如何读书——对过去阅读的总结与对未来的要求" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[Git Error]error Invalid path 报错，clone 失败，文件夹空白问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/04/%5BGit%20Error%5Derror%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
+  <time class="dt-published" datetime="2024-05-04T06:48:00.000Z" itemprop="datePublished">2024-05-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/05/04/%5BGit%20Error%5Derror%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><p>可能是在 clone 某仓库后出现形如下面报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/*.git</span><br><span class="line">Cloning into &#x27;*&#x27;...</span><br><span class="line">remote: Enumerating objects: *, done.</span><br><span class="line">remote: Counting objects: 100% (*/*), done.</span><br><span class="line">remote: Compressing objects: 100% (*/*), done.</span><br><span class="line">remote: Total * (delta *), reused * (delta *), pack-reused *</span><br><span class="line">Receiving objects: 100% (*/*), * MiB | 8.40 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (*/*), done.</span><br><span class="line">error: invalid path &#x27;*.md&#x27;</span><br><span class="line">fatal: unable to checkout working tree</span><br><span class="line">warning: Clone succeeded, but checkout failed.</span><br><span class="line">You can inspect what was checked out with &#x27;git status&#x27;</span><br><span class="line">and retry with &#x27;git restore --source=HEAD :/&#x27;</span><br></pre></td></tr></table></figure>
+<p>而且仓库里除了.git文件夹就“一尘不染”。</p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>在仓库的文件夹中打开终端，并输入<br><code>git config core.protectNTFS false</code><br>大致意思是关闭文件保护之类的，然后切换为刚刚的分支，如<br><code>git checkout main</code><br>然后文件夹就正常咯</p>
+<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>一个简单记录，并非笔者原创的方法，只是想以自己的方式记录该方法。</p>
+<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zackary/p/13702643.html">https://www.cnblogs.com/zackary/p/13702643.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/04/[Git%20Error]error%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="cm7j3ftgp000fuwaghjo19ha9" data-title="【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-【方法论】如何读论文 李沐视频笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time class="dt-published" datetime="2024-03-25T08:57:00.000Z" itemprop="datePublished">2024-03-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/">【方法论】如何读论文 李沐视频笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内容不多，但姑且记下来加深印象好了</p>
+<p>[视频链接]（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H44y1t75x/?spm_id_from=333.788&vd_source=0e55873fcd6a0d01839a7f7f37c36254%EF%BC%89">https://www.bilibili.com/video/BV1H44y1t75x/?spm_id_from=333.788&amp;vd_source=0e55873fcd6a0d01839a7f7f37c36254）</a></p>
+<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><h2 id="总概"><a href="#总概" class="headerlink" title="总概"></a>总概</h2><p>读论文的重点在于筛选出适合自己的论文，通过三遍阅读来找出并吸收</p>
+<p>论文大致分为<br>1、标题 title<br>2、摘要 abstract<br>3、介绍 introduction<br>4、方法 method<br>5、实验 exp<br>6、结论 conclusion</p>
+<h2 id="第一遍阅读"><a href="#第一遍阅读" class="headerlink" title="第一遍阅读"></a>第一遍阅读</h2><p>只看标题、摘要和结论，从中判断论文的方向是否是自己所需</p>
+<h2 id="第二遍阅读"><a href="#第二遍阅读" class="headerlink" title="第二遍阅读"></a>第二遍阅读</h2><p>看介绍和方法、实验中的图表，搞清图表每一个指标的含义，是这个方法多好，比别人厉害多少什么的</p>
+<h2 id="第三遍阅读"><a href="#第三遍阅读" class="headerlink" title="第三遍阅读"></a>第三遍阅读</h2><p>全面仔细阅读，搞清楚每一步的过程、目的，其中的公式、证明可忽略，目的是跟着作者的思路复现一次论文</p>
+<p>结束阅读后脑子里能大致复现内容，这就是一次阅读。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" data-id="cm7j3fth90028uwagg9go32v2" data-title="【方法论】如何读论文 李沐视频笔记" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页 &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

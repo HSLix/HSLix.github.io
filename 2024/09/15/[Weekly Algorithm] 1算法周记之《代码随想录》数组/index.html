@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Weekly Algorithm】 算法周记之《代码随想录》数组 | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="学习小结前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。 也学到要坚持循环不变原则，即有些原则在循环中应保持不变，以统一后续操作，方便完成循环，具体可查看螺旋矩阵的部分。 数组二分查找正例 代码随想录 (programmercarl.com)  二分查找重点是搞清楚边界，下面是左闭右开的写法  参考代码随想录思路的解法 1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】 算法周记之《代码随想录》数组">
+<meta property="og:url" content="http://example.com/2024/09/15/[Weekly%20Algorithm]%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。 也学到要坚持循环不变原则，即有些原则在循环中应保持不变，以统一后续操作，方便完成循环，具体可查看螺旋矩阵的部分。 数组二分查找正例 代码随想录 (programmercarl.com)  二分查找重点是搞清楚边界，下面是左闭右开的写法  参考代码随想录思路的解法 1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-15T04:03:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.972Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[Weekly Algorithm] 1算法周记之《代码随想录》数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/15/%5BWeekly%20Algorithm%5D%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/" class="article-date">
+  <time class="dt-published" datetime="2024-09-15T04:03:00.000Z" itemprop="datePublished">2024-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Weekly Algorithm】 算法周记之《代码随想录》数组
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。</p>
+<p>也学到要坚持循环不变原则，即有些原则在循环中应保持不变，以统一后续操作，方便完成循环，具体可查看螺旋矩阵的部分。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="正例"><a href="#正例" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#%E6%80%BB%E7%BB%93">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>二分查找重点是搞清楚边界，下面是左闭右开的写法</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int func(vector&lt;int&gt; nums, int target) &#123;</span><br><span class="line">	int left = 0, right = nums.size(), middle;</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">    	middle = (left + right) / 2;</span><br><span class="line">        if (nums[middle] &gt; target) right = middle;</span><br><span class="line">        else if (nums[middle] &lt; target) left = middle + 1;</span><br><span class="line">        else return middle;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>左闭右开，即 num[left] 在搜索范围内（可能为 target），num[right] 刚好不在，所以中间更新时也有所区别，left 得是 middle + 1，因为 middle 处已确认不是 target</p>
+</li>
+<li><p>倘若考虑闭区间，将 while 改 <code>while (left &lt;= right)</code>, right 改 <code>right = nums.size() - 1</code>，<code>right = middle - 1</code>即可</p>
+</li>
+</ul>
+<h3 id="补充例题"><a href="#补充例题" class="headerlink" title="补充例题"></a>补充例题</h3><h4 id="leetcode-查找数组中元素的第一个和最后一个位置"><a href="#leetcode-查找数组中元素的第一个和最后一个位置" class="headerlink" title="leetcode_查找数组中元素的第一个和最后一个位置"></a>leetcode_查找数组中元素的第一个和最后一个位置</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0034.%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE.html">代码随想录</a></p>
+</li>
+<li><p>首先，可以用两次二分法确认元素的左右边界</p>
+<p>最重要的是，分清查找后的三种情况  </p>
+<ol>
+<li>元素大小在数组外，自然不在数组中，比如数组中最大的是9，target 是 12；</li>
+<li>元素大小在数组内，但不在数组中，比如target 是 5，但数组为……4，6……；</li>
+<li>元素在数组中</li>
+</ol>
+</li>
+</ul>
+<p>如此一来，可以设置变量，检测二分法找边界时，是否有更新边界，两次二分法有一次没有更新边界的情况，都说明元素大小在数组外  </p>
+<p>当两次都更新了边界，就可以看看给出的边界是否时target，不是的话属于第二种情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = searchLeft(nums, target), right = searchRight(nums, target);</span><br><span class="line">        vector&lt;int&gt;result(2);</span><br><span class="line">        // 处理数在外的的情况</span><br><span class="line">        if (left == -2 || right == -2) &#123;</span><br><span class="line">            result[0] = -1; result[1] = -1;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        // 处理数在不在其中但大小在中间的情况</span><br><span class="line">        else if (nums[left] != target) &#123;</span><br><span class="line">            result[0] = -1; result[1] = -1;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        // 处理数在其中的情况</span><br><span class="line">        result[0] = left, result[1] = right - 1;</span><br><span class="line">        return result;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 找到左边界的二分法</span><br><span class="line">    int searchLeft(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = 0, right = nums.size(), middle = 0;</span><br><span class="line">        int leftBoarder = -2;</span><br><span class="line"></span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (nums[middle] &lt; target) &#123;</span><br><span class="line">                left = middle + 1; </span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">                leftBoarder = right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //cout &lt;&lt; leftBoarder &lt;&lt; endl;</span><br><span class="line">        return leftBoarder;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 找到右边界的二分法</span><br><span class="line">    int searchRight(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = 0, right = nums.size(), middle = 0;</span><br><span class="line">        int rightBoarder = -2;</span><br><span class="line"></span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (nums[middle] &lt;= target) &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">                rightBoarder = left;</span><br><span class="line">            &#125; </span><br><span class="line">            else right = middle; </span><br><span class="line">        &#125;</span><br><span class="line">        //cout &lt;&lt; rightBoarder &lt;&lt; endl;</span><br><span class="line">        return rightBoarder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-x的平方根"><a href="#leetcode-x的平方根" class="headerlink" title="leetcode_x的平方根"></a>leetcode_x的平方根</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sqrtx/description/">69. x 的平方根 - 力扣（LeetCode）</a></li>
+<li>即找到平方为 x 的平方根的整数部分</li>
+<li>毕竟就是算术平方根，就用二分法逼近即可，注意 middle * middle 可能超 int，用 long long 就行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int mySqrt(int x) &#123;</span><br><span class="line">        int result = 0, left = 0, right = x + 1; </span><br><span class="line">        unsigned long long middle = 0;</span><br><span class="line">		// 二分试那个数平方恰小于等于的</span><br><span class="line">        while(left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (middle * middle &gt; x) &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">                result = middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-有效的完全平方数"><a href="#leetcode-有效的完全平方数" class="headerlink" title="leetcode_有效的完全平方数"></a>leetcode_有效的完全平方数</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-perfect-square/description/">367. 有效的完全平方数 - 力扣（LeetCode）</a></li>
+<li>即判断当前数是否为完全平方数，二分法找个平方为该数即可</li>
+<li>与上个平方类似，不多说， [[leetcode_x的平方根]]</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isPerfectSquare(int num) &#123;</span><br><span class="line">        unsigned long long left = 0, right = num, middle = 0;</span><br><span class="line">        // 二分法试出那个平方为 num 的数</span><br><span class="line">        while (left &lt;= right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (middle * middle &gt; num) &#123;</span><br><span class="line">                right = middle - 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else if (middle * middle &lt; num) &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h2><h3 id="正例-1"><a href="#正例-1" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></li>
+<li>暴力解法<br>即每次遇到要删除的元素，就把数组后面每一位向左覆盖一位  </li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">            if (nums[i] == val) &#123;</span><br><span class="line">                for (int j = i; j &lt; size - 1; j++) &#123;</span><br><span class="line">                    nums[j] = nums[j + 1];</span><br><span class="line">                &#125;</span><br><span class="line">                size--;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>双指针法<br>快指针去找元素，慢指针是新数组的元素  </li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        int fast_p = 0, slow_p = 0;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        for (fast_p = 0; fast_p &lt; size; fast_p++) &#123;</span><br><span class="line">            if (nums[fast_p] != val) &#123;</span><br><span class="line">                nums[slow_p++] = nums[fast_p];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return slow_p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例题-1"><a href="#补充例题-1" class="headerlink" title="补充例题"></a>补充例题</h3><h4 id="leetcode-重复删除有序数组中的重复项"><a href="#leetcode-重复删除有序数组中的重复项" class="headerlink" title="leetcode_重复删除有序数组中的重复项"></a>leetcode_重复删除有序数组中的重复项</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></li>
+<li>即数组去重</li>
+<li>双指针秒了</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size(), slow = 0, fast = 0;</span><br><span class="line">        int counter = 1;</span><br><span class="line">        for (fast = 1; fast &lt; size; fast++) &#123;</span><br><span class="line">        	// 不同的情况做个覆盖</span><br><span class="line">            if (nums[slow] != nums[fast]) &#123;</span><br><span class="line">                nums[++slow] = nums[fast];</span><br><span class="line">                counter++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return counter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-移动零"><a href="#leetcode-移动零" class="headerlink" title="leetcode_移动零"></a>leetcode_移动零</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">283. 移动零 - 力扣（LeetCode）</a></li>
+<li>即保持非零数字顺序，零全放右侧</li>
+<li>双指针解决，记得有个 swap 函数可用于向量就方便些，简单地说，就是让快指针去找非零数，然后替换到慢指针所在的地方，若快指针遇到零就不换，跳过就是。</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void moveZeroes(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        int slow = 0, fast = 0;</span><br><span class="line">        for (fast = 0; fast &lt; size; fast++) &#123;</span><br><span class="line">        	// 快指针不为 0 时，快慢指针换值并使慢指针右移</span><br><span class="line">            if (nums[fast] != 0) &#123;</span><br><span class="line">                swap(nums[slow++], nums[fast]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-比较含退格的字符串"><a href="#leetcode-比较含退格的字符串" class="headerlink" title="leetcode_比较含退格的字符串"></a>leetcode_比较含退格的字符串</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/description/">844. 比较含退格的字符串 - 力扣（LeetCode）</a></li>
+</ul>
+</li>
+<li>该题思路挺多，不过还得是双指针</li>
+<li>可以用栈来改两个字符串，陆爻齐选择用双指针来改两字符串，也就是用慢指针确认前面的字符是什么，快指针去找要放在字符串的字符，换到慢指针处，与移动零的区别是，遇到 ‘#’ 时，慢指针应向左一格，让下次的字符覆盖上个字符。</li>
+<li>也有思路从后向前双指针同时比较（退格键的左侧不重要，右侧可确定）</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool backspaceCompare(string s, string t) &#123;</span><br><span class="line">        work(s);</span><br><span class="line">        work(t);</span><br><span class="line">        return s==t;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 使字符串变成处理完退格字符后的字符串</span><br><span class="line">    void work(string &amp;s) &#123;</span><br><span class="line">        int size = s.size(), slow = 0, fast = 0;</span><br><span class="line">        for (fast = 0; fast &lt; size; fast++) &#123;</span><br><span class="line">            if (s[fast] != &#x27;#&#x27;) &#123;</span><br><span class="line">                s[slow++] = s[fast];</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (slow &gt; 0) &#123;</span><br><span class="line">                    slow--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s = s.substr(0, slow);</span><br><span class="line">        //cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-有序数组的平方"><a href="#leetcode-有序数组的平方" class="headerlink" title="leetcode_有序数组的平方"></a>leetcode_有序数组的平方</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/solutions/2806253/xiang-xiang-shuang-zhi-zhen-cong-da-dao-blda6/">977. 有序数组的平方 - 力扣（LeetCode）</a></li>
+<li>即将非递减的数组（含负数），各位平方后再以非递减序列排成数组</li>
+<li>从两侧向中间检测，也是双指针罢</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int left = 0, size = nums.size(), right = size - 1;</span><br><span class="line">        vector&lt;int&gt; result(size);</span><br><span class="line">        for (int i = size - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        	// 左右比较，选大者放后面，循环至尽</span><br><span class="line">            if (nums[left] * nums[left]&gt; nums[right] * nums[right]) &#123;</span><br><span class="line">                result[i] = nums[left] * nums[left];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                result[i] = nums[right] * nums[right];</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><h3 id="正例-2"><a href="#正例-2" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>滑动窗口可以视为双指针的特殊形态，以 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/">长度最小的子数组</a> 为例</li>
+<li>该题要求一个数组中连续元素和大于 target 的最小长度是多少</li>
+<li>暴力解法可以用两个 for 循环嵌套，一个相当于起始，一个相当于终止，穷举出所有可能，不过时间复杂度为 O(n^2)</li>
+<li>那么接下来就是 O(n) 的滑动窗口啦，该方法用 for 循环遍历终止位置，当快指针已遍历的数值满足需求时，记录长度，同时慢指针也向右移动至不满足要求，此时快指针再向右移动找下一个满足需求的情况</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size(), sum = 0, least_len = INT32_MAX, i = 0, sub_len;</span><br><span class="line">        for (int j = 0; j &lt; size; j++) &#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            while (sum &gt;= target) &#123;</span><br><span class="line">                sub_len = j - i + 1;</span><br><span class="line">                if (least_len &gt; sub_len) &#123;</span><br><span class="line">                    least_len = sub_len;</span><br><span class="line">                &#125;</span><br><span class="line">                sum -= nums[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return (least_len == INT32_MAX) ? 0 : least_len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子"><a href="#补充例子" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="leetcode-水果成篮"><a href="#leetcode-水果成篮" class="headerlink" title="leetcode_水果成篮"></a>leetcode_水果成篮</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/">904. 水果成篮 - 力扣（LeetCode）</a></li>
+<li>该题就是求数组中最长的连续两数字序列长度</li>
+<li>要点是运用哈希表来做查重记录工作</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int totalFruit(vector&lt;int&gt;&amp; fruits) &#123;</span><br><span class="line">        unordered_map&lt;int,int&gt; cns;</span><br><span class="line">        int size = fruits.size();</span><br><span class="line">        int left = 0;</span><br><span class="line">        int max_len = 0;</span><br><span class="line">        for (int right = 0; right &lt; size; right++) &#123;</span><br><span class="line">        	// 记录第一次遇到该数字</span><br><span class="line">            if (cns.find(fruits[right]) == cns.end()) &#123;</span><br><span class="line">                //cns.insert(&#123;fruits[right], 1&#125;);</span><br><span class="line">                cns[fruits[right]] = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            // 重复计数</span><br><span class="line">            else &#123;</span><br><span class="line">                cns[fruits[right]]++;</span><br><span class="line">            &#125;</span><br><span class="line">			</span><br><span class="line">            // 当种类超过 2，开始去除一个</span><br><span class="line">            while (cns.size() &gt; 2) &#123;</span><br><span class="line">                cns[fruits[left]]--;</span><br><span class="line">                if (cns[fruits[left]] == 0) &#123;</span><br><span class="line">                    cns.erase(fruits[left]);</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">			</span><br><span class="line">            // 更新值</span><br><span class="line">            max_len = max(max_len, right - left + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return max_len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-最小覆盖子串"><a href="#leetcode-最小覆盖子串" class="headerlink" title="leetcode_最小覆盖子串"></a>leetcode_最小覆盖子串</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/">76. 最小覆盖子串 - 力扣（LeetCode）</a></li>
+<li>该题就是在字符串 s 上，找涵盖字符串 t 所有字符的最小字符子串</li>
+<li>只好用两字典存已有字符和目标字符，其余还是沿用滑动窗口，不过效率很低</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    unordered_map&lt;char, int&gt; cns, target;</span><br><span class="line">    string minWindow(string s, string t) &#123;</span><br><span class="line">        string result = &quot;&quot;;</span><br><span class="line">        int min_len = INT32_MAX, start_ind = 0;</span><br><span class="line"></span><br><span class="line">        // 初始化 target 和 cns</span><br><span class="line">        for(auto it : t) &#123;</span><br><span class="line">            target[it]++;</span><br><span class="line">            cns[it] = 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int left = 0, right = 0;</span><br><span class="line">        int size = s.size();</span><br><span class="line"></span><br><span class="line">        for (right = 0; right &lt; size; right++) &#123;</span><br><span class="line">            if (cns.find(s[right]) != cns.end()) &#123;</span><br><span class="line">                cns[s[right]]++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 满足就调整左边窗口</span><br><span class="line">            while (check()) &#123;</span><br><span class="line">                if (right - left + 1 &lt; min_len) &#123;</span><br><span class="line">                    //cout &lt;&lt; &quot;left &quot; &lt;&lt; left &lt;&lt; &quot;;&quot; &lt;&lt; &quot;right &quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">                    start_ind = left;</span><br><span class="line">                    min_len = right - left + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                if (cns.find(s[left]) != cns.end()) &#123;</span><br><span class="line">                    cns[s[left]]--;</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 排除无结果的错误</span><br><span class="line">        if (min_len == INT32_MAX) &#123;</span><br><span class="line">            min_len = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        result = s.substr(start_ind, min_len);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检查已有条件是否满足</span><br><span class="line">    bool check() &#123;</span><br><span class="line">        for (auto &amp;it : cns) &#123;</span><br><span class="line">            if (it.second &lt; target[it.first]) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title="螺旋矩阵"></a>螺旋矩阵</h2><h3 id="正例-3"><a href="#正例-3" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>即将数组以某种特定方式赋值排列</li>
+<li>没有特定的方法，重点是坚持循环不变原则，即有些处理时统一方法，比如螺旋矩阵换方向赋值时，可坚持左闭右开的原则赋值</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res = vector(n, vector&lt;int&gt;(n, 0));</span><br><span class="line">        int loop = n / 2; // 主循环次数</span><br><span class="line">        int middle = n / 2; // 记录矩阵中间的值</span><br><span class="line">        int startx = 0, starty = 0; // 记录每次循环的起点/终点</span><br><span class="line">        int set_num = 1; // 每次放入的数字</span><br><span class="line">        int off_set = 1; // 控制每循环填数个数</span><br><span class="line">        int i, j;</span><br><span class="line"></span><br><span class="line">        while(loop-- &gt;= 0) &#123;</span><br><span class="line">            i = startx, j = starty;</span><br><span class="line">            // 左上到右上</span><br><span class="line">            for (;j &lt; n - off_set; j++) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 右上到右下</span><br><span class="line">            for (;i &lt; n - off_set; i++) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 右下到左下</span><br><span class="line">            for (;j &gt; starty; j--) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 左下到左上</span><br><span class="line">            for (;i &gt; startx; i--) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">            startx++;</span><br><span class="line">            starty++;</span><br><span class="line">            off_set++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 对奇数矩阵补中间</span><br><span class="line">        if (n % 2 != 0) &#123;</span><br><span class="line">            res[middle][middle] = set_num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子-1"><a href="#补充例子-1" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="leetcode-螺旋遍历二维数组"><a href="#leetcode-螺旋遍历二维数组" class="headerlink" title="leetcode_螺旋遍历二维数组"></a>leetcode_螺旋遍历二维数组</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/description/">54. 螺旋矩阵 - 力扣（LeetCode）</a></li>
+<li>该题要将一个 m*n 的矩阵顺时针输出其中的内容</li>
+<li>代码随想录没解，暂时也没想到那个思路的延申</li>
+<li>可借鉴思路是，每次按向右，向下，向左，向上四次输出到头，每个方向走完，判断下下个方向是否还有路，无则马上退出</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        int m = matrix.size(), n = matrix[0].size();</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        </span><br><span class="line">        int u = 0, d = m - 1; // 上下</span><br><span class="line">        int l = 0, r = n - 1; // 左右</span><br><span class="line"></span><br><span class="line">        while (true) &#123;</span><br><span class="line">            for (int i = l; i &lt; r + 1; i++) &#123;</span><br><span class="line">                res.push_back(matrix[u][i]); // 向右</span><br><span class="line">            &#125;</span><br><span class="line">            if (++u &gt; d) break;// 上边界大于下边界</span><br><span class="line">            for (int i = u; i &lt; d + 1; i++) &#123;</span><br><span class="line">                res.push_back(matrix[i][r]); // 向下</span><br><span class="line">            &#125;</span><br><span class="line">            if (--r &lt; l) break; // 右边界左于左边界</span><br><span class="line">            for (int i = r; i &gt; l - 1; i--) &#123;</span><br><span class="line">                res.push_back(matrix[d][i]); // 向左</span><br><span class="line">            &#125;</span><br><span class="line">            if (--d &lt; u) break; // 下边界高于上边界</span><br><span class="line">            for (int i = d; i &gt; u - 1; i--) &#123;</span><br><span class="line">                res.push_back(matrix[i][l]); // 向上</span><br><span class="line">            &#125;</span><br><span class="line">            if (++l &gt; r) break; // 左边界右于右边界</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="区间和"><a href="#区间和" class="headerlink" title="区间和"></a>区间和</h2><h3 id="正例-4"><a href="#正例-4" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1070">58. 区间和（第九期模拟笔试） (kamacoder.com)</a></li>
+<li>就是要短时间内多次求一个数组上一段区间的数之和</li>
+<li>要用到前缀和，也就是在初始化数组时，用另一个数组存当前下标之前所有数字的和（每次存新数就更新累加和即可）</li>
+<li>最后求区间和时，用前缀和数组的右下标减左下标即可</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int count = 0,left = 0, right = 0;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;count);</span><br><span class="line">    vector&lt;int&gt; num(count), pre_sum(count);</span><br><span class="line">    int store_sum = 0;</span><br><span class="line">    </span><br><span class="line">    // 记录数组同时计算前缀和</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;num[i]);</span><br><span class="line">        store_sum += num[i];</span><br><span class="line">        pre_sum[i] = store_sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 持续接收左右下标至输入结束</span><br><span class="line">    while(~scanf(&quot;%d %d&quot;, &amp;left, &amp;right)) &#123;</span><br><span class="line">        if (left == 0) &#123;</span><br><span class="line">            printf(&quot;%d\n&quot;,pre_sum[right]);</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;, pre_sum[right] - pre_sum[left-1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子-2"><a href="#补充例子-2" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="开发商购买土地"><a href="#开发商购买土地" class="headerlink" title="开发商购买土地"></a>开发商购买土地</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1044">44. 开发商购买土地（第五期模拟笔试） (kamacoder.com)</a></li>
+<li>给一个 m*n 的数组，可能对每行每列横切&#x2F;竖切，求两边差值最小值</li>
+<li>可前缀和记录横向或者竖向的前缀和，然后就可方便大量计算差值</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int m, n;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; block(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    vector&lt;int&gt; horizontal(n, 0);</span><br><span class="line">    vector&lt;int&gt; vertical(m, 0);</span><br><span class="line">    int result = INT32_MAX;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    </span><br><span class="line">    // 初始化，顺便把横向前缀和求完</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; block[i][j];</span><br><span class="line">            horizontal[i] += block[i][j];</span><br><span class="line">            sum += block[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 计算垂直前缀和</span><br><span class="line">    for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            vertical[j] += block[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int horizontal_cut = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        horizontal_cut += horizontal[i];</span><br><span class="line">        result = min(result, abs(sum - horizontal_cut - horizontal_cut));// （sum - horizontal_cut）是一个公司的子区域价值，horizontal_cut是另一公司的子区域价值</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int vertical_cut = 0;</span><br><span class="line">    for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">        vertical_cut += vertical[j];</span><br><span class="line">        result = min(result, abs(sum - vertical_cut - vertical_cut));</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/15/[Weekly%20Algorithm]%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/" data-id="cm7j3fth0001juwag9ojt7gs0" data-title="【Weekly Algorithm】 算法周记之《代码随想录》数组" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/09/16/%5BConda%5D%20miniconda%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【Conda】 miniconda 使用手册
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/28/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%957%20Homework2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

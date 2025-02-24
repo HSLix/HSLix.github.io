@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>【Weekly Algorithm】算法周记之《代码随想录》图论（三） | LuYaoQi&#39;s Blogs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="学习小结本周跟随《代码随想录》继续学习关于图论的知识，主要是关于并查集以及最小生成树的两个经典算法（prim和kruskal）。 并查集的作用在于快速区分不同的类别并补充内容。prim 则是从点的角度从图中划分出最小生成树，kruskal 是划分边来种最小生成树。 图论 有向图的完全可达性 代码随想录  105. 有向图的完全可达性  问题：给一个有向图，但求中的1节点是否能到达其他节点。  方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Weekly Algorithm】算法周记之《代码随想录》图论（三）">
+<meta property="og:url" content="http://example.com/2024/02/23/[Weekly%20Algorithm]%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/index.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="学习小结本周跟随《代码随想录》继续学习关于图论的知识，主要是关于并查集以及最小生成树的两个经典算法（prim和kruskal）。 并查集的作用在于快速区分不同的类别并补充内容。prim 则是从点的角度从图中划分出最小生成树，kruskal 是划分边来种最小生成树。 图论 有向图的完全可达性 代码随想录  105. 有向图的完全可达性  问题：给一个有向图，但求中的1节点是否能到达其他节点。  方法">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-02-23T15:31:00.000Z">
+<meta property="article:modified_time" content="2025-02-24T13:13:19.972Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="LuYaoQi's Blogs" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">LuYaoQi&#39;s Blogs</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Hello my World</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-[Weekly Algorithm] 19算法周记之《代码随想录》图论（三）" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/" class="article-date">
+  <time class="dt-published" datetime="2024-02-23T15:31:00.000Z" itemprop="datePublished">2024-02-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      【Weekly Algorithm】算法周记之《代码随想录》图论（三）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》继续学习关于图论的知识，主要是关于并查集以及最小生成树的两个经典算法（prim和kruskal）。</p>
+<p>并查集的作用在于快速区分不同的类别并补充内容。prim 则是从点的角度从图中划分出最小生成树，kruskal 是划分边来种最小生成树。</p>
+<h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><ul>
+<li><h2 id="有向图的完全可达性"><a href="#有向图的完全可达性" class="headerlink" title="有向图的完全可达性"></a>有向图的完全可达性</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0105.%E6%9C%89%E5%90%91%E5%9B%BE%E7%9A%84%E5%AE%8C%E5%85%A8%E5%8F%AF%E8%BE%BE%E6%80%A7.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1177">105. 有向图的完全可达性</a></p>
+</li>
+<li><p>问题：给一个有向图，但求中的1节点是否能到达其他节点。</p>
+</li>
+<li><p>方法：从 1 开始 dfs&#x2F;bfs 就可以，重点在于用邻接表存储</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;list&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">void dfs(const vector&lt;list&lt;int&gt;&gt; grid, vector&lt;bool&gt; &amp;visited, int &amp;count, int node) &#123;</span><br><span class="line">    count++;</span><br><span class="line">    visited[node] = true;</span><br><span class="line">    // 遍历每个节点所链接的部分</span><br><span class="line">    for (const auto &amp;i : grid[node]) &#123;</span><br><span class="line">        if (visited[i]) continue;</span><br><span class="line">        dfs(grid, visited, count, i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, k;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    </span><br><span class="line">    vector&lt;list&lt;int&gt;&gt; grid(n+1);</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; k; i++) &#123;</span><br><span class="line">        int a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        grid[a].push_back(b);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    vector&lt;bool&gt; visited(n+1, false);</span><br><span class="line">    int count = 0;</span><br><span class="line">    </span><br><span class="line">    dfs(grid, visited, count, 1);</span><br><span class="line">    </span><br><span class="line">    int result;</span><br><span class="line">    if (count == n) &#123;</span><br><span class="line">        result = 1;</span><br><span class="line">    &#125;</span><br><span class="line">    else &#123;</span><br><span class="line">        result = -1;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    // 测试输出图</span><br><span class="line">    // for (int i = 0; i &lt; n+1; i++) &#123;</span><br><span class="line">    //     cout &lt;&lt; i &lt;&lt; &quot;: &quot;;</span><br><span class="line">    //     for (auto &amp;j : grid[i]) &#123;</span><br><span class="line">    //         cout &lt;&lt; j &lt;&lt; &quot; &quot;;</span><br><span class="line">    //     &#125;</span><br><span class="line">    //     cout &lt;&lt; endl;</span><br><span class="line">    // &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="岛屿的周长"><a href="#岛屿的周长" class="headerlink" title="岛屿的周长"></a>岛屿的周长</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0106.%E5%B2%9B%E5%B1%BF%E7%9A%84%E5%91%A8%E9%95%BF.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1178">106. 岛屿的周长</a></p>
+</li>
+<li><p>题意：二维数组中的岛屿没有内部水，求该一个岛屿的边缘周长。</p>
+</li>
+<li><p>方法：两个思路，一个是遍历岛屿，求每块的边界；第二个思路是求岛屿块数，4*块数 - 相邻区块的重叠边，该思路只要注意求相邻区块的方向不要重合，比如每个区块都只检查左上两个方向。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// 一格的四个方向</span><br><span class="line">int dr[4][2] = &#123;1, 0, -1, 0, 0, 1, 0, -1&#125;;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    </span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; grid[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 遍历统计边</span><br><span class="line">    int edge_num = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            if (grid[i][j] == 0) continue;</span><br><span class="line">            </span><br><span class="line">            for (int k = 0; k &lt; 4; k++) &#123;</span><br><span class="line">                int nx = i + dr[k][0];</span><br><span class="line">                int ny = j + dr[k][1];</span><br><span class="line">                </span><br><span class="line">                if (nx &lt; 0 || nx &gt;= n || ny &lt; 0 || ny &gt;= m || grid[nx][ny] == 0) &#123;</span><br><span class="line">                    edge_num++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; edge_num &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="寻找存在的路径"><a href="#寻找存在的路径" class="headerlink" title="寻找存在的路径"></a>寻找存在的路径</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0107.%E5%AF%BB%E6%89%BE%E5%AD%98%E5%9C%A8%E7%9A%84%E8%B7%AF%E5%BE%84.html">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1179">107. 寻找存在的路径</a></p>
+</li>
+<li><p>题意：给一个无向图和两个点，由于无向图不是连通，要判断两点是否连通</p>
+</li>
+<li><p>方法：用并查集，每次输入边就联系两点的并查集。</p>
+</li>
+<li><p>参考代码随想录思路的解法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int find(vector&lt;int&gt; &amp;father, int a) &#123;</span><br><span class="line">    return father[a] == a ? a : father[a] = find(father, father[a]);// 路径压缩</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    // n个点 m条边</span><br><span class="line">    vector&lt;int&gt; father(n+1, -1);</span><br><span class="line">    </span><br><span class="line">    // 初始化并查集</span><br><span class="line">    for (int i = 0; i &lt; n+1; i++) &#123;</span><br><span class="line">        father[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; m; i++) &#123;</span><br><span class="line">        int a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        a = find(father, a);</span><br><span class="line">        b = find(father, b);</span><br><span class="line">        //cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">        if (a != b) father[a] = b;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // for (int i = 0; i &lt; n+1; i++) &#123;</span><br><span class="line">    //     cout &lt;&lt; father[i] &lt;&lt; endl;</span><br><span class="line">    // &#125;</span><br><span class="line">    </span><br><span class="line">    int source, destination;</span><br><span class="line">    cin &gt;&gt; source &gt;&gt; destination;</span><br><span class="line">    </span><br><span class="line">    // 本质上就是两个点是否属于统一个并查集（同一个无向连通图）</span><br><span class="line">    cout &lt;&lt; int(find(father, father[source])==find(father, father[destination])) &lt;&lt; endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="冗余连接"><a href="#冗余连接" class="headerlink" title="冗余连接"></a>冗余连接</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0108.%E5%86%97%E4%BD%99%E8%BF%9E%E6%8E%A5.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1181">108. 冗余连接</a></p>
+</li>
+<li><p>题意：给一个无向图的构建，但要求返回最后一个连成环的边</p>
+</li>
+<li><p>方法：用并查集，一旦检测出一个边的两个点在同一个并查集，就返回这条边</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int find(vector&lt;int&gt; &amp;father, int a)&#123; // 查找并查集所属类</span><br><span class="line">    return father[a] == a ? a : father[a] = find(father, father[a]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool join(vector&lt;int&gt; &amp;father, int a, int b) &#123; // 尝试合并两个点</span><br><span class="line">    a = find(father, a);</span><br><span class="line">    b = find(father, b);</span><br><span class="line">    if (a == b) return false;</span><br><span class="line">    father[a] = b;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    vector&lt;int&gt; father(n, 0); // 并查集</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123; // 初始化</span><br><span class="line">        father[i] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        int a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        if (!join(father, a, b)) &#123;</span><br><span class="line">            cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="冗余连接II"><a href="#冗余连接II" class="headerlink" title="冗余连接II"></a>冗余连接II</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0109.%E5%86%97%E4%BD%99%E8%BF%9E%E6%8E%A5II.html#%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1182">109. 冗余连接II</a></p>
+</li>
+<li><p>题意：[[冗余连接]]的有向图版。</p>
+</li>
+<li><p>方法，由于无向图变成有向图，就不能无脑找那个并查集重复的那条边，这只能避免成环的情况，无法避免一个点有两个父节点的情况。</p>
+</li>
+<li><p>参考代码随想录思路的解法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int n;</span><br><span class="line">vector&lt;int&gt; father(1001, 0);</span><br><span class="line"></span><br><span class="line">// 并查集初始化</span><br><span class="line">void init() &#123;</span><br><span class="line">    for (int i = 1; i &lt;= n; i++) father[i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 寻根</span><br><span class="line">int find(int u) &#123;</span><br><span class="line">    return father[u]==u ? u : father[u] = find(father[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 查看是否相同</span><br><span class="line">bool isSame(int p, int q) &#123;</span><br><span class="line">    return find(p) == find(q);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 加入并查集</span><br><span class="line">void join(int p, int q) &#123;</span><br><span class="line">    p = find(p);</span><br><span class="line">    q = find(q);</span><br><span class="line">    if (p == q) return;</span><br><span class="line">    father[p] = q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 在图里找到要删除的边</span><br><span class="line">// 原理是从前向后找到第一组同一个并查集的的一组点就行</span><br><span class="line">void deleteCircleEdge(const vector&lt;vector&lt;int&gt;&gt;&amp; edges) &#123;</span><br><span class="line">    init();</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        if (isSame(edges[i][0], edges[i][1])) &#123;</span><br><span class="line">            cout &lt;&lt; edges[i][0] &lt;&lt; &quot; &quot; &lt;&lt; edges[i][1] &lt;&lt; endl;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            join(edges[i][0], edges[i][1]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 判断去除边后剩下能否成树</span><br><span class="line">bool isDelOk(const vector&lt;vector&lt;int&gt;&gt; edges, int del) &#123;</span><br><span class="line">    init();</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        if (i == del) continue;</span><br><span class="line">        if (isSame(edges[i][0], edges[i][1]))&#123; // 出现环说明删除到错的边了，换另一条即可</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        join(edges[i][0], edges[i][1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; edges; // 边的记录</span><br><span class="line">    vector&lt;int&gt; inDegree(n+1, 0); // 入度</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        int a, b;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        edges.push_back(&#123;a,b&#125;);</span><br><span class="line">        inDegree[b]++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 倒序添加入度为2的点对应的边</span><br><span class="line">    vector&lt;int&gt; vec;</span><br><span class="line">    for (int i = n-1; i &gt;= 0; i--) &#123;</span><br><span class="line">        if (inDegree[edges[i][1]] == 2) &#123;</span><br><span class="line">            vec.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 处理非成环的情况</span><br><span class="line">    if (vec.size() &gt; 0) &#123;</span><br><span class="line">        // 只有两种情况，倒数第一条或者倒数第二条</span><br><span class="line">        // 因为有可能倒数第一条取出后，会产生孤立点，所以去除另一条边</span><br><span class="line">        if (isDelOk(edges, vec[0])) &#123;</span><br><span class="line">            cout &lt;&lt; edges[vec[0]][0] &lt;&lt; &quot; &quot; &lt;&lt; edges[vec[0]][1] &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else &#123;</span><br><span class="line">            cout &lt;&lt; edges[vec[1]][0] &lt;&lt; &quot; &quot; &lt;&lt; edges[vec[1]][1] &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        return 0;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 处理有向环</span><br><span class="line">    deleteCircleEdge(edges);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="最小生成树之prim"><a href="#最小生成树之prim" class="headerlink" title="最小生成树之prim"></a>最小生成树之prim</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0053.%E5%AF%BB%E5%AE%9D-prim.html#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1053">53. 寻宝（第七期模拟笔试）</a></p>
+</li>
+<li><p>题意：本质就是求最小生成树的值大小</p>
+</li>
+<li><p>方法：prim算法<br>分三步：  </p>
+<ol>
+<li>找到与最小生成树距离最近的节点（初始化就随便一个都行）</li>
+<li>把节点加入最小生成树</li>
+<li>根据加入节点，更新其他节点与最小生成树的距离</li>
+</ol>
+</li>
+<li><p>但是具体实现还有很多细节，写在了注释中。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;climits&gt;// INT_MAX</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int v, e;</span><br><span class="line">    cin &gt;&gt; v &gt;&gt; e;</span><br><span class="line">    </span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; grid(v+1, vector&lt;int&gt;(v+1, 0));</span><br><span class="line">    for (int i = 0; i &lt; e; i++) &#123;</span><br><span class="line">        int x, y, k;</span><br><span class="line">        cin &gt;&gt; x &gt;&gt; y &gt;&gt; k;</span><br><span class="line">        grid[x][y] = k;</span><br><span class="line">        grid[y][x] = k;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    vector&lt;int&gt; min_dist(v+1, 10001);// 题目最大值10000</span><br><span class="line">    vector&lt;bool&gt; visited(v+1, false);</span><br><span class="line">    // 找到构成最小生成树的v-1条边</span><br><span class="line">    for (int i = 1; i &lt; v; i++) &#123;</span><br><span class="line">        int min_val = INT_MAX;</span><br><span class="line">        int cur = -1;// 要加入最小生成树的点</span><br><span class="line">        </span><br><span class="line">        for (int j = 1; j &lt;= v; j++) &#123; // 遍历所有点</span><br><span class="line">            // 找一个不在树里面，且与最小生成树距离最小的点</span><br><span class="line">            if (!visited[j] &amp;&amp; min_dist[j] &lt; min_val) &#123;</span><br><span class="line">                min_val = min_dist[j];</span><br><span class="line">                cur = j;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        // 加入最小生成树的点</span><br><span class="line">        visited[cur] = true;</span><br><span class="line">        </span><br><span class="line">        // 遍历与加入点相连的其它点，更新与最小生成树的距离</span><br><span class="line">        for (int i = 1; i &lt;= v; i++) &#123;</span><br><span class="line">            if (visited[i]) continue; // 已在树内</span><br><span class="line">            if (grid[cur][i] == 0) continue; // 无连接</span><br><span class="line">            if (grid[cur][i] &lt; min_dist[i]) &#123;</span><br><span class="line">                min_dist[i] = grid[cur][i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int result = 0;</span><br><span class="line">    for (int i = 2; i &lt;= v; i++) &#123; // 之所以i从2开始，是因为min_dist[1]不会赋值</span><br><span class="line">    // 从理解的角度，1一开始就在树内，所以没有计算距离（或是距离为0）</span><br><span class="line">        result += min_dist[i];</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><h2 id="最小生成树之kruskal"><a href="#最小生成树之kruskal" class="headerlink" title="最小生成树之kruskal"></a>最小生成树之kruskal</h2></li>
+<li><p><a target="_blank" rel="noopener" href="https://www.programmercarl.com/kamacoder/0053.%E5%AF%BB%E5%AE%9D-Kruskal.html#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF">代码随想录</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1053">53. 寻宝（第七期模拟笔试）</a></p>
+</li>
+<li><p>题目：与[[最小生成树之prim]]一样，但方法不同。</p>
+</li>
+<li><p>方法：kruskal看边，而prim看点。简单地说，kruskal会升序遍历边，不断加入不同并查集的边，最后得到最小生成树。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;climits&gt;// INT_MAX</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">typedef struct _Edge &#123;</span><br><span class="line">    int l;</span><br><span class="line">    int r;</span><br><span class="line">    int val;</span><br><span class="line">&#125;Edge;</span><br><span class="line"></span><br><span class="line">int n = 10001;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt; father(n, 0);</span><br><span class="line"></span><br><span class="line">int find(int u) &#123;</span><br><span class="line">    return father[u]==u ? u : father[u] = find(father[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void join(int u, int v) &#123;</span><br><span class="line">    u = find(u);</span><br><span class="line">    v = find(v);</span><br><span class="line">    if (u == v) return;</span><br><span class="line">    father[u] = v;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bool isSame(int u, int v) &#123;</span><br><span class="line">    return find(u) == find(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void init() &#123;</span><br><span class="line">    for (int i = 0; i &lt; 10001; i++) &#123;</span><br><span class="line">        father[i] = i;</span><br><span class="line">    &#125;                                                     </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int v, e;</span><br><span class="line">    cin &gt;&gt; v &gt;&gt; e;</span><br><span class="line">    </span><br><span class="line">    vector&lt;Edge&gt; edge;</span><br><span class="line">    </span><br><span class="line">    while(e--) &#123;</span><br><span class="line">        int l, r, val;</span><br><span class="line">        cin &gt;&gt; l &gt;&gt; r &gt;&gt; val;</span><br><span class="line">        edge.push_back(&#123;l, r, val&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    sort(edge.begin(), edge.end(), [](Edge &amp;e1, Edge &amp;e2) &#123;return e1.val &lt; e2.val;&#125;);</span><br><span class="line">    </span><br><span class="line">    init();</span><br><span class="line">    int result = 0;</span><br><span class="line">    </span><br><span class="line">    for (const auto &amp; line : edge) &#123;</span><br><span class="line">        int l = find(line.l);</span><br><span class="line">        int r = find(line.r);</span><br><span class="line">        if (l != r) &#123;</span><br><span class="line">            join(l, r);</span><br><span class="line">            result += line.val;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/02/23/[Weekly%20Algorithm]%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/" data-id="cm7j3ftgz001guwagdypn9qjh" data-title="【Weekly Algorithm】算法周记之《代码随想录》图论（三）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2024/02/29/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%951%20Homework1%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          【CS61A-Fall-2020】学习记录一 Homework1 题解思路分享
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CINTA/" rel="tag">CINTA</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" rel="tag">播客笔记</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Algorithm/" style="font-size: 20px;">Algorithm</a> <a href="/tags/CINTA/" style="font-size: 10px;">CINTA</a> <a href="/tags/CS61A/" style="font-size: 17.14px;">CS61A</a> <a href="/tags/Conda/" style="font-size: 10px;">Conda</a> <a href="/tags/Git/" style="font-size: 10px;">Git</a> <a href="/tags/JLU/" style="font-size: 15.71px;">JLU</a> <a href="/tags/Python/" style="font-size: 18.57px;">Python</a> <a href="/tags/%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0/" style="font-size: 11.43px;">播客笔记</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 14.29px;">数据结构与算法</a> <a href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 11.43px;">方法论</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 11.43px;">机器学习</a> <a href="/tags/%E6%9D%82%E8%B0%88/" style="font-size: 12.86px;">杂谈</a> <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 10px;">深度学习</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+          </li>
+        
+          <li>
+            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 陆爻齐-LuYaoQi<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
