@@ -77,6 +77,558 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-[Weekly Algorithm] 3算法周记之《代码随想录》哈希表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/29/%5BWeekly%20Algorithm%5D%203%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%93%88%E5%B8%8C%E8%A1%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-09-29T15:59:00.000Z" itemprop="datePublished">2024-09-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/29/%5BWeekly%20Algorithm%5D%203%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%93%88%E5%B8%8C%E8%A1%A8/">【Weekly Algorithm】 算法周记之《代码随想录》哈希表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习哈希表部分，较深入地了解了哈希表的相关算法题，结合数组、set、map完成题目，并利用双指针解决部分题目。</p>
+<h1 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h1><h2 id="简评"><a href="#简评" class="headerlink" title="简评"></a>简评</h2><p>究其本质而言，就是数组，但可以通过给元素编码得其索引，以 O(1) 的效率访存，最适合检测该元素是否存在。</p>
+<h2 id="有效的字母异位词"><a href="#有效的字母异位词" class="headerlink" title="有效的字母异位词"></a>有效的字母异位词</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0242.%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D.html">代码随想录 (programmercarl.com)</a></li>
+<li>即检测一个字符串是否为另一个字符串的字母打散重组的单词</li>
+<li>字符可以通过 ASCII 码表来存储，遍历某个字符串，对应字符++，再遍历另一个对应字符–，最后所有字符都为 0 即为字母异位词</li>
+<li></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isAnagram(string s, string t) &#123;</span><br><span class="line">        // 记录每个字符对应次数，相当于哈希表</span><br><span class="line">        int word_rec[26] = &#123;0&#125;;</span><br><span class="line">        // 遍历某个字符串，记录对应字符出现次数</span><br><span class="line">        for (auto c : s) &#123;</span><br><span class="line">            word_rec[get_index(c)]++;</span><br><span class="line">        &#125;</span><br><span class="line">        // 遍历另一个字符串，把对应字符出现与上个字符串抵消</span><br><span class="line">        for (auto c : t) &#123;</span><br><span class="line">            word_rec[get_index(c)]--;</span><br><span class="line">        &#125;</span><br><span class="line">        // 若有字符没抵消干净，说明不是字母异位词</span><br><span class="line">        for (auto i : word_rec) &#123;</span><br><span class="line">            if (i != 0) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    inline int get_index(char c) &#123;</span><br><span class="line">        return int(c)-97;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="两个数组的交集"><a href="#两个数组的交集" class="headerlink" title="两个数组的交集"></a>两个数组的交集</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0349.%E4%B8%A4%E4%B8%AA%E6%95%B0%E7%BB%84%E7%9A%84%E4%BA%A4%E9%9B%86.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>本题与 [[有效的字母异位词]]，有点类似，不过检测的元素从字符变成数字，而且需要输出重合的部分</p>
+</li>
+<li><p>大致有两思路</p>
+<ol>
+<li>陆爻齐想到，用 unordered_map 先把某一个数组中有的数字记 1，随后遍历另一数组时，把当前 map 里有且值为 1 的部分改值到 2 并放到数组里；</li>
+<li>代码随想录用两个 set，其中一个用来存储某个数组唯一的所有元素，另一个存放结果，由于 set 会保证元素唯一，一旦找到交集就可以无脑 insert 进去</li>
+</ol>
+</li>
+<li><p>这里选择记录陆爻齐的思路</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; intersection(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2) &#123;</span><br><span class="line">        unordered_map&lt;int,int&gt; num_rec;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        // 遍历某个数组，记录其中存在数字</span><br><span class="line">        for (auto c : nums1) &#123;</span><br><span class="line">            if (num_rec.find(c) == num_rec.end()) &#123;</span><br><span class="line">                num_rec[c] = 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // 遍历另一个数组，记录交集数字加入结果</span><br><span class="line">        for (auto c : nums2) &#123;</span><br><span class="line">            if (num_rec.find(c) != num_rec.end() &amp;&amp; num_rec[c] == 1) &#123;</span><br><span class="line">                num_rec[c]++;</span><br><span class="line">                res.push_back(c);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="快乐数"><a href="#快乐数" class="headerlink" title="快乐数"></a>快乐数</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0202.%E5%BF%AB%E4%B9%90%E6%95%B0.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>该题就是一个数字游戏，寻找一个整数是否存在一个其各元素平方和为 1 的情况，可能会无限循环</li>
+<li>解决方法就是创建一个哈希表，把过程中产生的数字记录，若有重复，则陷入死循环，否则到了 1，则为快乐数</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isHappy(int n) &#123;</span><br><span class="line">        // 记录过程中产生的数</span><br><span class="line">        unordered_map&lt;int, int&gt; record;</span><br><span class="line">        // map 中判断是否记录过的方法</span><br><span class="line">        while (record.find(n) == record.end()) &#123;</span><br><span class="line">            // 做记录</span><br><span class="line">            record[n] = 0;</span><br><span class="line">            n = get_happy(n);</span><br><span class="line">            // 得到快乐数的情况</span><br><span class="line">            if (n == 1) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            //cout &lt;&lt; n &lt;&lt; endl;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 递归获取各位平方和</span><br><span class="line">    int get_happy(int n) &#123;</span><br><span class="line">        if (n &gt;= 10) &#123;</span><br><span class="line">            return (n % 10) * (n % 10) + get_happy(n / 10);</span><br><span class="line">        &#125;</span><br><span class="line">        return n * n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0001.%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C.html">代码随想录 (programmercarl.com)</a></li>
+<li>该题给予了一个整数数组和目标数字，要求找到数组中一组两数和为目标值的下标</li>
+<li>暴力解法为 O(n^2) 遍历两层数组，而运用哈希值就能快很多，通过 map，可以把遍历过的数字作为索引，其对应下标作为值存入 map 中，如此在得到数组中的一个数字时，就计算其与目标差值，在 map 中查找差值是否存在，存在则找到解，不存在则存入当前正在遍历的数字及其下标。</li>
+<li></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; twoSum(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        map&lt;int,int&gt; record; // 记录已遍历数字，索引为数值，值为下标</span><br><span class="line">        vector&lt;int&gt; result; // 要返回的结果</span><br><span class="line">        int index = 0; // 下标记录</span><br><span class="line"></span><br><span class="line">        // 遍历每个数</span><br><span class="line">        for (auto c : nums) &#123;</span><br><span class="line">            int cur = target - c; // 与目标值所差值</span><br><span class="line">            if (record.find(cur) != record.end()) &#123; // 若差值已遍历，则可调出凑出结果</span><br><span class="line">                result.push_back(record[cur]);</span><br><span class="line">                result.push_back(index);</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123; // 否则记录当前值及其下标</span><br><span class="line">                record[c] = index;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            index++; // 更新下标</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="四数相加"><a href="#四数相加" class="headerlink" title="四数相加||"></a>四数相加||</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0454.%E5%9B%9B%E6%95%B0%E7%9B%B8%E5%8A%A0II.html">代码随想录 (programmercarl.com)</a></li>
+<li>与[[两数之和]]类似，不过这次有四个数组，要求找到四个数组各取一数之和为 0 的元组个数</li>
+<li>方法是，把前两数组之和放 map，和值为 key，出现次数为 value，然后遍历后两数组和，对于其负数若 map 中有，则结果多一个该负数在 map 对应的 value 值</li>
+<li></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int fourSumCount(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2, vector&lt;int&gt;&amp; nums3, vector&lt;int&gt;&amp; nums4) &#123;</span><br><span class="line">        unordered_map&lt;int, int&gt; num_record; // 记录前两者和的情况和次数</span><br><span class="line">        int result = 0; // 记录结果元组个数</span><br><span class="line"></span><br><span class="line">        // 遍历前两数组，记录和</span><br><span class="line">        for (auto i : nums1) &#123;</span><br><span class="line">            for (auto j : nums2) &#123;</span><br><span class="line">                num_record[i + j]++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 遍历后两数组和，检查是否有满足和为0的一对</span><br><span class="line">        for (auto i : nums3) &#123;</span><br><span class="line">            for (auto j : nums4) &#123;</span><br><span class="line">                if (num_record.find(-1 * (i + j)) != num_record.end()) &#123;</span><br><span class="line">                    result += num_record[-1 * (i + j)];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="赎金信"><a href="#赎金信" class="headerlink" title="赎金信"></a>赎金信</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0383.%E8%B5%8E%E9%87%91%E4%BF%A1.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>本题的意思与此前的 [[有效的字母异位词]]，很相近，不过 [[有效的字母异位词]] 需要两个字符串可以互相组成，而本题只需要字符串 a 能由字符串 b 组成即可</p>
+</li>
+<li><p>方法反而简单，可以用 map 记录字母对应次数，但由于本题目已说明字母串中皆为小写字母，所以通过 ASCII 码转换下标记录数组的效率更高，更简单</p>
+</li>
+<li><p>陆爻齐的思路是增加一个整形数字记录所需字母的总个数，一旦字符串 b 中出现所需字母，且所需字母的需要个数非零，则该数字减一，最后秩序检查该数字是否为零即可得知题意是否满足</p>
+<p>代码随想录更直接些，先统计字符串b的字母，再用 a 的减去，若出现小于零的位，则说明有没有满足的字母存在  </p>
+</li>
+<li><p>陆爻齐的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int need_num = 0;   // 记录需要字母的总个数</span><br><span class="line">    int word_record[26] = &#123;0&#125;; // 记录需要字母的个数</span><br><span class="line"></span><br><span class="line">    bool canConstruct(string ransomNote, string magazine) &#123;</span><br><span class="line">        // 记录需要字母个数</span><br><span class="line">        for (auto c : ransomNote) &#123;</span><br><span class="line">            add_rec(get_char_num(c));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 削减需要字母个数</span><br><span class="line">        for (auto c : magazine) &#123;</span><br><span class="line">            cut_rec(get_char_num(c));</span><br><span class="line">        &#125;</span><br><span class="line">        // 若仍有需要字符未消减干净，则不满足题目条件</span><br><span class="line">        if (need_num &gt; 0)&#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 记录需要的字母及其数量</span><br><span class="line">    void add_rec(int index) &#123;</span><br><span class="line">        word_record[index]++;</span><br><span class="line">        need_num++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 削减magazine有的字符，但只有是需要的情况下才削减数量</span><br><span class="line">    void cut_rec(int index) &#123;</span><br><span class="line">        if (word_record[index] &gt; 0) &#123;</span><br><span class="line">            word_record[index]--;</span><br><span class="line">            need_num--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 获取字母对应的下标</span><br><span class="line">    inline int get_char_num(char c) &#123;</span><br><span class="line">        return int(c - 97);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>代码随想录的解法  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool canConstruct(string ransomNote, string magazine) &#123;</span><br><span class="line">        int record[26] = &#123;0&#125;;</span><br><span class="line">        //add</span><br><span class="line">        if (ransomNote.size() &gt; magazine.size()) &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 0; i &lt; magazine.length(); i++) &#123;</span><br><span class="line">            // 通过record数据记录 magazine里各个字符出现次数</span><br><span class="line">            record[magazine[i]-&#x27;a&#x27;] ++;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; ransomNote.length(); j++) &#123;</span><br><span class="line">            // 遍历ransomNote，在record里对应的字符个数做--操作</span><br><span class="line">            record[ransomNote[j]-&#x27;a&#x27;]--;</span><br><span class="line">            // 如果小于零说明ransomNote里出现的字符，magazine没有</span><br><span class="line">            if(record[ransomNote[j]-&#x27;a&#x27;] &lt; 0) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="三数之和"><a href="#三数之和" class="headerlink" title="三数之和"></a>三数之和</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0015.%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>即在一个数组中，找到下标互不重复且三个值不重复的所有三数之和为零的三元组</p>
+</li>
+<li><p>看起来与[[两数之和]]相近，可以把前两数之和放 map，最后一个数匹配，但由于题目要求返回不重三元组，所以去重将是大难题</p>
+</li>
+<li><p>所以本题采用双指针，先把数组排好序，用 i 确认第一个数 a，再用left 和 right 从 a 的右侧两旁逼近答案</p>
+<p>思路不难，但去重难  </p>
+<p>首先是 a 的去重，由于排好序了，只要让 a 与前一个值不同，就可以遍历到不同的 a；那么可以让 a 与后面一个不同吗？不能，因为可能有{1，1，-2} 这样的情况，若让 a 与后一个不同，那么由于前两个 1，该答案会被排除。  </p>
+<p>然后是 b 和 c 的去重，由于排好序，在取到一个可用值后，让 left 和 right 各向中心去重  </p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; threeSum(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">        sort(nums.begin(), nums.end());// 先排好序</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line"></span><br><span class="line">            // 若最小的数都为正数，那么三数之和不可能为零</span><br><span class="line">            if (nums[i] &gt; 0) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 对第一个 a 的去重，若前一个与当前相等，那么有三数之和为零的话一定重用，没的话三数之和定不为零</span><br><span class="line">            if (i &gt; 0 &amp;&amp; nums[i] == nums[i - 1]) &#123;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            // 双指针遍历</span><br><span class="line">            int left = i+1, right = size - 1;</span><br><span class="line">            while (left &lt; right) &#123;</span><br><span class="line">                int sum = nums[i] + nums[left] + nums[right];</span><br><span class="line">                // 若三数之和小了，让 left 变大</span><br><span class="line">                if (sum &lt; 0) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                // 大了，就让 right 变小</span><br><span class="line">                else if(sum &gt; 0) &#123;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">                else &#123;</span><br><span class="line">                    result.push_back(vector&lt;int&gt;&#123;nums[i], nums[left], nums[right]&#125;);</span><br><span class="line"></span><br><span class="line">                    // 对于 left 和 right 的去重</span><br><span class="line">                    while (right &gt; left &amp;&amp; nums[left] == nums[left + 1]) &#123;</span><br><span class="line">                        left++;</span><br><span class="line">                    &#125;</span><br><span class="line">                    while(right &gt; left &amp;&amp; nums[right] == nums[right - 1]) &#123;</span><br><span class="line">                        right--;    </span><br><span class="line">                    &#125;</span><br><span class="line">                    left++;</span><br><span class="line">                    right--;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="四数之和"><a href="#四数之和" class="headerlink" title="四数之和"></a>四数之和</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0018.%E5%9B%9B%E6%95%B0%E4%B9%8B%E5%92%8C.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>本地算[[三数之和]]的拓展，习得这个拓展套路，便可解决类似的“五数之和”等</li>
+<li>与 [[四数相加||]] 不同，该题要在与 [[三数之和]] 的一个数组下，找到四数之和为 target 的四元组</li>
+<li>注意 target 可能为负，所以剪枝不能大于target就剪就差不多了罢</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; fourSum(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">            vector&lt;vector&lt;int&gt;&gt; result;</span><br><span class="line">            sort(nums.begin(), nums.end()); // 确保数组有序</span><br><span class="line">            int size = nums.size();</span><br><span class="line">            for (int k = 0; k &lt; size; k++) &#123; // 第一个数</span><br><span class="line">                if (nums[k] &gt;= 0 &amp;&amp; nums[k] &gt; target) &#123; //第一层剪枝，若往后只会更大则剪</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                if (k &gt; 0 &amp;&amp; nums[k-1] == nums[k]) &#123; // 第一层去重</span><br><span class="line">                    continue;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                for (int i = k + 1; i &lt; size; i++) &#123;</span><br><span class="line">                    int i_k_sum = nums[i] + nums[k];</span><br><span class="line">                    if (i_k_sum &gt;= 0 &amp;&amp; i_k_sum &gt; target) &#123; // 第二层剪枝</span><br><span class="line">                        break;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    if (i &gt; k + 1 &amp;&amp; nums[i - 1] == nums[i]) &#123; //第二层去重</span><br><span class="line">                        continue;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                    int left = i + 1, right = size - 1;</span><br><span class="line"></span><br><span class="line">                    while (left &lt; right) &#123;</span><br><span class="line">                        if ((long long)i_k_sum + nums[left] + nums[right] &gt; target) &#123; </span><br><span class="line">                            right--;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else if((long long)i_k_sum + nums[left] + nums[right] &lt; target) &#123;</span><br><span class="line">                            left++;</span><br><span class="line">                        &#125;</span><br><span class="line">                        else &#123;</span><br><span class="line">                            result.push_back(vector&lt;int&gt;&#123;nums[k], nums[i], nums[left], nums[right]&#125;);</span><br><span class="line"></span><br><span class="line">                            while(left &lt; right &amp;&amp; nums[left] == nums[left+1]) &#123;</span><br><span class="line">                                left++;</span><br><span class="line">                            &#125;</span><br><span class="line">                            while(left &lt; right &amp;&amp; nums[right] == nums[right-1]) &#123;</span><br><span class="line">                                right--;</span><br><span class="line">                            &#125;</span><br><span class="line">                            left++;</span><br><span class="line">                            right--;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            return result;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/29/[Weekly%20Algorithm]%203%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%93%88%E5%B8%8C%E8%A1%A8/" data-id="cm7j3jecf001m10ag485y7769" data-title="【Weekly Algorithm】 算法周记之《代码随想录》哈希表" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[Weekly Algorithm] 2算法周记之《代码随想录》链表" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/22/%5BWeekly%20Algorithm%5D%202%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E9%93%BE%E8%A1%A8/" class="article-date">
+  <time class="dt-published" datetime="2024-09-22T07:35:00.000Z" itemprop="datePublished">2024-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/22/%5BWeekly%20Algorithm%5D%202%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E9%93%BE%E8%A1%A8/">【Weekly Algorithm】 算法周记之《代码随想录》链表</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>本周跟随《代码随想录》学习链表部分，较深入地了解了链表的相关算法题，并利用双指针解决部分题目。</p>
+<h1 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h1><h2 id="移除链表元素"><a href="#移除链表元素" class="headerlink" title="移除链表元素"></a>移除链表元素</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0203.%E7%A7%BB%E9%99%A4%E9%93%BE%E8%A1%A8%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></li>
+<li>由于链表结构特殊，移除操作需要对指针操作，稍微复杂点</li>
+<li>比较方便的方法是，用一个虚拟的指针头，将这个链表的删除操作转化为统一的链表中元素的移除</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* removeElements(ListNode* head, int val) &#123;</span><br><span class="line">        ListNode* vir_head = new ListNode(0);</span><br><span class="line">        vir_head-&gt;next = head;</span><br><span class="line"></span><br><span class="line">        // 用虚拟头统一操作</span><br><span class="line">        ListNode*p = vir_head;</span><br><span class="line"></span><br><span class="line">        while(p-&gt;next != nullptr) &#123;</span><br><span class="line">            // 下个符合就删</span><br><span class="line">            if (p-&gt;next-&gt;val == val) &#123;</span><br><span class="line">                ListNode *tmp = p-&gt;next;</span><br><span class="line">                p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">                delete tmp;</span><br><span class="line">            &#125;</span><br><span class="line">            // 没删 next 的情况再更新到 next，若刚删了 next 且 null，会在循环那里停下来</span><br><span class="line">            else &#123;</span><br><span class="line">                p = p-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return vir_head-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="设计链表"><a href="#设计链表" class="headerlink" title="设计链表"></a>设计链表</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0707.%E8%AE%BE%E8%AE%A1%E9%93%BE%E8%A1%A8.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>考察很综合，增删查改</li>
+<li>TODO 独立单链表实现一次</li>
+<li>TODO 双链表独立实现一次</li>
+<li></li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br></pre></td><td class="code"><pre><span class="line">typedef struct _link &#123;</span><br><span class="line">    int val;</span><br><span class="line">    struct _link *next = nullptr;</span><br><span class="line">    //struct _link *pre = nullptr;</span><br><span class="line"></span><br><span class="line">    _link(int num) &#123;</span><br><span class="line">        val = num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;link_node;</span><br><span class="line"></span><br><span class="line">class MyLinkedList &#123;</span><br><span class="line">public:</span><br><span class="line">    int size = 0;</span><br><span class="line">    link_node * head;</span><br><span class="line"></span><br><span class="line">    MyLinkedList() &#123;</span><br><span class="line">        this-&gt;size = 0;</span><br><span class="line">        head = new link_node(0);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int get(int index) &#123;</span><br><span class="line">        if (index &gt;= size || index &lt; 0) &#123;</span><br><span class="line">            return -1;</span><br><span class="line">        &#125;</span><br><span class="line">        link_node *p = head-&gt;next;</span><br><span class="line">        for (int i = 0; i &lt; index; i++) &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        return p-&gt;val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void addAtHead(int val) &#123;</span><br><span class="line">        link_node *p = new link_node(val);</span><br><span class="line">        p-&gt;next = head-&gt;next;</span><br><span class="line">        head-&gt;next = p;</span><br><span class="line">        this-&gt;size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void addAtTail(int val) &#123;</span><br><span class="line">        link_node *p = new link_node(val);</span><br><span class="line">        link_node *cur = head;</span><br><span class="line">        while(cur-&gt;next != nullptr) &#123;</span><br><span class="line">            cur = cur-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;next = p;</span><br><span class="line">        this-&gt;size++;</span><br><span class="line">        </span><br><span class="line">        //addAtIndex(this-&gt;size, val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void addAtIndex(int index, int val) &#123;</span><br><span class="line">        if(index &gt; this-&gt;size) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        if (index &lt; 0) &#123;</span><br><span class="line">            index = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        link_node *p = head;</span><br><span class="line">        for (int i = 0; i &lt; index; i++) &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        link_node *new_node = new link_node(val);</span><br><span class="line">        new_node-&gt;next = p-&gt;next;</span><br><span class="line">        p-&gt;next = new_node;</span><br><span class="line">        this-&gt;size++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void deleteAtIndex(int index) &#123;</span><br><span class="line">        if (index &gt;= this-&gt;size || index &lt; 0) &#123;</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        link_node *p = head;</span><br><span class="line">        for (int i = 0; i &lt; index; i++) &#123;</span><br><span class="line">            p = p-&gt;next;</span><br><span class="line">        &#125;  </span><br><span class="line">        link_node *q = p-&gt;next;</span><br><span class="line">        p-&gt;next = p-&gt;next-&gt;next;</span><br><span class="line">        delete  q;</span><br><span class="line">        this-&gt;size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Your MyLinkedList object will be instantiated and called as such:</span><br><span class="line"> * MyLinkedList* obj = new MyLinkedList();</span><br><span class="line"> * int param_1 = obj-&gt;get(index);</span><br><span class="line"> * obj-&gt;addAtHead(val);</span><br><span class="line"> * obj-&gt;addAtTail(val);</span><br><span class="line"> * obj-&gt;addAtIndex(index,val);</span><br><span class="line"> * obj-&gt;deleteAtIndex(index);</span><br><span class="line"> */</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="翻转链表"><a href="#翻转链表" class="headerlink" title="翻转链表"></a>翻转链表</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0206.%E7%BF%BB%E8%BD%AC%E9%93%BE%E8%A1%A8.html">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>本题要求，将一个单链表顺序翻转过来</p>
+</li>
+<li><p>有递归法、双指针法，时间复杂度皆为O（n），双指针空间复杂度O（1），递归O（n）</p>
+</li>
+<li><p>双指针法如下</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">        ListNode *pre = nullptr;</span><br><span class="line">        ListNode *cur = head;</span><br><span class="line">        ListNode *tmp = nullptr;// 存储 cur 的下个节点</span><br><span class="line">        while(cur != nullptr) &#123;</span><br><span class="line">            tmp = cur-&gt;next; // 先存下个要操作的节点</span><br><span class="line">            cur-&gt;next = pre;// 翻转当前节点</span><br><span class="line">            pre = cur; // 整体右移一个</span><br><span class="line">            cur = tmp;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="两两交换链表中的节点"><a href="#两两交换链表中的节点" class="headerlink" title="两两交换链表中的节点"></a>两两交换链表中的节点</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0024.%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9.html">代码随想录 (programmercarl.com)</a></li>
+</ul>
+</li>
+<li><p>该题就是要求把链表中每两个元素的顺序调换</p>
+</li>
+<li><p>方法就是选定锚点，然后以锚点后两个交换</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* swapPairs(ListNode* head) &#123;</span><br><span class="line">        // 建个哨兵以统一后面的交换进程</span><br><span class="line">        ListNode *setinel = new ListNode(0);</span><br><span class="line">        setinel-&gt;next = head;</span><br><span class="line">        ListNode *cur = setinel;</span><br><span class="line">        // 以cur为基准，交换后两个结点</span><br><span class="line">        while(cur-&gt;next != nullptr &amp;&amp; cur-&gt;next-&gt;next != nullptr) &#123;</span><br><span class="line">            ListNode *tmp1 = cur-&gt;next;</span><br><span class="line">            ListNode *tmp2 = cur-&gt;next-&gt;next;</span><br><span class="line"></span><br><span class="line">            // 先连接到后面，剩下两个随意换</span><br><span class="line">            tmp1-&gt;next = tmp2-&gt;next;</span><br><span class="line">            tmp2-&gt;next = tmp1;</span><br><span class="line">            cur-&gt;next = tmp2;</span><br><span class="line"></span><br><span class="line">            // 向右移动两节点</span><br><span class="line">            cur = cur-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 由于head可能变了，传setinel回去</span><br><span class="line">        return setinel-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="删除链表的倒数第N个节点"><a href="#删除链表的倒数第N个节点" class="headerlink" title="删除链表的倒数第N个节点"></a>删除链表的倒数第N个节点</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0019.%E5%88%A0%E9%99%A4%E9%93%BE%E8%A1%A8%E7%9A%84%E5%80%92%E6%95%B0%E7%AC%ACN%E4%B8%AA%E8%8A%82%E7%82%B9.html">代码随想录 (programmercarl.com)</a></li>
+</ul>
+</li>
+<li><p>题意易见</p>
+</li>
+<li><p>一次遍历解决的方法是，用双指针，快指针先走N步，再两指针一起走，最后删除慢指针后面那个。</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode() : val(0), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x) : val(x), next(nullptr) &#123;&#125;</span><br><span class="line"> *     ListNode(int x, ListNode *next) : val(x), next(next) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* removeNthFromEnd(ListNode* head, int n) &#123;</span><br><span class="line">        // 哨兵节点统一处理</span><br><span class="line">        ListNode *sentinel = new ListNode(0);</span><br><span class="line">        sentinel-&gt;next = head;</span><br><span class="line">        ListNode *right = sentinel, *left = sentinel;</span><br><span class="line">        // 先走N步</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            right = right-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 一起走</span><br><span class="line">        while(right-&gt;next != nullptr) &#123;</span><br><span class="line">            right = right-&gt;next;</span><br><span class="line">            left = left-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 删慢指针后面那个</span><br><span class="line">        ListNode *tmp = left-&gt;next;</span><br><span class="line">        left-&gt;next = tmp-&gt;next;</span><br><span class="line">        delete tmp;</span><br><span class="line">        return sentinel-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="链表相交"><a href="#链表相交" class="headerlink" title="链表相交"></a>链表相交</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/%E9%9D%A2%E8%AF%95%E9%A2%9802.07.%E9%93%BE%E8%A1%A8%E7%9B%B8%E4%BA%A4.html">代码随想录 (programmercarl.com)</a></li>
+</ul>
+</li>
+<li><p>即有两条长短不一的链表，在后面某一点交会到一条，找到交汇的那个点</p>
+</li>
+<li><p>方法即是先找到两个链表的长度，然后让长短两条各有一指针从相同位置同时检测两指针是否相等，毕竟前面的长短不一的部分不可能交汇</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) &#123;</span><br><span class="line">        int len_a = 0, len_b = 0;</span><br><span class="line">        ListNode *cur_a = headA, *cur_b = headB;</span><br><span class="line"></span><br><span class="line">        // 分别测量 a 和 b 的长度</span><br><span class="line">        while(cur_a != nullptr) &#123;</span><br><span class="line">            cur_a = cur_a-&gt;next;</span><br><span class="line">            len_a++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        while(cur_b != nullptr) &#123;</span><br><span class="line">            cur_b = cur_b-&gt;next;</span><br><span class="line">            len_b++;</span><br><span class="line">        &#125;</span><br><span class="line">        cur_a = headA;</span><br><span class="line">        cur_b = headB;</span><br><span class="line"></span><br><span class="line">        int len_dif = abs(len_a - len_b);</span><br><span class="line"></span><br><span class="line">        // 保证 a 是较长的一端</span><br><span class="line">        if (len_a &lt; len_b) &#123;</span><br><span class="line">            swap(cur_a, cur_b);</span><br><span class="line">            swap(len_a, len_b);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 对齐 a 和 b</span><br><span class="line">        for (int i = 0; i &lt; len_dif; i++) &#123;</span><br><span class="line">            cur_a = cur_a-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 逐一检查是否相等</span><br><span class="line">        while(cur_a != nullptr) &#123;</span><br><span class="line">            if (cur_a == cur_b) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">            cur_a = cur_a-&gt;next;</span><br><span class="line">            cur_b = cur_b-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return cur_a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="环形链表"><a href="#环形链表" class="headerlink" title="环形链表||"></a>环形链表||</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0142.%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II.html">代码随想录 (programmercarl.com)</a></li>
+</ul>
+</li>
+<li><p>即链表后面可能有个环，要求返回入环点</p>
+</li>
+<li><p>两个问题，一、有没有环；二、入环点怎么找</p>
+</li>
+<li><p>有没有环的问题，可以通过简单的双指针解决，即快指针走两步，慢指针走一步，若是有环，一定在某点相遇。倘若慢指针刚入环，无论快指针在环走多少，此时设快指针到慢指针距离 x，每次行动距离减一，迟早相遇。</p>
+</li>
+<li><p>接着是入环点的问题，接下来就是数学为主的时间，设 head 到入环点距离 x，入环点到相遇点距离 y，相遇点到入环点距离 z，慢指针就走了 x+y，快指针走了 x+n* (y+z) +y （毕竟可能走了几圈），快指针移速为慢指针两倍，可列式子 2*(x+y) &#x3D;  x+n* (y+z) +y，消减得 x &#x3D; n(y+z) - y，变换得 x &#x3D; (n-1)(y+z) + z，一看从相遇点开始走 z 步（可能加上好几圈）以及从头开始走的不就可以在入环点相遇了嘛。</p>
+<p>假设 n&#x3D;1，x&#x3D;&#x3D;z，两边直接相遇；n&#x3D;2，相遇点处的指针多走一圈，也能相遇  </p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode *detectCycle(ListNode *head) &#123;</span><br><span class="line">        ListNode *fast = head, *slow = head;</span><br><span class="line"></span><br><span class="line">        // 探明是否有环</span><br><span class="line">        while(fast != nullptr &amp;&amp; fast-&gt;next != nullptr) &#123;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            if (fast == slow) &#123;</span><br><span class="line">                // 从交汇点与起点同时走，交汇于入环点</span><br><span class="line">                slow = head;</span><br><span class="line">                while (fast != slow) &#123;</span><br><span class="line">                    fast = fast-&gt;next;</span><br><span class="line">                    slow = slow-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                return fast;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return nullptr;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/22/[Weekly%20Algorithm]%202%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E9%93%BE%E8%A1%A8/" data-id="cm7j3jece001l10agb9o1fiks" data-title="【Weekly Algorithm】 算法周记之《代码随想录》链表" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[Conda] miniconda 使用手册" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/16/%5BConda%5D%20miniconda%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" class="article-date">
+  <time class="dt-published" datetime="2024-09-16T06:14:00.000Z" itemprop="datePublished">2024-09-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/16/%5BConda%5D%20miniconda%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/">【Conda】 miniconda 使用手册</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本文是陆爻齐平时经常使用 conda 的一些记录，且作为复习笔记罢</p>
+<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="创建环境"><a href="#创建环境" class="headerlink" title="创建环境"></a>创建环境</h2><p><code>conda create -n name python=3.9.*</code><br>这条语句的意思是创建名字为 name，python 版本为 3.9 中最新的版本的环境，-n 后面跟名字，python 也可先不确定，但还没试过后面安 python。</p>
+<h2 id="查看环境"><a href="#查看环境" class="headerlink" title="查看环境"></a>查看环境</h2><p><code>conda env list</code><br>会列出所有已有的虚拟环境</p>
+<h2 id="删除环境"><a href="#删除环境" class="headerlink" title="删除环境"></a>删除环境</h2><p><code>conda remove -n name --all</code><br>删除名字为 name 的环境</p>
+<h2 id="克隆环境"><a href="#克隆环境" class="headerlink" title="克隆环境"></a>克隆环境</h2><p><code>conda create -n name --clone other</code><br>将名为 other 的环境复制到新环境 name 中</p>
+<h2 id="更改存储和环境的地方"><a href="#更改存储和环境的地方" class="headerlink" title="更改存储和环境的地方"></a>更改存储和环境的地方</h2><p><a target="_blank" rel="noopener" href="https://www.autodl.com/docs/miniconda/#:~:text=%E5%8F%96%E6%B6%88%E8%AE%BE%E7%BD%AE%E5%AE%89%E8%A3%85%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%88%B0%E6%95%B0%E6%8D%AE%E7%9B%98,%E7%BC%96%E8%BE%91%2Froot%2F.condarc%E6%96%87%E4%BB%B6%EF%BC%8C%E5%88%A0%E9%99%A4%E5%AF%B9%E5%BA%94%E7%9A%84%E8%B7%AF%E5%BE%84%E6%89%80%E5%9C%A8%E8%A1%8C%E5%8D%B3%E5%8F%AF">参考网址</a><br>执行以下命令设置将虚拟环境安装到&#x2F;root&#x2F;autodl-tmp&#x2F;conda&#x2F;envs， 包缓存到&#x2F;root&#x2F;autodl-tmp&#x2F;conda&#x2F;pkgs</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /root/autodl-tmp/conda/pkgs</span><br><span class="line">conda config --add pkgs_dirs /root/autodl-tmp/conda/pkgs</span><br><span class="line"></span><br><span class="line">mkdir -p /root/autodl-tmp/conda/envs</span><br><span class="line">conda config --add envs_dirs /root/autodl-tmp/conda/envs</span><br></pre></td></tr></table></figure>
+
+<h2 id="打包环境"><a href="#打包环境" class="headerlink" title="打包环境"></a>打包环境</h2><p>参考<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/540615230">知乎文章</a></p>
+<p>构建环境的操作系统必须与目标的操作系统匹配。这意味着在Windows上构建的环境不能重新定位到Linux。</p>
+<h3 id="打包"><a href="#打包" class="headerlink" title="打包"></a>打包</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 把虚拟环境 my_env 打包为 my_env.tar.gz</span><br><span class="line">conda pack -n my_env</span><br><span class="line"></span><br><span class="line"># -o 参数指定打包路径和名称，把虚拟环境 my_env 打包为 out_name.tar.gz</span><br><span class="line">conda pack -n my_env -o out_name.tar.gz</span><br><span class="line"></span><br><span class="line"># 把某个特定路径的虚拟环境打包为 my_env.tar.gz</span><br><span class="line">conda pack -p /explicit/path/to/my_env</span><br></pre></td></tr></table></figure>
+
+<h3 id="解压使用"><a href="#解压使用" class="headerlink" title="解压使用"></a>解压使用</h3><h4 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"># 创建目录 `my_env`，并将环境解压至该目录</span><br><span class="line">mkdir -p my_env</span><br><span class="line">tar -xzf my_env.tar.gz -C my_env</span><br><span class="line"></span><br><span class="line"># 使用python而不激活或修复前缀。</span><br><span class="line"># 大多数 python 库可以正常工作，但需要处理前缀的部分将失败。</span><br><span class="line">./my_env/bin/python</span><br><span class="line"></span><br><span class="line"># 激活环境，同时这步操作会将路径 `my_env/bin` 添加到环境变量 path</span><br><span class="line">source my_env/bin/activate</span><br><span class="line"></span><br><span class="line"># 在环境中运行python</span><br><span class="line">(my_env) $ python</span><br><span class="line"></span><br><span class="line"># 从激活环境中清除前缀。</span><br><span class="line"># 请注意，也可以在不激活环境的情况下运行此命令</span><br><span class="line"># 只要机器上已经安装了某个版本的python。</span><br><span class="line">(my_env) $ conda-unpack</span><br><span class="line"></span><br><span class="line"># 此时，环境与您在此路径直接使用 conda 安装的环境完全相同。</span><br><span class="line"># 所有脚本都应该工作正常。</span><br><span class="line">(my_env) $ ipython --version</span><br><span class="line"></span><br><span class="line"># 停用环境以将其从环境变量 path 中删除</span><br><span class="line">(my_env) $ source my_env/bin/deactivate</span><br></pre></td></tr></table></figure>
+<h4 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h4><p>新建 <code>my_env</code> 文件夹，将打包的 my_env.tar.gz 文件解压到该文件夹中。</p>
+<p>使用 cmd 打开路径 <code>my_env</code> 所在路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># 进入项目路径</span><br><span class="line">cd C:\my_env</span><br><span class="line"></span><br><span class="line"># 激活环境 </span><br><span class="line">.\Scripts\activate.bat</span><br><span class="line"></span><br><span class="line"># 从激活环境中清除前缀。</span><br><span class="line">.\Scripts\conda-unpack.exe</span><br><span class="line"></span><br><span class="line"># 退出环境</span><br><span class="line">.\Scripts\deactivate.bat</span><br></pre></td></tr></table></figure>
+
+<h2 id="修复无法激活环境的问题"><a href="#修复无法激活环境的问题" class="headerlink" title="修复无法激活环境的问题"></a>修复无法激活环境的问题</h2><p>问题发生情景：在 activate 环境时，报错如 <code>UnicodeDecodeError: &#39;gbk&#39; codec can&#39;t decode byte 0xae in position 790: illegal multibyte sequence Unexpected cygpath error (&#39;NoneType&#39; object has no attribute &#39;strip&#39;)</code></p>
+<p>问题排查过程：经解读报错和查阅资料发现，该问题是由于 conda 在启动环境的过程中，读取到了非正常字符。想到最近安装了微信开发者工具，让环境变量的 Path 中出现了中文，故删除对应的环境路径，再启动环境就正常了</p>
+<p>总结：环境变量 Path 中出现的中文让 conda 激活环境失败</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/16/[Conda]%20miniconda%20%E4%BD%BF%E7%94%A8%E6%89%8B%E5%86%8C/" data-id="cm7j3jec1000b10agbv24gyuh" data-title="【Conda】 miniconda 使用手册" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Conda/" rel="tag">Conda</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[Weekly Algorithm] 1算法周记之《代码随想录》数组" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/09/15/%5BWeekly%20Algorithm%5D%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/" class="article-date">
+  <time class="dt-published" datetime="2024-09-15T04:03:00.000Z" itemprop="datePublished">2024-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/09/15/%5BWeekly%20Algorithm%5D%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/">【Weekly Algorithm】 算法周记之《代码随想录》数组</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="学习小结"><a href="#学习小结" class="headerlink" title="学习小结"></a>学习小结</h1><p>前两周跟随《代码随想录》，对数组的部分做学习，具体而言，学习了二分查找、前缀和、双指针、滑动窗口的方法，来解决相关数组问题。</p>
+<p>也学到要坚持循环不变原则，即有些原则在循环中应保持不变，以统一后续操作，方便完成循环，具体可查看螺旋矩阵的部分。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h2><h3 id="正例"><a href="#正例" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0704.%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE.html#%E6%80%BB%E7%BB%93">代码随想录 (programmercarl.com)</a></p>
+</li>
+<li><p>二分查找重点是搞清楚边界，下面是左闭右开的写法</p>
+</li>
+<li><p>参考代码随想录思路的解法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int func(vector&lt;int&gt; nums, int target) &#123;</span><br><span class="line">	int left = 0, right = nums.size(), middle;</span><br><span class="line">    while (left &lt; right) &#123;</span><br><span class="line">    	middle = (left + right) / 2;</span><br><span class="line">        if (nums[middle] &gt; target) right = middle;</span><br><span class="line">        else if (nums[middle] &lt; target) left = middle + 1;</span><br><span class="line">        else return middle;</span><br><span class="line">    &#125;</span><br><span class="line">    return -1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>左闭右开，即 num[left] 在搜索范围内（可能为 target），num[right] 刚好不在，所以中间更新时也有所区别，left 得是 middle + 1，因为 middle 处已确认不是 target</p>
+</li>
+<li><p>倘若考虑闭区间，将 while 改 <code>while (left &lt;= right)</code>, right 改 <code>right = nums.size() - 1</code>，<code>right = middle - 1</code>即可</p>
+</li>
+</ul>
+<h3 id="补充例题"><a href="#补充例题" class="headerlink" title="补充例题"></a>补充例题</h3><h4 id="leetcode-查找数组中元素的第一个和最后一个位置"><a href="#leetcode-查找数组中元素的第一个和最后一个位置" class="headerlink" title="leetcode_查找数组中元素的第一个和最后一个位置"></a>leetcode_查找数组中元素的第一个和最后一个位置</h4><ul>
+<li><p><a target="_blank" rel="noopener" href="https://programmercarl.com/0034.%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE.html">代码随想录</a></p>
+</li>
+<li><p>首先，可以用两次二分法确认元素的左右边界</p>
+<p>最重要的是，分清查找后的三种情况  </p>
+<ol>
+<li>元素大小在数组外，自然不在数组中，比如数组中最大的是9，target 是 12；</li>
+<li>元素大小在数组内，但不在数组中，比如target 是 5，但数组为……4，6……；</li>
+<li>元素在数组中</li>
+</ol>
+</li>
+</ul>
+<p>如此一来，可以设置变量，检测二分法找边界时，是否有更新边界，两次二分法有一次没有更新边界的情况，都说明元素大小在数组外  </p>
+<p>当两次都更新了边界，就可以看看给出的边界是否时target，不是的话属于第二种情况</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; searchRange(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = searchLeft(nums, target), right = searchRight(nums, target);</span><br><span class="line">        vector&lt;int&gt;result(2);</span><br><span class="line">        // 处理数在外的的情况</span><br><span class="line">        if (left == -2 || right == -2) &#123;</span><br><span class="line">            result[0] = -1; result[1] = -1;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        // 处理数在不在其中但大小在中间的情况</span><br><span class="line">        else if (nums[left] != target) &#123;</span><br><span class="line">            result[0] = -1; result[1] = -1;</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">        // 处理数在其中的情况</span><br><span class="line">        result[0] = left, result[1] = right - 1;</span><br><span class="line">        return result;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 找到左边界的二分法</span><br><span class="line">    int searchLeft(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = 0, right = nums.size(), middle = 0;</span><br><span class="line">        int leftBoarder = -2;</span><br><span class="line"></span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (nums[middle] &lt; target) &#123;</span><br><span class="line">                left = middle + 1; </span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">                leftBoarder = right;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //cout &lt;&lt; leftBoarder &lt;&lt; endl;</span><br><span class="line">        return leftBoarder;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 找到右边界的二分法</span><br><span class="line">    int searchRight(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        int left = 0, right = nums.size(), middle = 0;</span><br><span class="line">        int rightBoarder = -2;</span><br><span class="line"></span><br><span class="line">        while (left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (nums[middle] &lt;= target) &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">                rightBoarder = left;</span><br><span class="line">            &#125; </span><br><span class="line">            else right = middle; </span><br><span class="line">        &#125;</span><br><span class="line">        //cout &lt;&lt; rightBoarder &lt;&lt; endl;</span><br><span class="line">        return rightBoarder;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-x的平方根"><a href="#leetcode-x的平方根" class="headerlink" title="leetcode_x的平方根"></a>leetcode_x的平方根</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sqrtx/description/">69. x 的平方根 - 力扣（LeetCode）</a></li>
+<li>即找到平方为 x 的平方根的整数部分</li>
+<li>毕竟就是算术平方根，就用二分法逼近即可，注意 middle * middle 可能超 int，用 long long 就行</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int mySqrt(int x) &#123;</span><br><span class="line">        int result = 0, left = 0, right = x + 1; </span><br><span class="line">        unsigned long long middle = 0;</span><br><span class="line">		// 二分试那个数平方恰小于等于的</span><br><span class="line">        while(left &lt; right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (middle * middle &gt; x) &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">                result = middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-有效的完全平方数"><a href="#leetcode-有效的完全平方数" class="headerlink" title="leetcode_有效的完全平方数"></a>leetcode_有效的完全平方数</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-perfect-square/description/">367. 有效的完全平方数 - 力扣（LeetCode）</a></li>
+<li>即判断当前数是否为完全平方数，二分法找个平方为该数即可</li>
+<li>与上个平方类似，不多说， [[leetcode_x的平方根]]</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isPerfectSquare(int num) &#123;</span><br><span class="line">        unsigned long long left = 0, right = num, middle = 0;</span><br><span class="line">        // 二分法试出那个平方为 num 的数</span><br><span class="line">        while (left &lt;= right) &#123;</span><br><span class="line">            middle = (left + right) / 2;</span><br><span class="line">            if (middle * middle &gt; num) &#123;</span><br><span class="line">                right = middle - 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else if (middle * middle &lt; num) &#123;</span><br><span class="line">                left = middle + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="移除元素"><a href="#移除元素" class="headerlink" title="移除元素"></a>移除元素</h2><h3 id="正例-1"><a href="#正例-1" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0027.%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录 (programmercarl.com)</a></li>
+<li>暴力解法<br>即每次遇到要删除的元素，就把数组后面每一位向左覆盖一位  </li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        for (int i = 0; i &lt; size; i++) &#123;</span><br><span class="line">            if (nums[i] == val) &#123;</span><br><span class="line">                for (int j = i; j &lt; size - 1; j++) &#123;</span><br><span class="line">                    nums[j] = nums[j + 1];</span><br><span class="line">                &#125;</span><br><span class="line">                size--;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return size;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+<li>双指针法<br>快指针去找元素，慢指针是新数组的元素  </li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeElement(vector&lt;int&gt;&amp; nums, int val) &#123;</span><br><span class="line">        int fast_p = 0, slow_p = 0;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        for (fast_p = 0; fast_p &lt; size; fast_p++) &#123;</span><br><span class="line">            if (nums[fast_p] != val) &#123;</span><br><span class="line">                nums[slow_p++] = nums[fast_p];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return slow_p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例题-1"><a href="#补充例题-1" class="headerlink" title="补充例题"></a>补充例题</h3><h4 id="leetcode-重复删除有序数组中的重复项"><a href="#leetcode-重复删除有序数组中的重复项" class="headerlink" title="leetcode_重复删除有序数组中的重复项"></a>leetcode_重复删除有序数组中的重复项</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">26. 删除有序数组中的重复项 - 力扣（LeetCode）</a></li>
+<li>即数组去重</li>
+<li>双指针秒了</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int removeDuplicates(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size(), slow = 0, fast = 0;</span><br><span class="line">        int counter = 1;</span><br><span class="line">        for (fast = 1; fast &lt; size; fast++) &#123;</span><br><span class="line">        	// 不同的情况做个覆盖</span><br><span class="line">            if (nums[slow] != nums[fast]) &#123;</span><br><span class="line">                nums[++slow] = nums[fast];</span><br><span class="line">                counter++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return counter;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-移动零"><a href="#leetcode-移动零" class="headerlink" title="leetcode_移动零"></a>leetcode_移动零</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/move-zeroes/description/">283. 移动零 - 力扣（LeetCode）</a></li>
+<li>即保持非零数字顺序，零全放右侧</li>
+<li>双指针解决，记得有个 swap 函数可用于向量就方便些，简单地说，就是让快指针去找非零数，然后替换到慢指针所在的地方，若快指针遇到零就不换，跳过就是。</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    void moveZeroes(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size();</span><br><span class="line">        int slow = 0, fast = 0;</span><br><span class="line">        for (fast = 0; fast &lt; size; fast++) &#123;</span><br><span class="line">        	// 快指针不为 0 时，快慢指针换值并使慢指针右移</span><br><span class="line">            if (nums[fast] != 0) &#123;</span><br><span class="line">                swap(nums[slow++], nums[fast]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="leetcode-比较含退格的字符串"><a href="#leetcode-比较含退格的字符串" class="headerlink" title="leetcode_比较含退格的字符串"></a>leetcode_比较含退格的字符串</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/backspace-string-compare/description/">844. 比较含退格的字符串 - 力扣（LeetCode）</a></li>
+</ul>
+</li>
+<li>该题思路挺多，不过还得是双指针</li>
+<li>可以用栈来改两个字符串，陆爻齐选择用双指针来改两字符串，也就是用慢指针确认前面的字符是什么，快指针去找要放在字符串的字符，换到慢指针处，与移动零的区别是，遇到 ‘#’ 时，慢指针应向左一格，让下次的字符覆盖上个字符。</li>
+<li>也有思路从后向前双指针同时比较（退格键的左侧不重要，右侧可确定）</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool backspaceCompare(string s, string t) &#123;</span><br><span class="line">        work(s);</span><br><span class="line">        work(t);</span><br><span class="line">        return s==t;</span><br><span class="line">    &#125;</span><br><span class="line">	</span><br><span class="line">    // 使字符串变成处理完退格字符后的字符串</span><br><span class="line">    void work(string &amp;s) &#123;</span><br><span class="line">        int size = s.size(), slow = 0, fast = 0;</span><br><span class="line">        for (fast = 0; fast &lt; size; fast++) &#123;</span><br><span class="line">            if (s[fast] != &#x27;#&#x27;) &#123;</span><br><span class="line">                s[slow++] = s[fast];</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                if (slow &gt; 0) &#123;</span><br><span class="line">                    slow--;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        s = s.substr(0, slow);</span><br><span class="line">        //cout &lt;&lt; s &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-有序数组的平方"><a href="#leetcode-有序数组的平方" class="headerlink" title="leetcode_有序数组的平方"></a>leetcode_有序数组的平方</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/squares-of-a-sorted-array/solutions/2806253/xiang-xiang-shuang-zhi-zhen-cong-da-dao-blda6/">977. 有序数组的平方 - 力扣（LeetCode）</a></li>
+<li>即将非递减的数组（含负数），各位平方后再以非递减序列排成数组</li>
+<li>从两侧向中间检测，也是双指针罢</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; sortedSquares(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int left = 0, size = nums.size(), right = size - 1;</span><br><span class="line">        vector&lt;int&gt; result(size);</span><br><span class="line">        for (int i = size - 1; i &gt;= 0; i--) &#123;</span><br><span class="line">        	// 左右比较，选大者放后面，循环至尽</span><br><span class="line">            if (nums[left] * nums[left]&gt; nums[right] * nums[right]) &#123;</span><br><span class="line">                result[i] = nums[left] * nums[left];</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                result[i] = nums[right] * nums[right];</span><br><span class="line">                right--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h2><h3 id="正例-2"><a href="#正例-2" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0209.%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>滑动窗口可以视为双指针的特殊形态，以 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/description/">长度最小的子数组</a> 为例</li>
+<li>该题要求一个数组中连续元素和大于 target 的最小长度是多少</li>
+<li>暴力解法可以用两个 for 循环嵌套，一个相当于起始，一个相当于终止，穷举出所有可能，不过时间复杂度为 O(n^2)</li>
+<li>那么接下来就是 O(n) 的滑动窗口啦，该方法用 for 循环遍历终止位置，当快指针已遍历的数值满足需求时，记录长度，同时慢指针也向右移动至不满足要求，此时快指针再向右移动找下一个满足需求的情况</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int size = nums.size(), sum = 0, least_len = INT32_MAX, i = 0, sub_len;</span><br><span class="line">        for (int j = 0; j &lt; size; j++) &#123;</span><br><span class="line">            sum += nums[j];</span><br><span class="line">            while (sum &gt;= target) &#123;</span><br><span class="line">                sub_len = j - i + 1;</span><br><span class="line">                if (least_len &gt; sub_len) &#123;</span><br><span class="line">                    least_len = sub_len;</span><br><span class="line">                &#125;</span><br><span class="line">                sum -= nums[i];</span><br><span class="line">                i++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return (least_len == INT32_MAX) ? 0 : least_len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子"><a href="#补充例子" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="leetcode-水果成篮"><a href="#leetcode-水果成篮" class="headerlink" title="leetcode_水果成篮"></a>leetcode_水果成篮</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/fruit-into-baskets/">904. 水果成篮 - 力扣（LeetCode）</a></li>
+<li>该题就是求数组中最长的连续两数字序列长度</li>
+<li>要点是运用哈希表来做查重记录工作</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int totalFruit(vector&lt;int&gt;&amp; fruits) &#123;</span><br><span class="line">        unordered_map&lt;int,int&gt; cns;</span><br><span class="line">        int size = fruits.size();</span><br><span class="line">        int left = 0;</span><br><span class="line">        int max_len = 0;</span><br><span class="line">        for (int right = 0; right &lt; size; right++) &#123;</span><br><span class="line">        	// 记录第一次遇到该数字</span><br><span class="line">            if (cns.find(fruits[right]) == cns.end()) &#123;</span><br><span class="line">                //cns.insert(&#123;fruits[right], 1&#125;);</span><br><span class="line">                cns[fruits[right]] = 1;</span><br><span class="line">            &#125;</span><br><span class="line">            // 重复计数</span><br><span class="line">            else &#123;</span><br><span class="line">                cns[fruits[right]]++;</span><br><span class="line">            &#125;</span><br><span class="line">			</span><br><span class="line">            // 当种类超过 2，开始去除一个</span><br><span class="line">            while (cns.size() &gt; 2) &#123;</span><br><span class="line">                cns[fruits[left]]--;</span><br><span class="line">                if (cns[fruits[left]] == 0) &#123;</span><br><span class="line">                    cns.erase(fruits[left]);</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">			</span><br><span class="line">            // 更新值</span><br><span class="line">            max_len = max(max_len, right - left + 1);</span><br><span class="line">        &#125;</span><br><span class="line">        return max_len;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="leetcode-最小覆盖子串"><a href="#leetcode-最小覆盖子串" class="headerlink" title="leetcode_最小覆盖子串"></a>leetcode_最小覆盖子串</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-window-substring/">76. 最小覆盖子串 - 力扣（LeetCode）</a></li>
+<li>该题就是在字符串 s 上，找涵盖字符串 t 所有字符的最小字符子串</li>
+<li>只好用两字典存已有字符和目标字符，其余还是沿用滑动窗口，不过效率很低</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    unordered_map&lt;char, int&gt; cns, target;</span><br><span class="line">    string minWindow(string s, string t) &#123;</span><br><span class="line">        string result = &quot;&quot;;</span><br><span class="line">        int min_len = INT32_MAX, start_ind = 0;</span><br><span class="line"></span><br><span class="line">        // 初始化 target 和 cns</span><br><span class="line">        for(auto it : t) &#123;</span><br><span class="line">            target[it]++;</span><br><span class="line">            cns[it] = 0;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        int left = 0, right = 0;</span><br><span class="line">        int size = s.size();</span><br><span class="line"></span><br><span class="line">        for (right = 0; right &lt; size; right++) &#123;</span><br><span class="line">            if (cns.find(s[right]) != cns.end()) &#123;</span><br><span class="line">                cns[s[right]]++;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            // 满足就调整左边窗口</span><br><span class="line">            while (check()) &#123;</span><br><span class="line">                if (right - left + 1 &lt; min_len) &#123;</span><br><span class="line">                    //cout &lt;&lt; &quot;left &quot; &lt;&lt; left &lt;&lt; &quot;;&quot; &lt;&lt; &quot;right &quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">                    start_ind = left;</span><br><span class="line">                    min_len = right - left + 1;</span><br><span class="line">                &#125;</span><br><span class="line">                </span><br><span class="line">                if (cns.find(s[left]) != cns.end()) &#123;</span><br><span class="line">                    cns[s[left]]--;</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 排除无结果的错误</span><br><span class="line">        if (min_len == INT32_MAX) &#123;</span><br><span class="line">            min_len = 0;</span><br><span class="line">        &#125;</span><br><span class="line">        result = s.substr(start_ind, min_len);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    // 检查已有条件是否满足</span><br><span class="line">    bool check() &#123;</span><br><span class="line">        for (auto &amp;it : cns) &#123;</span><br><span class="line">            if (it.second &lt; target[it.first]) &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="螺旋矩阵"><a href="#螺旋矩阵" class="headerlink" title="螺旋矩阵"></a>螺旋矩阵</h2><h3 id="正例-3"><a href="#正例-3" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0059.%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5II.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li>即将数组以某种特定方式赋值排列</li>
+<li>没有特定的方法，重点是坚持循环不变原则，即有些处理时统一方法，比如螺旋矩阵换方向赋值时，可坚持左闭右开的原则赋值</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; generateMatrix(int n) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res = vector(n, vector&lt;int&gt;(n, 0));</span><br><span class="line">        int loop = n / 2; // 主循环次数</span><br><span class="line">        int middle = n / 2; // 记录矩阵中间的值</span><br><span class="line">        int startx = 0, starty = 0; // 记录每次循环的起点/终点</span><br><span class="line">        int set_num = 1; // 每次放入的数字</span><br><span class="line">        int off_set = 1; // 控制每循环填数个数</span><br><span class="line">        int i, j;</span><br><span class="line"></span><br><span class="line">        while(loop-- &gt;= 0) &#123;</span><br><span class="line">            i = startx, j = starty;</span><br><span class="line">            // 左上到右上</span><br><span class="line">            for (;j &lt; n - off_set; j++) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 右上到右下</span><br><span class="line">            for (;i &lt; n - off_set; i++) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 右下到左下</span><br><span class="line">            for (;j &gt; starty; j--) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line">            // 左下到左上</span><br><span class="line">            for (;i &gt; startx; i--) &#123;</span><br><span class="line">                res[i][j] = set_num++;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            </span><br><span class="line">            startx++;</span><br><span class="line">            starty++;</span><br><span class="line">            off_set++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        // 对奇数矩阵补中间</span><br><span class="line">        if (n % 2 != 0) &#123;</span><br><span class="line">            res[middle][middle] = set_num;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子-1"><a href="#补充例子-1" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="leetcode-螺旋遍历二维数组"><a href="#leetcode-螺旋遍历二维数组" class="headerlink" title="leetcode_螺旋遍历二维数组"></a>leetcode_螺旋遍历二维数组</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/description/">54. 螺旋矩阵 - 力扣（LeetCode）</a></li>
+<li>该题要将一个 m*n 的矩阵顺时针输出其中的内容</li>
+<li>代码随想录没解，暂时也没想到那个思路的延申</li>
+<li>可借鉴思路是，每次按向右，向下，向左，向上四次输出到头，每个方向走完，判断下下个方向是否还有路，无则马上退出</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; spiralOrder(vector&lt;vector&lt;int&gt;&gt;&amp; matrix) &#123;</span><br><span class="line">        int m = matrix.size(), n = matrix[0].size();</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        </span><br><span class="line">        int u = 0, d = m - 1; // 上下</span><br><span class="line">        int l = 0, r = n - 1; // 左右</span><br><span class="line"></span><br><span class="line">        while (true) &#123;</span><br><span class="line">            for (int i = l; i &lt; r + 1; i++) &#123;</span><br><span class="line">                res.push_back(matrix[u][i]); // 向右</span><br><span class="line">            &#125;</span><br><span class="line">            if (++u &gt; d) break;// 上边界大于下边界</span><br><span class="line">            for (int i = u; i &lt; d + 1; i++) &#123;</span><br><span class="line">                res.push_back(matrix[i][r]); // 向下</span><br><span class="line">            &#125;</span><br><span class="line">            if (--r &lt; l) break; // 右边界左于左边界</span><br><span class="line">            for (int i = r; i &gt; l - 1; i--) &#123;</span><br><span class="line">                res.push_back(matrix[d][i]); // 向左</span><br><span class="line">            &#125;</span><br><span class="line">            if (--d &lt; u) break; // 下边界高于上边界</span><br><span class="line">            for (int i = d; i &gt; u - 1; i--) &#123;</span><br><span class="line">                res.push_back(matrix[i][l]); // 向上</span><br><span class="line">            &#125;</span><br><span class="line">            if (++l &gt; r) break; // 左边界右于右边界</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        return res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="区间和"><a href="#区间和" class="headerlink" title="区间和"></a>区间和</h2><h3 id="正例-4"><a href="#正例-4" class="headerlink" title="正例"></a>正例</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://programmercarl.com/0977.%E6%9C%89%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E5%B9%B3%E6%96%B9.html#%E6%80%9D%E8%B7%AF">代码随想录 (programmercarl.com)</a></li>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1070">58. 区间和（第九期模拟笔试） (kamacoder.com)</a></li>
+<li>就是要短时间内多次求一个数组上一段区间的数之和</li>
+<li>要用到前缀和，也就是在初始化数组时，用另一个数组存当前下标之前所有数字的和（每次存新数就更新累加和即可）</li>
+<li>最后求区间和时，用前缀和数组的右下标减左下标即可</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int count = 0,left = 0, right = 0;</span><br><span class="line">    scanf(&quot;%d&quot;, &amp;count);</span><br><span class="line">    vector&lt;int&gt; num(count), pre_sum(count);</span><br><span class="line">    int store_sum = 0;</span><br><span class="line">    </span><br><span class="line">    // 记录数组同时计算前缀和</span><br><span class="line">    for (int i = 0; i &lt; count; i++) &#123;</span><br><span class="line">        scanf(&quot;%d&quot;, &amp;num[i]);</span><br><span class="line">        store_sum += num[i];</span><br><span class="line">        pre_sum[i] = store_sum;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 持续接收左右下标至输入结束</span><br><span class="line">    while(~scanf(&quot;%d %d&quot;, &amp;left, &amp;right)) &#123;</span><br><span class="line">        if (left == 0) &#123;</span><br><span class="line">            printf(&quot;%d\n&quot;,pre_sum[right]);</span><br><span class="line">            continue;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;, pre_sum[right] - pre_sum[left-1]);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="补充例子-2"><a href="#补充例子-2" class="headerlink" title="补充例子"></a>补充例子</h3><h4 id="开发商购买土地"><a href="#开发商购买土地" class="headerlink" title="开发商购买土地"></a>开发商购买土地</h4><ul>
+<li><a target="_blank" rel="noopener" href="https://kamacoder.com/problempage.php?pid=1044">44. 开发商购买土地（第五期模拟笔试） (kamacoder.com)</a></li>
+<li>给一个 m*n 的数组，可能对每行每列横切&#x2F;竖切，求两边差值最小值</li>
+<li>可前缀和记录横向或者竖向的前缀和，然后就可方便大量计算差值</li>
+<li>参考代码随想录思路的解法<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    int m, n;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; block(n, vector&lt;int&gt;(m, 0));</span><br><span class="line">    vector&lt;int&gt; horizontal(n, 0);</span><br><span class="line">    vector&lt;int&gt; vertical(m, 0);</span><br><span class="line">    int result = INT32_MAX;</span><br><span class="line">    int sum = 0;</span><br><span class="line">    </span><br><span class="line">    // 初始化，顺便把横向前缀和求完</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">            cin &gt;&gt; block[i][j];</span><br><span class="line">            horizontal[i] += block[i][j];</span><br><span class="line">            sum += block[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    // 计算垂直前缀和</span><br><span class="line">    for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            vertical[j] += block[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int horizontal_cut = 0;</span><br><span class="line">    for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">        horizontal_cut += horizontal[i];</span><br><span class="line">        result = min(result, abs(sum - horizontal_cut - horizontal_cut));// （sum - horizontal_cut）是一个公司的子区域价值，horizontal_cut是另一公司的子区域价值</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    int vertical_cut = 0;</span><br><span class="line">    for (int j = 0; j &lt; m; j++) &#123;</span><br><span class="line">        vertical_cut += vertical[j];</span><br><span class="line">        result = min(result, abs(sum - vertical_cut - vertical_cut));</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; result &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/09/15/[Weekly%20Algorithm]%201%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E6%95%B0%E7%BB%84/" data-id="cm7j3jece001j10ageobw14nn" data-title="【Weekly Algorithm】 算法周记之《代码随想录》数组" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Algorithm/" rel="tag">Algorithm</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-[CS61A-Fall-2020]学习记录7 Homework2 题解思路分享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/08/28/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%957%20Homework2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" class="article-date">
+  <time class="dt-published" datetime="2024-08-28T07:22:00.000Z" itemprop="datePublished">2024-08-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/08/28/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%957%20Homework2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/">【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>观前提示，笔者写的代码答案放在 <a target="_blank" rel="noopener" href="https://github.com/HSLix/CS61A-Fall-2020">GitHub仓库</a> 中，此处仅记录过程与心得。</p>
+<p>此外，请最好在尝试独立完成该任务后再看本文，否则就很可能失去了体验本项目精华的机会</p>
+<h2 id="Higher-Order-Functions"><a href="#Higher-Order-Functions" class="headerlink" title="Higher-Order Functions"></a>Higher-Order Functions</h2><h3 id="Q1-Product"><a href="#Q1-Product" class="headerlink" title="Q1: Product"></a>Q1: Product</h3><p>Write a function called product that returns the product of the first n terms of a sequence. Specifically, product takes in an integer n and term, a single-argument function that determines a sequence. (That is, term(i) gives the ith term of the sequence.) product(n, term) should return term(1) * … * term(n).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def product(n, term):</span><br><span class="line">    &quot;&quot;&quot;Return the product of the first n terms in a sequence.</span><br><span class="line"></span><br><span class="line">    n: a positive integer</span><br><span class="line">    term:  a function that takes one argument to produce the term</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; product(3, identity)  # 1 * 2 * 3</span><br><span class="line">    6</span><br><span class="line">    &gt;&gt;&gt; product(5, identity)  # 1 * 2 * 3 * 4 * 5</span><br><span class="line">    120</span><br><span class="line">    &gt;&gt;&gt; product(3, square)    # 1^2 * 2^2 * 3^2</span><br><span class="line">    36</span><br><span class="line">    &gt;&gt;&gt; product(5, square)    # 1^2 * 2^2 * 3^2 * 4^2 * 5^2</span><br><span class="line">    14400</span><br><span class="line">    &gt;&gt;&gt; product(3, increment) # (1+1) * (2+1) * (3+1)</span><br><span class="line">    24</span><br><span class="line">    &gt;&gt;&gt; product(3, triple)    # 1*3 * 2*3 * 3*3</span><br><span class="line">    162</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="A1"><a href="#A1" class="headerlink" title="A1"></a>A1</h3><p>题目大意是，用一个函数，计算从 1-n 经 term 函数处理之积</p>
+<p>嘛，用循环可以轻松解决，不过陆爻齐用了递归</p>
+<h3 id="Q2-Accumulate"><a href="#Q2-Accumulate" class="headerlink" title="Q2: Accumulate"></a>Q2: Accumulate</h3><p>Let’s take a look at how product is an instance of a more general function called accumulate, which we would like to implement:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def accumulate(fuse, start, n, term):</span><br><span class="line">    &quot;&quot;&quot;Return the result of fusing together the first n terms in a sequence </span><br><span class="line">    and start.  The terms to be fused are term(1), term(2), ..., term(n). </span><br><span class="line">    The function fuse is a two-argument commutative &amp; associative function.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; accumulate(add, 0, 5, identity)  # 0 + 1 + 2 + 3 + 4 + 5</span><br><span class="line">    15</span><br><span class="line">    &gt;&gt;&gt; accumulate(add, 11, 5, identity) # 11 + 1 + 2 + 3 + 4 + 5</span><br><span class="line">    26</span><br><span class="line">    &gt;&gt;&gt; accumulate(add, 11, 0, identity) # 11 (fuse is never used)</span><br><span class="line">    11</span><br><span class="line">    &gt;&gt;&gt; accumulate(add, 11, 3, square)   # 11 + 1^2 + 2^2 + 3^2</span><br><span class="line">    25</span><br><span class="line">    &gt;&gt;&gt; accumulate(mul, 2, 3, square)    # 2 * 1^2 * 2^2 * 3^2</span><br><span class="line">    72</span><br><span class="line">    &gt;&gt;&gt; # 2 + (1^2 + 1) + (2^2 + 1) + (3^2 + 1)</span><br><span class="line">    &gt;&gt;&gt; accumulate(lambda x, y: x + y + 1, 2, 3, square)</span><br><span class="line">    19</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+
+<p>accumulate has the following parameters:</p>
+<p>fuse: a two-argument function that specifies how the current term is fused with the previously accumulated terms<br>start: value at which to start the accumulation<br>n: a non-negative integer indicating the number of terms to fuse<br>term: a single-argument function; term(i) is the ith term of the sequence<br>Implement accumulate, which fuses the first n terms of the sequence defined by term with the start value using the fuse function.</p>
+<p>For example, the result of accumulate(add, 11, 3, square) is</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add(11,  add(square(1), add(square(2),  square(3)))) =</span><br><span class="line">    11 +     square(1) +    square(2) + square(3)    =</span><br><span class="line">    11 +     1         +    4         + 9            = 25</span><br></pre></td></tr></table></figure>
+<p>Assume that fuse is commutative, fuse(a, b) &#x3D;&#x3D; fuse(b, a), and associative, fuse(fuse(a, b), c) &#x3D;&#x3D; fuse(a, fuse(b, c)).</p>
+<p>Then, implement summation (from lecture) and product as one-line calls to accumulate.</p>
+<p>Important: Both summation_using_accumulate and product_using_accumulate should be implemented with a single line of code starting with return.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">def summation_using_accumulate(n, term):</span><br><span class="line">    &quot;&quot;&quot;Returns the sum: term(1) + ... + term(n), using accumulate.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; summation_using_accumulate(5, square) # square(0) + square(1) + ... + square(4) + square(5)</span><br><span class="line">    55</span><br><span class="line">    &gt;&gt;&gt; summation_using_accumulate(5, triple) # triple(0) + triple(1) + ... + triple(4) + triple(5)</span><br><span class="line">    45</span><br><span class="line">    &gt;&gt;&gt; # This test checks that the body of the function is just a return statement.</span><br><span class="line">    &gt;&gt;&gt; import inspect, ast</span><br><span class="line">    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(summation_using_accumulate)).body[0].body]</span><br><span class="line">    [&#x27;Expr&#x27;, &#x27;Return&#x27;]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return ____</span><br><span class="line"></span><br><span class="line">def product_using_accumulate(n, term):</span><br><span class="line">    &quot;&quot;&quot;Returns the product: term(1) * ... * term(n), using accumulate.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; product_using_accumulate(4, square) # square(1) * square(2) * square(3) * square()</span><br><span class="line">    576</span><br><span class="line">    &gt;&gt;&gt; product_using_accumulate(6, triple) # triple(1) * triple(2) * ... * triple(5) * triple(6)</span><br><span class="line">    524880</span><br><span class="line">    &gt;&gt;&gt; # This test checks that the body of the function is just a return statement.</span><br><span class="line">    &gt;&gt;&gt; import inspect, ast</span><br><span class="line">    &gt;&gt;&gt; [type(x).__name__ for x in ast.parse(inspect.getsource(product_using_accumulate)).body[0].body]</span><br><span class="line">    [&#x27;Expr&#x27;, &#x27;Return&#x27;]</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    return ____</span><br></pre></td></tr></table></figure>
+<h3 id="A2"><a href="#A2" class="headerlink" title="A2"></a>A2</h3><p>题目大意，是先完成 accumulate 函数，这是一个用 fuse 处理 start、term(1) … term(n) 之间的函数，再用 accumulate 函数实现两个衍生的函数。</p>
+<p>没什么难点，想说的话同 A1</p>
+<h3 id="Q3-Make-Repeater"><a href="#Q3-Make-Repeater" class="headerlink" title="Q3: Make Repeater"></a>Q3: Make Repeater</h3><p>Implement the function make_repeater which takes a one-argument function f and a positive integer n. It returns a one-argument function, where make_repeater(f, n)(x) returns the value of f(f(…f(x)…)) in which f is applied n times to x. For example, make_repeater(square, 3)(5) squares 5 three times and returns 390625, just like square(square(square(5))).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">def make_repeater(f, n):</span><br><span class="line">    &quot;&quot;&quot;Returns the function that computes the nth application of f.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; add_three = make_repeater(increment, 3)</span><br><span class="line">    &gt;&gt;&gt; add_three(5)</span><br><span class="line">    8</span><br><span class="line">    &gt;&gt;&gt; make_repeater(triple, 5)(1) # 3 * (3 * (3 * (3 * (3 * 1))))</span><br><span class="line">    243</span><br><span class="line">    &gt;&gt;&gt; make_repeater(square, 2)(5) # square(square(5))</span><br><span class="line">    625</span><br><span class="line">    &gt;&gt;&gt; make_repeater(square, 3)(5) # square(square(square(5)))</span><br><span class="line">    390625</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="A3"><a href="#A3" class="headerlink" title="A3"></a>A3</h3><p>题目大意是，写一个函数，传入一个单参函数和数字 n，分别是处理参数的方式和次数，返回一个可传一个参数的函数。</p>
+<p>实现方式就是内部定个函数，把传入数字，用 f 执行 n 次即可，也不难</p>
+<h2 id="Recursion"><a href="#Recursion" class="headerlink" title="Recursion"></a>Recursion</h2><h3 id="Q4-Digit-Distance"><a href="#Q4-Digit-Distance" class="headerlink" title="Q4: Digit Distance"></a>Q4: Digit Distance</h3><p>For a given integer, the digit distance is the sum of the absolute differences between consecutive digits. For example:</p>
+<p>The digit distance of 6 is 0.<br>The digit distance of 61 is 5, as the absolute value of 6 - 1 is 5.<br>The digit distance of 71253 is 12 (6 + 1 + 3 + 2).<br>Write a function that determines the digit distance of a given positive integer. You must use recursion or the tests will fail.</p>
+<p>Hint: There are multiple valid ways of solving this problem! If you’re stuck, try writing out an iterative solution first, and then convert your iterative solution into a recursive one.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">def digit_distance(n):</span><br><span class="line">    &quot;&quot;&quot;Determines the digit distance of n.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; digit_distance(3)</span><br><span class="line">    0</span><br><span class="line">    &gt;&gt;&gt; digit_distance(777)</span><br><span class="line">    0</span><br><span class="line">    &gt;&gt;&gt; digit_distance(314)</span><br><span class="line">    5</span><br><span class="line">    &gt;&gt;&gt; digit_distance(31415926535)</span><br><span class="line">    32</span><br><span class="line">    &gt;&gt;&gt; digit_distance(3464660003)</span><br><span class="line">    16</span><br><span class="line">    &gt;&gt;&gt; from construct_check import check</span><br><span class="line">    &gt;&gt;&gt; # ban all loops</span><br><span class="line">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;digit_distance&#x27;,</span><br><span class="line">    ...       [&#x27;For&#x27;, &#x27;While&#x27;])</span><br><span class="line">    True</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="A4"><a href="#A4" class="headerlink" title="A4"></a>A4</h3><p>题目大意是，计算一个数字各位差绝对值之和，且不准用循环的方式。</p>
+<p>陆爻齐的思路是，每次取第一位和第二位数字差的绝对值加上 n 整除 10 后的数字，如此便可计算出各位差绝对值，与参考答案不谋而合捏。</p>
+<h3 id="Q5-Interleaved-Sum"><a href="#Q5-Interleaved-Sum" class="headerlink" title="Q5: Interleaved Sum"></a>Q5: Interleaved Sum</h3><p>Write a function interleaved_sum, which takes in a number n and two one-argument functions: odd_func and even_func. It applies odd_func to every odd number and even_func to every even number from 1 to n inclusive and returns the sum.</p>
+<p>For example, executing interleaved_sum(5, lambda x: x, lambda x: x * x) returns 1 + 2<em>2 + 3 + 4</em>4 + 5 &#x3D; 29.</p>
+<p>Important: Implement this function without using any loops or directly testing if a number is odd or even – aka modulos (%) are not allowed! Instead of directly checking whether a number is even or odd, start with 1, which you know is an odd number.</p>
+<p>Hint: Introduce an inner helper function that takes an odd number k and computes an interleaved sum from k to n (including n).</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def interleaved_sum(n, odd_func, even_func):</span><br><span class="line">    &quot;&quot;&quot;Compute the sum odd_func(1) + even_func(2) + odd_func(3) + ..., up</span><br><span class="line">    to n.</span><br><span class="line"></span><br><span class="line">    &gt;&gt;&gt; identity = lambda x: x</span><br><span class="line">    &gt;&gt;&gt; square = lambda x: x * x</span><br><span class="line">    &gt;&gt;&gt; triple = lambda x: x * 3</span><br><span class="line">    &gt;&gt;&gt; interleaved_sum(5, identity, square) # 1   + 2*2 + 3   + 4*4 + 5</span><br><span class="line">    29</span><br><span class="line">    &gt;&gt;&gt; interleaved_sum(5, square, identity) # 1*1 + 2   + 3*3 + 4   + 5*5</span><br><span class="line">    41</span><br><span class="line">    &gt;&gt;&gt; interleaved_sum(4, triple, square)   # 1*3 + 2*2 + 3*3 + 4*4</span><br><span class="line">    32</span><br><span class="line">    &gt;&gt;&gt; interleaved_sum(4, square, triple)   # 1*1 + 2*3 + 3*3 + 4*3</span><br><span class="line">    28</span><br><span class="line">    &gt;&gt;&gt; from construct_check import check</span><br><span class="line">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;interleaved_sum&#x27;, [&#x27;While&#x27;, &#x27;For&#x27;, &#x27;Mod&#x27;]) # ban loops and %</span><br><span class="line">    True</span><br><span class="line">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;interleaved_sum&#x27;, [&#x27;BitAnd&#x27;, &#x27;BitOr&#x27;, &#x27;BitXor&#x27;]) # ban bitwise operators, don&#x27;t worry about these if you don&#x27;t know what they are</span><br><span class="line">    True</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="A5"><a href="#A5" class="headerlink" title="A5"></a>A5</h3><p>题目大意，交错和，即对奇偶数各用奇偶的函数处理，再相加得和，不准使用循环和 %，以及位运算来禁止直接判断数字奇偶。</p>
+<p>此题，陆爻齐用了取巧的办法越过了检查，仍然直接判断奇偶，即用递归判断，n 次递归，用另一个变量 1&#x2F;0，以得出奇偶，下面是看了参考答案总结的思路。</p>
+<p>不知 n 的奇偶，但可以从 1 推到 n，于是可写个内部函数，计算 1 2 ……，两位两位地计算和，递归，最后返回结果即可</p>
+<h3 id="Q6-Count-Coins"><a href="#Q6-Count-Coins" class="headerlink" title="Q6: Count Coins"></a>Q6: Count Coins</h3><p>Given a positive integer total, a set of coins makes change for total if the sum of the values of the coins is total. Here we will use standard US Coin values: 1, 5, 10, 25. For example, the following sets make change for 15:</p>
+<p>15 1-cent coins<br>10 1-cent, 1 5-cent coins<br>5 1-cent, 2 5-cent coins<br>5 1-cent, 1 10-cent coins<br>3 5-cent coins<br>1 5-cent, 1 10-cent coin<br>Thus, there are 6 ways to make change for 15. Write a recursive function count_coins that takes a positive integer total and returns the number of ways to make change for total using coins.</p>
+<p>You can use either of the functions given to you:</p>
+<p>next_larger_coin will return the next larger coin denomination from the input, i.e. next_larger_coin(5) is 10.<br>next_smaller_coin will return the next smaller coin denomination from the input, i.e. next_smaller_coin(5) is 1.<br>Either function will return None if the next coin value does not exist<br>There are two main ways in which you can approach this problem. One way uses next_larger_coin, and another uses next_smaller_coin. It is up to you which one you want to use!</p>
+<p>Important: Use recursion; the tests will fail if you use loops.</p>
+<p>Hint: Refer to the implementation of count_partitions for an example of how to count the ways to sum up to a final value with smaller parts. If you need to keep track of more than one value across recursive calls, consider writing a helper function.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">def next_larger_coin(coin):</span><br><span class="line">    &quot;&quot;&quot;Returns the next larger coin in order.</span><br><span class="line">    &gt;&gt;&gt; next_larger_coin(1)</span><br><span class="line">    5</span><br><span class="line">    &gt;&gt;&gt; next_larger_coin(5)</span><br><span class="line">    10</span><br><span class="line">    &gt;&gt;&gt; next_larger_coin(10)</span><br><span class="line">    25</span><br><span class="line">    &gt;&gt;&gt; next_larger_coin(2) # Other values return None</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if coin == 1:</span><br><span class="line">        return 5</span><br><span class="line">    elif coin == 5:</span><br><span class="line">        return 10</span><br><span class="line">    elif coin == 10:</span><br><span class="line">        return 25</span><br><span class="line"></span><br><span class="line">def next_smaller_coin(coin):</span><br><span class="line">    &quot;&quot;&quot;Returns the next smaller coin in order.</span><br><span class="line">    &gt;&gt;&gt; next_smaller_coin(25)</span><br><span class="line">    10</span><br><span class="line">    &gt;&gt;&gt; next_smaller_coin(10)</span><br><span class="line">    5</span><br><span class="line">    &gt;&gt;&gt; next_smaller_coin(5)</span><br><span class="line">    1</span><br><span class="line">    &gt;&gt;&gt; next_smaller_coin(2) # Other values return None</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    if coin == 25:</span><br><span class="line">        return 10</span><br><span class="line">    elif coin == 10:</span><br><span class="line">        return 5</span><br><span class="line">    elif coin == 5:</span><br><span class="line">        return 1</span><br><span class="line"></span><br><span class="line">def count_coins(total):</span><br><span class="line">    &quot;&quot;&quot;Return the number of ways to make change using coins of value of 1, 5, 10, 25.</span><br><span class="line">    &gt;&gt;&gt; count_coins(15)</span><br><span class="line">    6</span><br><span class="line">    &gt;&gt;&gt; count_coins(10)</span><br><span class="line">    4</span><br><span class="line">    &gt;&gt;&gt; count_coins(20)</span><br><span class="line">    9</span><br><span class="line">    &gt;&gt;&gt; count_coins(100) # How many ways to make change for a dollar?</span><br><span class="line">    242</span><br><span class="line">    &gt;&gt;&gt; count_coins(200)</span><br><span class="line">    1463</span><br><span class="line">    &gt;&gt;&gt; from construct_check import check</span><br><span class="line">    &gt;&gt;&gt; # ban iteration</span><br><span class="line">    &gt;&gt;&gt; check(HW_SOURCE_FILE, &#x27;count_coins&#x27;, [&#x27;While&#x27;, &#x27;For&#x27;])</span><br><span class="line">    True</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line">    &quot;*** YOUR CODE HERE ***&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="A6"><a href="#A6" class="headerlink" title="A6"></a>A6</h3><p>题目大意，就是将给定的数字划分成 1、5、10、25 的组合，给出组合个数，不可使用循环。可借助已写好的 next_larger_coin 等函数</p>
+<p>此题可这么看，从一个数字向下蔓延分支，可大致分两类，一类是尝试用当前数字减去一次额度，一类是额度变化（变大变小都可），如此递归下去各种路线都可计算到。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>Q5 和 Q6 都挺有思考的趣味，递归很早就学了，但体会递归的魅力，还是在此</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/08/28/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%957%20Homework2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" data-id="cm7j3jec3000e10agh4at5rc3" data-title="【CS61A-Fall-2020】学习记录七 Homework2 题解思路分享" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CS61A/" rel="tag">CS61A</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Python/" rel="tag">Python</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-[CS61A-Fall-2020]学习记录6 Lab2 题解思路分享" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2024/08/13/%5BCS61A-Fall-2020%5D%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" class="article-date">
@@ -134,7 +686,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/13/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" data-id="cm7j3ftgm0009uwag41s60sbl" data-title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/08/13/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%956%20Lab2%20%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB/" data-id="cm7j3jec0000910ag0jfnfhyf" data-title="【CS61A-Fall-2020】学习记录六 Lab2 题解思路分享" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -196,7 +748,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3fth80021uwagdmgv9h7y" data-title="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/08/03/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%20%E3%80%8A%E7%88%B1%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%E6%88%91%E8%A6%81%E5%A6%82%E4%BD%95%E5%AD%A6%E4%BC%9A%E7%88%B1%EF%BC%8C%E5%B0%A4%E5%85%B6%E6%98%AF%EF%BC%8C%E5%AD%A6%E4%BC%9A%E7%88%B1%E8%87%AA%E5%B7%B1%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3jeco002510agesvdcplg" data-title="【播客笔记】《爱的艺术》我要如何学会爱，尤其是，学会爱自己 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -241,7 +793,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/19/hello-world/" data-id="cm7j3fth70020uwagcy8igsys" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/19/hello-world/" data-id="cm7j3jecm001x10aghff1c8ua" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -318,7 +870,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/19/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%E3%80%8A%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%97%E9%AA%97%E3%80%8B%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E6%AF%8F%E4%B8%AA%E5%A5%B3%E7%94%9F%E7%9C%8B%E5%AE%8C%E8%BF%99%E6%9C%AC%E4%B9%A6%E5%86%8D%E5%8E%BB%E6%81%8B%E7%88%B1%EF%BC%81%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3fth80023uwagdrbz9sq8" data-title="【播客笔记】《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！ 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/19/%E3%80%90%E6%92%AD%E5%AE%A2%E7%AC%94%E8%AE%B0%E3%80%91%E3%80%8A%E6%88%91%E4%BB%AC%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%8F%97%E9%AA%97%E3%80%8B%E5%BC%BA%E7%83%88%E5%BB%BA%E8%AE%AE%E6%AF%8F%E4%B8%AA%E5%A5%B3%E7%94%9F%E7%9C%8B%E5%AE%8C%E8%BF%99%E6%9C%AC%E4%B9%A6%E5%86%8D%E5%8E%BB%E6%81%8B%E7%88%B1%EF%BC%81%20%E7%BA%B5%E6%A8%AA%E5%9B%9B%E6%B5%B7/" data-id="cm7j3jecn001z10ag4bh68tpe" data-title="【播客笔记】《我们为什么会受骗》强烈建议每个女生看完这本书再去恋爱！ 纵横四海" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -397,7 +949,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/18/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%955%20Project1%20The%20Game%20of%20Hog%20%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/" data-id="cm7j3ftgk0005uwagdtfs24jd" data-title="【CS61A-Fall-2020】学习记录五 Project1 The Game of Hog 中有意思的点" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/18/[CS61A-Fall-2020]%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%955%20Project1%20The%20Game%20of%20Hog%20%E4%B8%AD%E6%9C%89%E6%84%8F%E6%80%9D%E7%9A%84%E7%82%B9/" data-id="cm7j3jec0000810agezuh0v1z" data-title="【CS61A-Fall-2020】学习记录五 Project1 The Game of Hog 中有意思的点" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -471,7 +1023,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/11/[Datawhale%20AI%20%E5%A4%8F%E4%BB%A4%E8%90%A5]%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20Task1%20%E4%BD%93%E9%AA%8C%E8%AE%B0%E5%BD%95%20%E6%80%9D%E8%80%83%20%E8%A1%A5%E5%85%85/" data-id="cm7j3ftgn000cuwagfv1k7ikh" data-title="【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/11/[Datawhale%20AI%20%E5%A4%8F%E4%BB%A4%E8%90%A5]%20%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%20Task1%20%E4%BD%93%E9%AA%8C%E8%AE%B0%E5%BD%95%20%E6%80%9D%E8%80%83%20%E8%A1%A5%E5%85%85/" data-id="cm7j3jec2000c10ag075o8tzn" data-title="【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -569,7 +1121,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/09/[CINTA]%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" data-id="cm7j3ftga0000uwag9e4jho0i" data-title="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/09/[CINTA]%20%E5%85%B7%E4%BD%93%E6%95%B0%E8%AE%BA%E4%B8%8E%E4%BB%A3%E6%95%B0%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0%E2%80%94%E2%80%94%E7%AC%AC%E4%B8%80%E7%AB%A0%20%E6%95%B4%E6%95%B0%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88%E5%90%AB%E5%8A%A0%E3%80%81%E4%B9%98%E3%80%81%E9%99%A4%EF%BC%89/" data-id="cm7j3jebm000010ag53ar4tkp" data-title="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -673,7 +1225,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgt000tuwag0dqz3wew" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/04/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%89%E6%AC%A1%E5%92%8C%E7%AC%AC%E5%9B%9B%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec8000u10ag48qgd8vj" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -809,7 +1361,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/03/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgt000uuwaghstj6qhl" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/03/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E8%AF%BE%E7%A8%8B%E8%AE%BE%E8%AE%A1%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8E%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec8000t10agb1rt9ojs" data-title="【JLU】 数据结构与算法上机题解思路分享-课程设计第一次与第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -928,7 +1480,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/02/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgs000ouwag1g6o9vq8" data-title="【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/02/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%89%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec6000l10agc6ofcvi8" data-title="【JLU】 数据结构与算法上机题解思路分享-第三次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -1043,343 +1595,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2024/07/01/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgs000quwag9ofbc0sr" data-title="【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2024/07/01/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%BA%8C%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3jec6000o10aghgyahy21" data-title="【JLU】 数据结构与算法上机题解思路分享-第二次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-[JLU] 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/06/30/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" class="article-date">
-  <time class="dt-published" datetime="2024-06-30T14:54:00.000Z" itemprop="datePublished">2024-06-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/06/30/%5BJLU%5D%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/">【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><strong>首先</strong>，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。</p>
-<p>这里只是思路解析的博客，代码仓库是<a target="_blank" rel="noopener" href="https://github.com/HSLix/JLU_Data_Structures_Record.git">JLU_Data_Structures_Record</a></p>
-<p>希望你能在这里找到你想要的:)</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><hr>
-<h2 id="A-调皮的哈利"><a href="#A-调皮的哈利" class="headerlink" title="A 调皮的哈利"></a>A 调皮的哈利</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>贝蒂是个打字高手，打字时有不看屏幕的习惯。在一次贝蒂打字时，调皮的哈利常常趁贝蒂不注意按下Home键、End键、左右方向键和退格键。当Home键被按下时，输入光标会跳到文本最开头；当End键被按下时，输入光标会跳到文本末尾；当左&#x2F;右方向键被按下时，输入光标会向左&#x2F;右移动一位；当退格键被按下时，输入光标左面的一个字符会被删除。现给出贝蒂和哈利按键的字符串，其中’{‘表示Home键，’}’表示End键，’&lt;’表示左方向键，’&gt;’表示右方向键，’#’表示退格键，其余字符均表示输入的内容，请输出屏幕上最终显示的文本。</p>
-<p>img.jpg</p>
-<p>输入格式:<br>输入一个字符串，长度不超过5×10<br>4<br> ，包含大小写字母、空格、下划线、{、}、&lt;、&gt;、#，表示贝蒂和哈利的按键序列。</p>
-<p>输出格式:<br>输出为屏幕上最终显示的字符串。</p>
-<p>输入样例1:<br>jlu_cc{i_love_}st</p>
-<p>输出样例1:<br>i_love_jlu_ccst<br>输入样例2:<br>stre&lt;&lt;aaa</p>
-<p>输出样例2:<br>staaare<br>输入样例3:<br>xxx&gt;&gt;&gt;yyy##z&lt;&lt;&gt;k</p>
-<p>输出样例3:<br>xxxykz<br>输入样例4:<br>abcd{efghi}jklm{nopq}rs{t}uvwxyz</p>
-<p>输出样例4:<br>tnopqefghiabcdjklmrsuvwxyz<br>代码长度限制<br>16 KB<br>时间限制<br>25 ms<br>内存限制<br>10 MB</p>
-<hr>
-<p>从题目可以知道，题目要求对于内部的数据结构有着频繁的更改，所以在我们已知的数据结构中，可以考虑采用链表来进行实现。</p>
-<p>同时也能注意到，对于字符串的处理，有一些如同转义字符一样的特殊字符，将这些特殊字符的处理编为函数，也是一个不错的选择。</p>
-<p>此外，也建议想象自己操纵着光标，输入时向光标左边插字，删除时删除左边的字这样。</p>
-<hr>
-<p>##B 括号匹配<br>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>请编写程序判断一个包含“（”和“）”的括号序列是否匹配。如匹配则输出Match；如不匹配，计算出使该序列变为匹配序列所需添加的最少括号数目（只允许在该序列开始和结尾处添加括号），并输出经添加最少括号后得到的合法匹配序列。</p>
-<p>输入格式:<br>输入为若干行，每行一个字符串，包含不超过10 ^ 5个括号。输入行数不超过10行。</p>
-<p>输出格式:<br>对于输入的每个括号序列输出1行或2行信息。若输入的括号序列匹配，则输出Match。若不匹配，则输出分为2行，第1行为一个整数，表示将该序列变为匹配序列所需添加的最少括号数目，第2行为一个字符串，表示经添加最少括号后得到的合法匹配序列。</p>
-<p>输入样例:<br>(())()<br>)(<br>()))((</p>
-<p>输出样例:<br>Match<br>2<br>()()<br>4<br>((()))(())</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>20 ms<br>内存限制<br>10 MB</p>
-<hr>
-<p>该题目与课内某题很像，通过栈记录匹配与否，再实现补充即可</p>
-<p>由于全是小括号，基本不用考虑在哪里补充，缺几个左括号就直接向左补，缺几个右括号直接向右补即可</p>
-<hr>
-<h2 id="C-表达式求值"><a href="#C-表达式求值" class="headerlink" title="C 表达式求值"></a>C 表达式求值</h2><p>分数 30<br>作者 朱允刚<br>单位 吉林大学<br>给定一个中缀表达式，请编写程序计算该表达式的值。表达式包含+、-、*、\、^、(、)，所有运算均为二元运算，操作数均为正整数，但可能不止一位，不超过10位。运算结果为整数，值域为[−2^31,2^<br>31)。除法运算结果若为小数则进行截尾取整。若除法运算中除数为0，则输出INVALID。幂运算须自行实现，不允许调用pow等系统函数。测试数据保证幂运算中指数为非负，底数不为0。</p>
-<p>输入格式:<br>输入为多行，每行为一个长度不超过1000的字符串，表示中缀表达式。</p>
-<p>输出格式:<br>对每个表达式输出一行：为一个整数（表达式的值）或为一个字符串INVALID。</p>
-<p>输入样例:<br>5+(10<em>2)-6<br>8</em>(999+1)<br>1+5&#x2F;(1-1)<br>7*2^3</p>
-<p>输出样例:<br>19<br>8000<br>INVALID<br>56<br>代码长度限制<br>16 KB<br>时间限制<br>50 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>经典的中缀表达式转后缀表达式，基本与课本一样，不过需要快速幂来减少时间消耗，毕竟只有50ms嘛</p>
-<p>陆爻齐采用了专门的函数判断符号优先级，是否为括号的函数来事得程序条理更清晰些，为了省事，或许能够统一个函数，直接用数字区分类别，不过更耗点脑子罢</p>
-<hr>
-<h2 id="D-EDG"><a href="#D-EDG" class="headerlink" title="D EDG"></a>D EDG</h2><p>分数 20<br>作者 朱允刚<br>单位 吉林大学<br>2021年11月6日，英雄联盟全球总决赛打响，中国电子竞技战队Edward Gaming（EDG）以3:2力克韩国强敌DWG KIA（DK）战队，历史上首次夺得全球总冠军。一时间全网沸腾，大家纷纷在社交平台上直呼“edgnb”。现给定一段文本，请编写程序识别出连续的k个“edgnb”组成的字符串在该文本中出现了多少次。</p>
-<p>输入格式:<br>第一行为1个整数T，表示数据组数。对于每组数据，第一行为1个字符串，表示给定的文本。第二行为1个整数k，含义如题目所述。（1≤T≤10。各组数据给定的字符串长度之和不超过10<br>5<br> ，且字符串中只包含a-z的小写字母。k≥1且k×5小于给定字符串长度）。</p>
-<p>输出格式:<br>对于每组数据输出一行，为1个整数，表示所求的出现次数。</p>
-<p>输入样例:<br>5<br>xyzedgnbabcedgnb<br>1<br>xyzedgnbabcedgnb<br>2<br>defedgnbedgnbxyz<br>2<br>edgnbedgnbedgnb<br>2<br>fxedgnbedgnbedgnbedgnbmem<br>3</p>
-<p>输出样例:<br>2<br>0<br>1<br>2<br>2</p>
-<p>数据规模:<br>测试点0：5≤T≤10，400≤T个字符串长度之和≤500，k&#x3D;1<br>测试点1：5≤T≤10，400≤T个字符串长度之和≤500，k≥1<br>测试点2：5≤T≤10，4000≤T个字符串长度之和≤5000，k≥1<br>测试点3：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1<br>测试点4：1≤T≤3，90000≤T个字符串长度之和≤100000，k≥1</p>
-<p>代码长度限制<br>16 KB<br>时间限制<br>400 ms<br>内存限制<br>64 MB</p>
-<hr>
-<p>这个题的实质是从字符串中匹配符合的字符串，而且不单单是匹配单个edgnb出现次数，而是可能变长的。只要理解了这一点，接下来只要实现经典的kmp就成功了。</p>
-<p>你问kmp是什么？我也不知道捏（毕竟过去一年力</p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>这次上机实验主要考察了对链表、字符串匹配和操作，思考量肯定是有的，不过这里面很多东西我确实还是没有理解啊，纵使当时写下来了，现在也全忘了，hhh</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/06/30/[JLU]%20%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B8%8A%E6%9C%BA%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF%E5%88%86%E4%BA%AB-%E7%AC%AC%E4%B8%80%E6%AC%A1%E4%B8%8A%E6%9C%BA%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6/" data-id="cm7j3ftgr000muwaggohl136f" data-title="【JLU】 数据结构与算法上机题解思路分享-第一次上机 吉林大学" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" rel="tag">数据结构与算法</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-[JLU] 吉林大学校园网上网攻略汇总与补充" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/06/09/%5BJLU%5D%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/" class="article-date">
-  <time class="dt-published" datetime="2024-06-09T12:21:00.000Z" itemprop="datePublished">2024-06-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/06/09/%5BJLU%5D%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/">【JLU】 吉林大学校园网上网攻略汇总与补充</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如题，陆爻齐为了汇集一下觉得比较有用的 JLU 校园网相关的资源，同时对于一些比较重要但比较少被提及的地方做点补充而写本文。</p>
-<p>希望能对吉林大学（也许）的各位有所帮助</p>
-<p>如果陆爻齐再次重装系统，或许也用的到罢：）</p>
-<h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="现有攻略推介"><a href="#现有攻略推介" class="headerlink" title="现有攻略推介"></a>现有攻略推介</h2><h3 id="文章"><a href="#文章" class="headerlink" title="文章"></a>文章</h3><ul>
-<li><h4 id="官方老文"><a href="#官方老文" class="headerlink" title="官方老文"></a>官方老文</h4></li>
-</ul>
-<p>如果你会搜索下“吉林大学 校园网”，那么第一个网址大概就是这个 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1095.htm">吉林大学校园网入网指南</a> </p>
-<p>实际上，这篇文章有点老，JLU校园网手机无线网络配置也得看 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1988.htm">JLU.WIFI使用指南</a> ，而且其它配电脑部分篇幅较为冗余，反正我是太长，不看！！！（笑</p>
-<ul>
-<li><h4 id="官方新文"><a href="#官方新文" class="headerlink" title="官方新文"></a>官方新文</h4></li>
-</ul>
-<p>所以，可以参考这个应该比较难搜出来的 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1025/1718.htm">校园网入网指南（新生版）</a></p>
-<p>相较而言，简洁不少（果然还是新生版攻略好用<br><a id="line_turation"></a></p>
-<ul>
-<li><h4 id="有线网"><a href="#有线网" class="headerlink" title="有线网"></a>有线网</h4></li>
-</ul>
-<p>而如果想配置有线网，那么可以参考 <a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/info/1113/1727.htm">有线网络配置及登陆方法</a></p>
-<p>PS：<del>登录</del> VS 登陆</p>
-<p>如果你是小白建议看看下面的<a href="#line">补充</a></p>
-<ul>
-<li><h4 id="官方的常见问题与解答"><a href="#官方的常见问题与解答" class="headerlink" title="官方的常见问题与解答"></a>官方的常见问题与解答</h4></li>
-</ul>
-<p>有点老，仅供参考罢<br><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wxwlxgywjd_y_.htm">无线网络相关业务解答（一）</a></p>
-<p><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wxwlxgywjd_e_.htm">无线网络相关业务解答（二）</a></p>
-<p><a target="_blank" rel="noopener" href="https://nic.jlu.edu.cn/cjwd/wlcjwtjd.htm">网络常见问题解答</a></p>
-<p>里面有官方24小时答疑电话，这个应该最有用罢</p>
-<h3 id="视频"><a href="#视频" class="headerlink" title="视频"></a>视频</h3><p>嘛，有个叫 JLUBOOK 的组织做了些攻略，2022年的，算比较新啦，在此贴贴</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1te4y1f7Xv/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.2（Windows＆Android校园网入网以及邮箱获取教程）</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1cP411V7Bt/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.3（Mac开通校园网）</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1eW4y1t7UF/?share_source=copy_web&vd_source=1423ba210b588816e333b03a9060d0b0">吉林大学新生必备指南讲解4.4（Apple设备连接校园网）</a></p>
-<h2 id="补充说明"><a href="#补充说明" class="headerlink" title="补充说明"></a>补充说明</h2><h3 id="关于收费"><a href="#关于收费" class="headerlink" title="关于收费"></a>关于收费</h3><p>目前JLU  校园网是不限流量 20r&#x2F;月，一次校园网需要充满 100 开户（如果没记错的），免费月为 2 月和 7 月，详细可以看下图</p>
-<p><img src="https://img2024.cnblogs.com/blog/3207177/202406/3207177-20240609194449184-142657213.png" alt="校园网常见问题"></p>
-<p>也就是说，8 月前其实可以推掉校园网省 20r，下学期再开通，这样就省了一个月，但要花点时间重新配置（笑</p>
-<h3 id="充值"><a href="#充值" class="headerlink" title="充值"></a>充值</h3><p>如果没记错，月末或月初有几天不能充值续费，在乎这方面的同学建议早充早用，等发现用不了再充可能得难受几天。</p>
-<h3 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h3><ul>
-<li><p>范围上，基本覆盖全校区，但在人多的时候很不太好用，比如饭点的日新楼，还有像基础园澡堂这样就是没覆盖的（别问我怎么知道的</p>
-</li>
-<li><p>速度上无线基本在 8m 到几十m之间，但有线网极快，平时就几百m，状态好的时候可以上 1g，所以建议经常下载什么的，能配有线尽量配</p>
-</li>
-<li><p>稳定性上，PC的无线网络时不时会自己中断，要手动重连；而且有时明明关掉了，没有启动，又说正在运行而无法打开；笔记本电脑合上后也会自动断开，无法忍受的同学可以看看 <a href="#other_ser">其他客户端</a>，陆爻齐未来也打算写个新的客户端来使用，不过可能到时也用不着了</p>
-</li>
-</ul>
-<p><a id="line"></a></p>
-<h3 id="有线网配置补充与全流程参考"><a href="#有线网配置补充与全流程参考" class="headerlink" title="有线网配置补充与全流程参考"></a>有线网配置补充与全流程参考</h3><p>有线网和无线网不同的是，光靠文字或视频攻略可能无法配置，还需要购买硬件，比如网线、转换器什么的</p>
-<p>1.首先，要确认自己的设备是否有网线接口，类似下图，如果有，请继续下面；如果没有却仍考虑有线网，可先查询自己设备有无 type-c 接口以及网卡是否支持通过 type-c 接口上网（近几年电脑大多支持），然后购买相关拓展坞（比如有 type-c 转网口的），再继续 </p>
-<p><img src="https://img2024.cnblogs.com/blog/3207177/202406/3207177-20240609200724266-1733097933.png" alt="网口示例"></p>
-<p>2.然后要确认好宿舍的路由器在哪里，自己桌子附近有无前辈留下的网线<del>遗产</del>，确认其是否连接到路由器上，如果有网线且连接看似正常，那么就回到 <a href="#line_turation">上面</a> 参照攻略尝试连接</p>
-<p>3.如果连接失败，且在电话咨询学校网络中心后仍无法解决，建议更换网线，百兆够用，千兆更流畅，类别不重要。</p>
-<p><a id="other_ser"></a></p>
-<h3 id="其他客户端"><a href="#其他客户端" class="headerlink" title="其他客户端"></a>其他客户端</h3><p>在GitHub，你吉老学长们做了不同版本开源的客户端，虽然可能有点老，不过你吉的客户端应该更老，该兴趣的同学可以自行下载体验</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>没啥好总结，有用就行：）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/06/09/[JLU]%20%E5%90%89%E6%9E%97%E5%A4%A7%E5%AD%A6%E6%A0%A1%E5%9B%AD%E7%BD%91%E4%B8%8A%E7%BD%91%E6%94%BB%E7%95%A5%E6%B1%87%E6%80%BB%E4%B8%8E%E8%A1%A5%E5%85%85/" data-id="cm7j3ftgp000huwagaw00g1zv" data-title="【JLU】 吉林大学校园网上网攻略汇总与补充" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JLU/" rel="tag">JLU</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-【方法论】再论如何读书——对过去阅读的总结与对未来的要求" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/" class="article-date">
-  <time class="dt-published" datetime="2024-06-08T12:12:00.000Z" itemprop="datePublished">2024-06-08</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/">【方法论】再论如何读书——对过去阅读的总结与对未来的要求</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>陆爻齐在以前曾花心思读了不少关于“如何阅读”这个主题的书，有时对某条表示“顿悟”，然后做了几次就往在一边，什么笔记法啊，阅读法啊，大多十分的繁杂，连把整个流程走完一边都十分繁琐无聊，坚持下去于陆爻齐而言就是天方夜谭。在偶然瞥见某篇文章时，突然又有所顿悟，希望能把这个简单的思维贯彻执行，也在此作下记录。</p>
-<h1 id="知以阅读，行以实践"><a href="#知以阅读，行以实践" class="headerlink" title="知以阅读，行以实践"></a>知以阅读，行以实践</h1><h2 id="知行如何合一"><a href="#知行如何合一" class="headerlink" title="知行如何合一"></a>知行如何合一</h2><p>先摆结论，陆爻齐提倡“知行合一”，可以大致分两个场景</p>
-<ul>
-<li>带有强烈目的性的情况，也就是为了高效地获取知识而阅读，那么应该是“边做边读”最为有效，即一边阅读知识，一边将所读所学付诸实践。合适的时候，可以辅以康奈尔笔记这种“笔记”方法帮助记忆巩固。这种情景往往出现在大学牲速成期末考试中，或者狂热地为了实现某个目的而学习的过程中。</li>
-<li>然后就是其它部分，也就是几乎没有目的性，平时随意阅读的时候，这种情形陆爻齐不推荐将阅读所得以“笔记”方式记录，但通过博客、视频等方式将所学输出是推荐的。</li>
-<li>书是为人而看的。为了看书而看书，容易只会享受知识流淌过脑子的感觉。看书只是为了找到与自己共鸣的部分，即使一本书只有一句有用，那便足矣，充分吸收这句带来的益处便好。</li>
-</ul>
-<h2 id="脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰"><a href="#脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰" class="headerlink" title="脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰"></a>脱离实践，黄金屋亦会蒙尘，颜如玉也会色衰</h2><p>这里说说陆爻齐的理由吧。</p>
-<p>上大学来，陆爻齐曾尝试过自主泛读所谓的“杂书”，也做了些所谓“笔记”，但现在回顾，所写所记，全部忘在角落蒙尘，若非今日书写此文，定会继续被遗忘。即使未来真的遇到能用里面的知识解决问题，陆爻齐也一定会几乎从零开始。</p>
-<p>与之相对，陆爻齐为了解决重装系统、电脑故障、自己的项目维护问题甚至期末考试等，而学到的东西即使有段时间未碰，也深深印刻在脑内。</p>
-<p>陆爻齐也并非没有尝试解决几乎无目的性学习这种情况的问题，当前想到的便是采用“输出”来实现“知行合一”，比如写博客、做视频。这也正是陆爻齐写<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luyaoqi/p/17968076">重装系统记录</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/luyaoqi/p/18172286">Git报错解决</a>等文章的用意。写完博客，这些知识也就在我试图输出的时候，通过整理很好地吸收了。</p>
-<p>陆爻齐在想，或许是所谓阅读得来的知识对人脑而言还是过于抽象了。简单的说，平时使用没用过的东西，比起把“使用说明”背下来，直接上手使用实践或许带来的印象更为深刻吧。</p>
-<h2 id="细谈阅读过程"><a href="#细谈阅读过程" class="headerlink" title="细谈阅读过程"></a>细谈阅读过程</h2><p>除了应试需要将规定内容几乎一字不落地吸收外，其他情况下可按几步走</p>
-<ol>
-<li>看目录，锁定感兴趣&#x2F;最需要的部分</li>
-<li>浏览（1）锁定的部分，适当的时候略览与所需也匹配的部分</li>
-<li>实践，输出所学内容</li>
-</ol>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>综上，除了带有强烈目的性，容易达成“知行合一”情景的阅读场景，其余场景也要尽量达成“知行合一”。谨以此文，献给为曾经如何读书而迷茫的陆爻齐，让他今后不再烦恼于此</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/06/08/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%86%8D%E8%AE%BA%E5%A6%82%E4%BD%95%E8%AF%BB%E4%B9%A6%E2%80%94%E2%80%94%E5%AF%B9%E8%BF%87%E5%8E%BB%E9%98%85%E8%AF%BB%E7%9A%84%E6%80%BB%E7%BB%93%E4%B8%8E%E5%AF%B9%E6%9C%AA%E6%9D%A5%E7%9A%84%E8%A6%81%E6%B1%82/" data-id="cm7j3fth90025uwag42mph88c" data-title="【方法论】再论如何读书——对过去阅读的总结与对未来的要求" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-[Git Error]error Invalid path 报错，clone 失败，文件夹空白问题解决" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/05/04/%5BGit%20Error%5Derror%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" class="article-date">
-  <time class="dt-published" datetime="2024-05-04T06:48:00.000Z" itemprop="datePublished">2024-05-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/05/04/%5BGit%20Error%5Derror%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/">【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><p>可能是在 clone 某仓库后出现形如下面报错</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/*.git</span><br><span class="line">Cloning into &#x27;*&#x27;...</span><br><span class="line">remote: Enumerating objects: *, done.</span><br><span class="line">remote: Counting objects: 100% (*/*), done.</span><br><span class="line">remote: Compressing objects: 100% (*/*), done.</span><br><span class="line">remote: Total * (delta *), reused * (delta *), pack-reused *</span><br><span class="line">Receiving objects: 100% (*/*), * MiB | 8.40 MiB/s, done.</span><br><span class="line">Resolving deltas: 100% (*/*), done.</span><br><span class="line">error: invalid path &#x27;*.md&#x27;</span><br><span class="line">fatal: unable to checkout working tree</span><br><span class="line">warning: Clone succeeded, but checkout failed.</span><br><span class="line">You can inspect what was checked out with &#x27;git status&#x27;</span><br><span class="line">and retry with &#x27;git restore --source=HEAD :/&#x27;</span><br></pre></td></tr></table></figure>
-<p>而且仓库里除了.git文件夹就“一尘不染”。</p>
-<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>在仓库的文件夹中打开终端，并输入<br><code>git config core.protectNTFS false</code><br>大致意思是关闭文件保护之类的，然后切换为刚刚的分支，如<br><code>git checkout main</code><br>然后文件夹就正常咯</p>
-<h1 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h1><p>一个简单记录，并非笔者原创的方法，只是想以自己的方式记录该方法。</p>
-<h1 id="参考网址"><a href="#参考网址" class="headerlink" title="参考网址"></a>参考网址</h1><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zackary/p/13702643.html">https://www.cnblogs.com/zackary/p/13702643.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/05/04/[Git%20Error]error%20Invalid%20path%20%E6%8A%A5%E9%94%99%EF%BC%8Cclone%20%E5%A4%B1%E8%B4%A5%EF%BC%8C%E6%96%87%E4%BB%B6%E5%A4%B9%E7%A9%BA%E7%99%BD%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/" data-id="cm7j3ftgp000fuwaghjo19ha9" data-title="【Git Error】error Invalid path 报错，clone 失败，文件夹空白问题解决" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Git/" rel="tag">Git</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-【方法论】如何读论文 李沐视频笔记" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" class="article-date">
-  <time class="dt-published" datetime="2024-03-25T08:57:00.000Z" itemprop="datePublished">2024-03-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/">【方法论】如何读论文 李沐视频笔记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>内容不多，但姑且记下来加深印象好了</p>
-<p>[视频链接]（<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H44y1t75x/?spm_id_from=333.788&vd_source=0e55873fcd6a0d01839a7f7f37c36254%EF%BC%89">https://www.bilibili.com/video/BV1H44y1t75x/?spm_id_from=333.788&amp;vd_source=0e55873fcd6a0d01839a7f7f37c36254）</a></p>
-<h1 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h1><h2 id="总概"><a href="#总概" class="headerlink" title="总概"></a>总概</h2><p>读论文的重点在于筛选出适合自己的论文，通过三遍阅读来找出并吸收</p>
-<p>论文大致分为<br>1、标题 title<br>2、摘要 abstract<br>3、介绍 introduction<br>4、方法 method<br>5、实验 exp<br>6、结论 conclusion</p>
-<h2 id="第一遍阅读"><a href="#第一遍阅读" class="headerlink" title="第一遍阅读"></a>第一遍阅读</h2><p>只看标题、摘要和结论，从中判断论文的方向是否是自己所需</p>
-<h2 id="第二遍阅读"><a href="#第二遍阅读" class="headerlink" title="第二遍阅读"></a>第二遍阅读</h2><p>看介绍和方法、实验中的图表，搞清图表每一个指标的含义，是这个方法多好，比别人厉害多少什么的</p>
-<h2 id="第三遍阅读"><a href="#第三遍阅读" class="headerlink" title="第三遍阅读"></a>第三遍阅读</h2><p>全面仔细阅读，搞清楚每一步的过程、目的，其中的公式、证明可忽略，目的是跟着作者的思路复现一次论文</p>
-<p>结束阅读后脑子里能大致复现内容，这就是一次阅读。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2024/03/25/%E3%80%90%E6%96%B9%E6%B3%95%E8%AE%BA%E3%80%91%E5%A6%82%E4%BD%95%E8%AF%BB%E8%AE%BA%E6%96%87%20%E6%9D%8E%E6%B2%90%E8%A7%86%E9%A2%91%E7%AC%94%E8%AE%B0/" data-id="cm7j3fth90028uwagg9go32v2" data-title="【方法论】如何读论文 李沐视频笔记" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">方法论</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9D%82%E8%B0%88/" rel="tag">杂谈</a></li></ul>
 
     </footer>
   </div>
@@ -1426,7 +1646,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/02/">二月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">一月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/12/">十二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/11/">十一月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/10/">十月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/09/">九月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">八月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/07/">七月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/06/">六月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">五月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">三月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">二月 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/01/">一月 2024</a></li></ul>
     </div>
   </div>
 
@@ -1439,23 +1659,23 @@
       <ul>
         
           <li>
-            <a href="/2024/12/15/%5BWeekly%20Algorithm%5D%2014%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%94%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（五）</a>
+            <a href="/2025/02/23/%5BWeekly%20Algorithm%5D%2019%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（三）</a>
           </li>
         
           <li>
-            <a href="/2024/12/08/%5BWeekly%20Algorithm%5D%2013%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%9B%9B%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（四）</a>
+            <a href="/2025/02/16/%5BWeekly%20Algorithm%5D%2018%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》图论（二）</a>
           </li>
         
           <li>
-            <a href="/2024/12/01/%5BWeekly%20Algorithm%5D%2012%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%89%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（三）</a>
+            <a href="/2025/02/09/%5BWeekly%20Algorithm%5D%2017%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8D%95%E8%B0%83%E6%A0%88%E5%92%8C%E5%9B%BE%E8%AE%BA%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》单调栈和图论（一）</a>
           </li>
         
           <li>
-            <a href="/2024/11/24/%5BWeekly%20Algorithm%5D%2011%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%BA%8C%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（二）</a>
+            <a href="/2025/01/19/%5BWeekly%20Algorithm%5D%2016%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%83%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（七）</a>
           </li>
         
           <li>
-            <a href="/2024/11/17/%5BWeekly%20Algorithm%5D%2010%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E4%B8%80%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（一）</a>
+            <a href="/2025/01/12/%5BWeekly%20Algorithm%5D%2015%E7%AE%97%E6%B3%95%E5%91%A8%E8%AE%B0%E4%B9%8B%E3%80%8A%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E3%80%8B%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%EF%BC%88%E5%85%AD%EF%BC%89/">【Weekly Algorithm】算法周记之《代码随想录》动态规划（六）</a>
           </li>
         
       </ul>
