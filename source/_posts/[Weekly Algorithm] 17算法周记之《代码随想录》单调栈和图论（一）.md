@@ -4,6 +4,7 @@ tags:
   - Algorithm
 index_img: /img/index/leetcode.png
 hide: false
+abbrlink: 30a37951
 date: 2024-02-09 19:12:00
 ---
 # 学习小结
