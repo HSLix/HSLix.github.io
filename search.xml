@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3090每个字符最多出现两次的最长字符串</title>
+      <link href="/posts/6dc72043.html"/>
+      <url>/posts/6dc72043.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-length-substring-with-two-occurrences/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，求里面子串的最长长度，该子串需要每个字母不超过两个。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>不定长滑动窗口，在这里正式引入灵神的模板，也就是循环扩大窗口右侧，当条件不满足时，让窗口左侧右移，直到满足条件。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-length-substring-with-two-occurrences/solutions/2704776/on-hua-dong-chuang-kou-pythonjavacgo-by-hl44d/">https://leetcode.cn/problems/maximum-length-substring-with-two-occurrences/solutions/2704776/on-hua-dong-chuang-kou-pythonjavacgo-by-hl44d/</a></p></blockquote></li><li><p>简单地把2改成1就能用在上一题上力，就是 <a href="/posts/bef9257a.html" title="【Leetcode Daily】3无重复字符的最长子串">【Leetcode Daily】3无重复字符的最长子串</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考灵神的模板答案</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maximumLengthSubstring(string s) &#123;</span><br><span class="line">        vector&lt;int&gt; rec(26, 0);</span><br><span class="line">        int left = 0;</span><br><span class="line">        int n = s.size();</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            int index = s[i]-&#x27;a&#x27;;</span><br><span class="line">            rec[index]++;</span><br><span class="line">            while (rec[index] &gt; 2) &#123;</span><br><span class="line">                rec[s[left++]-&#x27;a&#x27;]--;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, i-left+1);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3无重复字符的最长子串</title>
       <link href="/posts/bef9257a.html"/>
       <url>/posts/bef9257a.html</url>
