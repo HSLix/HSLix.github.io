@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1493删掉一个元素以后全为1的最长子数组</title>
+      <link href="/posts/c87da625.html"/>
+      <url>/posts/c87da625.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个由 0 和 1 组成的数组，现在<strong>需要</strong>从中删除一个元素，求删除后只含 1 的最长子数组长度。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>除了不定长滑动窗口模板的内容（<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>），本题只有一点需要特别注意，那就是必须要删除一个字符的需求。</p></li><li><p>由于这个需求的存在，会造成一种情况，如果子串内没有 0，也必须删除一个字符，而如果子串内有一个 0，那就删除 0 来获取长度。所以可以发现，无论是什么情况，最后求得的结果都要减一。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>陆爻齐的解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int longestSubarray(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int zero_count = 0;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            if (nums[i]==0) &#123;</span><br><span class="line">                zero_count++;</span><br><span class="line">            &#125;</span><br><span class="line">            while(zero_count&gt;1) &#123;</span><br><span class="line">                zero_count -= 1-nums[left++];</span><br><span class="line">            &#125;</span><br><span class="line">            // 如果正规一点，应该用变量m=max(1, zero_count)</span><br><span class="line">            // 然后ans = max(ans,i-left+1-m)；这样的意思比较明确</span><br><span class="line">            // 至少删除一个，有0删0，无0删1，不过正好发现怎么都是1，直接抵消</span><br><span class="line">            ans = max(ans, i-left);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3090每个字符最多出现两次的最长字符串</title>
       <link href="/posts/6dc72043.html"/>
       <url>/posts/6dc72043.html</url>
