@@ -4,7 +4,82 @@
   
     
     <entry>
-      <title>【Leetcode Daily】1004最大连续1的个数</title>
+      <title>【一起来学 Git】LearnGitBranching-完结撒花与感言【Learn Git】</title>
+      <link href="/posts/73d3bb24.html"/>
+      <url>/posts/73d3bb24.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>经过大概一周有余的更新，这个系列就算是完结了（8787878787），对陆爻齐自身而言算是受益匪浅啊。</p></li><li><p>其实吧，陆爻齐原本最熟悉的部分大多在<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>和<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】</a>，前者很多命令本地用，后者主要使用 pull 和 push。 </p></li><li><p>但是吧，有时候遇到一些想编辑 commit 顺序的时候就很难受，问 ai 吧，操作完又不知所以然，有时候 ai 也不会。现在总算是对 git 有了更多的了解，至少这一点点的基础，看着网上的帖子和官方文档也不会太痛苦了。</p></li><li><p>现在学完之后，陆爻齐之后至少会有以下的变化</p></li></ul><ol><li>从前只会 merge，现在为了保持线性的提交历史，会多多地使用 rebase 命令；</li><li>对于提交的更改，学会使用交互式 rebase 与 –amend 相结合，以及 cherry-pick；</li><li>对于版本的发布，会在本地上自己用 tag 标注好，并结合自动化工作流，而不是只依赖 github 的图形化；</li></ol><ul><li>总之十分推荐没有玩过这个网站的人尝试一下，以及如果你没有在本地上用过 git，也十分推荐你用一下，作为一个版本管理工具，除了学习成本较高外，并没有什么缺点。</li></ul><h1 id="证明：）"><a href="#证明：）" class="headerlink" title="证明：）"></a>证明：）</h1><ul><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_1.png" alt="Learn_Git_Branching_Finish_1"></p></li><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_2.png" alt="Learn_Git_Branching_Finish_2"></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一起来学Git|LearnGitTogether </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【一起来学 Git】LearnGitBranching-关于origin和它的周边-Git远程仓库高级操作【Learn Git】</title>
+      <link href="/posts/7de72648.html"/>
+      <url>/posts/7de72648.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>做一名仁慈的独裁者一定会很有趣……</p></blockquote><ul><li>好奇怪的引语，不过本章说是高级操作，陆爻齐在此前 git 出现奇怪问题的时候，向 gpt 请教过，给出类似的代码，有时奏效有时又寄，所以还是十分建议学习的：）</li></ul><h2 id="推送主分支"><a href="#推送主分支" class="headerlink" title="推送主分支"></a>推送主分支</h2><ul><li>这章要展示的是，开发者从远程仓库获取主分支的更新，然后在本地其它分支开发完后，如何在主分支上完成更新并推送的步骤。</li></ul><ol><li><p>获取主分支的更新，为了保持<strong>线性</strong>的提交历史，就可以采用<code>git pull --rebase</code>，注意，先切换到主分支再用 pull；</p></li><li><p>然后更新本地主分支，此时主分支已经接收了远程仓库的更新。那么这里为了<strong>线性</strong>的提交历史，还是选择 rebase 方法，分别让其它几个分支变基（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>）就行；</p></li><li><p>最后推送，这个简单，<code>git push</code>;</p></li></ol><h2 id="合并远程仓库"><a href="#合并远程仓库" class="headerlink" title="合并远程仓库"></a>合并远程仓库</h2><ul><li><p>这章和上一章要解决的是一个问题，只不过不要求<strong>线性</strong>的提交历史，用 merge 实现主分支的功能更新。</p></li><li><p>merge 不说怎么搞了，但是这一章关卡过完就能够深刻地感受到，<strong>线性</strong>的提交历史多清晰，多好看。</p></li></ul><h2 id="远程跟踪分支"><a href="#远程跟踪分支" class="headerlink" title="远程跟踪分支"></a>远程跟踪分支</h2><ul><li><p>本章解释了 main，origin&#x2F;main 如何关联的。其实除了之前所说的 pull 和 push 时两者的关系外，它们其实在 clone 其实会自动关联起来。</p></li><li><p>注意，远程分支的跟踪可以自定义，比如<code>git checkout -b foo origin/main</code>，那么就会新建一个分支 foo 跟踪远程分支 origin&#x2F;main，此时要是<code>git pull</code>就会把本地没有的提交拉取下来，更新到 origin&#x2F;main 和 foo 上。</p></li><li><p><strong>注意</strong>，自定义后，原来的 main 就没有跟踪 origin&#x2F;main 了，所以刚刚的拉取不会更新 main。</p></li><li><p>同理，推送 push 时，也可以推送到远程的指定分支，比如上面关联后，<code>git push</code>就会把 foo 上新的提交推送到远程仓库的 main 上。</p></li><li><p>但是，上面的绑定方法也会新建分支，有没有直接绑定现有分支和远程分支的方法呢？有的：）<code>git branch -u origin/main foo</code>就能让 foo 跟踪 远程仓库的 main ，而且如果当前分支就是 foo，还能省略成<code>git branch -u origin/main</code>。</p></li></ul><h2 id="Git-push-的参数"><a href="#Git-push-的参数" class="headerlink" title="Git push 的参数"></a>Git push 的参数</h2><ul><li><p>有时候想不切换过去，而是直接推送一个分支上去，那就用到本章知识。</p></li><li><p>比如，当前的<code>HEAD</code>指针在其它地方，却想把本地的 foo 分支推到远程的 foo 分支。而如果直接写<code>git push</code>，是不会有用的，因为完整的句子其实是<code>git push &lt;remote&gt; &lt;locale&gt;</code>。这里的<code>&lt;remote&gt;</code>指的是目的地——远程仓库，一般写 origin 就行，<code>&lt;locale&gt;</code>是本地分支的名字。</p></li></ul><h2 id="Git-push-的参数2"><a href="#Git-push-的参数2" class="headerlink" title="Git push 的参数2"></a>Git push 的参数2</h2><ul><li><p>上面的 push 参数能够让指定分支推送上去，但有时候在其他分支开发的东西，想推送到远程仓库的指定分支，这个时候就可以设定 push 的参数来实现。</p></li><li><p>比如<code>git push origin foo^:main</code>就会把 foo 的上一个提交之前的远程仓库没有的提交推送到远程仓库的 main 分支上，如果远程仓库没有 main 分支，就会新建一个 main 分支获取推送信息。</p></li></ul><h2 id="Git-fetch-的参数"><a href="#Git-fetch-的参数" class="headerlink" title="Git fetch 的参数"></a>Git fetch 的参数</h2><ul><li><p>与上面的 push 类似，拿例子比较好理解。</p></li><li><p>对于<code>git fetch origin foo</code> 则会把远程仓库中<code>foo</code>的本地没有的提交给 fetch 下来，更新到 origin&#x2F;foo 上。</p></li><li><p>对于<code>git fetch orgin main^:foo</code>则会把远程仓库的<code>main</code>分支上一个提交之前的本地没有的分支 fetch 到本地的 foo 分支上，注意，是 foo 和 origin&#x2F;main 上，不是 origin&#x2F;foo。（这个操作几乎用不到，但语法是支持的）</p></li><li><p>最后，绝大部分情况下，一个<code>git fetch</code>拉取那些更新就行，不用搞上面那些虚头八脑的。</p></li></ul><h2 id="没有-source-的-source"><a href="#没有-source-的-source" class="headerlink" title="没有 source 的 source"></a>没有 source 的 source</h2><ul><li><p>这里看网站内容才能理解标题的含义，下面主要简单说下知识点。</p></li><li><p>Git 支持下面删除远程分支的方式<code>git push origin :foo</code>就会把远程仓库中的 foo 分支给删除。</p></li><li><p>同时也支持下面创建新分支的方式<code>git fetch origin :bar</code>就会在本地新建一个叫 bar 的分支</p></li></ul><h2 id="Git-pull-的参数"><a href="#Git-pull-的参数" class="headerlink" title="Git pull 的参数"></a>Git pull 的参数</h2><ul><li><p>前面（<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】</a>）说过，pull 就是 fetch +（merge || rebase），所以这里加的参与与 fetch 类似。</p></li><li><p>比如<code>git pull origin foo</code>就会等于<code>git fetch origin foo</code> + <code>git merge origin/foo</code>，<code>git pull origin main^:bar</code>就是<code>git fetch origin main^:bar</code>+<code>git merge bar</code>。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一起来学Git|LearnGitTogether </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1658将x减到0的最小操作数</title>
+      <link href="/posts/9d513cff.html"/>
+      <url>/posts/9d513cff.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/description/">题目链接</a>。</p></li><li><p>简单地说，给你一个整数数组，可以从左或从右一次删除一个数，使得删除的总数之和恰好为x。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>两个思路，正向和逆向，皆基于不定长滑动窗口(<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>)。</p></li><li><p>正向是计算窗口内之和恰好为 x，由于最左和最右的删除形式，可以把原数组拼接。但是还需要限定两点，一个是窗口长度不大于原数组长度；二个是窗口的左侧和右侧满足左侧或者右侧贴边，或者左侧和右侧在加倍窗口的两侧。总之，挺麻烦的。</p></li><li><p>逆向是，先计算数组之和，目标为最大化窗口内数值，至于删除的结果就拿数组和减去窗口值获得。这个简单，不需要加倍数组，也不需要限定窗口位置。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>正向</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minOperations(vector&lt;int&gt;&amp; nums, int x) &#123;</span><br><span class="line">        int ans = INT_MAX;</span><br><span class="line">        int m = nums.size();</span><br><span class="line">        //cout &lt;&lt; &quot;m:&quot; &lt;&lt; m &lt;&lt; endl;</span><br><span class="line">        nums.insert(nums.begin(), nums.begin(), nums.end());</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int cur = 0;        </span><br><span class="line">        int left = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            cur += nums[i];</span><br><span class="line">            while (cur &gt; x) &#123;</span><br><span class="line">                cur -= nums[left++];</span><br><span class="line">            &#125;</span><br><span class="line">            if (cur == x &amp;&amp; i-left+1 &lt;= m &amp;&amp; (left == 0 || (left &lt;= m &amp;&amp; i &gt;= m) || i == n-1)) &#123;</span><br><span class="line">                //cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; cur &lt;&lt; endl;</span><br><span class="line">                ans = min(ans, i-left+1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans == INT_MAX ? -1 : ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><ul><li>逆向</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minOperations(vector&lt;int&gt;&amp; nums, int x) &#123;</span><br><span class="line">        int win = -1;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int target = reduce(nums.begin(), nums.end())-x;</span><br><span class="line">        if (target &lt; 0) return -1;</span><br><span class="line">        int cur = 0;        </span><br><span class="line">        int left = 0;</span><br><span class="line">        for (int i = 0; i &lt; n; i++) &#123;</span><br><span class="line">            cur += nums[i];</span><br><span class="line">            while (target &lt; cur) &#123;</span><br><span class="line">                cur -= nums[left++];</span><br><span class="line">            &#125;</span><br><span class="line">            if (target == cur) &#123;</span><br><span class="line">                win = max(win, i-left+1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return win&lt;0 ? -1 : n-win;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1004最大连续1的个数III</title>
       <link href="/posts/d5241e62.html"/>
       <url>/posts/d5241e62.html</url>
       
