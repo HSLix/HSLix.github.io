@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2779数组的最大美丽值</title>
+      <link href="/posts/a991ab19.html"/>
+      <url>/posts/a991ab19.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组和一个数字 k，让你对每一个位的数字可以做一个操作也就是上下浮动不超过 k 的数值，最后整个数组最多的数字的数量就是要求的结果。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>陆爻齐吃亏在了审题不当，题目中的子序列是可以删除数组的内容，也就是说，顺序不重要，只要找到最多的公共数值就行。</p></li><li><p>而要找到这个公共数值，可以这么做，先排序，然后开始不定长滑动窗口（<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>），而不满足窗口的条件是，左窗口加上 k 的值小于右窗口减去 k 的值，这意味着窗口的左右两侧不再有公共的数值。</p></li><li><p>数组经过排序，所以只要左窗口不断向右滑动，总会再次处于左右窗口有公共数值的阶段。这样一来窗口就会高效率地遍历并找到有公共值的最长子序列。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/solutions/2345805/pai-xu-shuang-zhi-zhen-by-endlesscheng-hbqx/">https://leetcode.cn/problems/maximum-beauty-of-an-array-after-applying-operation/solutions/2345805/pai-xu-shuang-zhi-zhen-by-endlesscheng-hbqx/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maximumBeauty(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        int ans = 1;</span><br><span class="line">        int left = 0;</span><br><span class="line">        sort(nums.begin(), nums.end());</span><br><span class="line">        for (int i = 0; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            while (nums[i]-k &gt; nums[left]+k) &#123;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, i-left+1);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2730找到最长的半重复子字符串</title>
+      <link href="/posts/3e4fd694.html"/>
+      <url>/posts/3e4fd694.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-the-longest-semi-repetitive-substring/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个由 0 和 1 组成的字符串，现在找到其中最长连续子字符串的长度，要求字符串中间没有超过一个的相邻重复数字的情况。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>经典不定长滑动窗口一则(<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>)，不过本题有一点需要注意的是，判断相邻重复数字后的 left 指针的位置要清楚。如果像陆爻齐一样，left 判断完都会 ++ 那么就与灵茶山艾府的解法没那么一样，不能直接用 i-left+1，毕竟 left 其实一直在左窗口+1的位置上。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int longestSemiRepetitiveSubstring(string s) &#123;</span><br><span class="line">        int same_count = 0;</span><br><span class="line">        int left = 1;</span><br><span class="line">        int ans = 1;</span><br><span class="line">        for (int i = 1; i &lt; s.size(); i++) &#123;</span><br><span class="line">            if (s[i] == s[i-1]) &#123;</span><br><span class="line">                same_count++;</span><br><span class="line">            &#125;</span><br><span class="line">            while (same_count &gt; 1) &#123;</span><br><span class="line">                if (s[left] == s[left-1]) &#123;</span><br><span class="line">                    same_count--;</span><br><span class="line">                &#125;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, i-left+2);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【一起来学 Git】LearnGitBranching-完结撒花与感言【Learn Git】</title>
       <link href="/posts/73d3bb24.html"/>
       <url>/posts/73d3bb24.html</url>
