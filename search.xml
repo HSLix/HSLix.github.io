@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2831找出最长等值子数组</title>
+      <link href="/posts/54f641d9.html"/>
+      <url>/posts/54f641d9.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-the-longest-equal-subarray/description/">题目链接</a>。</p></li><li><p>简单地说，可以对数组做 k 次以内的删除操作，求删除完后数组内最长子数组的长度，该子数组连续。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>陆爻齐输力，得很很地研究灵茶山艾府的题解才行。</p><blockquote><p><a href="https://leetcode.cn/problems/find-the-longest-equal-subarray/solutions/2396401/fen-zu-shuang-zhi-zhen-pythonjavacgo-by-lqqau/">https://leetcode.cn/problems/find-the-longest-equal-subarray/solutions/2396401/fen-zu-shuang-zhi-zhen-pythonjavacgo-by-lqqau/</a></p></blockquote></li><li><p>这是挺高级的分组滑动窗口，数组内有多少个数字，就有多少个窗口需要滑动，每个窗口的责任是找到自己负责的数组最长连续的情况长度是多少。而这个怎么找的思路就很有意思。</p></li><li><p>对于每个数值，都有一个唯一对应的数组来保存各个数值在原数组的下标，该对应由哈希表实现。想计算两个相同数值之间有多少个数值（闭区间）只要用两个下标相减加一即可，暂且把这个数值记作 A。</p></li><li><p>那么如何满足题目中删除最多 k 个数字来保证子数组连续的要求呢？只要找到这两个数在哈希表自己数组中的下标之差，就对应了该区间内，想连续数值的数量，这个数量记作 B。现在，有了一个区间内数字的数量 A，和需要的相同数字的数量 B，只要 A-B 小于 k，那么这个子数组就是满足条件的。把所有的 B 中最大值求出，就是结果。</p></li><li><p>不过上面的这一条是思路，具体实现时，发现只要记录数值下标时，同时对这个值减去当前哈希表对应数组的长度，就能使得对这个数组的窗口左右相减时的值就是上面的 A-B。毕竟相当于每个数存的是 a1-b1, a2-b2……，任意两个相减就是 a2-a1-(b2-b1), A&#x3D;&#x3D;a2-a1, B&#x3D;&#x3D;b2-b1。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int longestEqualSubarray(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; rec(nums.size()+1);</span><br><span class="line">        for (int i = 0; i &lt; nums.size(); i++) &#123;</span><br><span class="line">            rec[nums[i]].push_back(i-rec[nums[i]].size());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (const auto &amp;p : rec) &#123;</span><br><span class="line">            int left = 0;</span><br><span class="line">            for (int i = 0; i &lt; p.size(); i++) &#123;</span><br><span class="line">                while(p[i]-p[left]&gt;k) &#123;</span><br><span class="line">                    left++;</span><br><span class="line">                &#125;</span><br><span class="line">                ans = max(ans, i-left+1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2516每种字符至少取K个</title>
       <link href="/posts/ec968a0f.html"/>
       <url>/posts/ec968a0f.html</url>
