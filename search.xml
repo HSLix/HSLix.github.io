@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2271毯子覆盖的最多白色砖块数</title>
+      <link href="/posts/ea441eea.html"/>
+      <url>/posts/ea441eea.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/description/">题目链接</a>。</p></li><li><p>简单地说，就是把一系列的数组当作一块块连续的白色瓷砖组，瓷砖组互不重叠，再给一个数字作为地毯长度，问地毯盖下去能覆盖的最长的瓷砖数是多少。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>又是评鉴大佬（灵茶山艾府）题解的一集。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/solutions/1496434/by-endlesscheng-kdy9/">https://leetcode.cn/problems/maximum-white-tiles-covered-by-a-carpet/solutions/1496434/by-endlesscheng-kdy9/</a></p></blockquote></li><li><p>首先我们可以思考一下如何覆盖地毯能尽可能覆盖最多瓷砖。易得（想几种情况比较，地毯右端在瓷砖组右侧，右端在中间，右端在左边），地毯的右侧如果直接与瓷砖组右侧对齐能尽可能地多覆盖瓷砖（拿地毯左侧与瓷砖组左侧对齐也可行）。</p></li><li><p>那么可以想象地毯（窗口）如何滑动能够比较高效地计算出最长的情况。由上面的推导式，想要让窗口单向滑动，先要对瓷砖组做排序，按第一位，也就是瓷砖组的起点做升序排序。</p></li><li><p>那么计算窗口内瓷砖数量呢？其实只要每次窗口滑动，就把新瓷砖组的瓷砖数加入，就能直到窗口内的总瓷砖数。要知道窗口最左侧的瓷砖组是否需要排除，只要在这个最左侧的瓷砖组的右侧加上地毯长度，发现这个值还是比目前最右侧的值小，说明地毯无法保持与右侧对齐，这是就要去除最左侧的瓷砖组。</p></li><li><p>说完了加入和排除策略，那么如果地毯左侧处于某个瓷砖组中间呢？只要拿最左侧瓷砖组的左侧加上地毯长度与当前最右侧瓷砖组右侧之差与零取一个最大值，就能找出当前地毯没有覆盖最左侧瓷砖的长度，如果长度为负数也能取到零。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maximumWhiteTiles(vector&lt;vector&lt;int&gt;&gt;&amp; tiles, int carpetLen) &#123;</span><br><span class="line">        ranges::sort(tiles, &#123;&#125;, [](auto &amp;t)&#123;return t[0];&#125;);</span><br><span class="line">        int left = 0;</span><br><span class="line">        int cover = 0;</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (const auto &amp;ti : tiles) &#123;</span><br><span class="line">            cover += ti[1]-ti[0]+1;</span><br><span class="line">            while(tiles[left][1]+carpetLen-1 &lt; ti[1]) &#123;</span><br><span class="line">                cover -= tiles[left][1]-tiles[left][0]+1;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">            int uncover = max(0, ti[1]-carpetLen+1-tiles[left][0]);</span><br><span class="line">            ans = max(ans, cover-uncover);</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2831找出最长等值子数组</title>
       <link href="/posts/54f641d9.html"/>
       <url>/posts/54f641d9.html</url>
