@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】209长度最小的子数组</title>
+      <link href="/posts/b13baa93.html"/>
+      <url>/posts/b13baa93.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-size-subarray-sum/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和一个整数，找出数组中总和大于该整数的子数组中的最小长度。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>不定长滑动窗口(% post_link 3090每个字符最多出现两次的最长字符串 %)的简单变式，不过以往的滑动窗口是为了求最长值，这里是求最短值。</p></li><li><p>所以陆爻齐有个想法，以前都是主循环窗口右侧，不满足条件就让窗口左侧右滑，那么就反过来，主循环窗口左侧滑动，不满足这个条件就让窗口右侧右滑，这就是下面的代码的意思。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>陆爻齐的参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minSubArrayLen(int target, vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        int ans = INT_MAX;</span><br><span class="line">        int right = 0;</span><br><span class="line">        int sum = 0;</span><br><span class="line">        for (int left = 0; left &lt; n; left++) &#123;</span><br><span class="line">            while (sum &lt; target &amp;&amp; right &lt; n) &#123;</span><br><span class="line">                sum += nums[right++];</span><br><span class="line">            &#125;</span><br><span class="line">            if (sum &gt;= target &amp;&amp; right &lt;= n) &#123;</span><br><span class="line">                //cout &lt;&lt; sum &lt;&lt; &quot; &quot; &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">                ans = min(ans, right-left);</span><br><span class="line">            &#125;</span><br><span class="line">            sum -= nums[left];</span><br><span class="line">        &#125;</span><br><span class="line">        return ans==INT_MAX ? 0 : ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2271毯子覆盖的最多白色砖块数</title>
       <link href="/posts/ea441eea.html"/>
       <url>/posts/ea441eea.html</url>
