@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2904最短且字典序最小的美丽子字符串</title>
+      <link href="/posts/a7b9ac4.html"/>
+      <url>/posts/a7b9ac4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/shortest-and-lexicographically-smallest-beautiful-string/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个由 0 和 1 组成的字符串，找出其中子字符串的最短长度，该子字符串要满足条件：1. 其中恰好有 k 个 1；2. 字典序在相同长度的子字符串中最小；</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>简单不定长滑动窗口（<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>）的应用，思路上不用多说，主要讲讲从灵茶山艾府的题解中吸取到的经验。</p><blockquote><p><a href="https://leetcode.cn/problems/shortest-and-lexicographically-smallest-beautiful-string/solutions/2483144/mei-ju-pythonjavacgo-by-endlesscheng-5th8/">https://leetcode.cn/problems/shortest-and-lexicographically-smallest-beautiful-string/solutions/2483144/mei-ju-pythonjavacgo-by-endlesscheng-5th8/</a></p></blockquote></li><li><p>一个是<code>ranges::</code>系列的学习，除了之前排序的 range::sort，这次还有 ranges::count，ranges::count(str, ‘1’)就会统计字符串 str 中字符 1 的个数。</p></li><li><p>还有就是 move 函数，比如 s &#x3D; move(str); 可以快速地把字符串 str 的内容放到 s 中，在追求效率的算法竞赛中挺有用的。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string shortestBeautifulSubstring(string s, int k) &#123;</span><br><span class="line">        if (ranges::count(s, &#x27;1&#x27;) &lt; k) return &quot;&quot;;</span><br><span class="line">        string ans = s;</span><br><span class="line">        int right = 0;</span><br><span class="line">        int one_count = 0;</span><br><span class="line">        int n = s.size();</span><br><span class="line">        for (int left = 0; left &lt; n; left++) &#123;</span><br><span class="line">            while(one_count &lt; k &amp;&amp; right &lt; n) &#123;</span><br><span class="line">                if (s[right++]==&#x27;1&#x27;) one_count++;</span><br><span class="line">            &#125;</span><br><span class="line">            if (one_count == k &amp;&amp; right &lt;= n) &#123;</span><br><span class="line">                //cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">                string tmp(s.begin()+left, s.begin()+right);</span><br><span class="line">                //cout &lt;&lt; tmp &lt;&lt; endl;</span><br><span class="line">                if (tmp.size() &lt; ans.size() || tmp.size() == ans.size() &amp;&amp; tmp &lt; ans) &#123;</span><br><span class="line">                    ans = move(tmp);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (s[left]==&#x27;1&#x27;) one_count--;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】209长度最小的子数组</title>
       <link href="/posts/b13baa93.html"/>
       <url>/posts/b13baa93.html</url>
