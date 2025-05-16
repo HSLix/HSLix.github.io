@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1234替换子串得到平衡字符串</title>
+      <link href="/posts/3b8d17a9.html"/>
+      <url>/posts/3b8d17a9.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/description/">题目链接</a>。</p></li><li><p>简单地说，给一个由 QWER 四个字母组成的字符串，可以变换其中的子字符串，使得四个字母数量相同，求变换的子字符串的最短长度。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>不定长滑动窗口的求“至少”应用，思路上基本同<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>，下面主要讲讲灵茶山艾府在题解中可以借鉴的地方。</p><blockquote><p><a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/solutions/2108358/tong-xiang-shuang-zhi-zhen-hua-dong-chua-z7tu/">https://leetcode.cn/problems/replace-the-substring-for-balanced-string/solutions/2108358/tong-xiang-shuang-zhi-zhen-hua-dong-chua-z7tu/</a></p></blockquote></li><li><p>一个是数组的初始化，由于 ASCII 码的对应，其实用字符初始化数组数量是可以的，所以就有了<code>int rec[&#39;Z&#39;]&#123;&#125;</code>这种写法。</p></li><li><p>另一个是结果在窗口合法时更新，避免窗口不合法后，去猜合法情况的代码。这样做很容易把自己绕进去。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int balancedString(string s) &#123;</span><br><span class="line">        int n = s.size();</span><br><span class="line">        int rec[&#x27;X&#x27;]&#123;&#125;;</span><br><span class="line">        for (const char &amp;c:s) &#123;</span><br><span class="line">            rec[c]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int base = n/4;</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        // rec的意思变为窗口内多余的字母</span><br><span class="line">        if (rec[&#x27;Q&#x27;]==base &amp;&amp; rec[&#x27;W&#x27;]==base &amp;&amp; rec[&#x27;E&#x27;]==base &amp;&amp; rec[&#x27;R&#x27;]==base) return 0;</span><br><span class="line">        int ans = INT_MAX;</span><br><span class="line"></span><br><span class="line">        int left = 0;</span><br><span class="line">        for (int right=0; right &lt; n; right++) &#123;</span><br><span class="line">            rec[s[right]]--;</span><br><span class="line">            </span><br><span class="line">            while(rec[&#x27;Q&#x27;]&lt;=base &amp;&amp; rec[&#x27;W&#x27;]&lt;=base &amp;&amp; rec[&#x27;E&#x27;]&lt;=base &amp;&amp; rec[&#x27;R&#x27;]&lt;=base) &#123;</span><br><span class="line">                ans = min(ans, right-left+1);</span><br><span class="line">                // cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; &quot; &quot; &lt;&lt; rec[&#x27;Q&#x27;] &lt;&lt; rec[&#x27;W&#x27;] &lt;&lt; rec[&#x27;E&#x27;]&lt;&lt;rec[&#x27;R&#x27;] &lt;&lt; endl;</span><br><span class="line">                rec[s[left++]]++;</span><br><span class="line">            &#125;</span><br><span class="line">            //cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; &quot; &quot; &lt;&lt; rec[&#x27;Q&#x27;] &lt;&lt; rec[&#x27;W&#x27;] &lt;&lt; rec[&#x27;E&#x27;]&lt;&lt;rec[&#x27;R&#x27;] &lt;&lt; endl;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2904最短且字典序最小的美丽子字符串</title>
       <link href="/posts/a7b9ac4.html"/>
       <url>/posts/a7b9ac4.html</url>
