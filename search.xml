@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2875无限数组的最短子数组</title>
+      <link href="/posts/40a240db.html"/>
+      <url>/posts/40a240db.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-size-subarray-in-infinite-array/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，可以将该数组无限地复制自身，求无限的数组中，子数组和恰好为 target 的最短长度。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本问题看似没那么难，实则藏了一个难点，由于数组可以无限叠加，那么所求的子数组很可能横跨了很多数组，只有解决了这个问题，才能回归普通的不定长滑动窗口（<a href="/posts/6dc72043.html" title="【Leetcode Daily】3090每个字符最多出现两次的最长字符串">【Leetcode Daily】3090每个字符最多出现两次的最长字符串</a>）。</p></li><li><p>问题可以这么解决，对目标和 target 取余记为 mod，然后加倍数组，在其中找到和为 mod 的窗口长度，最后加上中间省略的数组长度（target&#x2F;all_sum*nums.size()）。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-size-subarray-in-infinite-array/solutions/2464878/hua-dong-chuang-kou-on-shi-jian-o1-kong-cqawc/">https://leetcode.cn/problems/minimum-size-subarray-in-infinite-array/solutions/2464878/hua-dong-chuang-kou-on-shi-jian-o1-kong-cqawc/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minSizeSubarray(vector&lt;int&gt;&amp; nums, int target) &#123;</span><br><span class="line">        long long all_sum = reduce(nums.begin(), nums.end(), 0LL);</span><br><span class="line">        int target_sum = target % all_sum;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int ans = INT_MAX;</span><br><span class="line">        long long cur_sum = 0;</span><br><span class="line">        int n = nums.size();</span><br><span class="line">        for (int right = 0; right &lt; 2*n; right++) &#123;</span><br><span class="line">            cur_sum += nums[right%n];</span><br><span class="line">            while(cur_sum &gt; target_sum) &#123;</span><br><span class="line">                </span><br><span class="line">                cur_sum -= nums[left++%n];</span><br><span class="line">            &#125;</span><br><span class="line">            if (cur_sum == target_sum) &#123;</span><br><span class="line">                //cout &lt;&lt; &quot;cur:&quot; &lt;&lt; cur_sum &lt;&lt; &quot;; nums[left]:&quot; &lt;&lt; nums[left] &lt;&lt; &quot;; left:&quot; &lt;&lt; left &lt;&lt; &quot;; right:&quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">                ans = min(ans, right-left+1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans == INT_MAX ? -1 : ans  + target / all_sum * n;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1234替换子串得到平衡字符串</title>
       <link href="/posts/3b8d17a9.html"/>
       <url>/posts/3b8d17a9.html</url>
