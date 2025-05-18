@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】76最小覆盖子串</title>
+      <link href="/posts/c61f2c8f.html"/>
+      <url>/posts/c61f2c8f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-window-substring/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个字符串 s 和 t，求 s 中能够涵盖 t 的最小子字符串的长度。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>可惜，差点就不看题解ac了。不过大致思路与灵神类似也算进步罢。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-window-substring/solutions/2713911/liang-chong-fang-fa-cong-o52mn-dao-omnfu-3ezz/">https://leetcode.cn/problems/minimum-window-substring/solutions/2713911/liang-chong-fang-fa-cong-o52mn-dao-omnfu-3ezz/</a></p></blockquote></li><li><p>完整思路直接戳上面链接跳转查看比较好，下面写写遇到的坑。</p></li></ul><ol><li><p>对于 ASCII 表专用的哈希表形式，直接用长 128 的数组比较省心省力，用专门设定长度有可能恰好忘记考虑边缘值；</p></li><li><p>substr 方法的本质是拷贝一个字符串，所以执行效率低；</p></li></ol><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool isCover(int *recs, int *rect) &#123;</span><br><span class="line">        for (int i = &#x27;a&#x27;; i &lt;= &#x27;z&#x27;; i++) &#123;</span><br><span class="line">            if (recs[i] &lt; rect[i]) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = &#x27;A&#x27;; i &lt;= &#x27;Z&#x27;; i++) &#123;</span><br><span class="line">            if (recs[i] &lt; rect[i]) return false;</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    string minWindow(string s, string t) &#123;</span><br><span class="line">        string ans = &quot;&quot;;</span><br><span class="line">        int rect[&#x27;z&#x27;+1]&#123;&#125;;</span><br><span class="line">        int recs[&#x27;z&#x27;+1]&#123;&#125;;</span><br><span class="line">        for (const char &amp;c : t) &#123;</span><br><span class="line">            rect[c]++;</span><br><span class="line">        &#125;</span><br><span class="line">        int left = 0;</span><br><span class="line">        int ans_left = -1, ans_right = s.size();</span><br><span class="line">        for (int right = 0; right &lt; s.size(); right++) &#123;</span><br><span class="line">            recs[s[right]]++;</span><br><span class="line">            while(isCover(recs, rect)) &#123;</span><br><span class="line">                if ((ans_right-ans_left)&gt;(right-left)) &#123;</span><br><span class="line">                    ans_left = left;</span><br><span class="line">                    ans_right = right;</span><br><span class="line">                &#125;</span><br><span class="line">                //cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">                recs[s[left]]--;</span><br><span class="line">                left++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans_left==-1?&quot;&quot;:s.substr(ans_left, ans_right-ans_left+1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2875无限数组的最短子数组</title>
       <link href="/posts/40a240db.html"/>
       <url>/posts/40a240db.html</url>
