@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【一起来学 CMake】CMakeCookBook-开始编译，然后执行【Learn CMake Together】</title>
+      <link href="/posts/5cb682ce.html"/>
+      <url>/posts/5cb682ce.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐主要借助资源 <a href="https://chenxiaowei.gitbook.io/cmake-cookbook"><code>CMake Cookbook</code></a> 学习 CMake 的系列记录。</p><blockquote><p><a href="https://chenxiaowei.gitbook.io/cmake-cookbook">https://chenxiaowei.gitbook.io/cmake-cookbook</a></p></blockquote></li><li><p>不定时更新，也不一定全按上面的章节顺序走，用到哪学到哪罢了：）</p></li><li><p>运行环境：VSCode + CMake + MinGW</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li>首先在项目新建一个名为<code>hello.cpp</code>的文件，内容是</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  cout &lt;&lt; <span class="string">&quot;Hello World!&quot;</span> &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li><p>上面是十分甚至有九分标准的代码，要将这个代码编译执行， 在IDE 上就是点一下或者两下按钮的事，但在 VSCode，这事没那么轻松。</p></li><li><p>下载完 C++ 之类的拓展后，虽然右上角出现了运行和调试的按钮，但对多文件不管用，这是因为 VSCode 还需要你编辑 <code>.vscode</code> 文件夹内的 json 配置文件，麻烦，而且与其它编辑器不通用。虽然现在也不用其它编辑器，但学习一种更通用的方法总是好的，这就是本系列的由来。</p></li></ul><h2 id="对-Hello-World！单文件编译与执行"><a href="#对-Hello-World！单文件编译与执行" class="headerlink" title="对 Hello World！单文件编译与执行"></a>对 Hello World！单文件编译与执行</h2><blockquote><p><a href="https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.1-chinese">https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.1-chinese</a></p></blockquote><ul><li>那么进入正题，如何用 CMake 来对单文件编译然后执行呢？</li></ul><h3 id="编译步骤"><a href="#编译步骤" class="headerlink" title="编译步骤"></a>编译步骤</h3><ul><li>首先要初始化 CMake 的环境，先在项目的根目录下新建一个 CMakeLists.txt 文件，内容只需要三行。</li></ul><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 第一句的意思是要求当前 CMake 的版本不低于 3.5，否则就会报错</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span> FATAL_ERROR)</span><br><span class="line"><span class="comment"># 这句话的意思，是为当前项目起名为 hello，同时限定语言为 cpp</span></span><br><span class="line"><span class="keyword">project</span>(hello LANGUAGES CXX)</span><br><span class="line"><span class="comment"># 这句话的意思是，把 hello.cpp 文件编译为名字是 hello-world 的可执行文件</span></span><br><span class="line"><span class="keyword">add_executable</span>(hello-world hello.cpp)</span><br></pre></td></tr></table></figure><ul><li>然后创建 build 目录来配置项目，用命令有以下三行：</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir build</span><br><span class="line">cd build</span><br><span class="line">cmake ..</span><br></pre></td></tr></table></figure><ul><li><p>注意，要是这时没有<code>CMakeLists.txt</code>文件的话，是不会配置成功的。</p></li><li><p>配置文件后，下面这句代码才会正式开始编译工作，注意，输入命令的位置在 build 文件夹内：<code>cmake --build .</code></p></li></ul><h3 id="可执行文件位置"><a href="#可执行文件位置" class="headerlink" title="可执行文件位置"></a>可执行文件位置</h3><ul><li><p>这时就有人说了：“陆爻齐！我看到编译成功了，但没有执行程序，你是不是教错了？”，嘛，编译成功并不是执行成功，在 build 文件夹内找找可执行文件运行就可以啦。</p></li><li><p>再次注意，根据生成器的不同，可执行文件的位置也会有所不同。</p></li><li><p>比如要是默认生成器是<code>Visual Studio</code>系列的话，build 文件夹内很可能会有个 Debug 文件夹，里面就是可执行文件；如果是<code>MinGW</code>的话，可执行文件会直接出现在 build 文件夹内。</p></li><li><p>刚刚说生成器的不同会对编译有所影响，而生成器当然也是可以切换的，这将在后文阐述。</p></li></ul><h3 id="更简单的编译步骤"><a href="#更简单的编译步骤" class="headerlink" title="更简单的编译步骤"></a>更简单的编译步骤</h3><ul><li><p>上述的编译步骤其实是“传统派”，CMake 支持更为“简单”的方法。</p></li><li><p>就是在 CMakeLists 文件写好后，在根目录运行 <code>cmake -H. -Bbuild</code>，<code>-H.</code>表示当前目录中搜索根CMakeLists.txt文件。<code>-Bbuild</code>告诉CMake在一个名为build的目录中生成所有的文件。</p></li><li><p>嘛，陆爻齐本人姑且还是传统派的：）所以后续提起编译步骤就默认是传统方法吧。</p></li></ul><h3 id="build文件夹的意义"><a href="#build文件夹的意义" class="headerlink" title="build文件夹的意义"></a>build文件夹的意义</h3><ul><li><p>回到编译步骤中写完 CMakeLists 的时候，如果此时直接运行命令<code>cmake .</code>也可以完成编译工作并正常运行。</p></li><li><p><strong>但是</strong>，那些繁杂的配置文件就会出现在项目根目录，十分不整齐，这就需要 build 文件夹装好这些配置文件。</p></li></ul><h2 id="切换生成器"><a href="#切换生成器" class="headerlink" title="切换生成器"></a>切换生成器</h2><blockquote><p><a href="https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.2-chinese">https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.2-chinese</a></p></blockquote><ul><li><p>回到编译步骤中写完 CMakeLists 的时候，先用<code>cmake --help</code>来查看自己能选什么生成器。</p></li><li><p>比如，我想换 MinGW Makefile，在 build 文件夹中这么来初始化：<code>cmake -G MinGW Makefile ..</code></p></li><li><p>注意，如果已经初始化了，是不能直接用上面的句子重新初始化，需要清除冲突部分。可以干脆删掉 build 文件夹，或者专门清理特定的缓存文件夹。</p></li></ul><h2 id="多文件编译与执行"><a href="#多文件编译与执行" class="headerlink" title="多文件编译与执行"></a>多文件编译与执行</h2><blockquote><p><a href="https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.3-chinese">https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.3-chinese</a></p></blockquote><ul><li><p>题目都说是多文件了，项目的内容也要有所变化，不过这部分陆爻齐没什么需要特别补充的，建议直接看<a href="https://chenxiaowei.gitbook.io/cmake-cookbook/1.0-chinese/1.3-chinese">链接</a>完成初始配置。</p></li><li><p>然后就在前面单文件的基础上改改 CMakeLists 就行，直接看代码吧，说明都在注释里</p></li></ul><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.5</span> FATAL_ERROR)</span><br><span class="line"><span class="keyword">project</span>(hello LANGUAGES CXX)</span><br><span class="line"><span class="comment"># 把新增的两个 Message 编成静态库 message</span></span><br><span class="line"><span class="keyword">add_library</span>(<span class="keyword">message</span> STATIC <span class="keyword">Message</span>.hpp <span class="keyword">Message</span>.cpp)</span><br><span class="line"><span class="keyword">add_executable</span>(hello-world hello.cpp)</span><br><span class="line"><span class="comment"># 把 message 库连接到可执行文件上</span></span><br><span class="line"><span class="keyword">target_link_libraries</span>(hello-world <span class="keyword">message</span>)</span><br></pre></td></tr></table></figure><ul><li>目前暂且只对<code>STATIC</code>感兴趣，那就说明下：STATIC 是静态库，SHARED 是动态库，或者说是动态共享对象（DSO）。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 一起来学 CMake | Learn CMake Together </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CMake </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3325字符至少出现K次的子字符串</title>
       <link href="/posts/98a39247.html"/>
       <url>/posts/98a39247.html</url>
@@ -13,7 +38,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -38,7 +63,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -63,7 +88,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -88,7 +113,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -113,7 +138,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -138,7 +163,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -163,7 +188,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -188,7 +213,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -213,7 +238,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -238,7 +263,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -263,7 +288,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -288,7 +313,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -313,7 +338,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -338,7 +363,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -354,16 +379,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-完结撒花与感言【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-完结撒花与感言【Learn Git Together】</title>
       <link href="/posts/73d3bb24.html"/>
       <url>/posts/73d3bb24.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>经过大概一周有余的更新，这个系列就算是完结了（8787878787），对陆爻齐自身而言算是受益匪浅啊。</p></li><li><p>其实吧，陆爻齐原本最熟悉的部分大多在<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>和<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】</a>，前者很多命令本地用，后者主要使用 pull 和 push。 </p></li><li><p>但是吧，有时候遇到一些想编辑 commit 顺序的时候就很难受，问 ai 吧，操作完又不知所以然，有时候 ai 也不会。现在总算是对 git 有了更多的了解，至少这一点点的基础，看着网上的帖子和官方文档也不会太痛苦了。</p></li><li><p>现在学完之后，陆爻齐之后至少会有以下的变化</p></li></ul><ol><li>从前只会 merge，现在为了保持线性的提交历史，会多多地使用 rebase 命令；</li><li>对于提交的更改，学会使用交互式 rebase 与 –amend 相结合，以及 cherry-pick；</li><li>对于版本的发布，会在本地上自己用 tag 标注好，并结合自动化工作流，而不是只依赖 github 的图形化；</li></ol><ul><li>总之十分推荐没有玩过这个网站的人尝试一下，以及如果你没有在本地上用过 git，也十分推荐你用一下，作为一个版本管理工具，除了学习成本较高外，并没有什么缺点。</li></ul><h1 id="证明：）"><a href="#证明：）" class="headerlink" title="证明：）"></a>证明：）</h1><ul><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_1.png" alt="Learn_Git_Branching_Finish_1"></p></li><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_2.png" alt="Learn_Git_Branching_Finish_2"></p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>经过大概一周有余的更新，这个系列就算是完结了（8787878787），对陆爻齐自身而言算是受益匪浅啊。</p></li><li><p>其实吧，陆爻齐原本最熟悉的部分大多在<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>和<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git Together】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git Together】</a>，前者很多命令本地用，后者主要使用 pull 和 push。 </p></li><li><p>但是吧，有时候遇到一些想编辑 commit 顺序的时候就很难受，问 ai 吧，操作完又不知所以然，有时候 ai 也不会。现在总算是对 git 有了更多的了解，至少这一点点的基础，看着网上的帖子和官方文档也不会太痛苦了。</p></li><li><p>现在学完之后，陆爻齐之后至少会有以下的变化</p></li></ul><ol><li>从前只会 merge，现在为了保持线性的提交历史，会多多地使用 rebase 命令；</li><li>对于提交的更改，学会使用交互式 rebase 与 –amend 相结合，以及 cherry-pick；</li><li>对于版本的发布，会在本地上自己用 tag 标注好，并结合自动化工作流，而不是只依赖 github 的图形化；</li></ol><ul><li>总之十分推荐没有玩过这个网站的人尝试一下，以及如果你没有在本地上用过 git，也十分推荐你用一下，作为一个版本管理工具，除了学习成本较高外，并没有什么缺点。</li></ul><h1 id="证明：）"><a href="#证明：）" class="headerlink" title="证明：）"></a>证明：）</h1><ul><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_1.png" alt="Learn_Git_Branching_Finish_1"></p></li><li><p><img src="/%5Cimg%5CLearnGitBranching-%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1%E4%B8%8E%E6%84%9F%E8%A8%80%5Clearn_git_branching_finish_2.png" alt="Learn_Git_Branching_Finish_2"></p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -379,16 +404,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-关于origin和它的周边-Git远程仓库高级操作【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-关于origin和它的周边-Git远程仓库高级操作【Learn Git Together】</title>
       <link href="/posts/7de72648.html"/>
       <url>/posts/7de72648.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>做一名仁慈的独裁者一定会很有趣……</p></blockquote><ul><li>好奇怪的引语，不过本章说是高级操作，陆爻齐在此前 git 出现奇怪问题的时候，向 gpt 请教过，给出类似的代码，有时奏效有时又寄，所以还是十分建议学习的：）</li></ul><h2 id="推送主分支"><a href="#推送主分支" class="headerlink" title="推送主分支"></a>推送主分支</h2><ul><li>这章要展示的是，开发者从远程仓库获取主分支的更新，然后在本地其它分支开发完后，如何在主分支上完成更新并推送的步骤。</li></ul><ol><li><p>获取主分支的更新，为了保持<strong>线性</strong>的提交历史，就可以采用<code>git pull --rebase</code>，注意，先切换到主分支再用 pull；</p></li><li><p>然后更新本地主分支，此时主分支已经接收了远程仓库的更新。那么这里为了<strong>线性</strong>的提交历史，还是选择 rebase 方法，分别让其它几个分支变基（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>）就行；</p></li><li><p>最后推送，这个简单，<code>git push</code>;</p></li></ol><h2 id="合并远程仓库"><a href="#合并远程仓库" class="headerlink" title="合并远程仓库"></a>合并远程仓库</h2><ul><li><p>这章和上一章要解决的是一个问题，只不过不要求<strong>线性</strong>的提交历史，用 merge 实现主分支的功能更新。</p></li><li><p>merge 不说怎么搞了，但是这一章关卡过完就能够深刻地感受到，<strong>线性</strong>的提交历史多清晰，多好看。</p></li></ul><h2 id="远程跟踪分支"><a href="#远程跟踪分支" class="headerlink" title="远程跟踪分支"></a>远程跟踪分支</h2><ul><li><p>本章解释了 main，origin&#x2F;main 如何关联的。其实除了之前所说的 pull 和 push 时两者的关系外，它们其实在 clone 其实会自动关联起来。</p></li><li><p>注意，远程分支的跟踪可以自定义，比如<code>git checkout -b foo origin/main</code>，那么就会新建一个分支 foo 跟踪远程分支 origin&#x2F;main，此时要是<code>git pull</code>就会把本地没有的提交拉取下来，更新到 origin&#x2F;main 和 foo 上。</p></li><li><p><strong>注意</strong>，自定义后，原来的 main 就没有跟踪 origin&#x2F;main 了，所以刚刚的拉取不会更新 main。</p></li><li><p>同理，推送 push 时，也可以推送到远程的指定分支，比如上面关联后，<code>git push</code>就会把 foo 上新的提交推送到远程仓库的 main 上。</p></li><li><p>但是，上面的绑定方法也会新建分支，有没有直接绑定现有分支和远程分支的方法呢？有的：）<code>git branch -u origin/main foo</code>就能让 foo 跟踪 远程仓库的 main ，而且如果当前分支就是 foo，还能省略成<code>git branch -u origin/main</code>。</p></li></ul><h2 id="Git-push-的参数"><a href="#Git-push-的参数" class="headerlink" title="Git push 的参数"></a>Git push 的参数</h2><ul><li><p>有时候想不切换过去，而是直接推送一个分支上去，那就用到本章知识。</p></li><li><p>比如，当前的<code>HEAD</code>指针在其它地方，却想把本地的 foo 分支推到远程的 foo 分支。而如果直接写<code>git push</code>，是不会有用的，因为完整的句子其实是<code>git push &lt;remote&gt; &lt;locale&gt;</code>。这里的<code>&lt;remote&gt;</code>指的是目的地——远程仓库，一般写 origin 就行，<code>&lt;locale&gt;</code>是本地分支的名字。</p></li></ul><h2 id="Git-push-的参数2"><a href="#Git-push-的参数2" class="headerlink" title="Git push 的参数2"></a>Git push 的参数2</h2><ul><li><p>上面的 push 参数能够让指定分支推送上去，但有时候在其他分支开发的东西，想推送到远程仓库的指定分支，这个时候就可以设定 push 的参数来实现。</p></li><li><p>比如<code>git push origin foo^:main</code>就会把 foo 的上一个提交之前的远程仓库没有的提交推送到远程仓库的 main 分支上，如果远程仓库没有 main 分支，就会新建一个 main 分支获取推送信息。</p></li></ul><h2 id="Git-fetch-的参数"><a href="#Git-fetch-的参数" class="headerlink" title="Git fetch 的参数"></a>Git fetch 的参数</h2><ul><li><p>与上面的 push 类似，拿例子比较好理解。</p></li><li><p>对于<code>git fetch origin foo</code> 则会把远程仓库中<code>foo</code>的本地没有的提交给 fetch 下来，更新到 origin&#x2F;foo 上。</p></li><li><p>对于<code>git fetch orgin main^:foo</code>则会把远程仓库的<code>main</code>分支上一个提交之前的本地没有的分支 fetch 到本地的 foo 分支上，注意，是 foo 和 origin&#x2F;main 上，不是 origin&#x2F;foo。（这个操作几乎用不到，但语法是支持的）</p></li><li><p>最后，绝大部分情况下，一个<code>git fetch</code>拉取那些更新就行，不用搞上面那些虚头八脑的。</p></li></ul><h2 id="没有-source-的-source"><a href="#没有-source-的-source" class="headerlink" title="没有 source 的 source"></a>没有 source 的 source</h2><ul><li><p>这里看网站内容才能理解标题的含义，下面主要简单说下知识点。</p></li><li><p>Git 支持下面删除远程分支的方式<code>git push origin :foo</code>就会把远程仓库中的 foo 分支给删除。</p></li><li><p>同时也支持下面创建新分支的方式<code>git fetch origin :bar</code>就会在本地新建一个叫 bar 的分支</p></li></ul><h2 id="Git-pull-的参数"><a href="#Git-pull-的参数" class="headerlink" title="Git pull 的参数"></a>Git pull 的参数</h2><ul><li><p>前面（<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】</a>）说过，pull 就是 fetch +（merge || rebase），所以这里加的参与与 fetch 类似。</p></li><li><p>比如<code>git pull origin foo</code>就会等于<code>git fetch origin foo</code> + <code>git merge origin/foo</code>，<code>git pull origin main^:bar</code>就是<code>git fetch origin main^:bar</code>+<code>git merge bar</code>。</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>做一名仁慈的独裁者一定会很有趣……</p></blockquote><ul><li>好奇怪的引语，不过本章说是高级操作，陆爻齐在此前 git 出现奇怪问题的时候，向 gpt 请教过，给出类似的代码，有时奏效有时又寄，所以还是十分建议学习的：）</li></ul><h2 id="推送主分支"><a href="#推送主分支" class="headerlink" title="推送主分支"></a>推送主分支</h2><ul><li>这章要展示的是，开发者从远程仓库获取主分支的更新，然后在本地其它分支开发完后，如何在主分支上完成更新并推送的步骤。</li></ul><ol><li><p>获取主分支的更新，为了保持<strong>线性</strong>的提交历史，就可以采用<code>git pull --rebase</code>，注意，先切换到主分支再用 pull；</p></li><li><p>然后更新本地主分支，此时主分支已经接收了远程仓库的更新。那么这里为了<strong>线性</strong>的提交历史，还是选择 rebase 方法，分别让其它几个分支变基（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>）就行；</p></li><li><p>最后推送，这个简单，<code>git push</code>;</p></li></ol><h2 id="合并远程仓库"><a href="#合并远程仓库" class="headerlink" title="合并远程仓库"></a>合并远程仓库</h2><ul><li><p>这章和上一章要解决的是一个问题，只不过不要求<strong>线性</strong>的提交历史，用 merge 实现主分支的功能更新。</p></li><li><p>merge 不说怎么搞了，但是这一章关卡过完就能够深刻地感受到，<strong>线性</strong>的提交历史多清晰，多好看。</p></li></ul><h2 id="远程跟踪分支"><a href="#远程跟踪分支" class="headerlink" title="远程跟踪分支"></a>远程跟踪分支</h2><ul><li><p>本章解释了 main，origin&#x2F;main 如何关联的。其实除了之前所说的 pull 和 push 时两者的关系外，它们其实在 clone 其实会自动关联起来。</p></li><li><p>注意，远程分支的跟踪可以自定义，比如<code>git checkout -b foo origin/main</code>，那么就会新建一个分支 foo 跟踪远程分支 origin&#x2F;main，此时要是<code>git pull</code>就会把本地没有的提交拉取下来，更新到 origin&#x2F;main 和 foo 上。</p></li><li><p><strong>注意</strong>，自定义后，原来的 main 就没有跟踪 origin&#x2F;main 了，所以刚刚的拉取不会更新 main。</p></li><li><p>同理，推送 push 时，也可以推送到远程的指定分支，比如上面关联后，<code>git push</code>就会把 foo 上新的提交推送到远程仓库的 main 上。</p></li><li><p>但是，上面的绑定方法也会新建分支，有没有直接绑定现有分支和远程分支的方法呢？有的：）<code>git branch -u origin/main foo</code>就能让 foo 跟踪 远程仓库的 main ，而且如果当前分支就是 foo，还能省略成<code>git branch -u origin/main</code>。</p></li></ul><h2 id="Git-push-的参数"><a href="#Git-push-的参数" class="headerlink" title="Git push 的参数"></a>Git push 的参数</h2><ul><li><p>有时候想不切换过去，而是直接推送一个分支上去，那就用到本章知识。</p></li><li><p>比如，当前的<code>HEAD</code>指针在其它地方，却想把本地的 foo 分支推到远程的 foo 分支。而如果直接写<code>git push</code>，是不会有用的，因为完整的句子其实是<code>git push &lt;remote&gt; &lt;locale&gt;</code>。这里的<code>&lt;remote&gt;</code>指的是目的地——远程仓库，一般写 origin 就行，<code>&lt;locale&gt;</code>是本地分支的名字。</p></li></ul><h2 id="Git-push-的参数2"><a href="#Git-push-的参数2" class="headerlink" title="Git push 的参数2"></a>Git push 的参数2</h2><ul><li><p>上面的 push 参数能够让指定分支推送上去，但有时候在其他分支开发的东西，想推送到远程仓库的指定分支，这个时候就可以设定 push 的参数来实现。</p></li><li><p>比如<code>git push origin foo^:main</code>就会把 foo 的上一个提交之前的远程仓库没有的提交推送到远程仓库的 main 分支上，如果远程仓库没有 main 分支，就会新建一个 main 分支获取推送信息。</p></li></ul><h2 id="Git-fetch-的参数"><a href="#Git-fetch-的参数" class="headerlink" title="Git fetch 的参数"></a>Git fetch 的参数</h2><ul><li><p>与上面的 push 类似，拿例子比较好理解。</p></li><li><p>对于<code>git fetch origin foo</code> 则会把远程仓库中<code>foo</code>的本地没有的提交给 fetch 下来，更新到 origin&#x2F;foo 上。</p></li><li><p>对于<code>git fetch orgin main^:foo</code>则会把远程仓库的<code>main</code>分支上一个提交之前的本地没有的分支 fetch 到本地的 foo 分支上，注意，是 foo 和 origin&#x2F;main 上，不是 origin&#x2F;foo。（这个操作几乎用不到，但语法是支持的）</p></li><li><p>最后，绝大部分情况下，一个<code>git fetch</code>拉取那些更新就行，不用搞上面那些虚头八脑的。</p></li></ul><h2 id="没有-source-的-source"><a href="#没有-source-的-source" class="headerlink" title="没有 source 的 source"></a>没有 source 的 source</h2><ul><li><p>这里看网站内容才能理解标题的含义，下面主要简单说下知识点。</p></li><li><p>Git 支持下面删除远程分支的方式<code>git push origin :foo</code>就会把远程仓库中的 foo 分支给删除。</p></li><li><p>同时也支持下面创建新分支的方式<code>git fetch origin :bar</code>就会在本地新建一个叫 bar 的分支</p></li></ul><h2 id="Git-pull-的参数"><a href="#Git-pull-的参数" class="headerlink" title="Git pull 的参数"></a>Git pull 的参数</h2><ul><li><p>前面（<a href="/posts/2867501f.html" title="【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git Together】">【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git Together】</a>）说过，pull 就是 fetch +（merge || rebase），所以这里加的参与与 fetch 类似。</p></li><li><p>比如<code>git pull origin foo</code>就会等于<code>git fetch origin foo</code> + <code>git merge origin/foo</code>，<code>git pull origin main^:bar</code>就是<code>git fetch origin main^:bar</code>+<code>git merge bar</code>。</p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -413,7 +438,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -438,7 +463,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -463,7 +488,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -479,16 +504,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-Push&amp;Pull-Git远程仓库【Learn Git Together】</title>
       <link href="/posts/2867501f.html"/>
       <url>/posts/2867501f.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>是时候分享你的代码了，让编码变得社交化吧</p></blockquote><ul><li>事实上，远程仓库的部分才是大部分人使用 Git 的用途。对于自己的本地小项目，多数人倾向于采用比较“简单”的本地复制文件存档。只要这个项目还在开发迭代，过不了多久就会发生版本混乱。</li></ul><h2 id="Git-Clone"><a href="#Git-Clone" class="headerlink" title="Git Clone"></a>Git Clone</h2><ul><li><p>正如网站中所说，网站演示效果与实际不符，输入<code>git clone</code>命令后，并非从远程创建本地复制，而是在本地创建一个远程仓库的副本。</p></li><li><p>这个命令用得可太多了，陆爻齐需要本地复现别人的模型，或者试下别人的开源代码，都需要用 clone 复制仓库副本。（陆爻齐的LALC每天也有不少 clone 的请求啊）</p></li></ul><h2 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h2><ul><li><p>一言以蔽之，就是本地中上一次与远程仓库通信时的状态，该分支是可以用 HEAD 切换上去，不过会自动进入分离 HEAD 的状态，毕竟人工修改本地中远程仓库的状态没有且容易混乱。</p></li><li><p>举一个小栗子更能帮助理解该部分罢。比如，现在直接从一个仓库 clone 下来，你的分支上除了 main，其实还有 origin&#x2F;main，这个 origin 是 git 给远程仓库起的别名（网站用 o 代替）。</p></li><li><p>origin&#x2F;main 只会在远程仓库更新后，与远程仓库交互时才会跟着更新，比如<code>git pull</code>,<code>git push</code>等等。</p></li></ul><h2 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h2><ul><li><p>该命令的作用是，从远程仓库获取数据，让本地的远程分支同步更新一下。具体而言，会从远程仓库下载本地缺失的提交记录和更新远程分支指针。</p></li><li><p><strong>但是</strong>，更新远程分支不等于更新本地分支，所以使用该命令后，你会发现本地仓库的内容一点没变。</p></li><li><p>当然，这个时候通过以前学过的移动分支指针的知识（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>中的 merge、rebase 和 <a href="/posts/b3c82686.html" title="【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git】">【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git】</a>中的 cherry-pick），就可以实现更新了。比如<code>git fetch; git rebase origin/main</code>, <code>git fetch; git merge origin/main</code>。</p></li><li><p>这个命令存在感很低，至少在陆爻齐十分有限的代码实践环节里没有用过。毕竟从上面几段可以看出，这个命令对应的需求十分常见，而实现需求的过程居然需要两步，这样的麻烦促使后面一个强大命令的诞生<code>git pull</code>。</p></li></ul><h2 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h2><ul><li><p>面对<code>git fetch</code>的窘迫，<code>git pull</code>应运而生。</p></li><li><p>普通的<code>git pull</code>对应<code>git fetch; git merge origin/main</code>，而<code>git pull --rebase</code>对应<code>git fetch; git rebase origin/main</code>.</p></li></ul><h1 id="模拟团队合作"><a href="#模拟团队合作" class="headerlink" title="模拟团队合作"></a>模拟团队合作</h1><ul><li><p>网站给了一个模拟其他人提交的命令，和 Git 关系不大，故不做详解。</p></li><li><p>本关只要模拟提交后，pull就行。</p></li></ul><h1 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h1><ul><li><p>该命令的本质，是把本地的变更上传到远程仓库，同时让本地的远程分支也同步到最新的提交。</p></li><li><p>这个也是核心命令。一般来说，add、commit、push，三件套不会有什么太大的问题（本地的小玩具项目上），不过要真正实现网络远程协作开发，还是远远不够，当然后面会有的：）</p></li></ul><h2 id="偏离的工作"><a href="#偏离的工作" class="headerlink" title="偏离的工作"></a>偏离的工作</h2><ul><li><p>这个标题有些迷惑，要理解这个部分的内容还得看例子。</p></li><li><p>比如说，远程仓库本来最新提交是 c1，现在 A 同学 clone 下来，做了变更作为新提交 c2，但没有立即 push 上去。此时，B 同学 clone 了仓库，开发并 push 了提交 c3，使得远程仓库的最新提交为 c3。接下来，问题来了，A 同学可以把自己的变更 c2 push 上去吗？</p></li><li><p>答案是不行，毕竟 c2 是基于 c1 开发的，而仓库最新的提交是 c3，push 不能直接把 c2 连接到 c3 后，也不会自动从 c1 分离出一条新的分支，无论 A 还是 B 都是用 main 分支。</p></li><li><p>而要解决这个事情有两个方法，merge或rebase，比如用<code>git pull</code>把远程分支拉下来就算是 merge，或者<code>git pull --rebase</code>也能拉下来，不过不会产生merge的交叉，而是rebase。</p></li></ul><h2 id="锁定的Main"><a href="#锁定的Main" class="headerlink" title="锁定的Main"></a>锁定的Main</h2><ul><li><p>拓展下标题，应该是：“解决因锁定的Main而无法直接Push的问题”</p></li><li><p>锁定Main在大公司的Git流程应该属于正常范畴，毕竟如果每个人都能push到 main 那可就混沌咯。</p></li><li><p>所以个人只能在自己的 branch 上开发，然后 push 上去，提 pr 来等待合并。</p></li><li><p>但是如果发生了自己不小心在本地的 main 上提交导致无法 push 上远程仓库的情况呢？那就是本关的内容，其实只要把 main 分支指针移到和远程仓库一样的状态就行。</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>是时候分享你的代码了，让编码变得社交化吧</p></blockquote><ul><li>事实上，远程仓库的部分才是大部分人使用 Git 的用途。对于自己的本地小项目，多数人倾向于采用比较“简单”的本地复制文件存档。只要这个项目还在开发迭代，过不了多久就会发生版本混乱。</li></ul><h2 id="Git-Clone"><a href="#Git-Clone" class="headerlink" title="Git Clone"></a>Git Clone</h2><ul><li><p>正如网站中所说，网站演示效果与实际不符，输入<code>git clone</code>命令后，并非从远程创建本地复制，而是在本地创建一个远程仓库的副本。</p></li><li><p>这个命令用得可太多了，陆爻齐需要本地复现别人的模型，或者试下别人的开源代码，都需要用 clone 复制仓库副本。（陆爻齐的LALC每天也有不少 clone 的请求啊）</p></li></ul><h2 id="远程分支"><a href="#远程分支" class="headerlink" title="远程分支"></a>远程分支</h2><ul><li><p>一言以蔽之，就是本地中上一次与远程仓库通信时的状态，该分支是可以用 HEAD 切换上去，不过会自动进入分离 HEAD 的状态，毕竟人工修改本地中远程仓库的状态没有且容易混乱。</p></li><li><p>举一个小栗子更能帮助理解该部分罢。比如，现在直接从一个仓库 clone 下来，你的分支上除了 main，其实还有 origin&#x2F;main，这个 origin 是 git 给远程仓库起的别名（网站用 o 代替）。</p></li><li><p>origin&#x2F;main 只会在远程仓库更新后，与远程仓库交互时才会跟着更新，比如<code>git pull</code>,<code>git push</code>等等。</p></li></ul><h2 id="Git-Fetch"><a href="#Git-Fetch" class="headerlink" title="Git Fetch"></a>Git Fetch</h2><ul><li><p>该命令的作用是，从远程仓库获取数据，让本地的远程分支同步更新一下。具体而言，会从远程仓库下载本地缺失的提交记录和更新远程分支指针。</p></li><li><p><strong>但是</strong>，更新远程分支不等于更新本地分支，所以使用该命令后，你会发现本地仓库的内容一点没变。</p></li><li><p>当然，这个时候通过以前学过的移动分支指针的知识（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>中的 merge、rebase 和 <a href="/posts/b3c82686.html" title="【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git Together】">【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git Together】</a>中的 cherry-pick），就可以实现更新了。比如<code>git fetch; git rebase origin/main</code>, <code>git fetch; git merge origin/main</code>。</p></li><li><p>这个命令存在感很低，至少在陆爻齐十分有限的代码实践环节里没有用过。毕竟从上面几段可以看出，这个命令对应的需求十分常见，而实现需求的过程居然需要两步，这样的麻烦促使后面一个强大命令的诞生<code>git pull</code>。</p></li></ul><h2 id="Git-Pull"><a href="#Git-Pull" class="headerlink" title="Git Pull"></a>Git Pull</h2><ul><li><p>面对<code>git fetch</code>的窘迫，<code>git pull</code>应运而生。</p></li><li><p>普通的<code>git pull</code>对应<code>git fetch; git merge origin/main</code>，而<code>git pull --rebase</code>对应<code>git fetch; git rebase origin/main</code>.</p></li></ul><h1 id="模拟团队合作"><a href="#模拟团队合作" class="headerlink" title="模拟团队合作"></a>模拟团队合作</h1><ul><li><p>网站给了一个模拟其他人提交的命令，和 Git 关系不大，故不做详解。</p></li><li><p>本关只要模拟提交后，pull就行。</p></li></ul><h1 id="Git-Push"><a href="#Git-Push" class="headerlink" title="Git Push"></a>Git Push</h1><ul><li><p>该命令的本质，是把本地的变更上传到远程仓库，同时让本地的远程分支也同步到最新的提交。</p></li><li><p>这个也是核心命令。一般来说，add、commit、push，三件套不会有什么太大的问题（本地的小玩具项目上），不过要真正实现网络远程协作开发，还是远远不够，当然后面会有的：）</p></li></ul><h2 id="偏离的工作"><a href="#偏离的工作" class="headerlink" title="偏离的工作"></a>偏离的工作</h2><ul><li><p>这个标题有些迷惑，要理解这个部分的内容还得看例子。</p></li><li><p>比如说，远程仓库本来最新提交是 c1，现在 A 同学 clone 下来，做了变更作为新提交 c2，但没有立即 push 上去。此时，B 同学 clone 了仓库，开发并 push 了提交 c3，使得远程仓库的最新提交为 c3。接下来，问题来了，A 同学可以把自己的变更 c2 push 上去吗？</p></li><li><p>答案是不行，毕竟 c2 是基于 c1 开发的，而仓库最新的提交是 c3，push 不能直接把 c2 连接到 c3 后，也不会自动从 c1 分离出一条新的分支，无论 A 还是 B 都是用 main 分支。</p></li><li><p>而要解决这个事情有两个方法，merge或rebase，比如用<code>git pull</code>把远程分支拉下来就算是 merge，或者<code>git pull --rebase</code>也能拉下来，不过不会产生merge的交叉，而是rebase。</p></li></ul><h2 id="锁定的Main"><a href="#锁定的Main" class="headerlink" title="锁定的Main"></a>锁定的Main</h2><ul><li><p>拓展下标题，应该是：“解决因锁定的Main而无法直接Push的问题”</p></li><li><p>锁定Main在大公司的Git流程应该属于正常范畴，毕竟如果每个人都能push到 main 那可就混沌咯。</p></li><li><p>所以个人只能在自己的 branch 上开发，然后 push 上去，提 pr 来等待合并。</p></li><li><p>但是如果发生了自己不小心在本地的 main 上提交导致无法 push 上远程仓库的情况呢？那就是本关的内容，其实只要把 main 分支指针移到和远程仓库一样的状态就行。</p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -513,7 +538,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -538,7 +563,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -554,16 +579,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-高级话题【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-高级话题【Learn Git Together】</title>
       <link href="/posts/5aa3ef8b.html"/>
       <url>/posts/5aa3ef8b.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-高级话题"><a href="#正文-高级话题" class="headerlink" title="正文-高级话题"></a>正文-高级话题</h1><blockquote><p>只为真正的勇士</p></blockquote><ul><li>说是高级话题，实际上就是一些 Git 版小测，把之前的命令做了一点点的变化</li></ul><h2 id="多次-Rebase"><a href="#多次-Rebase" class="headerlink" title="多次 Rebase"></a>多次 Rebase</h2><ul><li><p>题目说的很明白，“把所有这些分支上所做的工作都通过 rebase 合并到 main 分支上”，无需多盐。</p></li><li><p>对于 rebase 为什么有这样的效果，可以看看此前基础篇相关解释（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>）</p></li></ul><h2 id="两个-Parent-节点"><a href="#两个-Parent-节点" class="headerlink" title="两个 Parent 节点"></a>两个 Parent 节点</h2><ul><li><p>此前没怎么提到 parent 节点这个概念，实际上，一旦在当前的 HEAD 上 commit 一下，现在的节点就是新节点的 parent 节点。</p></li><li><p>而出现两个 parent 节点的情况，就是 merge 命令执行后的交点部分。</p></li><li><p>现在回想下之前学过的相对引用（<a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git】</a>，比如命令<code>git checkout HEAD^</code>这样的命令会在两个 parent 节点中如何选择呢？</p></li><li><p>答案是，他会自动选择比较早的节点，不过通过命令<code>git checkout HEAD^2</code>可以选择到第二早的节点，<code>^</code>后面的参数不是对几个节点操作的含义（要与<code>~</code>有所区分）而是选择第几个 parent 节点的意思。</p></li><li><p>此外，相对引用支持链式操作，比如本题答案就可以用下面这一条命令来结束<code>git branch -f bugWork HEAD~^2~</code></p></li></ul><h2 id="纠缠不清的分支"><a href="#纠缠不清的分支" class="headerlink" title="纠缠不清的分支"></a>纠缠不清的分支</h2><ul><li>这一题就是 cherry-pick 和分支移动的简单应用，只可惜 cherry-pick 这个命令只能对 HEAD 指着的地方做操作，不然还会更舒服：）</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-高级话题"><a href="#正文-高级话题" class="headerlink" title="正文-高级话题"></a>正文-高级话题</h1><blockquote><p>只为真正的勇士</p></blockquote><ul><li>说是高级话题，实际上就是一些 Git 版小测，把之前的命令做了一点点的变化</li></ul><h2 id="多次-Rebase"><a href="#多次-Rebase" class="headerlink" title="多次 Rebase"></a>多次 Rebase</h2><ul><li><p>题目说的很明白，“把所有这些分支上所做的工作都通过 rebase 合并到 main 分支上”，无需多盐。</p></li><li><p>对于 rebase 为什么有这样的效果，可以看看此前基础篇相关解释（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>）</p></li></ul><h2 id="两个-Parent-节点"><a href="#两个-Parent-节点" class="headerlink" title="两个 Parent 节点"></a>两个 Parent 节点</h2><ul><li><p>此前没怎么提到 parent 节点这个概念，实际上，一旦在当前的 HEAD 上 commit 一下，现在的节点就是新节点的 parent 节点。</p></li><li><p>而出现两个 parent 节点的情况，就是 merge 命令执行后的交点部分。</p></li><li><p>现在回想下之前学过的相对引用（<a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】</a>，比如命令<code>git checkout HEAD^</code>这样的命令会在两个 parent 节点中如何选择呢？</p></li><li><p>答案是，他会自动选择比较早的节点，不过通过命令<code>git checkout HEAD^2</code>可以选择到第二早的节点，<code>^</code>后面的参数不是对几个节点操作的含义（要与<code>~</code>有所区分）而是选择第几个 parent 节点的意思。</p></li><li><p>此外，相对引用支持链式操作，比如本题答案就可以用下面这一条命令来结束<code>git branch -f bugWork HEAD~^2~</code></p></li></ul><h2 id="纠缠不清的分支"><a href="#纠缠不清的分支" class="headerlink" title="纠缠不清的分支"></a>纠缠不清的分支</h2><ul><li>这一题就是 cherry-pick 和分支移动的简单应用，只可惜 cherry-pick 这个命令只能对 HEAD 指着的地方做操作，不然还会更舒服：）</li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -588,7 +613,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -613,7 +638,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -629,16 +654,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-杂项【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-杂项【Learn Git Together】</title>
       <link href="/posts/506b058c.html"/>
       <url>/posts/506b058c.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-杂项"><a href="#正文-杂项" class="headerlink" title="正文-杂项"></a>正文-杂项</h1><blockquote><p>Git 技术、技巧与贴士大集合</p></blockquote><ul><li>标题党喵，要是我来总结就是：1. 如何高效修改前几个commit；2. Tag；3. Describe</li></ul><h2 id="只取一个提交记录-提交的技巧-1-提交的技巧-2"><a href="#只取一个提交记录-提交的技巧-1-提交的技巧-2" class="headerlink" title="只取一个提交记录 &amp; 提交的技巧#1 &amp; 提交的技巧#2"></a>只取一个提交记录 &amp; 提交的技巧#1 &amp; 提交的技巧#2</h2><ul><li><p>由于前三个部分说的都是一件事，就合并力。</p></li><li><p>都是为了解决：如果想修改一个处于“中间”的 commit，该如何处理？</p></li><li><p>从 <a href="/posts/b3c82686.html" title="【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git】">【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git】</a>可以看出，就两个方式 cherry-pick 和交互式 rebase。</p></li><li><p>无论哪个方式，都会遵循下面的步骤来执行（至少是过关的步骤）</p></li></ul><ol><li>提取出中间那个要修改的 commit；</li><li>通过命令<code>git commit --amend</code>来修改 commit 内容；</li><li>按照原定顺序，编排修改后 commit 和涉及到的路程中其它 commit。</li></ol><ul><li>如果感觉上面的步骤说得比较抽象，那么把网站对应部分的关过一次就好力。</li></ul><h2 id="Git-Tag"><a href="#Git-Tag" class="headerlink" title="Git Tag"></a>Git Tag</h2><ul><li><p>就好比是给 commit 下一个“永久”的标签，作为重要版本或者错误修复的标记。</p></li><li><p><code>git tag v1 c1</code>就是给 c1（提交的哈希值）添加一个名为 v1 的标签，后续这个 v1 就当作分支指针一样用，可以<code>git checkout v1</code>。如果没有 c1 这个参数，就默认对 HEAD 正在指着的 commit 贴标签。</p></li><li><p>以及，虽然是使用后面的 describe 命令才发现的事情，但陆爻齐觉着放着比较好。陆爻齐在某个本地仓库实验 describe 命令时，出现了下面的语句提示</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git describe</span><br><span class="line">fatal: No annotated tags can describe &#x27;0f5137947385b1dd89d72a9b68a108b73e81d110&#x27;.</span><br></pre></td></tr></table></figure><ul><li><p>经查阅，该语句的意思是，没有带标注的 tag 可以 describe，之所以会出现这样的情况，是因为之前的 tag 的产生都是在 GitHub 发布 release 时产生的，没有标注。</p><blockquote><p><a href="https://stackoverflow.org.cn/questions/10268641">https://stackoverflow.org.cn/questions/10268641</a></p></blockquote></li><li><p>平常打标签时，尽量打带标注的标签，<code>git tag -a &quot;tag_name&quot; -m &quot;description of tag&quot;</code>。</p></li><li><p>实际上，如果采用命令<code>git describe --tags</code>也可以正常描述无标注的标签。</p></li></ul><h2 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h2><ul><li><p><code>git describe</code>用于描述当前 HEAD 与上一个标签的情况，比如<code>V3.1.1-8-g0f51379</code>的意思是：上一个标签是叫 V3.1.1，距离是八个 commit，该 tag 的 commit 的哈希值为 g0f51379。</p></li><li><p>当然如果给后面加点参数会更灵活，比如<code>git describe main</code>就会描述 main 前面 tag 的情况，以及上面的<code>git describe --tags</code>就可以描述无标注标签的情况。</p></li><li><p>以及，如果当前的 commit 就是最新带 tag 的，describe 命令就会直接输入 tag 的名字。</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-杂项"><a href="#正文-杂项" class="headerlink" title="正文-杂项"></a>正文-杂项</h1><blockquote><p>Git 技术、技巧与贴士大集合</p></blockquote><ul><li>标题党喵，要是我来总结就是：1. 如何高效修改前几个commit；2. Tag；3. Describe</li></ul><h2 id="只取一个提交记录-提交的技巧-1-提交的技巧-2"><a href="#只取一个提交记录-提交的技巧-1-提交的技巧-2" class="headerlink" title="只取一个提交记录 &amp; 提交的技巧#1 &amp; 提交的技巧#2"></a>只取一个提交记录 &amp; 提交的技巧#1 &amp; 提交的技巧#2</h2><ul><li><p>由于前三个部分说的都是一件事，就合并力。</p></li><li><p>都是为了解决：如果想修改一个处于“中间”的 commit，该如何处理？</p></li><li><p>从 <a href="/posts/b3c82686.html" title="【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git Together】">【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git Together】</a>可以看出，就两个方式 cherry-pick 和交互式 rebase。</p></li><li><p>无论哪个方式，都会遵循下面的步骤来执行（至少是过关的步骤）</p></li></ul><ol><li>提取出中间那个要修改的 commit；</li><li>通过命令<code>git commit --amend</code>来修改 commit 内容；</li><li>按照原定顺序，编排修改后 commit 和涉及到的路程中其它 commit。</li></ol><ul><li>如果感觉上面的步骤说得比较抽象，那么把网站对应部分的关过一次就好力。</li></ul><h2 id="Git-Tag"><a href="#Git-Tag" class="headerlink" title="Git Tag"></a>Git Tag</h2><ul><li><p>就好比是给 commit 下一个“永久”的标签，作为重要版本或者错误修复的标记。</p></li><li><p><code>git tag v1 c1</code>就是给 c1（提交的哈希值）添加一个名为 v1 的标签，后续这个 v1 就当作分支指针一样用，可以<code>git checkout v1</code>。如果没有 c1 这个参数，就默认对 HEAD 正在指着的 commit 贴标签。</p></li><li><p>以及，虽然是使用后面的 describe 命令才发现的事情，但陆爻齐觉着放着比较好。陆爻齐在某个本地仓库实验 describe 命令时，出现了下面的语句提示</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git describe</span><br><span class="line">fatal: No annotated tags can describe &#x27;0f5137947385b1dd89d72a9b68a108b73e81d110&#x27;.</span><br></pre></td></tr></table></figure><ul><li><p>经查阅，该语句的意思是，没有带标注的 tag 可以 describe，之所以会出现这样的情况，是因为之前的 tag 的产生都是在 GitHub 发布 release 时产生的，没有标注。</p><blockquote><p><a href="https://stackoverflow.org.cn/questions/10268641">https://stackoverflow.org.cn/questions/10268641</a></p></blockquote></li><li><p>平常打标签时，尽量打带标注的标签，<code>git tag -a &quot;tag_name&quot; -m &quot;description of tag&quot;</code>。</p></li><li><p>实际上，如果采用命令<code>git describe --tags</code>也可以正常描述无标注的标签。</p></li></ul><h2 id="Git-Describe"><a href="#Git-Describe" class="headerlink" title="Git Describe"></a>Git Describe</h2><ul><li><p><code>git describe</code>用于描述当前 HEAD 与上一个标签的情况，比如<code>V3.1.1-8-g0f51379</code>的意思是：上一个标签是叫 V3.1.1，距离是八个 commit，该 tag 的 commit 的哈希值为 g0f51379。</p></li><li><p>当然如果给后面加点参数会更灵活，比如<code>git describe main</code>就会描述 main 前面 tag 的情况，以及上面的<code>git describe --tags</code>就可以描述无标注标签的情况。</p></li><li><p>以及，如果当前的 commit 就是最新带 tag 的，describe 命令就会直接输入 tag 的名字。</p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -663,7 +688,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -688,7 +713,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -713,7 +738,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -729,16 +754,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-移动提交记录【Learn Git Together】</title>
       <link href="/posts/b3c82686.html"/>
       <url>/posts/b3c82686.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>自由修改提交树</p></blockquote><ul><li>作者在这表示之前的内容（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>、<a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git】</a>）已经涵盖了 Git 90% 的功能，但是剩下 10% 的功能正是为一些复杂的工作而准备的。</li></ul><h2 id="Git-Cherry-pick"><a href="#Git-Cherry-pick" class="headerlink" title="Git Cherry-pick"></a>Git Cherry-pick</h2><ul><li><p>正如本篇的引语一般可以自由地修改提交树（的一点），可以把任意 commit 集中到当前分支上来，比如在其他分支有名为 c2、c5 的分支（这里的名指的是哈希值），那么可以用以下命令来实现集中 c2 和 c5 到当前分支来。<code>git cherry-pick c2 c5</code></p></li><li><p>非常地简单啊，还是赶紧到下一个环节罢。</p></li></ul><h2 id="交互式-rebase"><a href="#交互式-rebase" class="headerlink" title="交互式 rebase"></a>交互式 rebase</h2><ul><li><p>此前在 <a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git】</a>，我们学过 git rebase，这里用到了其中的参数，-i，也就是使其能够交互的原因。</p></li><li><p>比如我要对包括新 commit 在内，HEAD的前四个 commit 做修改，那么就用命令<code>git rebase -i HEAD~4</code>。在修改完后，会在前面第五个 commit 出现另一条分支，把修改后的四个 commit 复制到这个小分支上。</p></li><li><p>修改的具体过程在网站采用了另一种形式表达，并支持删除和重新排序。下面陆爻齐复制一下真实情况下，对某个项目采用这个交互式 rebase 出现的操作界面。</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">pick f8a55e9 [3.1.4]update themepack config</span><br><span class="line">pick e78d15b [3.1.5]1. rewrite i18n to avoid having to update it frequently; 2. add style refresh when cost enough; 3. avoid the ego gift about ego resource</span><br><span class="line">pick ec004ff [3.1.6]1. improve the logic when acquiring the ego; 2. stop when finishing mirror without enough enkephalin modules; 3. only click enhanceable ego in the enhancing</span><br><span class="line">pick 0f51379 [3.1.7]update version</span><br><span class="line"></span><br><span class="line"># Rebase 1725f2a..0f51379 onto 1725f2a (4 commands)</span><br><span class="line">#</span><br><span class="line"># Commands:</span><br><span class="line"># p, pick &lt;commit&gt; = use commit</span><br><span class="line"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="line"># e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="line"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="line"># f, fixup [-C | -c] &lt;commit&gt; = like &quot;squash&quot; but keep only the previous</span><br><span class="line">#                    commit&#x27;s log message, unless -C is used, in which case</span><br><span class="line">#                    keep only this commit&#x27;s message; -c is same as -C but</span><br><span class="line">#                    opens the editor</span><br><span class="line"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="line"># b, break = stop here (continue rebase later with &#x27;git rebase --continue&#x27;)</span><br><span class="line"># d, drop &lt;commit&gt; = remove commit</span><br><span class="line"># l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="line"># t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="line"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="line">#         create a merge commit using the original merge commit&#x27;s</span><br><span class="line">#         message (or the oneline, if no original merge commit was</span><br><span class="line">#         specified); use -c &lt;commit&gt; to reword the commit message</span><br><span class="line"># u, update-ref &lt;ref&gt; = track a placeholder for the &lt;ref&gt; to be updated</span><br><span class="line">#                       to this position in the new commits. The &lt;ref&gt; is</span><br><span class="line">#                       updated at the end of the rebase</span><br><span class="line">#</span><br><span class="line"># These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="line">#</span><br><span class="line"># If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="line">#</span><br><span class="line"># However, if you remove everything, the rebase will be aborted.</span><br><span class="line">#</span><br></pre></td></tr></table></figure><ul><li>可以看到除了删除和重新排序的功能外，还支持合并 commit 等功能，反正十分强大。修改后只要保存这个命令就行。</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><blockquote><p>自由修改提交树</p></blockquote><ul><li>作者在这表示之前的内容（<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>、<a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】</a>）已经涵盖了 Git 90% 的功能，但是剩下 10% 的功能正是为一些复杂的工作而准备的。</li></ul><h2 id="Git-Cherry-pick"><a href="#Git-Cherry-pick" class="headerlink" title="Git Cherry-pick"></a>Git Cherry-pick</h2><ul><li><p>正如本篇的引语一般可以自由地修改提交树（的一点），可以把任意 commit 集中到当前分支上来，比如在其他分支有名为 c2、c5 的分支（这里的名指的是哈希值），那么可以用以下命令来实现集中 c2 和 c5 到当前分支来。<code>git cherry-pick c2 c5</code></p></li><li><p>非常地简单啊，还是赶紧到下一个环节罢。</p></li></ul><h2 id="交互式-rebase"><a href="#交互式-rebase" class="headerlink" title="交互式 rebase"></a>交互式 rebase</h2><ul><li><p>此前在 <a href="/posts/6476fef2.html" title="【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】</a>，我们学过 git rebase，这里用到了其中的参数，-i，也就是使其能够交互的原因。</p></li><li><p>比如我要对包括新 commit 在内，HEAD的前四个 commit 做修改，那么就用命令<code>git rebase -i HEAD~4</code>。在修改完后，会在前面第五个 commit 出现另一条分支，把修改后的四个 commit 复制到这个小分支上。</p></li><li><p>修改的具体过程在网站采用了另一种形式表达，并支持删除和重新排序。下面陆爻齐复制一下真实情况下，对某个项目采用这个交互式 rebase 出现的操作界面。</p></li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">pick f8a55e9 [3.1.4]update themepack config</span><br><span class="line">pick e78d15b [3.1.5]1. rewrite i18n to avoid having to update it frequently; 2. add style refresh when cost enough; 3. avoid the ego gift about ego resource</span><br><span class="line">pick ec004ff [3.1.6]1. improve the logic when acquiring the ego; 2. stop when finishing mirror without enough enkephalin modules; 3. only click enhanceable ego in the enhancing</span><br><span class="line">pick 0f51379 [3.1.7]update version</span><br><span class="line"></span><br><span class="line"># Rebase 1725f2a..0f51379 onto 1725f2a (4 commands)</span><br><span class="line">#</span><br><span class="line"># Commands:</span><br><span class="line"># p, pick &lt;commit&gt; = use commit</span><br><span class="line"># r, reword &lt;commit&gt; = use commit, but edit the commit message</span><br><span class="line"># e, edit &lt;commit&gt; = use commit, but stop for amending</span><br><span class="line"># s, squash &lt;commit&gt; = use commit, but meld into previous commit</span><br><span class="line"># f, fixup [-C | -c] &lt;commit&gt; = like &quot;squash&quot; but keep only the previous</span><br><span class="line">#                    commit&#x27;s log message, unless -C is used, in which case</span><br><span class="line">#                    keep only this commit&#x27;s message; -c is same as -C but</span><br><span class="line">#                    opens the editor</span><br><span class="line"># x, exec &lt;command&gt; = run command (the rest of the line) using shell</span><br><span class="line"># b, break = stop here (continue rebase later with &#x27;git rebase --continue&#x27;)</span><br><span class="line"># d, drop &lt;commit&gt; = remove commit</span><br><span class="line"># l, label &lt;label&gt; = label current HEAD with a name</span><br><span class="line"># t, reset &lt;label&gt; = reset HEAD to a label</span><br><span class="line"># m, merge [-C &lt;commit&gt; | -c &lt;commit&gt;] &lt;label&gt; [# &lt;oneline&gt;]</span><br><span class="line">#         create a merge commit using the original merge commit&#x27;s</span><br><span class="line">#         message (or the oneline, if no original merge commit was</span><br><span class="line">#         specified); use -c &lt;commit&gt; to reword the commit message</span><br><span class="line"># u, update-ref &lt;ref&gt; = track a placeholder for the &lt;ref&gt; to be updated</span><br><span class="line">#                       to this position in the new commits. The &lt;ref&gt; is</span><br><span class="line">#                       updated at the end of the rebase</span><br><span class="line">#</span><br><span class="line"># These lines can be re-ordered; they are executed from top to bottom.</span><br><span class="line">#</span><br><span class="line"># If you remove a line here THAT COMMIT WILL BE LOST.</span><br><span class="line">#</span><br><span class="line"># However, if you remove everything, the rebase will be aborted.</span><br><span class="line">#</span><br></pre></td></tr></table></figure><ul><li>可以看到除了删除和重新排序的功能外，还支持合并 commit 等功能，反正十分强大。修改后只要保存这个命令就行。</li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -763,7 +788,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -788,7 +813,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -813,7 +838,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -829,16 +854,16 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-高级篇【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-高级篇【Learn Git Together】</title>
       <link href="/posts/6476fef2.html"/>
       <url>/posts/6476fef2.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-高级篇"><a href="#正文-高级篇" class="headerlink" title="正文-高级篇"></a>正文-高级篇</h1><blockquote><p>要开始介绍 Git 的超棒特性了，快来吧！</p></blockquote><ul><li>该章节的内容是陆爻齐从未接触过的，不过这也正是学习的意义啊（感慨）</li></ul><h2 id="分离-HEAD"><a href="#分离-HEAD" class="headerlink" title="分离 HEAD"></a>分离 HEAD</h2><ul><li><p>这里的 <code>HEAD</code> 就是 git 操作时正处于的指针位置，一般情况下，<code>HEAD</code> 会跟着分支指针走，比如在<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</a>中，每次输入命令<code>git checkout main</code>，实际上就是让 <code>HEAD</code> 和 main 同步（HEAD-&gt;main-&gt;节点），后续每次 <code>commit</code>，main 会移动，相当于两个指针会一起更新到新的节点。</p></li><li><p>而所谓的分离 <code>HEAD</code>，就是让 <code>HEAD</code> 离开分支头。这里就要引入一个小知识，每个 <code>commit</code> 都会有一串哈希值来对应，不过一般情况下，只要前四个字母就能确认一个 <code>commit</code>。假定某个 <code>commit</code> 的节点哈希值为 c1，那么把 <code>HEAD</code> 移到该节点的命令就是 <code>git checkout c1</code></p></li></ul><h2 id="相对引用1"><a href="#相对引用1" class="headerlink" title="相对引用1"></a>相对引用1</h2><ul><li><p>上面移动 <code>HEAD</code> 的方式需要查看 <code>commit</code> 对应的哈希值（通常用<code>git log</code>命令查看），那么有没有什么简单又强势的方法来移动 <code>HEAD</code> 呢？有的，兄弟，有的：）那就是这里的相对引用。</p></li><li><p>比如，我想移到 main 的上一个节点，就可以用命令<code>git checkout main^</code>，如果想移到前两个节点，多加个<code>^</code>变成<code>git checkout main^^</code>即可。如果只是移到 <code>HEAD</code> 前一个，也可以，用命令<code>git checkout HEAD^</code>就好。</p></li></ul><h2 id="相对引用2"><a href="#相对引用2" class="headerlink" title="相对引用2"></a>相对引用2</h2><ul><li><p>在前一个章节，虽然学会了相对移动的 一种方式，但是如果想移动多次，比如前一百个节点（一般没这种情况罢），可以用新的符号<code>~</code>，也就是命令<code>git checkout HEAD~100</code>。</p></li><li><p>但是，相对引用实际上应用最多的地方是移动分支的指针，比如我想把 main 分支的指针移动到 <code>HEAD</code> 的前三个点，就用以下命令<code>git branch -f main HEAD~3</code>。注意，这里用的是 branch 而不是 checkout，私以为 checkout 是对 <code>HEAD</code> 的操作，而 branch 是对分支指针的操作。</p></li></ul><h2 id="撤销更改"><a href="#撤销更改" class="headerlink" title="撤销更改"></a>撤销更改</h2><ul><li><p>两个方式 <code>reset</code> 和 <code>revert</code>，一个个介绍。</p></li><li><p>如果现在在本地，你想撤销 main 刚刚提交的 <code>commit</code>，可以用<code>git reset HEAD^</code>来实现，这样相当于把 main 分支指针上移，这时最新的 <code>commit</code> 的变更其实还在，只是不在暂存区了。</p></li><li><p>上面的 <code>reset</code> 命令本质上是通过移动分支指针的方式，但是这种方式肯定不能用于远程的仓库上，所以就需要 <code>revert</code> 命令。同样的用处，命令则是<code>git revert HEAD</code>。该命令实际上会创建新的 <code>commit</code>，该 <code>commit</code> 的内容就是撤销上一次的 <code>commit</code>。如果事项撤销上上次的 <code>commit</code>，则要写<code>git revert HEAD^</code>。这样的命令可以在远程仓库也实现撤销的操作。</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>这是一个陆爻齐跟着 <code>Learn Git Branching</code> 网站学习(<del>复习</del>) Git 的系列记录，会跟着其内容的步伐做学习记录，并结合自身<strong>浅薄</strong>的知识积累和<strong>几乎为零</strong>的实践经验做<strong>一点点</strong>的补充。</p><blockquote><p><a href="https://learngitbranching.js.org/">https://learngitbranching.js.org</a></p></blockquote></li><li><p>私以为，该网站比较适合有一点 Git 基础来学习，如果是完全零基础，还是看看 Git 官网教程，在 GitHub 这样的代码托管网站走一遍流程比较好。</p></li><li><p>注意，由于下面的笔记不可避免地涉及到过关的答案，所以<strong>强烈建议</strong>，自行体验过网站内容再看本文。</p></li></ul><h1 id="正文-高级篇"><a href="#正文-高级篇" class="headerlink" title="正文-高级篇"></a>正文-高级篇</h1><blockquote><p>要开始介绍 Git 的超棒特性了，快来吧！</p></blockquote><ul><li>该章节的内容是陆爻齐从未接触过的，不过这也正是学习的意义啊（感慨）</li></ul><h2 id="分离-HEAD"><a href="#分离-HEAD" class="headerlink" title="分离 HEAD"></a>分离 HEAD</h2><ul><li><p>这里的 <code>HEAD</code> 就是 git 操作时正处于的指针位置，一般情况下，<code>HEAD</code> 会跟着分支指针走，比如在<a href="/posts/c477e115.html" title="【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】">【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</a>中，每次输入命令<code>git checkout main</code>，实际上就是让 <code>HEAD</code> 和 main 同步（HEAD-&gt;main-&gt;节点），后续每次 <code>commit</code>，main 会移动，相当于两个指针会一起更新到新的节点。</p></li><li><p>而所谓的分离 <code>HEAD</code>，就是让 <code>HEAD</code> 离开分支头。这里就要引入一个小知识，每个 <code>commit</code> 都会有一串哈希值来对应，不过一般情况下，只要前四个字母就能确认一个 <code>commit</code>。假定某个 <code>commit</code> 的节点哈希值为 c1，那么把 <code>HEAD</code> 移到该节点的命令就是 <code>git checkout c1</code></p></li></ul><h2 id="相对引用1"><a href="#相对引用1" class="headerlink" title="相对引用1"></a>相对引用1</h2><ul><li><p>上面移动 <code>HEAD</code> 的方式需要查看 <code>commit</code> 对应的哈希值（通常用<code>git log</code>命令查看），那么有没有什么简单又强势的方法来移动 <code>HEAD</code> 呢？有的，兄弟，有的：）那就是这里的相对引用。</p></li><li><p>比如，我想移到 main 的上一个节点，就可以用命令<code>git checkout main^</code>，如果想移到前两个节点，多加个<code>^</code>变成<code>git checkout main^^</code>即可。如果只是移到 <code>HEAD</code> 前一个，也可以，用命令<code>git checkout HEAD^</code>就好。</p></li></ul><h2 id="相对引用2"><a href="#相对引用2" class="headerlink" title="相对引用2"></a>相对引用2</h2><ul><li><p>在前一个章节，虽然学会了相对移动的 一种方式，但是如果想移动多次，比如前一百个节点（一般没这种情况罢），可以用新的符号<code>~</code>，也就是命令<code>git checkout HEAD~100</code>。</p></li><li><p>但是，相对引用实际上应用最多的地方是移动分支的指针，比如我想把 main 分支的指针移动到 <code>HEAD</code> 的前三个点，就用以下命令<code>git branch -f main HEAD~3</code>。注意，这里用的是 branch 而不是 checkout，私以为 checkout 是对 <code>HEAD</code> 的操作，而 branch 是对分支指针的操作。</p></li></ul><h2 id="撤销更改"><a href="#撤销更改" class="headerlink" title="撤销更改"></a>撤销更改</h2><ul><li><p>两个方式 <code>reset</code> 和 <code>revert</code>，一个个介绍。</p></li><li><p>如果现在在本地，你想撤销 main 刚刚提交的 <code>commit</code>，可以用<code>git reset HEAD^</code>来实现，这样相当于把 main 分支指针上移，这时最新的 <code>commit</code> 的变更其实还在，只是不在暂存区了。</p></li><li><p>上面的 <code>reset</code> 命令本质上是通过移动分支指针的方式，但是这种方式肯定不能用于远程的仓库上，所以就需要 <code>revert</code> 命令。同样的用处，命令则是<code>git revert HEAD</code>。该命令实际上会创建新的 <code>commit</code>，该 <code>commit</code> 的内容就是撤销上一次的 <code>commit</code>。如果事项撤销上上次的 <code>commit</code>，则要写<code>git revert HEAD^</code>。这样的命令可以在远程仓库也实现撤销的操作。</p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -863,7 +888,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -888,7 +913,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -904,7 +929,7 @@
     
     
     <entry>
-      <title>【一起来学 Git】LearnGitBranching-基础篇【Learn Git】</title>
+      <title>【一起来学 Git】LearnGitBranching-基础篇【Learn Git Together】</title>
       <link href="/posts/c477e115.html"/>
       <url>/posts/c477e115.html</url>
       
@@ -913,7 +938,7 @@
       
       <categories>
           
-          <category> 一起来学Git|LearnGitTogether </category>
+          <category> 一起来学 Git | Learn Git Together </category>
           
       </categories>
       
@@ -933,12 +958,12 @@
       <link href="/posts/4e4c059c.html"/>
       <url>/posts/4e4c059c.html</url>
       
-        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-number-of-occurrences-of-a-substring/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，求满足要求的子串中，出现最多的次数。该要求为 1. 内部的字母数量小于 maxLetters；2. 整个字符串的长度在 minSize 和 maxSize 之间（闭区间）。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>该题的难度在于干扰项 maxSize，由于求子串尽可能多的出现，所以该子串的长度必然越小越好，就是 minSize。</p></li><li><p>就是定长滑动窗口(<a href="/posts/92a38711.html" title="【Leetcode Daily】1456定长子串中元音的最大数目">【Leetcode Daily】1456定长子串中元音的最大数目</a>)，有了个字母数量不大于 maxLetters 的限制，再用哈希统计满足要求字符串出现的次数即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>陆爻齐的解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxFreq(string s, int maxLetters, int minSize, int maxSize) &#123;</span><br><span class="line">        vector&lt;int&gt; rec_letter(26, 0); // 记录窗口内个字母的计数</span><br><span class="line">        int count_letter = 0; // 窗口内字幕数目的计数</span><br><span class="line">        </span><br><span class="line">        unordered_map&lt;string, int&gt; rec_str;</span><br><span class="line">        int max_count_str = 0; // 记录子串出现的最大数目</span><br><span class="line"></span><br><span class="line">        string tmps;</span><br><span class="line">        for (int i = 0; i &lt; s.size(); i++) &#123;</span><br><span class="line">            tmps += s[i];</span><br><span class="line">            rec_letter[s[i]-&#x27;a&#x27;]++;</span><br><span class="line">            if (rec_letter[s[i]-&#x27;a&#x27;]==1) count_letter++;</span><br><span class="line"></span><br><span class="line">            if (i &lt; minSize-1) continue; // 窗口大小</span><br><span class="line"></span><br><span class="line">            if (count_letter &lt;= maxLetters) &#123;</span><br><span class="line">                rec_str[tmps]++;</span><br><span class="line">                max_count_str = max(rec_str[tmps], max_count_str);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rec_letter[tmps[0]-&#x27;a&#x27;]--;</span><br><span class="line">            if (rec_letter[tmps[0]-&#x27;a&#x27;]==0) count_letter--;</span><br><span class="line">            tmps.erase(tmps.begin());</span><br><span class="line">        &#125;</span><br><span class="line">        return max_count_str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-number-of-occurrences-of-a-substring/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，求满足要求的子串中，出现最多的次数。该要求为 1. 内部的字母数量小于 maxLetters；2. 整个字符串的长度在 minSize 和 maxSize 之间（闭区间）。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>该题的难度在于干扰项 maxSize，由于求子串尽可能多的出现，所以该子串的长度必然越小越好，就是 minSize。</p></li><li><p>就是定长滑动窗口(<a href="/posts/92a38711.html" title="【Leetcode Daily】1456定长子串中元音的最大数目">【Leetcode Daily】1456定长子串中元音的最大数目</a>)，有了个字母数量不大于 maxLetters 的限制，再用哈希统计满足要求字符串出现的次数即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>陆爻齐的解法</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxFreq</span><span class="params">(string s, <span class="type">int</span> maxLetters, <span class="type">int</span> minSize, <span class="type">int</span> maxSize)</span> </span>&#123;</span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">rec_letter</span><span class="params">(<span class="number">26</span>, <span class="number">0</span>)</span></span>; <span class="comment">// 记录窗口内个字母的计数</span></span><br><span class="line">        <span class="type">int</span> count_letter = <span class="number">0</span>; <span class="comment">// 窗口内字幕数目的计数</span></span><br><span class="line">        </span><br><span class="line">        unordered_map&lt;string, <span class="type">int</span>&gt; rec_str;</span><br><span class="line">        <span class="type">int</span> max_count_str = <span class="number">0</span>; <span class="comment">// 记录子串出现的最大数目</span></span><br><span class="line"></span><br><span class="line">        string tmps;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; s.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            tmps += s[i];</span><br><span class="line">            rec_letter[s[i]-<span class="string">&#x27;a&#x27;</span>]++;</span><br><span class="line">            <span class="keyword">if</span> (rec_letter[s[i]-<span class="string">&#x27;a&#x27;</span>]==<span class="number">1</span>) count_letter++;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (i &lt; minSize<span class="number">-1</span>) <span class="keyword">continue</span>; <span class="comment">// 窗口大小</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (count_letter &lt;= maxLetters) &#123;</span><br><span class="line">                rec_str[tmps]++;</span><br><span class="line">                max_count_str = <span class="built_in">max</span>(rec_str[tmps], max_count_str);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            rec_letter[tmps[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>]--;</span><br><span class="line">            <span class="keyword">if</span> (rec_letter[tmps[<span class="number">0</span>]-<span class="string">&#x27;a&#x27;</span>]==<span class="number">0</span>) count_letter--;</span><br><span class="line">            tmps.<span class="built_in">erase</span>(tmps.<span class="built_in">begin</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max_count_str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -963,7 +988,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -988,7 +1013,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1013,7 +1038,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1038,7 +1063,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1063,7 +1088,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1088,7 +1113,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1113,7 +1138,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1138,7 +1163,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1163,7 +1188,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1188,7 +1213,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1213,7 +1238,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1238,7 +1263,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1263,7 +1288,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1288,7 +1313,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1313,7 +1338,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1338,7 +1363,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1363,7 +1388,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
@@ -1388,7 +1413,7 @@
       
       <categories>
           
-          <category> 力扣日常|LeetcodeDaily </category>
+          <category> 力扣日常 | LeetcodeDaily </category>
           
       </categories>
       
