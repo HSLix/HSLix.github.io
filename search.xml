@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3325字符至少出现K次的子字符串</title>
+      <link href="/posts/98a39247.html"/>
+      <url>/posts/98a39247.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-substrings-with-k-frequency-characters-i/">题目链接</a>。</p></li><li><p>简单地说，就是给一个小写字母字符串以及一个数字 K，要求给出其中所有子字符串，每个字符串至少有一个字母的个数不小于 K。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>越长越合法类型的不定长滑动窗口（<a href="/posts/83629f2c.html" title="【Leetcode Daily】1358包含所有三种字符的子字符串数目">【Leetcode Daily】1358包含所有三种字符的子字符串数目</a>）</p></li><li><p>这里就稍微再解释下所谓的“越长越合法”罢，毕竟也是今天看了题解，突然有所感悟。这句话就是所得答案长度越长的情况下，往往是合法的。拿本题第一个输入举例。</p></li><li><p>输入：“s &#x3D; “abacb”, k &#x3D; 2”；输出：“4”</p></li><li><p>如果窗口内现在是 aba，那么肯定是符合条件的，所以窗口左部滑动后，窗口内容变成 ba，在下一循环变成 bac 时，答案也加上一，原因就是“越长越合法”，即把之前合法的情况和现在的窗口拼一起算上了。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int numberOfSubstrings(string s, int k) &#123;</span><br><span class="line">        int ans = 0, left = 0;</span><br><span class="line">        int rec[26]&#123;&#125;;</span><br><span class="line">        for (int right = 0; right &lt; s.size(); right++) &#123;</span><br><span class="line">            rec[s[right]-&#x27;a&#x27;]++;</span><br><span class="line">            while (rec[s[right]-&#x27;a&#x27;]==k) &#123;</span><br><span class="line">                rec[s[left++]-&#x27;a&#x27;]--;</span><br><span class="line">            &#125;</span><br><span class="line">            //cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; endl;</span><br><span class="line">            ans += left;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常|LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2962统计最大元素出现至少K次的子数组</title>
       <link href="/posts/d3ee12e8.html"/>
       <url>/posts/d3ee12e8.html</url>
