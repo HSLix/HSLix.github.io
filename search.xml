@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】713乘积小于K的子数组</title>
+      <link href="/posts/946aa542.html"/>
+      <url>/posts/946aa542.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/subarray-product-less-than-k/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组，求其中连续子数组之和小于 K 的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>与之前越长越合法的题目稍有些不同，这时越短越合法，所以在之前的基础上（<a href="/posts/d3ee12e8.html" title="【Leetcode Daily】2962统计最大元素出现至少K次的子数组">【Leetcode Daily】2962统计最大元素出现至少K次的子数组</a>）略作修改。</p></li><li><p>无论是哪种类型，本质上都是遍历窗口的右端。以前是满足条件时不断向右滑窗口，直到滑不动时，记录当前窗口左侧加到结果上；而现在是满足条件时，要记录窗口内个数（right-left+1），因为窗口的左端在窗口内的任意一处必定满足条件。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSubarrayProductLessThanK</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (k &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> cur = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">0</span>; right &lt; nums.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">            cur *= nums[right];</span><br><span class="line">            <span class="keyword">while</span> (cur &gt;= k) &#123;</span><br><span class="line">                cur /= nums[left++];</span><br><span class="line">            &#125;</span><br><span class="line">            ans += right-left<span class="number">+1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3298统计重新排列后包含另一个字符串的子字符串数目II</title>
       <link href="/posts/76973594.html"/>
       <url>/posts/76973594.html</url>
