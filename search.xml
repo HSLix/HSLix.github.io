@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3258统计满足K约束的子字符串数量I</title>
+      <link href="/posts/1f89498b.html"/>
+      <url>/posts/1f89498b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-substrings-that-satisfy-k-constraint-i/description/">题目链接</a>。</p></li><li><p>简单地说，给一个由 0 和 1 组成的字符串，求其中所有的子字符串数量，但子字符串必须满足 0 <strong>或</strong> 1 最多为 K 的限制。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>简单的越短越合法类型的不定长滑动窗口，直接使用例题思路即可，<a href="/posts/946aa542.html" title="【Leetcode Daily】713乘积小于K的子数组">【Leetcode Daily】713乘积小于K的子数组</a>。</p></li><li><p>参考灵神的题解，可以用<strong>与 1</strong>的方式来实现对字母’0’，’1’的区分，毕竟本质上两个字母一个是奇数，一个是偶数，与 1 后直接映射到 0 和 1 上，具体映射哪个也不重要，反正题目也并不区分 0 和 1 的限制方式。</p><blockquote><p><a href="https://leetcode.cn/problems/count-substrings-that-satisfy-k-constraint-i/solutions/2884495/on-hua-dong-chuang-kou-pythonjavacgo-by-keubv/">https://leetcode.cn/problems/count-substrings-that-satisfy-k-constraint-i/solutions/2884495/on-hua-dong-chuang-kou-pythonjavacgo-by-keubv/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考解法</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countKConstraintSubstrings(string s, int k) &#123;</span><br><span class="line">        int rec[2]&#123;&#125;;</span><br><span class="line">        int left = 0, ans = 0;</span><br><span class="line">        for(int right = 0; right &lt; s.size(); right++) &#123;</span><br><span class="line">            rec[s[right]-&#x27;0&#x27;]++;</span><br><span class="line">            while(rec[0] &gt; k &amp;&amp; rec[1] &gt; k) &#123;</span><br><span class="line">                rec[s[left++]-&#x27;0&#x27;]--;</span><br><span class="line">            &#125;</span><br><span class="line">            //cout &lt;&lt; left &lt;&lt; &quot; &quot; &lt;&lt; right &lt;&lt; &quot; &quot; &lt;&lt; s.substr(left, right-left+1) &lt;&lt; endl;</span><br><span class="line">            ans += right-left+1;</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】713乘积小于K的子数组</title>
       <link href="/posts/946aa542.html"/>
       <url>/posts/946aa542.html</url>
