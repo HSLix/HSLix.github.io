@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2762不间断数组</title>
+      <link href="/posts/23cfa8ee.html"/>
+      <url>/posts/23cfa8ee.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/continuous-subarrays/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组，并找出其中所有子数组的数目，子数组的要求为其中任意两元素之差不大于 2.</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>越短越合法的不定长滑动窗口的简单变式（<a href="/posts/946aa542.html" title="【Leetcode Daily】713乘积小于K的子数组">【Leetcode Daily】713乘积小于K的子数组</a></p></li><li><p>暴力一点的思路，是每次窗口变动，都遍历一边窗口内的元素找其中最大值与最小值之差，但是这样的话，复杂度就是 O(n^2)，所以解决这个问题就是本题关键。</p></li><li><p>以 C++ 的角度，无论是 map 还是 multiset 都能实现本题，陆爻齐采用 map 的方式，可以 O(1) 地取到窗口内的最大值和最小值，只要对首尾迭代器取 first 就行，毕竟这里看的是值差，并非数目差。</p><blockquote><p><a href="https://leetcode.cn/problems/continuous-subarrays/solutions/2327219/shuang-zhi-zhen-ping-heng-shu-ha-xi-biao-4frl/">https://leetcode.cn/problems/continuous-subarrays/solutions/2327219/shuang-zhi-zhen-ping-heng-shu-ha-xi-biao-4frl/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">continuousSubarrays</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; rec;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">0</span>; right &lt; nums.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">            rec[nums[right]]++;</span><br><span class="line">            <span class="keyword">while</span>(!rec.<span class="built_in">empty</span>() &amp;&amp; rec.<span class="built_in">rbegin</span>()-&gt;first-rec.<span class="built_in">begin</span>()-&gt;first &gt; <span class="number">2</span>) &#123;</span><br><span class="line">                <span class="type">int</span> index = nums[left++];</span><br><span class="line">                rec[index]--;</span><br><span class="line">                <span class="keyword">if</span> (rec[index] == <span class="number">0</span>) &#123;</span><br><span class="line">                    rec.<span class="built_in">erase</span>(index);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += right-left<span class="number">+1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2302统计得分小于K的子数组数目</title>
       <link href="/posts/f27e810e.html"/>
       <url>/posts/f27e810e.html</url>
