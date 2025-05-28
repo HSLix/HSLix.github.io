@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】LCP68美观的花束</title>
+      <link href="/posts/e5b0d046.html"/>
+      <url>/posts/e5b0d046.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/1GxJYY/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，和一个整数 K，要求返回所有满足条件的子数组数目。条件是子数组内每个数字的数目不超过 K。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>很无聊的越短越合法不定长滑动窗口（<a href="/posts/946aa542.html" title="【Leetcode Daily】713乘积小于K的子数组">【Leetcode Daily】713乘积小于K的子数组</a>），甚至不需要按照题目所说来取模就可以 ac。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">beautifulBouquet</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; flowers, <span class="type">int</span> cnt)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; rec;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">0</span>; right &lt; flowers.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">            <span class="type">int</span> index = flowers[right];</span><br><span class="line">            rec[index]++;</span><br><span class="line">            <span class="keyword">while</span>(rec[index] &gt; cnt) &#123;</span><br><span class="line">                rec[flowers[left++]]--;</span><br><span class="line">            &#125;</span><br><span class="line">            ans += (right-left<span class="number">+1</span>)%<span class="number">1000000007</span>;</span><br><span class="line">            ans %= <span class="number">1000000007</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2762不间断数组</title>
       <link href="/posts/23cfa8ee.html"/>
       <url>/posts/23cfa8ee.html</url>
