@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】930和相同的二元子数组</title>
+      <link href="/posts/e20623c8.html"/>
+      <url>/posts/e20623c8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/binary-subarrays-with-sum/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组和目标整数 goal，求子数组和恰好为 goal 的子数组数量。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这是“恰好型滑动窗口”，本质上就是两个越长越合法的窗口结果之差。</p></li><li><p>实现有两个方式，一个是单独把滑动窗口划分一个函数，调用两次，求结果之差；另一个是只设置一次滑动窗口，不过要同时维护两个左指针，计算结果是直接累计数值之差。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numSubarraysWithSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> goal)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left1 = <span class="number">0</span>, left2 = <span class="number">0</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> sum1 = <span class="number">0</span>, sum2 = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> goal1 = goal, goal2 = goal<span class="number">+1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> right = <span class="number">0</span>; right &lt; nums.<span class="built_in">size</span>(); right++) &#123;</span><br><span class="line">            sum1 += nums[right];</span><br><span class="line">            sum2 += nums[right];</span><br><span class="line">            <span class="keyword">while</span>(sum1 &gt;= goal1&amp;&amp;left1 &lt;= right) &#123;</span><br><span class="line">                sum1-=nums[left1++];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">while</span>(sum2 &gt;= goal2 &amp;&amp; left2 &lt;= right) &#123;</span><br><span class="line">                sum2-=nums[left2++];</span><br><span class="line">            &#125;</span><br><span class="line">            ans += left1-left2;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】LCP68美观的花束</title>
       <link href="/posts/e5b0d046.html"/>
       <url>/posts/e5b0d046.html</url>
