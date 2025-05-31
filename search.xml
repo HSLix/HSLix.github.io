@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>【Leetcode Daily】35搜索插入位置</title>
+      <link href="/posts/3cd7fbc1.html"/>
+      <url>/posts/3cd7fbc1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/search-insert-position/">题目链接</a>。</p></li><li><p>简单地说，给一个升序的无重复元素数组和目标值，找到该值的下标，如果数组中无目标值，则返回应该插入的地方</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本思路可看<a href="/posts/undefined.html" title="【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置">【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置</a>。</p></li><li><p>回到本题，要求这个“位置”，其实就是左指针，因为左指针确保 left-1 小于 target，循环到最后，left 本身一定是 target 应该所属的位置。</p></li><li><p>此外，c++ 的 ranges 库自带二分的低边界，可以写<code>ranges::lower_bound(nums, target)</code>来得到指向目标值左侧边界的迭代器，减去起始迭代器 begin() 就得到下标了。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">searchInsert</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>, right = nums.<span class="built_in">size</span>(), middle = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            middle = left+(right-left)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>(nums[middle]&lt;target) &#123;</span><br><span class="line">                left = middle<span class="number">+1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">        <span class="comment">// return ranges::lower_bound(nums, target)-nums.begin();</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置</title>
+      <link href="/posts/ee27b191.html"/>
+      <url>/posts/ee27b191.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个不降序数组和一个目标值 target，求数组中这个 target 值的下标区间，若无则返回{-1，-1}。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><blockquote><p><a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/1980196/er-fen-cha-zhao-zong-shi-xie-bu-dui-yi-g-t9l9/">https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/solutions/1980196/er-fen-cha-zhao-zong-shi-xie-bu-dui-yi-g-t9l9/</a></p></blockquote><ul><li><p>二分查找的开始，虽然算法早就学过，但灵神的讲解十分透彻，十分值得学习。</p></li><li><p>下面的二分，都以如果中间量小于目标量左指针动，否则右指针动的情况，这样会求得二分值的最左处。</p></li><li><p>二分的灵魂在于循环不变量，即在循环中不变的东西，比如，左右指针的区间含义是闭区间，左闭右开，亦或开区间就很重要；还有循环结束后左右指针的位置也是，拿左闭右开举例，结束后，左右指针都处于target值最左处下标，因为左指针保持了 left-1 处必定小于 target，而右指针则保持了 right 处必定大于等于 target。</p></li><li><p>此外要记得溢出的处理问题，除 python 外，求二分的中间下标如果用<code>(left+right)/2</code>的写法可能会溢出，所以要改写为<code>left+(right-left)/2</code>这样就减少了大于阈值的可能。</p></li><li><p>那么目标值的右侧下标怎么求呢？回顾上面左指针的定义，可以保持 left-1 处必定小于 target，那么如果求得 target+1 的左指针位置，那么该位置减一就是 target 的右边界嘛。即使 target+1 这个值不存在，也不妨碍找到这个位置。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">lowerBound</span><span class="params">(vector&lt;<span class="type">int</span>&gt; &amp;nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> left = <span class="number">0</span>, right = nums.<span class="built_in">size</span>();</span><br><span class="line">        <span class="type">int</span> middle = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(left &lt; right) &#123;</span><br><span class="line">            middle = left +(right-left)/<span class="number">2</span>; <span class="comment">// 除python外，防溢出的写法</span></span><br><span class="line">            <span class="keyword">if</span> (nums[middle]&lt;target) &#123;</span><br><span class="line">                left = middle<span class="number">+1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                right = middle;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//cout &lt;&lt; left &lt;&lt; endl;</span></span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">searchRange</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> start = <span class="built_in">lowerBound</span>(nums, target);</span><br><span class="line">        <span class="keyword">if</span> (start == nums.<span class="built_in">size</span>() || nums[start] != target) <span class="keyword">return</span> &#123;<span class="number">-1</span>, <span class="number">-1</span>&#125;;</span><br><span class="line">        <span class="type">int</span> end = <span class="built_in">lowerBound</span>(nums, target<span class="number">+1</span>)<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">return</span> &#123;start, end&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1248统计优美子数组</title>
       <link href="/posts/914e0b28.html"/>
       <url>/posts/914e0b28.html</url>
