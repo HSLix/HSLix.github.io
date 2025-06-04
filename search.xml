@@ -29,11 +29,11 @@
     
     
     <entry>
-      <title>ToDoList</title>
+      <title>备忘录 | ToDoList</title>
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p>考完试再放些什么，暂且先用于测试置顶功能</p></li><li><p>[ ]完成编译原理期末考试（垂死挣扎）</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li>考完试再放些什么，暂且先用于测试置顶功能</li></ul><p>[ ]完成编译原理期末考试（垂死挣扎）</p>]]></content>
       
       
       
