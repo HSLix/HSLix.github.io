@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1170比较字符串最小字母出现频次</title>
+      <link href="/posts/5cf033f6.html"/>
+      <url>/posts/5cf033f6.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/compare-strings-by-frequency-of-the-smallest-character/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个字符串数组，看一个数组中各个字符串的最小字母频次，在另一个数组所有字符串的最小字母频次中，排第几。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>分别对两个数组做转换成最小字母频次的整型数组，然后让一个数组的各值在另一个数组做二分查找找到自己的位置即可。</p></li><li><p>二分的基本思想在 <a href="/posts/ee27b191.html" title="【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置">【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置</a>。</p></li><li><p>重点注意一个小问题，字典序的顺序与数字不同，字典序中 2 比 10 大，因为 2 大于 10 的第一位 1，所以 2 更大。正因如此，不能在 string 的数组上直接排序。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">numSmallerByFrequency</span><span class="params">(vector&lt;string&gt;&amp; queries, vector&lt;string&gt;&amp; words)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; q;</span><br><span class="line">        <span class="keyword">for</span> (string &amp;s : queries) &#123;</span><br><span class="line">            <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">            <span class="type">char</span> tar = s[<span class="number">0</span>];</span><br><span class="line">            <span class="type">int</span> index = ranges::<span class="built_in">upper_bound</span>(s, tar) - s.<span class="built_in">begin</span>();</span><br><span class="line">            q.<span class="built_in">push_back</span>(index);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; w;</span><br><span class="line">        <span class="keyword">for</span> (string &amp;s : words) &#123;</span><br><span class="line">            <span class="built_in">sort</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>());</span><br><span class="line">            <span class="type">char</span> tar = s[<span class="number">0</span>];</span><br><span class="line">            <span class="type">int</span> index = ranges::<span class="built_in">upper_bound</span>(s, tar) - s.<span class="built_in">begin</span>();</span><br><span class="line">            w.<span class="built_in">push_back</span>(index);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">sort</span>(w.<span class="built_in">begin</span>(), w.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="function">vector&lt;<span class="type">int</span>&gt; <span class="title">res</span><span class="params">(q.size())</span></span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; q.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            res[i] = w.<span class="built_in">end</span>()-ranges::<span class="built_in">upper_bound</span>(w, q[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2389和有限的最长子序列</title>
       <link href="/posts/f81bf6b7.html"/>
       <url>/posts/f81bf6b7.html</url>
@@ -33,7 +58,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li>考完试再放些什么，暂且先用于测试置顶功能</li></ul><p>[ ]完成编译原理期末考试（垂死挣扎）</p>]]></content>
+        <content type="html"><![CDATA[<ul><li><p>考完试再放些什么，暂且先用于测试置顶功能</p></li><li><p><input disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li></ul>]]></content>
       
       
       
