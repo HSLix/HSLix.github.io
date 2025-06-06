@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>【Leetcode Daily】滑动窗口小结</title>
+      <link href="/posts/e5148ede.html"/>
+      <url>/posts/e5148ede.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="类别"><a href="#类别" class="headerlink" title="类别"></a>类别</h1><ul><li>该算法主要分为定长滑动窗口和不定长滑动窗口，前者由于窗口大小固定，往往是来求窗口内某种极值，极大、极小</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2080区域内查询数字的频率</title>
+      <link href="/posts/59db4b70.html"/>
+      <url>/posts/59db4b70.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/range-frequency-queries/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，要求建立一个数据结构，使得输入一个区间和一个目标值，可以返回目标值在区间内的出现频率。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>用二分可以加速有序数组的查找效率，所以陆爻齐开始的思路是，截取区间数组，排序，然后二分查找上界与下界之差。然后在最后的几个样例超时了。</p></li><li><p>这时就显现灵神题解的强大了，如何快速查找一个区间内有几个这个数字呢？只要先把各个数字的下标用 map 记录即可，每个数字对应一串下标，由于初始化时就是从前往后，所以不用排序。</p></li><li><p>记录下标后，不是查询时会给区间嘛，用区间的上下界，在对应目标值的下标数组中，二分查找自己的位置，然后做差就可以得到这个区间内数字的频率了，毕竟此时这两位置之间就是之前数字的下标。</p><blockquote><p><a href="https://leetcode.cn/problems/range-frequency-queries/solutions/1113439/tong-ji-wei-zhi-er-fen-wei-zhi-by-endles-8l9u/">https://leetcode.cn/problems/range-frequency-queries/solutions/1113439/tong-ji-wei-zhi-er-fen-wei-zhi-by-endles-8l9u/</a></p></blockquote></li><li><p>这里补充一下，ranges 库的 upper 和 lower_bound 分别可以看作，找第一个大于 val 的下标和找第一个大于等于 val 的下标。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RangeFreqQuery</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">RangeFreqQuery</span>(vector&lt;<span class="type">int</span>&gt;&amp; arr) &#123;</span><br><span class="line">        <span class="type">int</span> n = arr.<span class="built_in">size</span>();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            rec[arr[i]].<span class="built_in">push_back</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">query</span><span class="params">(<span class="type">int</span> left, <span class="type">int</span> right, <span class="type">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">auto</span> it = rec.<span class="built_in">find</span>(value);</span><br><span class="line">        <span class="keyword">if</span> (it == rec.<span class="built_in">end</span>()) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        vector&lt;<span class="type">int</span>&gt; &amp;arr = it-&gt;second;</span><br><span class="line">        <span class="keyword">return</span> ranges::<span class="built_in">upper_bound</span>(arr, right)-ranges::<span class="built_in">lower_bound</span>(arr, left);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    unordered_map&lt;<span class="type">int</span>, vector&lt;<span class="type">int</span>&gt;&gt; rec;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your RangeFreqQuery object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * RangeFreqQuery* obj = new RangeFreqQuery(arr);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj-&gt;query(left,right,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1170比较字符串最小字母出现频次</title>
       <link href="/posts/5cf033f6.html"/>
       <url>/posts/5cf033f6.html</url>
@@ -58,7 +108,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p>考完试再放些什么，暂且先用于测试置顶功能</p></li><li><p><input disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
