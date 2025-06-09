@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2441与对应负数同时存在的最大正整数</title>
+      <link href="/posts/361de13.html"/>
+      <url>/posts/361de13.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/largest-positive-integer-that-exists-with-its-negative/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，找一种一组值相加为 0，且在多组这样的值中，选出正数最大的数值返回。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a> ，在这个枚举上，要求相加为零，不过不用记录下标，因此可以采用 set 来记录遍历的值。<blockquote><p><a href="https://leetcode.cn/problems/largest-positive-integer-that-exists-with-its-negative/solutions/1895719/by-endlesscheng-jjtb/">https://leetcode.cn/problems/largest-positive-integer-that-exists-with-its-negative/solutions/1895719/by-endlesscheng-jjtb/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">findMaxK</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> max_int = <span class="number">-1</span>;</span><br><span class="line">        unordered_set&lt;<span class="type">int</span>&gt; rec;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="type">int</span> &amp;i : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (rec.<span class="built_in">count</span>(-i)) &#123;</span><br><span class="line">                max_int = <span class="built_in">max</span>(max_int, <span class="built_in">abs</span>(i));</span><br><span class="line">            &#125;</span><br><span class="line">            rec.<span class="built_in">insert</span>(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max_int;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class Solution &#123;</span></span><br><span class="line"><span class="comment">// public:</span></span><br><span class="line"><span class="comment">//     int findMaxK(vector&lt;int&gt;&amp; nums) &#123;</span></span><br><span class="line"><span class="comment">//         int max_int = -1;</span></span><br><span class="line"><span class="comment">//         int index = 0;</span></span><br><span class="line"><span class="comment">//         unordered_map&lt;int, int&gt; rec;</span></span><br><span class="line"><span class="comment">//         for (const int &amp;i : nums) &#123;</span></span><br><span class="line"><span class="comment">//             if (rec.find(-i)!=rec.end() &amp;&amp; abs(i) &gt; max_int) &#123;</span></span><br><span class="line"><span class="comment">//                 max_int = abs(i);</span></span><br><span class="line"><span class="comment">//             &#125;</span></span><br><span class="line"><span class="comment">//             rec[i] = index++;</span></span><br><span class="line"><span class="comment">//         &#125;</span></span><br><span class="line"><span class="comment">//         return max_int;</span></span><br><span class="line"><span class="comment">//     &#125;</span></span><br><span class="line"><span class="comment">// &#125;;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1两数之和</title>
       <link href="/posts/d26591e4.html"/>
       <url>/posts/d26591e4.html</url>
@@ -158,7 +183,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
