@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2001可互换矩形的组数</title>
+      <link href="/posts/298736a3.html"/>
+      <url>/posts/298736a3.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-pairs-of-interchangeable-rectangles/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，其中的每一个一维数组只有两位，表示每个矩形的宽和长，找出所有两两长宽比相同矩形的组数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>最重要的一点，是发现所谓的矩形不过是障眼法，题目看的就是长宽比，所以逐个枚举长宽比并记录即可。</p></li><li><p>后续步骤与上一题完全一致：<a href="/posts/3e235446.html" title="【Leetcode Daily】1512好数对的数目">【Leetcode Daily】1512好数对的数目</a>。</p></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">long</span> <span class="type">long</span> <span class="title">interchangeableRectangles</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; rectangles)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">double</span>, <span class="type">int</span>&gt; rec;</span><br><span class="line">        <span class="type">long</span> <span class="type">long</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;r : rectangles) &#123;</span><br><span class="line">            res += rec[(<span class="type">double</span>)r[<span class="number">0</span>]/r[<span class="number">1</span>]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1512好数对的数目</title>
       <link href="/posts/3e235446.html"/>
       <url>/posts/3e235446.html</url>
