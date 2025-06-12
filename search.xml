@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1128等价多米诺骨牌对的数量</title>
+      <link href="/posts/6cb0c69b.html"/>
+      <url>/posts/6cb0c69b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-equivalent-domino-pairs/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个元素为长度2的vector的vector，找出其中所有元素 vector 相同的对数，其中相同指的是两个 vector，各个元素相同，或者第一个元素与另一个的第二个相同，剩余两个相同。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>用二维数组当哈希表记录即可，可以选择对一个数对维护两个哈希表位，但哈希表的维护消耗资源其实不小，所以直接调整数对统一数对中的大小相对顺序，就只要用一个位置对应一个数对。比如把（2，1）转化为（1，2）来看。</p></li><li><p>C++中，可以通过 minmax 构建一个第一个元素小于第二个元素的 pair。</p><blockquote><p><a href="https://leetcode.cn/problems/number-of-equivalent-domino-pairs/solutions/3661647/mei-ju-you-wei-hu-zuo-pythonjavaccgojsru-me3c/">https://leetcode.cn/problems/number-of-equivalent-domino-pairs/solutions/3661647/mei-ju-you-wei-hu-zuo-pythonjavaccgojsru-me3c/</a></p></blockquote></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(vector&lt;vector&lt;<span class="type">int</span>&gt;&gt;&amp; dominoes)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="type">int</span> rec[<span class="number">10</span>][<span class="number">10</span>] = &#123;&#125;;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;v : dominoes) &#123;</span><br><span class="line">            <span class="keyword">auto</span> [a, b] = <span class="built_in">minmax</span>(v[<span class="number">0</span>], v[<span class="number">1</span>]);</span><br><span class="line">            res += rec[a][b]++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2001可互换矩形的组数</title>
       <link href="/posts/298736a3.html"/>
       <url>/posts/298736a3.html</url>
