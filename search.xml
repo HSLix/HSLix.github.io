@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】121买卖股票的最佳时机-枚举</title>
+      <link href="/posts/47b722c.html"/>
+      <url>/posts/47b722c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，说这里的每个数字都是股票加个，你可以在任意时期购买股票并在后面卖出一次，请给出最大利润，若无利润则返回 0.</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本题可以用动态规划或枚举的方法解决，这里介绍枚举的方法。</p></li><li><p>可以遍历数字，从左到右，视为找最大值，同时引入一变量记录目前左侧的最小值，不断计算当前最小值与最右值的差的最大值，就能得到答案。</p><blockquote><p><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/solutions/2464650/mei-ju-mai-chu-jie-ge-wei-hu-mai-ru-de-z-02ud/">https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/solutions/2464650/mei-ju-mai-chu-jie-ge-wei-hu-mai-ru-de-z-02ud/</a></p></blockquote></li><li><p>无需哈希表，毕竟用记录最小值即可。基础的枚举思路可看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxProfit</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; prices)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> min_price = prices[<span class="number">0</span>];</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="type">int</span> &amp;i : prices) &#123;</span><br><span class="line">            min_price = <span class="built_in">min</span>(min_price, i);</span><br><span class="line">            res = <span class="built_in">max</span>(res, i-min_price);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1128等价多米诺骨牌对的数量</title>
       <link href="/posts/6cb0c69b.html"/>
       <url>/posts/6cb0c69b.html</url>
@@ -258,7 +283,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 2025.06.16 拿****去签字</p></li><li><p><input disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 发邮件询问**，同时开始为此准备相关技术栈，记在后续的备忘录中 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> <del>拿****去签字 2025.06.13</del> 现在不能签，更改至下周一 </p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 完成可视化的报告 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
