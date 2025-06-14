@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】219存在重复元素II</title>
+      <link href="/posts/a448255f.html"/>
+      <url>/posts/a448255f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/contains-duplicate-ii/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组和一个整数 K，要求出该整型数组中是否存在这么一对数字，数值相同，下标不同。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>易得，如果存在这么一组值，那么只需要让每个数字与此前与自己相同数值的比较即可，所以构建一哈希表，保存每个数值的最新下标用于对照即可。</p></li><li><p>基础的枚举思路可以参考 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li><li><p>以及，本题是可以采用滑动窗口解决的，毕竟下标之差不大于 K，相当于可以构建长度为 K 的窗口滑动，哈希表只用维护窗口内的数值是否存在即可。</p><blockquote><p><a href="https://leetcode.cn/problems/contains-duplicate-ii/solutions/3041742/liang-chong-fang-fa-mei-ju-you-wei-hu-zu-kwjf/">https://leetcode.cn/problems/contains-duplicate-ii/solutions/3041742/liang-chong-fang-fa-mei-ju-you-wei-hu-zu-kwjf/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">containsNearbyDuplicate</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums, <span class="type">int</span> k)</span> </span>&#123;</span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; latest_index;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (latest_index.<span class="built_in">find</span>(nums[i])!=latest_index.<span class="built_in">end</span>() &amp;&amp; i-latest_index[nums[i]] &lt;= k) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            latest_index[nums[i]] = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】121买卖股票的最佳时机-枚举</title>
       <link href="/posts/47b722c.html"/>
       <url>/posts/47b722c.html</url>
@@ -283,7 +308,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 2025.06.16 拿****去签字</p></li><li><p><input disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 发邮件询问**，同时开始为此准备相关技术栈，记在后续的备忘录中 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> <del>拿****去签字 2025.06.13</del> 现在不能签，更改至下周一 </p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 完成可视化的报告 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 这样比较记录笔记形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 2025.06.16 拿****去签字</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 发邮件询问**，同时开始为此准备相关技术栈，记在后续的备忘录中 2025.06.13-14</p></li><li><p><input disabled="" type="checkbox"> <del>拿****去签字 2025.06.13</del> 现在不能签，更改至下周一 </p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-14</p></li><li><p><input disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
