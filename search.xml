@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2260必须拿起的最小连续卡牌数</title>
+      <link href="/posts/7637bc73.html"/>
+      <url>/posts/7637bc73.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-consecutive-cards-to-pick-up/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，找出其中子数组的最短长度，该子数组需满足至少内部有一个数字是出现两次及以上的。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>求子数组的最短长度属于不定长滑动窗口可以解决的范畴，因此可以参考 <a href="/posts/a7b9ac4.html" title="【Leetcode Daily】2904最短且字典序最小的美丽子字符串">【Leetcode Daily】2904最短且字典序最小的美丽子字符串</a> 的思路与解决方式。</p></li><li><p>接下来介绍一下枚举的思路，枚举就要比不定长滑动窗口实现上简单不少。就是昨天的 <a href="/posts/a448255f.html" title="【Leetcode Daily】219存在重复元素II">【Leetcode Daily】219存在重复元素II</a> 的换了个语境，故不在此详细说明。</p></li><li><p>枚举的基本思路可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">minimumCardPickup</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; cards)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 用不定长滑动窗口求最小窗口长度比较好解</span></span><br><span class="line">        <span class="comment">// int res = INT_MAX;</span></span><br><span class="line">        <span class="comment">// unordered_map&lt;int, int&gt; rec;</span></span><br><span class="line">        <span class="comment">// int left = 0;</span></span><br><span class="line">        <span class="comment">// for (const int i : cards) &#123;</span></span><br><span class="line">        <span class="comment">//     rec[i]++;</span></span><br><span class="line">        <span class="comment">//     // cout &lt;&lt; &quot;left:&quot; &lt;&lt; left &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">//     while(rec[i] &gt;= 2) &#123;</span></span><br><span class="line">        <span class="comment">//         // cout &lt;&lt; i &lt;&lt; &quot; &quot; &lt;&lt; cards[left] &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">//         // cout &lt;&lt; rec[i] &lt;&lt; &quot; &quot; &lt;&lt; rec[cards[left]] &lt;&lt; endl;</span></span><br><span class="line">        <span class="comment">//         rec[cards[left]]--;</span></span><br><span class="line">        <span class="comment">//         if (rec[cards[left]] == 0) &#123;</span></span><br><span class="line">        <span class="comment">//             rec.erase(cards[left]);</span></span><br><span class="line">        <span class="comment">//         &#125;</span></span><br><span class="line">        <span class="comment">//         left++;</span></span><br><span class="line">        <span class="comment">//         int n = rec.size();</span></span><br><span class="line">        <span class="comment">//         res = min(res, n+1);</span></span><br><span class="line">        <span class="comment">//     &#125;</span></span><br><span class="line">        <span class="comment">// &#125;</span></span><br><span class="line">        <span class="comment">// return res==INT_MAX ? -1 : res;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 或者哈希表记录上一次的下标来枚举</span></span><br><span class="line">        unordered_map&lt;<span class="type">int</span>, <span class="type">int</span>&gt; rec;</span><br><span class="line">        <span class="type">int</span> res = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; cards.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="type">int</span> index = cards[i];</span><br><span class="line">            <span class="keyword">if</span> (rec.<span class="built_in">find</span>(index)!=rec.<span class="built_in">end</span>()) &#123;</span><br><span class="line">                res = <span class="built_in">min</span>(res, i-rec[index]<span class="number">+1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            rec[index]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res==INT_MAX?<span class="number">-1</span>:res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】219存在重复元素II</title>
       <link href="/posts/a448255f.html"/>
       <url>/posts/a448255f.html</url>
@@ -204,7 +229,7 @@
     
     
     <entry>
-      <title>【Leetcode Daily】滑动窗口小结</title>
+      <title>【Leetcode Daily】LeetcodeDailySummary-滑动窗口小结</title>
       <link href="/posts/e5148ede.html"/>
       <url>/posts/e5148ede.html</url>
       
@@ -308,7 +333,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> 2025.06.16 拿****去签字</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 发邮件询问**，同时开始为此准备相关技术栈，记在后续的备忘录中 2025.06.13-14</p></li><li><p><input disabled="" type="checkbox"> <del>拿****去签字 2025.06.13</del> 现在不能签，更改至下周一 </p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-14</p></li><li><p><input disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的答辩 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
