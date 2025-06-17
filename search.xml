@@ -4,6 +4,81 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2815数组中的最大数对和</title>
+      <link href="/posts/fb24ea29.html"/>
+      <url>/posts/fb24ea29.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/max-pair-sum-in-an-array/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，找出其中一对数的和的最大值，这对数要求最大数位数字相等，不存在的情况下返回 -1.</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>要求最大数位的值相同，那么就有十种情况，0-9，可以相当于维护长度为 10 的表，每个记录和比较大的情况，然后遍历数字，在表内有值的情况下计算和并记录，取最大值。</p><blockquote><p><a href="https://leetcode.cn/problems/max-pair-sum-in-an-array/solutions/2385996/yi-ci-bian-li-by-endlesscheng-6zt9/">https://leetcode.cn/problems/max-pair-sum-in-an-array/solutions/2385996/yi-ci-bian-li-by-endlesscheng-6zt9/</a></p></blockquote></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maxSum</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> rec_val[<span class="number">10</span>]&#123;&#125;;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="type">int</span> &amp;i : nums) &#123;</span><br><span class="line">            <span class="type">int</span> max_num = <span class="number">0</span>;</span><br><span class="line">            <span class="type">int</span> val = i;</span><br><span class="line">            <span class="keyword">while</span> (val &gt; <span class="number">0</span>) &#123;</span><br><span class="line">                max_num = <span class="built_in">max</span>(max_num, val%<span class="number">10</span>);</span><br><span class="line">                val /= <span class="number">10</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (rec_val[max_num]!=<span class="number">0</span>) &#123;</span><br><span class="line">                res = <span class="built_in">max</span>(rec_val[max_num] + i, res);</span><br><span class="line">            &#125;</span><br><span class="line">            rec_val[max_num] = <span class="built_in">max</span>(rec_val[max_num], i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Introduction to Mathematical Thinking】Lecture 0 and Background</title>
+      <link href="/posts/46219e20.html"/>
+      <url>/posts/46219e20.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本次笔记记录了学习 Lecture 0 和阅读材料 Background Reading 的内容。</p></li><li><p>第一节课都会讲讲这门课到底讲啥，这门课的重要性，开设的理由什么的。</p></li></ul><h2 id="本课的目标，重要性，也就是开设的理由"><a href="#本课的目标，重要性，也就是开设的理由" class="headerlink" title="本课的目标，重要性，也就是开设的理由"></a>本课的目标，重要性，也就是开设的理由</h2><ul><li><p>让学生学会使用 mathematical thinking，直译过来应该叫“数学思维”。</p></li><li><p>在大学之前，我们所学的中学及之前的数学，都可以叫 “think inside the box”，意思就是，我们会学习各种各样的方法，对已有的问题提供的数字相关信息进行加工，最后得出一个结果。</p></li><li><p>这样的过程与烹饪料理书何曾相似，只要按照步骤一步步地加工，就能获得一个对应的结果。</p></li><li><p>但是，大学的要学的高等数学，或者更广义一些，对于未来在科研或是企业中所要遇到的各种问题，我们往往需要去应对这些未知的问题。而去将未知的问题化为已知的问题并解决，正是 mathematical thinking 所对应的，即 make unvisble to visble</p></li></ul><h2 id="数学的有趣小背景"><a href="#数学的有趣小背景" class="headerlink" title="数学的有趣小背景"></a>数学的有趣小背景</h2><ul><li><p>数学的起始就是十分工具性的用处，与金钱相关（数钱嘛），在漫长的岁月力，往往是在现有数理难以解决问题进展迅速。而大部分我们今日所熟知的数学，其实就是这最近几百年的成果。</p></li><li><p>数学符号是数学的表示，而非数学本身。就像是乐谱上的乐符表示的音乐（的演奏），但这不是音乐，通过乐器（或是合成）出来的与人共鸣的声音才是音乐。同理，数学的本质，其实应该是透过数学符号的，你对这个世界的认知。</p></li></ul><h2 id="小附录"><a href="#小附录" class="headerlink" title="小附录"></a>小附录</h2><ul><li>雅思的学习还是很有用处的，记得之前想上这门课，感觉十分吃力，主要是难以接受大量的生词输入，而雅思正是锻炼了这种能力，词汇量确实需要增长，但对于不会的生词也能大致了解大意的能力更是宝贵。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Introduction to Mathematical Thinking </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Math </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2016增量元素之间的最大差值</title>
+      <link href="/posts/cf91cc6f.html"/>
+      <url>/posts/cf91cc6f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-difference-between-increasing-elements/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，求其中两个数的最大差值，要求是后一个数减去前一个数的差值，且两个数的下标不能相同。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>就是普通枚举，而且只要保存一个数的下标左侧数值的最小值，然后与当前枚举数字做差值，取最大即可。</p></li><li><p>整体思路与 <a href="/posts/47b722c.html" title="【Leetcode Daily】121买卖股票的最佳时机-枚举">【Leetcode Daily】121买卖股票的最佳时机-枚举</a> 的思路一致。</p></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">maximumDifference</span><span class="params">(vector&lt;<span class="type">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">-1</span>;</span><br><span class="line">        <span class="type">int</span> min_num = nums[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">const</span> <span class="type">int</span> i : nums) &#123;</span><br><span class="line">            <span class="keyword">if</span> (i &gt; min_num) &#123;</span><br><span class="line">                res = <span class="built_in">max</span>(res, i-min_num);</span><br><span class="line">            &#125;</span><br><span class="line">            min_num = <span class="built_in">min</span>(min_num, i);</span><br><span class="line">            <span class="comment">//cout &lt;&lt; min_num &lt;&lt; endl;</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2260必须拿起的最小连续卡牌数</title>
       <link href="/posts/7637bc73.html"/>
       <url>/posts/7637bc73.html</url>
@@ -333,7 +408,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       
