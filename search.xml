@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】16-24数对和</title>
+      <link href="/posts/2234bbea.html"/>
+      <url>/posts/2234bbea.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/pairs-with-sum-lcci/description/">题目链接</a>。</p></li><li><p>简单地说，就是找出一个整型数组中所有的数对（元素为2的整型数组），这些数对的数值之和为 target</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>在昨天题目（<a href="/posts/b8d7f2cb.html" title="【Leetcode Daily】1679K和数对的最大数目">【Leetcode Daily】1679K和数对的最大数目</a>）的基础上，不要求数对个数，而是求每个数对的内容，所以只要把记录个数的语句换成记录数对内容的语句即可，不多赘述。</p></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pairSums</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], target: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        rec = Counter()</span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> rec[target-num]:</span><br><span class="line">                rec[target-num] -= <span class="number">1</span></span><br><span class="line">                res.append([num, target-num])</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                rec[num] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1679K和数对的最大数目</title>
       <link href="/posts/b8d7f2cb.html"/>
       <url>/posts/b8d7f2cb.html</url>
