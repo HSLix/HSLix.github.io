@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Introduction to Mathematical Thinking】Lecture-2-Basic-Combinators</title>
+      <link href="/posts/e4d33db3.html"/>
+      <url>/posts/e4d33db3.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li>总得来说，要学会 mathematical thinking，首先得让语言变得严谨无歧义，一种方法是采用数理符号来实现。毕竟日常对话的歧义是通过大量上下文和背景知识来消除歧义，而当我们探索未知的边界（也就是学习研究）时，可没有这样方便的环境。</li></ul><h2 id="关于作业"><a href="#关于作业" class="headerlink" title="关于作业"></a>关于作业</h2><ul><li>作业是用来引领我们尝试不同方式思考的引子，所以不用专注于得到作业的答案，而是尽可能地通过各种思考来解决问题。</li></ul><h2 id="And"><a href="#And" class="headerlink" title="And"></a>And</h2><ul><li><p>与，在逻辑中表示两块部分观点一致，或者说相关。</p></li><li><p>但是日常生活中有一点歧义，也就是无意义的补充，比如“I took a bag, and I ate some bread.” 带了一个包与吃了些面包不一致，甚至不相关，但就是会这么说，这样的表述在逻辑中不会出现。</p></li><li><p>在说明一个逻辑时，我们可以列出他的组合表来认识他，下面的 &amp; 符号用来代表与。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A&amp;B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>F</td></tr><tr><td>F</td><td>T</td><td>F</td></tr><tr><td>F</td><td>F</td><td>F</td></tr></tbody></table><ul><li>可以看到，需要两个部分都为真，他们的组合也为真，才算 与。</li></ul><h2 id="Or"><a href="#Or" class="headerlink" title="Or"></a>Or</h2><ul><li><p>或，在逻辑中表示只需要两个部分的其中一个为真，那么整体就是真的意思。</p></li><li><p>日常生活中，也有带歧义的句子，比如“Study hard, or you will fail.”，这里的 or，并非上面的逻辑含义，而是带有否则的含义，使得两个部分的观点，不可能都为真，这样的 or 叫做 exclusive-or，而之前的 or 叫 inclusive-or。之后的逻辑中的 or 均为 inclusive 的 or。</p></li><li><p>让我们看看组合表认识一下这个逻辑，下面用 | 这个符号来表示或。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A|B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>T</td></tr><tr><td>F</td><td>T</td><td>T</td></tr><tr><td>F</td><td>F</td><td>F</td></tr></tbody></table><h2 id="Not"><a href="#Not" class="headerlink" title="Not"></a>Not</h2><ul><li><p>否，就是否定观点，取相反的结论。</p></li><li><p>我们直接看看组合表，然后通过例子更深刻地来认识这个逻辑。下面表格用 ！ 来代表否定符号</p></li></ul><table><thead><tr><th>A</th><th>!A</th></tr></thead><tbody><tr><td>T</td><td>F</td></tr><tr><td>F</td><td>T</td></tr></tbody></table><ul><li><p>或许你已经觉得你掌握了 否，但请你再看看下面例子来加深你的理解。</p><ul><li>请问 “All the male will die.” 的否定结论是什么？</li><li>A. “All the male will not die.”</li><li>B. “All the female will die.”</li><li>C. “All the female will not die.”</li></ul></li><li><p>答案是，上述的选项都是错的，A 的否定并不完全，因为当所有的男性都会死亡不成立时，也不意味着所有男性都不会死亡，如果有一个男性不会死亡，结论依旧不成立；B 和 C 都有一个问题，在于更改了结论，原观点只是在讨论男性，B 和 C 说的都是女性，两者毫无关联，根本谈不上是结论。</p></li><li><p>一个对应的示例答案可以是 “At least one male will not die.”</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Introduction to Mathematical Thinking </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Math </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3371识别数组中的最大异常值</title>
       <link href="/posts/88712ee8.html"/>
       <url>/posts/88712ee8.html</url>
@@ -154,11 +179,11 @@
     
     
     <entry>
-      <title>【Introduction to Mathematical Thinking】Lecture 0 and Background</title>
+      <title>【Introduction to Mathematical Thinking】Lecture-0-and-Lecture-1-Background</title>
       <link href="/posts/46219e20.html"/>
       <url>/posts/46219e20.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本次笔记记录了学习 Lecture 0 和阅读材料 Background Reading 的内容。</p></li><li><p>第一节课都会讲讲这门课到底讲啥，这门课的重要性，开设的理由什么的。</p></li></ul><h2 id="本课的目标，重要性，也就是开设的理由"><a href="#本课的目标，重要性，也就是开设的理由" class="headerlink" title="本课的目标，重要性，也就是开设的理由"></a>本课的目标，重要性，也就是开设的理由</h2><ul><li><p>让学生学会使用 mathematical thinking，直译过来应该叫“数学思维”。</p></li><li><p>在大学之前，我们所学的中学及之前的数学，都可以叫 “think inside the box”，意思就是，我们会学习各种各样的方法，对已有的问题提供的数字相关信息进行加工，最后得出一个结果。</p></li><li><p>这样的过程与烹饪料理书何曾相似，只要按照步骤一步步地加工，就能获得一个对应的结果。</p></li><li><p>但是，大学的要学的高等数学，或者更广义一些，对于未来在科研或是企业中所要遇到的各种问题，我们往往需要去应对这些未知的问题。而去将未知的问题化为已知的问题并解决，正是 mathematical thinking 所对应的，即 make unvisble to visble. 这样的思考，可以叫 “think outside the box”.</p></li></ul><h2 id="数学的有趣小背景"><a href="#数学的有趣小背景" class="headerlink" title="数学的有趣小背景"></a>数学的有趣小背景</h2><ul><li><p>数学的起始就是十分工具性的用处，与金钱相关（数钱嘛），在漫长的岁月力，往往是在现有数理难以解决问题进展迅速。而大部分我们今日所熟知的数学，其实就是这最近几百年的成果。</p></li><li><p>数学符号是数学的表示，而非数学本身。就像是乐谱上的乐符表示的音乐（的演奏），但这不是音乐，通过乐器（或是合成）出来的与人共鸣的声音才是音乐。同理，数学的本质，其实应该是透过数学符号的，你对这个世界的认知。</p></li></ul><h2 id="小附录"><a href="#小附录" class="headerlink" title="小附录"></a>小附录</h2><ul><li>雅思的学习还是很有用处的，记得之前想上这门课，感觉十分吃力，主要是难以接受大量的生词输入，而雅思正是锻炼了这种能力，词汇量确实需要增长，但对于不会的生词也能大致了解大意的能力更是宝贵。</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本次笔记记录了学习 Lecture 0 、Lecture 1和阅读材料 Background Reading 的内容。</p></li><li><p>第一节课都会讲讲这门课到底讲啥，这门课的重要性，开设的理由什么的。</p></li></ul><h2 id="本课的目标，重要性，也就是开设的理由"><a href="#本课的目标，重要性，也就是开设的理由" class="headerlink" title="本课的目标，重要性，也就是开设的理由"></a>本课的目标，重要性，也就是开设的理由</h2><ul><li><p>让学生学会使用 mathematical thinking，直译过来应该叫“数学思维”。</p></li><li><p>在大学之前，我们所学的中学及之前的数学，都可以叫 “think inside the box”，意思就是，我们会学习各种各样的方法，对已有的问题提供的数字相关信息进行加工，最后得出一个结果。</p></li><li><p>这样的过程与烹饪料理书何曾相似，只要按照步骤一步步地加工，就能获得一个对应的结果。</p></li><li><p>但是，大学的要学的高等数学，或者更广义一些，对于未来在科研或是企业中所要遇到的各种问题，我们往往需要去应对这些未知的问题。而去将未知的问题化为已知的问题并解决，正是 mathematical thinking 所对应的，即 make unvisble to visble. 这样的思考，可以叫 “think outside the box”.</p></li><li><p>这种思考能够引领我们解决问题，而本系列的课程不会给我们提供各种解决问题的方法，而是引领我们尝试去思考出这些方法。</p></li></ul><h2 id="数学的有趣小背景"><a href="#数学的有趣小背景" class="headerlink" title="数学的有趣小背景"></a>数学的有趣小背景</h2><ul><li><p>数学的起始就是十分工具性的用处，与金钱相关（数钱嘛），在漫长的岁月力，往往是在现有数理难以解决问题进展迅速。而大部分我们今日所熟知的数学，其实就是这最近几百年的成果。</p></li><li><p>数学符号是数学的表示，而非数学本身。就像是乐谱上的乐符表示的音乐（的演奏），但这不是音乐，通过乐器（或是合成）出来的与人共鸣的声音才是音乐。同理，数学的本质，其实应该是透过数学符号的，你对这个世界的认知。</p></li></ul><h2 id="小附录"><a href="#小附录" class="headerlink" title="小附录"></a>小附录</h2><ul><li>雅思的学习还是很有用处的，记得之前想上这门课，感觉十分吃力，主要是难以接受大量的生词输入，而雅思正是锻炼了这种能力，词汇量确实需要增长，但对于不会的生词也能大致了解大意的能力更是宝贵。</li></ul>]]></content>
       
       
       <categories>
