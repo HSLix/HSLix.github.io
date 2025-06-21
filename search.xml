@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3371识别数组中的最大异常值</title>
+      <link href="/posts/88712ee8.html"/>
+      <url>/posts/88712ee8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/identify-the-largest-outlier-in-an-array/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，数组中分三种值，特殊数字，特殊数字的和，异常值，要求找到数组中可能要在的异常值的最大的值，并且异常值和特殊数字的和必须不同，但可以共享相同的值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>面对这种有几个类型的值的情况，可以用未知数列出关系，从而窥见规律得以解题。</p><blockquote><p><a href="https://leetcode.cn/problems/identify-the-largest-outlier-in-an-array/solutions/3006328/mei-ju-yi-chang-zhi-pythonjavacgo-by-end-wb3g/">https://leetcode.cn/problems/identify-the-largest-outlier-in-an-array/solutions/3006328/mei-ju-yi-chang-zhi-pythonjavacgo-by-end-wb3g/</a></p></blockquote></li><li><p>首先设我们要求的异常值为 x，剩下的特殊值之和为 y，那么整个数组的和 total&#x3D;x+2*y（剩下的特殊值的数值和也是 y 嘛）。那么现在我们就可以发现，这就是 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li><li><p>O(n)枚举的基本思路，可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li><li><p>有两种枚举方式</p><ul><li>一种是枚举异常值 x，那么就得要先计算 total - x求 y*2，进一步求 y。然后要确保 y 在数组中存在，以及 y 和 x 不是一个值的情况下，记录异常值的最大值；</li><li>另一种枚举特殊值 y，那么先计算 x&#x3D;total-2*y，然后检查 x 在数组中，且 x 可以不与 y 重合的情况下，就记录异常值的最大值。</li></ul></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getLargestOutlier</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># x + 2*y = total x是异常值，y是特殊数字和</span></span><br><span class="line">        <span class="comment"># 如果尝试枚举 y，就得下面这样子</span></span><br><span class="line">        <span class="comment"># rec = Counter(nums)</span></span><br><span class="line">        <span class="comment"># total = sum(nums)</span></span><br><span class="line">        <span class="comment"># max_num = -inf</span></span><br><span class="line">        <span class="comment"># for num in nums:</span></span><br><span class="line">        <span class="comment">#     x = total-2*num</span></span><br><span class="line">        <span class="comment">#     if rec[x] and (x!=num or rec[x]&gt;1):</span></span><br><span class="line">        <span class="comment">#         max_num = max(max_num, x)</span></span><br><span class="line">        <span class="comment"># return max_num</span></span><br><span class="line">        <span class="comment"># 如果想枚举 x</span></span><br><span class="line">        rec = Counter(nums)</span><br><span class="line">        total = <span class="built_in">sum</span>(nums)</span><br><span class="line">        max_num = -inf</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">            num, left = <span class="built_in">divmod</span>(total-x, <span class="number">2</span>)</span><br><span class="line">            <span class="keyword">if</span> left == <span class="number">0</span> <span class="keyword">and</span> rec[num] <span class="keyword">and</span> (x!=num <span class="keyword">or</span> rec[num]&gt;<span class="number">1</span>):</span><br><span class="line">                max_num  = <span class="built_in">max</span>(max_num, x)</span><br><span class="line">        <span class="keyword">return</span> max_num</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】16-24数对和</title>
       <link href="/posts/2234bbea.html"/>
       <url>/posts/2234bbea.html</url>
