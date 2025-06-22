@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】624数组列表中的最大距离</title>
+      <link href="/posts/a9536981.html"/>
+      <url>/posts/a9536981.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-distance-in-arrays/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个有整型数组组成的数组，现在求一个数字的最大值，该数字由其中两个不同的数组中各取一个数的差值。另外，每个小数组都已经化为了升序数组。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>枚举右，维护左。只要不断遍历小数组，记录已得最小值和最大值，并与当前正在遍历的数组的最小值和最大值分别求差，再记录最大差值即可。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-distance-in-arrays/solutions/3067679/mei-ju-you-wei-hu-zuo-pythonjavaccgojsru-wtgb/">https://leetcode.cn/problems/maximum-distance-in-arrays/solutions/3067679/mei-ju-you-wei-hu-zuo-pythonjavaccgojsru-wtgb/</a></p></blockquote></li><li><p>如果想不明白为什么先更新结果，再更新最小值和最大值，可以尝试这么理解：题目要求两个值应该出于两个数组，如果我先更新了最小值和最大值，那么就会存在可能：当前这个小数组拥有着最小的最小值和最大的最大值，导致结果会变成计算这个小数组内的差值，违反题意。</p></li><li><p>O(n) 枚举的基本思想可以看 <a href="/posts/d26591e4.html" title="【Leetcode Daily】1两数之和">【Leetcode Daily】1两数之和</a>。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxDistance</span>(<span class="params">self, arrays: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        min_num = inf</span><br><span class="line">        max_num = -inf</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> l <span class="keyword">in</span> arrays:</span><br><span class="line">            res = <span class="built_in">max</span>(res, l[-<span class="number">1</span>] - min_num, max_num - l[<span class="number">0</span>])</span><br><span class="line">            min_num = <span class="built_in">min</span>(l[<span class="number">0</span>], min_num)</span><br><span class="line">            max_num = <span class="built_in">max</span>(l[-<span class="number">1</span>], max_num)</span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Introduction to Mathematical Thinking】Lecture-2-Basic-Combinators</title>
       <link href="/posts/e4d33db3.html"/>
       <url>/posts/e4d33db3.html</url>
