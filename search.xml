@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2364统计坏数对的数目</title>
+      <link href="/posts/3251256b.html"/>
+      <url>/posts/3251256b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-number-of-bad-pairs/description/">题目链接</a>。</p></li><li><p>简单地说，就是给了一个坏数对的定义，要求找出坏数对的总数。所谓的坏数对，就是这个整型数组中的两个数，他们的数值之差与下标之差不等就算。（默认差值计算只会是大减小，只会是正数）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>陆爻齐思考了下，发现坏数对的共性，是数值减去下标后，差值不为零的情况，根据昨天所学的列未知量，可以这么看。</p></li><li><p>设两个数值分别为 a 和 b，下标分别为 i 和 j，那么坏数对的定义就是 a-b !&#x3D; i-j，简单变换得 a-i !&#x3D; b-j，也就是各自数值减去下标不相等就算坏数对。</p></li><li><p>这样就变换成了比较熟悉的枚举问题，遍历所有数值与自身下标之差，并记录到哈希表中，同时也统计已遍历个数。每次枚举新的数字，都会查找哈希表中对应的个数，这个个数就是好数对，但是总数对减去这个数字，就是坏数对的个数。这就是陆爻齐的解法（放到参考题解的注释里了）。</p></li><li><p>灵神的解法更直接一些，可以直接计算所有数对的个数（两两组合），然后减去好数对，剩下的就是坏数对的个数了。具体的做法与上面陆爻齐的解法一致。</p><blockquote><p><a href="https://leetcode.cn/problems/count-number-of-bad-pairs/">https://leetcode.cn/problems/count-number-of-bad-pairs/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countBadPairs</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res = comb(<span class="built_in">len</span>(nums), <span class="number">2</span>) <span class="comment"># 计算总数目</span></span><br><span class="line">        rec = Counter()</span><br><span class="line">        <span class="keyword">for</span> index, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            tmp = num - index</span><br><span class="line">            res -= rec[tmp] <span class="comment"># 减去好数对</span></span><br><span class="line">            rec[tmp] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># class Solution:</span></span><br><span class="line"><span class="comment">#     def countBadPairs(self, nums: List[int]) -&gt; int:</span></span><br><span class="line"><span class="comment">#         res = 0 # 记录坏数对数目</span></span><br><span class="line"><span class="comment">#         total = 0 # 计算已遍历的总数目</span></span><br><span class="line"><span class="comment">#         rec = Counter()</span></span><br><span class="line"><span class="comment">#         index = 0 # 记录当前数组下标</span></span><br><span class="line"><span class="comment">#         for num in nums:</span></span><br><span class="line"><span class="comment">#             tmp = num - index</span></span><br><span class="line"><span class="comment">#             res += total - rec[tmp]</span></span><br><span class="line"><span class="comment">#             total += 1</span></span><br><span class="line"><span class="comment">#             index += 1</span></span><br><span class="line"><span class="comment">#             rec[tmp] += 1</span></span><br><span class="line"><span class="comment">#         return res</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】624数组列表中的最大距离</title>
       <link href="/posts/a9536981.html"/>
       <url>/posts/a9536981.html</url>
