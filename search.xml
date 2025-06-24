@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2909元素和最小的山形三元组</title>
+      <link href="/posts/29412f7f.html"/>
+      <url>/posts/29412f7f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-sum-of-mountain-triplets-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，现在定义一个山形三元组，由数组中三个不同的数字组成，要求这三个数的位置上中间的数大于两边的数。如果存在这么山形三元组，那么就求元素和最小的那个三元组的元素和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这是枚举中间类型的第一题，所以将会详细介绍为什么这么做，以及怎么做。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-sum-of-mountain-triplets-ii/solutions/2493548/mei-ju-numsj-qian-hou-zhui-fen-jie-pytho-tskf/">https://leetcode.cn/problems/minimum-sum-of-mountain-triplets-ii/solutions/2493548/mei-ju-numsj-qian-hou-zhui-fen-jie-pytho-tskf/</a></p></blockquote></li><li><p>首先，为什么要<strong>枚举中间</strong>。可以看到，题目有三个下标等我们求，如果直接暴力，那么时间复杂度就是 O(n^3)，非常大。枚举中间可以简化时间复杂度到 O(n)（反正会少）。</p></li><li><p>可不可以枚举左边或者右边呢？应该可以，但大部分情况下没有中间简单。比如要求 i &lt; j &lt; k，如果枚举 j，就不需要考虑 i 和 k 的关系，因为如果 i &lt; j 和 j &lt; k 都满足了，i &lt; k 也会顺便满足。</p></li><li><p>那么怎么实现同时考虑三个的枚举呢？此前我们是采用哈希表解决一个变量，同时遍历另一个变量，那么我们只要再做预处理，使得第三个变量也能O(1)解决即可。</p></li><li><p>以本题为例，需要枚举中间的同时，保证两旁的数字比中间小即可，那么如果能通过预处理，知道每个下标位置往右最小的值，那么不就搞定第三个了嘛。</p></li><li><p>那么第一个变量也可以用这个方法吗？可以，但没必要，因为遍历的过程中，可以维护一个变量，记录当前遍历位置以左的最小值。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minimumSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        suf = [<span class="number">0</span>] * n</span><br><span class="line">        suf[-<span class="number">1</span>] = nums[-<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">2</span>, <span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">f&quot;<span class="subst">&#123;suf[i+<span class="number">1</span>]&#125;</span> and <span class="subst">&#123;nums[i]&#125;</span>&quot;</span>)</span><br><span class="line">            suf[i] = <span class="built_in">min</span>(suf[i+<span class="number">1</span>], nums[i])</span><br><span class="line">        </span><br><span class="line">        ans = inf</span><br><span class="line">        pre = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n-<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> pre &lt; nums[i] &gt; suf[i+<span class="number">1</span>]:</span><br><span class="line">                ans = <span class="built_in">min</span>(ans, pre + nums[i] + suf[i+<span class="number">1</span>])</span><br><span class="line">            pre = <span class="built_in">min</span>(pre, nums[i])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans <span class="keyword">if</span> ans != inf <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一起来学Python基础|LearnBasicPythonTogether</title>
       <link href="/posts/299d5f4e.html"/>
       <url>/posts/299d5f4e.html</url>
@@ -631,9 +656,21 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input disabled="" type="checkbox"> 完成英语语法学习，每天四章，完成对应练习并产出博客 2025.06.24-2025.06.28</p></li><li><p><input disabled="" type="checkbox"> 按照每天两个 Lecture 的量推进 Mathatical Thinking 课程 2025.06.24-2025.07.08</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> 杂记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 杂记 </tag>
+            
+        </tags>
       
     </entry>
     
