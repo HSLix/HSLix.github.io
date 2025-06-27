@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3128直角三角形</title>
+      <link href="/posts/3909f3d2.html"/>
+      <url>/posts/3909f3d2.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/right-triangles/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，数字只会是 0 或 1，求其中直角三角形的数目，直角三角形的三个元素要求以直角中心处为核心，横向和纵向有 1 即可。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>重点在于元素不必相邻，所以只要统计好每行和每列 1 的数量，遍历直角三角形核心，每次遇到 1，结果就可以加上该处行列剩余的 1 数量相乘的值。</p><blockquote><p><a href="https://leetcode.cn/problems/right-triangles/solutions/2758892/cheng-fa-yuan-li-pythonjavacgo-by-endles-7469/">https://leetcode.cn/problems/right-triangles/solutions/2758892/cheng-fa-yuan-li-pythonjavacgo-by-endles-7469/</a></p></blockquote></li><li><p>本题学到的最大的点在于 zip 函数的使用，在 cpp 中总是烦恼难以并行遍历，只能通过下标管理的窘况通过 zip 函数就能解决。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfRightTriangles</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        col_sum = [<span class="built_in">sum</span>(col) - <span class="number">1</span> <span class="keyword">for</span> col <span class="keyword">in</span> <span class="built_in">zip</span>(*grid)] <span class="comment"># 先将 grid 按行分开，然后用 zip 将每行的相同次序元素组合，形成遍历列的效果</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> row <span class="keyword">in</span> grid:</span><br><span class="line">            row_sum = <span class="built_in">sum</span>(row)-<span class="number">1</span></span><br><span class="line">            ans += row_sum * <span class="built_in">sum</span>(c <span class="keyword">for</span> x, c <span class="keyword">in</span> <span class="built_in">zip</span>(row, col_sum) <span class="keyword">if</span> x)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line"><span class="comment"># class Solution:</span></span><br><span class="line"><span class="comment">#     def numberOfRightTriangles(self, grid: List[List[int]]) -&gt; int:</span></span><br><span class="line"><span class="comment">#         col_sum = [sum(col) - 1 for col in zip(*grid)] </span></span><br><span class="line"><span class="comment">#         ans = 0</span></span><br><span class="line"><span class="comment">#         for row in grid:</span></span><br><span class="line"><span class="comment">#             row_sum = sum(row)-1</span></span><br><span class="line"><span class="comment">#             for x, c in zip(row, col_sum):</span></span><br><span class="line"><span class="comment">#                 if x==1:</span></span><br><span class="line"><span class="comment">#                     ans += row_sum * c</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#         return ans</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1930长度为3的不同回文子序列</title>
       <link href="/posts/36d76ee9.html"/>
       <url>/posts/36d76ee9.html</url>
@@ -76,6 +103,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -122,6 +151,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -146,6 +177,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -197,6 +230,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -221,6 +256,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -247,6 +284,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -272,32 +311,7 @@
             
             <tag> Algorithm </tag>
             
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【Learn English grammar Together】第一、二章：基本句型及补语和名词词组与冠词</title>
-      <link href="/posts/5af6e5ed.html"/>
-      <url>/posts/5af6e5ed.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>本系列博客为陆爻齐学习英语语法的笔记，教材为<a href="https://book.douban.com/subject/1014914/">《英语魔法师之魔法俱乐部》</a>。</p></li><li><p>整体的形式大致为，陆爻齐学习完后，会尝试<strong>用自己的语言概述</strong>本章所学，同时分享学习心得等拓展内容。这样的话相当于自己复习了一遍，想必学习效果会更好一些。</p></li><li><p>由于后面内容不可避免地涉及到章节测试的内容讲解，所以如果你想得到充分的学习效果，<strong>强烈建议</strong>自己读完相关章节再来看本博客。</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><h2 id="基本句型及补语"><a href="#基本句型及补语" class="headerlink" title="基本句型及补语"></a>基本句型及补语</h2><ul><li><p>首先约定下面概念，S 主语，V 谓语，O 宾语，C 补语</p></li><li><p>经过传统的英语教学，大家对于 S V O 三者往往比较熟悉，而 C 稍显陌生，这也就是本章的主角。</p></li><li><p>而有五种基本句型，由上面四个概念组成。分别是：</p><ul><li>S + V</li><li>S + V + O</li><li>S + V + C</li><li>S + V + O + O</li><li>S + V + O + C</li></ul></li><li><p>看例句来解析吧，比如下面的不及物动词和及物动词的示例</p><ul><li>“He died in 2000.”，这句话是 S + V 类型，可以发现只保留主语 He 和谓语 died 已经涵盖了本句的主要信息，后面的 in 2000 只是修饰。</li><li>“He killed three soldiers.”，这句话是 S + V + O 类型，但如果只有主语和谓语，句子的大半信息也表现出来了，就是他杀了什么。</li><li>“He is a solder”，这句话就是 S + V + C 了，可以看见，如果只有主语和谓语（“He is”）那么句子的意思完全表达不出来，后面的 solder 就是关键的补语。</li></ul></li><li><p>这里就给出对应的概念吧，对于这种谓语没有叙述能力（表达“是”这种含义的），就需要后面的补语来完成叙述工作，本质上就是把补语与主语构建一个相等的关系。比如上面的例句，就是把 He 和 soldier 构建相等关系。</p></li><li><p>像这样没有叙述能力的谓语，除了 be 动词，还有 look，seem，appear，feel，make，become 等，他们也叫连缀动词。</p></li><li><p>我们继续看例句来理解基本句型</p><ul><li>“He called his son a dog.”，他骂他儿子是狗，这个“是”，就算等价关系，把他儿子与狗联系起来，所以是 S + V + O + C</li><li>“He gave his son a dog.”，他给他儿子一条狗，这里的 a dog 与 his son 没有等价关系，他们是相对独立的个体，因此划为 S + V + O + O</li></ul></li></ul><h2 id="Test1-易错点与对应分析"><a href="#Test1-易错点与对应分析" class="headerlink" title="Test1 易错点与对应分析"></a>Test1 易错点与对应分析</h2><ul><li><p>The police found the letter missing.</p></li><li><p>The police found the missing letter.</p><ul><li>上面两句话得放一起说，第一句是 S + V + O + C，missing 作为补语形容 letter，强调信丢失了；第二句话，missing 的位置是作为形容词修饰宾语 letter，这样不算补语，整句话的结果变为了 S + V + O</li></ul></li><li><p>I consider you a member of the family.</p><ul><li>这句话容易被视为 S + V + O + O，但是看句子的意思，you 和 member of the family 有相等的含义，在两者之间加个“是”就是其含义。所以这句话其实是 S + V + C</li></ul></li></ul><h2 id="名词词组与冠词"><a href="#名词词组与冠词" class="headerlink" title="名词词组与冠词"></a>名词词组与冠词</h2><ul><li><p>关于什么时候应该使用冠词（a，the）这样的问题，以前的小学、中学老师大致是教：“人名地名不用加，星期几也不用加……”，这样一条条的“例外”。但例外是无穷无尽的，除了练出母语思维外，想理解冠词的使用方法，就需要理解冠词的作用。</p></li><li><p>先看 a（an），这个定冠词实际上可以看作 one 的<strong>弱化</strong>版，比如“I want an apple.”，我要一个苹果，就是“I want one apple.”，强调一个，而非多个，说明后面形容的这个东西，可以有多个。</p></li><li><p>我们来看几个例句，进一步理解一下</p><ul><li>“He is a member of the club.”，他是这个俱乐部的一个成员，成员往往很多个，所以需要用 a 说明是一个。</li><li>“He was president of the high school.”，他曾经是这个学校的校长，注意对于 the high school 而言，校长只能有一个，没有第二个，所以不用加 a&#x2F;an，可以用专有名词诠释，作为 He 的补语。</li><li>“Someone say he was a better president than Mr.Robert.”，有人说他当校长，比罗伯特先生干得好。这里的 president 之所以要加 a 修饰，是因为在句子中现在有两个校长的情况，或者说，现在句子意思的尺度拉到了高中历代校长中（至少有这两个），这样的话，president 这个词就不足以指代某个特定的校长，不能作为专有名词。</li></ul></li><li><p>接下来看 the，这个定冠词是 that 或 those 的<strong>弱化</strong>形式，要有明知或暗示的含义，也就是当“那个”出现时需要。</p></li><li><p>可以看下面这一组例句来体会一下，情景是在大巴上，你想打开旁边乘客的窗户，但你需要征求一键，所以你对着窗边的一位乘客说：</p><ul><li>“Do you mind if I open a window？”，这句话会让乘客感到十分疑惑，因为你在问，你介意我打开巴士上“一个”窗户吗。这个一个窗户，可以是巴士上的任意一个窗户，你打开其它的窗户和这个乘客几乎没什么关系。</li><li>“Do you mind if I open the window？”，这句话才是正确答案，the 在语境中会没有歧义地指代 you 旁边的 window。</li></ul></li><li><p>上面的例子清晰的表现了 the 的指代作用，那么怎么解释对于地名、人名，有时候要 the，有时候又不要 the 呢？来看下面这组例句来理解吧</p><ul><li>“I love living in Beijing.”，这里的北京就是特指现在的首都北京市，无歧义；</li><li>“He prefers living in the Beijing 30 years ago.”，这里的北京之所以加 the，是因为这里的北京并非现在的那个首都背景，而是 30 年前的那个北京，暗示这两个北京不同。</li></ul></li></ul><h2 id="Test2-易错点与对应分析"><a href="#Test2-易错点与对应分析" class="headerlink" title="Test2 易错点与对应分析"></a>Test2 易错点与对应分析</h2><ol><li>对于人类和有机物的“拥有”，可以用 ‘s 来表示，但如果是无机物，比如形容桌子的腿，the legs of the table；</li><li>类似“鞋店”，“语言老师”等这样有个一个名词作为形容词词加上名词的词组，前面的名词不需要复数形式，比如 shoe store，多个鞋店就是 shoe stores，同理多个语言老师是 language teachers；</li><li>“one … or another”是一个常见表述，表示一个或其它的多个什么东西；</li><li>指代一个人之前所说的话，可以用 This 或 That，但是如果这个词要放在开头，那么只能用 This；</li><li>“Either will do”也是一个常见表述，表示两者都可以的意思，如果是两者以上，那应该是 all will do 罢；</li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> 一起来学英语语法 | Learn English grammar Together </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> English </tag>
-            
-            <tag> LearnTogether </tag>
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -323,6 +337,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -374,6 +390,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -398,6 +416,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -424,6 +444,12 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -448,6 +474,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -474,6 +502,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -498,6 +528,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -524,6 +556,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
         </tags>
       
     </entry>
@@ -548,6 +582,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -601,6 +637,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -651,6 +689,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -675,6 +715,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 二分 </tag>
             
         </tags>
       
@@ -701,6 +743,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
+            <tag> 前缀和 </tag>
+            
         </tags>
       
     </entry>
@@ -712,7 +758,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input disabled="" type="checkbox"> ESLpod 2025.06.23-?</p></li><li><p><input disabled="" type="checkbox"> 按照每天两个 Lecture 的量推进 Mathatical Thinking 课程 2025.06.26-2025.07.09</p></li><li><p><input disabled="" type="checkbox"> 完成英语语法学习，每天两章，完成对应练习并产出博客 2025.06.24-2025.07.03</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input disabled="" type="checkbox"> ESLpod 2025.06.23-?</p></li><li><p><input disabled="" type="checkbox"> 按照每天两个 Lecture 的量推进 Mathatical Thinking 课程 2025.06.26-2025.07.09</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       <categories>
@@ -751,6 +797,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -775,6 +823,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 二分 </tag>
             
         </tags>
       
@@ -801,6 +851,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -826,6 +878,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -850,6 +904,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 二分 </tag>
             
         </tags>
       
@@ -903,6 +959,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 二分 </tag>
+            
         </tags>
       
     </entry>
@@ -928,6 +986,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -952,6 +1014,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1003,6 +1069,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1027,6 +1097,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1053,6 +1127,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1077,6 +1155,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1103,6 +1185,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1127,6 +1213,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1180,6 +1270,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1205,6 +1299,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1229,6 +1327,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1280,6 +1382,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1304,6 +1410,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1330,6 +1440,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1354,6 +1468,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1380,6 +1498,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1404,6 +1526,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1430,6 +1556,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1454,6 +1584,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1480,6 +1614,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1504,6 +1642,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1584,6 +1726,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1609,6 +1755,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1633,6 +1783,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1686,6 +1840,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1710,6 +1868,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1763,6 +1925,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1787,6 +1953,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1840,6 +2010,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1864,6 +2038,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
             
         </tags>
       
@@ -1946,6 +2124,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1971,6 +2153,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -1995,6 +2181,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2048,6 +2238,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2072,6 +2266,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2125,6 +2323,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2149,6 +2351,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2175,6 +2381,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2199,6 +2409,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2225,6 +2439,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2249,6 +2467,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2275,6 +2497,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 不定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2299,6 +2525,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2325,6 +2555,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2349,6 +2583,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2375,6 +2613,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2399,6 +2641,10 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
             
         </tags>
       
@@ -2425,6 +2671,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 定长滑动窗口 </tag>
+            
         </tags>
       
     </entry>
@@ -2449,6 +2699,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -2500,6 +2752,10 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 枚举 </tag>
+            
+            <tag> 数位dp </tag>
+            
         </tags>
       
     </entry>
@@ -2524,6 +2780,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 数位dp </tag>
             
         </tags>
       
