@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】447回旋镖的数量</title>
+      <link href="/posts/adfdba1.html"/>
+      <url>/posts/adfdba1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-boomerangs/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，找到其中所有三元组的数量。要求三元组之中，（假定顺序为 i，j，k），那么 i 和 k 的欧氏距离 i 和 j 的欧氏距离相等。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本的枚举思路可以参考<a href="/posts/29412f7f.html" title="【Leetcode Daily】2909元素和最小的山形三元组">【Leetcode Daily】2909元素和最小的山形三元组</a>。</p></li><li><p>和之前的题思路不同，此题需要在每次循环枚举 i 时都维护一个哈希表，该哈希表为各元素与 i 的欧氏距离。一旦遍历到曾经与自己距离相同的元素，结果则多加了两个。（之所以是两个，是因为三元组中的 j 和 k 可以互换位置。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfBoomerangs</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> xi, yi <span class="keyword">in</span> points:</span><br><span class="line">            rec = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">            <span class="keyword">for</span> xj, yj <span class="keyword">in</span> points:</span><br><span class="line">                disij = (xi - xj)**<span class="number">2</span> + (yi - yj)**<span class="number">2</span></span><br><span class="line">                ans += rec[disij] * <span class="number">2</span></span><br><span class="line">                rec[disij] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2874有序三元组中的最大值II</title>
       <link href="/posts/752fb474.html"/>
       <url>/posts/752fb474.html</url>
