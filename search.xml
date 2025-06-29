@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Introduction to Mathematical Thinking】Lecture-3-implies</title>
+      <link href="/posts/ecd93791.html"/>
+      <url>/posts/ecd93791.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本节的内容是介绍了 implies，或者应该叫包含、蕴含。</p></li><li><p>举个例子来说明比较好，A⇒B，表示 A 蕴含 B，这里的 A 和 B 分别代表一个表达式。</p></li><li><p>注意，A 和 B 不一定要有“因果关系”，比如<code>“他很好看”⇒“1+3=4”</code>这种也算蕴含，而且还是正确的（原因后面会补充）。</p></li></ul><h2 id="蕴含的-True-和-False"><a href="#蕴含的-True-和-False" class="headerlink" title="蕴含的 True 和 False"></a>蕴含的 True 和 False</h2><ul><li><p>和上一节一样，这个逻辑符号的式子也有 True 和 False 的结果，虽然结论是中学学过的，但为什么这样还是值得记录一下。</p></li><li><p>A⇒B，A 是前因（先前假设），B 是后果，如果两者都为真，那么结果就是真吧，像是<code>N&gt;7 ⇒ N^2&gt;40</code>。</p></li><li><p>但是如果 A 和 B 毫无关联会怎样呢？<code>1+2=3  -1&lt;0</code>这两条都为真，却毫无关联。规定为真，这样做的原因是无论式子是否具有意义，都能有一个定义，避免了未知状态的情况。</p></li><li><p>小结一下就可以说是，<code>A⇒B</code>为真时，而且 A 也为真时，要求 B 为真。</p></li><li><p>那么，什么时候<code>A⇒B</code>为假呢？只要不满足刚刚这一条即可，如果 B 为假，A 为真，就不满足<code>A⇒B</code>为真时的要求，那么就是假啦。</p></li><li><p>到此为止，已经讨论了<code>A⇒B</code>为真或者假的情况，但是这两种情况中的 A 都为真，如果 A 为假呢？</p></li><li><p>这里就会从 <code>A⇏B</code>入手，A 不包含 B，从上面的结论知道，如果 A 为真，B 为假，这个式子就为真。那么除此之外的情况，都为假。所以当 A 为假，A蕴含B的式子都为真。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A⇒B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>F</td></tr><tr><td>F</td><td>T</td><td>T</td></tr><tr><td>F</td><td>F</td><td>T</td></tr></tbody></table><h2 id="蕴含的变形"><a href="#蕴含的变形" class="headerlink" title="蕴含的变形"></a>蕴含的变形</h2><ul><li>从作业任务中可以学到，<code>A⇒B</code>与<code>¬A∨B</code>的真假表结果一致，<code>A⇏B</code>和<code>A∧¬B</code>也是。这种我记得在离散当结论记来着。</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Introduction to Mathematical Thinking </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Math </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】447回旋镖的数量</title>
       <link href="/posts/adfdba1.html"/>
       <url>/posts/adfdba1.html</url>
