@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3427变长子数组求和</title>
+      <link href="/posts/4f49bf51.html"/>
+      <url>/posts/4f49bf51.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/sum-of-variable-length-subarrays/description/">题目链接</a>。</p></li><li><p>简单地说，就是给了一个整型数组，对其中的每一个元素，都要根据一个要求创建一个子数组，而题目要求则要返回这些所有子数组的数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>由于题目子数组和求得的方式，可以通过前缀和方便完成，所以采用这种方法。</p></li><li><p>重要的是，终于搞清楚了 Python 中 accumulate 函数到底是怎么形成的。对于 [1, 2, 3] 这样的列表，accumulate([1, 2, 3]) 会产生 [1, 3, 6]，也就是前缀和，但是通过增加参数 initial 的值可以改变初始前缀和值（该参数默认为 None），比如 accumulate([1, 2, 3], initial&#x3D;0)，会在初始的地方增加一个 0，变成 [0, 1, 3, 6]；accumulate([1, 2, 3], initial&#x3D;1)，就是 [1, 2, 4, 7]。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">subarraySum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        pre = <span class="built_in">list</span>(accumulate(nums, initial=<span class="literal">None</span>))</span><br><span class="line">        <span class="comment"># pre = list(accumulate(nums, initial=0))</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        pre.insert(<span class="number">0</span>, <span class="number">0</span>) <span class="comment"># 补充没有的 0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            ans += pre[i+<span class="number">1</span>] - pre[<span class="built_in">max</span>(<span class="number">0</span>, i-nums[i])] </span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】303区域和检索-数组不可变</title>
+      <link href="/posts/42905a7b.html"/>
+      <url>/posts/42905a7b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/range-sum-query-immutable/">题目链接</a>。</p></li><li><p>简单地说，就是要求实现一个类，这个类能够返回数组中任意一个闭区间的数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这是前缀和的模板题，所谓前缀和的计算，正如其名，就是把数组从左往右一个个数值累加并记录。</p><blockquote><p><a href="https://leetcode.cn/problems/range-sum-query-immutable/solutions/2693498/qian-zhui-he-ji-qi-kuo-zhan-fu-ti-dan-py-vaar/">https://leetcode.cn/problems/range-sum-query-immutable/solutions/2693498/qian-zhui-he-ji-qi-kuo-zhan-fu-ti-dan-py-vaar/</a></p></blockquote></li><li><p>实现方式很简单，但是有一点需要特别注意，就是留出第一位的 0.如果采用第一位就放第一位的数值，那么就需要特别处理闭区间左部为 0 的情况，但是如果第一位置零，第二位放第一个数值，第三位放前两个数值，这样子下去，取区间和就只要调整一下下标加一即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumArray</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        s = [<span class="number">0</span>] * (<span class="built_in">len</span>(nums)+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> i,x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            s[i+<span class="number">1</span>] = s[i] + x</span><br><span class="line">        <span class="variable language_">self</span>.s = s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRange</span>(<span class="params">self, left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.s[right+<span class="number">1</span>]-<span class="variable language_">self</span>.s[left]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your NumArray object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = NumArray(nums)</span></span><br><span class="line"><span class="comment"># param_1 = obj.sumRange(left,right)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Introduction to Mathematical Thinking】Lecture-3-implies</title>
       <link href="/posts/ecd93791.html"/>
       <url>/posts/ecd93791.html</url>
@@ -46,6 +100,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
