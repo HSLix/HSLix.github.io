@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2559统计范围内的元音字符串数</title>
+      <link href="/posts/f8886c5e.html"/>
+      <url>/posts/f8886c5e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-vowel-strings-in-ranges/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串和一个二维整数数组，二维数组内每个元素有两个数值，代表一个区间，要求返回每个区间内开头和结尾都是元音字母的数量。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>除了题目，几乎与昨日的题目一模一样（<a href="/posts/4f49bf51.html" title="【Leetcode Daily】3427变长子数组求和">【Leetcode Daily】3427变长子数组求和</a>），故不做赘述。</p></li><li><p>只补充一点感受，还真是有点不习惯这个 accumulate 函数，还是得慢慢适应这种有各种方便函数调用的 Python ~（蛇堕*n）</p><blockquote><p><a href="https://leetcode.cn/problems/count-vowel-strings-in-ranges/solutions/2093978/suan-fa-xiao-ke-tang-qian-zhui-he-by-end-n0mx/">https://leetcode.cn/problems/count-vowel-strings-in-ranges/solutions/2093978/suan-fa-xiao-ke-tang-qian-zhui-he-by-end-n0mx/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">vowelStrings</span>(<span class="params">self, words: <span class="type">List</span>[<span class="built_in">str</span>], queries: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="comment"># s = list(accumulate([w[0] in [&#x27;a&#x27;, &#x27;e&#x27;, &#x27;i&#x27;, &#x27;o&#x27;, &#x27;u&#x27;] and w[-1] in [&#x27;a&#x27;, &#x27;e&#x27;, &#x27;i&#x27;, &#x27;o&#x27;, &#x27;u&#x27;] for w in words], initial=0))</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># return [s[q[1]+1]-s[q[0]] for q in queries]</span></span><br><span class="line">        </span><br><span class="line">        rec = [<span class="number">0</span>] * (<span class="built_in">len</span>(words)+<span class="number">1</span>)</span><br><span class="line">        ans = [<span class="number">0</span>] * <span class="built_in">len</span>(queries)</span><br><span class="line">        even_char = [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;e&#x27;</span>, <span class="string">&#x27;i&#x27;</span>, <span class="string">&#x27;o&#x27;</span>, <span class="string">&#x27;u&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, word <span class="keyword">in</span> <span class="built_in">enumerate</span>(words):</span><br><span class="line">            rec[i+<span class="number">1</span>] += rec[i] + (<span class="number">1</span> <span class="keyword">if</span> word[<span class="number">0</span>] <span class="keyword">in</span> even_char <span class="keyword">and</span> word[-<span class="number">1</span>] <span class="keyword">in</span> even_char <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(queries):</span><br><span class="line">            ans[i] = rec[x[<span class="number">1</span>]+<span class="number">1</span>]-rec[x[<span class="number">0</span>]]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">        </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3427变长子数组求和</title>
       <link href="/posts/4f49bf51.html"/>
       <url>/posts/4f49bf51.html</url>
