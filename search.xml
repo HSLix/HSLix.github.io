@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3152特殊数组II</title>
+      <link href="/posts/9b3f7b4e.html"/>
+      <url>/posts/9b3f7b4e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/special-array-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整型数组，和一个二维整型数组，将二维数组的每个元素视为区间，要求每个区间内的数组，是否每一对相邻元素都是奇偶性不同的数字。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>虽然明知是前缀和，但如何把题目抽象为前缀和能解答的形式还是需要多多学习的。</p></li><li><p>比如本题，可以将相邻数字奇偶性是否相同直接化为布尔值存储，如果相同则记 1，不同则记 0，然后求前缀和。这样子，如果区间两侧的值相同，说明区间中的奇偶性都是不同的。</p></li><li><p>值得说道的是，在 Python 中（3.10以上），可以通过 pairwise 函数来遍历数组内的每个数对。</p><blockquote><p><a href="https://leetcode.cn/problems/special-array-ii/solutions/2782830/qian-zhui-he-wei-yun-suan-pythonjavacgo-3pvya/">https://leetcode.cn/problems/special-array-ii/solutions/2782830/qian-zhui-he-wei-yun-suan-pythonjavacgo-3pvya/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isArraySpecial</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], queries: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">bool</span>]:</span><br><span class="line">        s = <span class="built_in">list</span>(accumulate((x%<span class="number">2</span>==y%<span class="number">2</span> <span class="keyword">for</span> x, y <span class="keyword">in</span> pairwise(nums)), initial=<span class="number">0</span>))</span><br><span class="line">        <span class="keyword">return</span> [s[q[<span class="number">0</span>]]==s[q[<span class="number">1</span>]] <span class="keyword">for</span> q <span class="keyword">in</span> queries]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2559统计范围内的元音字符串数</title>
       <link href="/posts/f8886c5e.html"/>
       <url>/posts/f8886c5e.html</url>
