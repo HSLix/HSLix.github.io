@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1749任意子数组和的绝对值的最大值</title>
+      <link href="/posts/50e29769.html"/>
+      <url>/posts/50e29769.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-absolute-sum-of-any-subarray/description/">题目链接</a>。</p></li><li><p>简单地说，就是要求一个数组内所有子数组中，子数组和的绝对值的最大值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>只要前缀和直接找其中的最大值和最小值求差即可，不过起始值必须是 0，因为得考虑第一个数字本身。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxAbsoluteSum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        s = <span class="built_in">list</span>(accumulate(nums, initial = <span class="number">0</span>))</span><br><span class="line">        <span class="comment"># print(s)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(s) - <span class="built_in">min</span>(s)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3152特殊数组II</title>
       <link href="/posts/9b3f7b4e.html"/>
       <url>/posts/9b3f7b4e.html</url>
