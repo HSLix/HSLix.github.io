@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【Leetcode Daily】974和可被K整除的子数组</title>
+      <link href="/posts/3348efaa.html"/>
+      <url>/posts/3348efaa.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/subarray-sums-divisible-by-k/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组和一个整数 k，要求其中所有子数组和能被 k 整除的数量。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>和之前的有些不同，发现有关取模的题目，大多都是判断取模后的内容来判断。前缀和是从下标零开始的一段子数组和，那么如果其中有一段子数组可以被 k 整除，可以写成 (i - j) % k &#x3D;&#x3D; 0，换句话就是 i % k &#x3D;&#x3D; j % k，题目也就转换成了找前缀和中，有多少组取模后的值相同的经典枚举情况。</p><blockquote><p><a href="https://leetcode.cn/problems/subarray-sums-divisible-by-k/solutions/22267/he-ke-bei-kzheng-chu-de-zi-shu-zu-by-lenn123/">https://leetcode.cn/problems/subarray-sums-divisible-by-k/solutions/22267/he-ke-bei-kzheng-chu-de-zi-shu-zu-by-lenn123/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">subarraysDivByK</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        s = <span class="built_in">list</span>(accumulate(nums, initial=<span class="number">0</span>))</span><br><span class="line">        rec = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">            index = i % k</span><br><span class="line">            ans += rec[index]</span><br><span class="line">            rec[index] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1524和为奇数的子数组数目</title>
       <link href="/posts/e8b85318.html"/>
       <url>/posts/e8b85318.html</url>
