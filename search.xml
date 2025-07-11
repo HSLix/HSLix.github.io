@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【Leetcode Daily】523连续的子数组和</title>
+      <link href="/posts/a28baaff.html"/>
+      <url>/posts/a28baaff.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/continuous-subarray-sum/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组和整数 K，求其中是否存在长度至少为二且数值和为 K 的倍数的子数组。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>这道题和 <a href="/posts/3348efaa.html" title="【Leetcode Daily】974和可被K整除的子数组">【Leetcode Daily】974和可被K整除的子数组</a> 相近，或者说这种什么整除，取模啥的，得列下式子，然后发现找子数组总和其实就是前缀和的两侧对 K 取模值相同即可，因为这样子两个值相减所得中间数组和就正好能被 K 整除，也就是 K 的倍数了。</p><blockquote><p><a href="https://leetcode.cn/problems/continuous-subarray-sum/solutions/3714798/ling-shen-ti-dan-qian-zhui-he-ha-xi-biao-oif8/">https://leetcode.cn/problems/continuous-subarray-sum/solutions/3714798/ling-shen-ti-dan-qian-zhui-he-ha-xi-biao-oif8/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">checkSubarraySum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        index_rec = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        index_rec[<span class="number">0</span>] = -<span class="number">1</span> <span class="comment"># 这样子只要在下标一及以后的位置出现能整除 k 的就能记录</span></span><br><span class="line">        total = <span class="number">0</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            total += x</span><br><span class="line">            mod_index = total % k</span><br><span class="line">            <span class="comment"># print(index)</span></span><br><span class="line">            <span class="keyword">if</span> mod_index <span class="keyword">in</span> index_rec:</span><br><span class="line">                <span class="keyword">if</span> i - index_rec[mod_index] &gt; <span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                index_rec[mod_index] = i</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】974和可被K整除的子数组</title>
       <link href="/posts/3348efaa.html"/>
       <url>/posts/3348efaa.html</url>
