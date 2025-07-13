@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【Leetcode Daily】437路径总和III</title>
+      <link href="/posts/b3d4e0ec.html"/>
+      <url>/posts/b3d4e0ec.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/path-sum-iii/description/">题目链接</a>。</p></li><li><p>简单地说，给了一个二叉树，求其中子链的数值和为 targetSum 的数目。子链的定义是二叉树中任意父节点到其子节点的节点链。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>这个题挺有意思的，通过这道题能够积累到有这么一种思路：可以通过类似二叉树的前序遍历，同时用哈希表记录前缀和。遍历的本质就是枚举子链的重点，这样就能清晰地看到每个有目标和值的子链。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pathSum</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], targetSum: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        cnt = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        cnt[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">node: <span class="type">Optional</span>[TreeNode], s: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">nonlocal</span> ans</span><br><span class="line">            s += node.val</span><br><span class="line">            ans += cnt[s - targetSum]</span><br><span class="line"></span><br><span class="line">            cnt[s] += <span class="number">1</span></span><br><span class="line">            dfs(node.left, s)</span><br><span class="line">            dfs(node.right, s)</span><br><span class="line"></span><br><span class="line">            cnt[s] -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        dfs(root, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】523连续的子数组和</title>
       <link href="/posts/a28baaff.html"/>
       <url>/posts/a28baaff.html</url>
@@ -1111,7 +1140,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input disabled="" type="checkbox"> ESLpod 2025.06.23-?</p></li><li><p><input disabled="" type="checkbox"> 按照每天两个 Lecture 的量推进 Mathatical Thinking 课程 2025.06.26-2025.07.09</p></li><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><input disabled="" type="checkbox"> Leetcode刷题，不急，慢慢学 2025.04.08-?</li></ul><p>&#x2F;&#x2F; 任务优先<br><del>- [ ] 推进 Mathatical Thinking 课程 2025.06.26-?</del></p><ul><li><p><input checked="" disabled="" type="checkbox"> qt作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       <categories>
