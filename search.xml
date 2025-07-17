@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【Leetcode Daily】17-05字母与数字</title>
+      <link href="/posts/2f75e249.html"/>
+      <url>/posts/2f75e249.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-longest-subarray-lcci/description/">目链接</a>。</p></li><li><p>简单地说，就是给一个数组，由字母和数字组成，找出其中字母和数字数目相同的子数组中，长度最长的那个。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>前缀和的思路，可以参考 <a href="/posts/42905a7b.html" title="【Leetcode Daily】303区域和检索-数组不可变">【Leetcode Daily】303区域和检索-数组不可变</a></p></li><li><p>出了题目描述，和昨天题目一模一样。<a href="/posts/e4780239.html" title="【Leetcode Daily】525连续数组">【Leetcode Daily】525连续数组</a>，要学会把两个数量相等，视作两个数量相加为 0 的思路。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findLongestSubarray</span>(<span class="params">self, array: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        acc_sum = <span class="number">0</span></span><br><span class="line">        rec = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        max_len = <span class="number">0</span></span><br><span class="line">        max_index = <span class="number">0</span></span><br><span class="line">        rec[<span class="number">0</span>] = -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(array):</span><br><span class="line">            acc_sum += <span class="number">1</span> <span class="keyword">if</span> x.isdigit() <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> acc_sum <span class="keyword">in</span> rec:</span><br><span class="line">                acc_len = i - rec[acc_sum]</span><br><span class="line">                <span class="keyword">if</span> max_len &lt; acc_len:</span><br><span class="line">                    max_len = acc_len</span><br><span class="line">                    max_index = rec[acc_sum]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                rec[acc_sum] = i</span><br><span class="line">    </span><br><span class="line">        max_index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> array[max_index:max_index+max_len]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】525连续数组</title>
       <link href="/posts/e4780239.html"/>
       <url>/posts/e4780239.html</url>
