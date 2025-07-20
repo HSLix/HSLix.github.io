@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2602使数组元素全部相等的最少操作次数</title>
+      <link href="/posts/2c27f19f.html"/>
+      <url>/posts/2c27f19f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个数组，现在规定一次操作为对数组一的任意元素进行加一或者减一，对数组二的每个元素，求将数组一的全部数字经多次操作后，全部变成该元素的操作次数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>有关距离和的基本思路，可以查看 <a href="/posts/2bf74580.html" title="【Leetcode Daily】1685有序数组中差绝对值之和">【Leetcode Daily】1685有序数组中差绝对值之和</a></p></li><li><p>本题与此前的距离和模板题有一点不同，由于不确定要对哪个下标的数字做距离和，需要二分查找找到下标再开始求解，python 中可以通过 bisect 函数来快速找到下标（bisect_left 是求最左，而 bisect_right 求最右）。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/solutions/2191417/yi-tu-miao-dong-pai-xu-qian-zhui-he-er-f-nf55/">https://leetcode.cn/problems/minimum-operations-to-make-all-array-elements-equal/solutions/2191417/yi-tu-miao-dong-pai-xu-qian-zhui-he-er-f-nf55/</a></p></blockquote></li><li><p>由于本题的操作不涉及原始序列，可以排序后再进行操作，这样才能用距离和。如果不能确保单调性，应该是得换个方法的。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minOperations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], queries: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        </span><br><span class="line">        nums.sort()</span><br><span class="line">        s = <span class="built_in">list</span>(accumulate(nums, initial=<span class="number">0</span>))</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> queries:</span><br><span class="line">            index = bisect_left(nums, i)</span><br><span class="line">            left = index*i - s[index] </span><br><span class="line">            right = s[n] - s[index] - (n-index)*i</span><br><span class="line">            ans.append(left+right)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+            <tag> 距离和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2615等值距离和</title>
+      <link href="/posts/558b5daf.html"/>
+      <url>/posts/558b5daf.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/sum-of-distances/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，求其中所有数值，各与其相同数值下标之差的绝对值之和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>有关距离和的基本思路，可以查看 <a href="/posts/2bf74580.html" title="【Leetcode Daily】1685有序数组中差绝对值之和">【Leetcode Daily】1685有序数组中差绝对值之和</a></p></li><li><p>本题是求下标之差，所以先要把数值分类，将各自的下标整理成各个数组，然后各数组就能计算其中元素与其它元素的距离和，从而提交答案。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">distance</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        groups = defaultdict(<span class="built_in">list</span>)</span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            groups[x].append(i)</span><br><span class="line">        ans = [<span class="number">0</span>]*<span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">for</span> a <span class="keyword">in</span> groups.values():</span><br><span class="line">            n = <span class="built_in">len</span>(a)</span><br><span class="line">            s = <span class="built_in">list</span>(accumulate(a, initial=<span class="number">0</span>))</span><br><span class="line">            <span class="keyword">for</span> j, target <span class="keyword">in</span> <span class="built_in">enumerate</span>(a):</span><br><span class="line">                left = target * j - s[j]</span><br><span class="line">                right = s[n]-s[j] - target*(n-j)</span><br><span class="line">                ans[target] = left + right</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+            <tag> 距离和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1685有序数组中差绝对值之和</title>
       <link href="/posts/2bf74580.html"/>
       <url>/posts/2bf74580.html</url>
@@ -22,9 +80,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 距离和 </tag>
             
         </tags>
       
