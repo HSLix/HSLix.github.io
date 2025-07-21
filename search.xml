@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2563统计公平数对的数目</title>
+      <link href="/posts/dc84143c.html"/>
+      <url>/posts/dc84143c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-the-number-of-fair-pairs/description/">题目链接</a>。</p></li><li><p>简单地说，题目规定了一种公平数对，也就是两个数字之和在一个数值区间中的情况，要求一个数组中有多少个公平数对。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>二分的基本思路可看<a href="/posts/ee27b191.html" title="【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置">【Leetcode Daily】34在排序数组中查找元素的第一个和最后一个位置</a>。</p></li><li><p>两数之和，马上就会想到枚举相关的技巧，通过简单变式就能把 l &lt; a + b &lt; r 的条件转化为 l-a &lt; b &lt; r-a，然后只要不断地枚举 a，找出 b 的范围并记录即可。</p><blockquote><p><a href="https://leetcode.cn/problems/count-the-number-of-fair-pairs/solutions/2107079/er-fen-cha-zhao-de-ling-huo-yun-yong-by-wplbj/">https://leetcode.cn/problems/count-the-number-of-fair-pairs/solutions/2107079/er-fen-cha-zhao-de-ling-huo-yun-yong-by-wplbj/</a></p></blockquote></li><li><p>由于本题的数对与位置无关，故可以先排序处理。排序后，就可以用二分查找快速定位要查找的数值（b 的区间）。</p></li><li><p>本题学到了 bisect 的后两个参数的作用，即查找下标的区间。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countFairPairs</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], lower: <span class="built_in">int</span>, upper: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        nums.sort()</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            r = bisect_right(nums, upper - x, <span class="number">0</span>, i)</span><br><span class="line">            l = bisect_left(nums, lower - x, <span class="number">0</span>, i)</span><br><span class="line">            ans += r-l</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 枚举 </tag>
+            
+            <tag> 二分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2602使数组元素全部相等的最少操作次数</title>
       <link href="/posts/2c27f19f.html"/>
       <url>/posts/2c27f19f.html</url>
