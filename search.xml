@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1011在D天内送达包裹的能力</title>
+      <link href="/posts/61d46c9e.html"/>
+      <url>/posts/61d46c9e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li>想查看原题可以点击<a href="https://leetcode.cn/problems/capacity-to-ship-packages-within-d-days/description/">题目链接</a>。</li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>二分答案的基本思路可看<a href="/posts/196cf791.html" title="【Leetcode Daily】1283使结果不超过阈值的最小除数">【Leetcode Daily】1283使结果不超过阈值的最小除数</a>。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">shipWithinDays</span>(<span class="params">self, weights: <span class="type">List</span>[<span class="built_in">int</span>], days: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 先要定好二分答案的左右区间起始,注意这是开区间</span></span><br><span class="line">        left, right = <span class="built_in">max</span>(weights)-<span class="number">1</span>, <span class="number">500</span>*<span class="built_in">len</span>(weights)+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">weights: <span class="type">List</span>[<span class="built_in">int</span>], ship_load: <span class="built_in">int</span>, days: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">            <span class="comment"># 此处把负载过小的情况快速地排除，加速</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">sum</span>(weights) &gt; ship_load*days:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">            </span><br><span class="line">            sum_num = <span class="number">0</span></span><br><span class="line">            use_days = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> weights:</span><br><span class="line">                sum_num += i</span><br><span class="line">                <span class="keyword">if</span> sum_num &gt; ship_load:</span><br><span class="line">                    sum_num = i</span><br><span class="line">                    use_days += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">            use_days += <span class="number">1</span> <span class="keyword">if</span> sum_num &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> use_days &lt;= days</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> left+<span class="number">1</span> &lt; right:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> check(weights, mid, days):</span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> right</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2187完成旅途的最少时间</title>
       <link href="/posts/72bab441.html"/>
       <url>/posts/72bab441.html</url>
