@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2226每个小孩最多能分到多少糖果</title>
+      <link href="/posts/797cc589.html"/>
+      <url>/posts/797cc589.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-candies-allocated-to-k-children/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组（糖果）和一个数值（孩子数量），要求按照一定规则分配糖果（这个规则直接看原题吧），求能给每个孩子分配的最大糖果数是多少。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>二分答案的基本思路可看<a href="/posts/196cf791.html" title="【Leetcode Daily】1283使结果不超过阈值的最小除数">【Leetcode Daily】1283使结果不超过阈值的最小除数</a>。</p></li><li><p>但从求二分答案最大值的角度，与昨天的题目（<a href="/posts/9349aae.html" title="【Leetcode Daily】275H指数II">【Leetcode Daily】275H指数II</a>）没有任何区别，故不赘述。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-candies-allocated-to-k-children/solutions/1391104/by-endlesscheng-y031/">https://leetcode.cn/problems/maximum-candies-allocated-to-k-children/solutions/1391104/by-endlesscheng-y031/</a></p></blockquote></li><li><p>不过有一点需要重点强调，就是初始左右指针的值的含义要搞清楚，由于是求最大，因此左指针需要一开始就满足条件，而右指针是一定不满足条件（开区间的设定）。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumCandies</span>(<span class="params">self, candies: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        left, right = <span class="number">0</span>, <span class="built_in">max</span>(candies)+<span class="number">1</span></span><br><span class="line">        <span class="keyword">while</span> left+<span class="number">1</span> &lt; right:</span><br><span class="line">            mid = (left+right) // <span class="number">2</span></span><br><span class="line">            children = <span class="built_in">sum</span>(num//mid <span class="keyword">for</span> num <span class="keyword">in</span> candies)</span><br><span class="line">            <span class="comment"># print(f&quot;&#123;mid&#125; &#123;children&#125;&quot;)</span></span><br><span class="line">            <span class="keyword">if</span> children &gt;= k:</span><br><span class="line">                left = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                right = mid</span><br><span class="line">        <span class="keyword">return</span> left</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】275H指数II</title>
       <link href="/posts/9349aae.html"/>
       <url>/posts/9349aae.html</url>
