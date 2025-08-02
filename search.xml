@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】844比较含退格的字符串</title>
+      <link href="/posts/16d5e0b0.html"/>
+      <url>/posts/16d5e0b0.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/backspace-string-compare/">题目链接</a>。</p></li><li><p>简单地说，就是给两个字符串，串中的 ‘#’ 被当作退格符，要求处理完退格符后，判断两个字符串是否相等。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>只要维护两个栈，在推入时 push（append），弹出时 pop 即可。</p></li><li><p>重点是学习 Python 是如何模拟栈的，在 C++ 中有对应的 stl，就算不用标准 stack，也能用 vector 模拟。Python 中是先用 list 的 append 和 pop 方法，最后运用 join 把 list 里面的各个元素粘合起来。</p></li><li><p><code>&quot;&quot;.join(stack)</code>的意思就是以 <code>&quot;&quot;</code> 内容作为连接符（这里就是没有任何内容），把 stack 的元素连成字符串。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">backspaceCompare</span>(<span class="params">self, s: <span class="built_in">str</span>, t: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">backspace</span>(<span class="params">s: <span class="built_in">str</span></span>):</span><br><span class="line">            stack = <span class="built_in">list</span>()</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> c != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                    stack.append(c)</span><br><span class="line">                <span class="keyword">elif</span> stack:</span><br><span class="line">                    stack.pop()</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stack)</span><br><span class="line">        <span class="keyword">return</span> backspace(s) == backspace(t)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1441用栈操作构建数组</title>
+      <link href="/posts/56c17beb.html"/>
+      <url>/posts/56c17beb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/build-an-array-with-stack-operations/">题目链接</a>。</p></li><li><p>简单地说，就是给一个 target 数组，现在会让数字从 1 到 n 输入，每次输入都算 Push 操作，而可以选择 Pop 弹出栈顶。求得到 target 数组的操作序列。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>正如题目所说，每次输入数字就算一次 Push，但是由于输入数字可能会跨越一定数值，因此需要计算中间需要多少次 Push 和对应的 Pop。</p></li><li><p>对于需要 Pop 的处理有大致两种方法，一种是每 Push 一个就马上 Pop，另一种是 Push 完中间的再一次性 Pop，下面选用第一种方法。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">buildArray</span>(<span class="params">self, target: <span class="type">List</span>[<span class="built_in">int</span>], n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        ans = []</span><br><span class="line">        index = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> target:</span><br><span class="line">            <span class="keyword">while</span> index &lt; x:</span><br><span class="line">                ans.append(<span class="string">&quot;Push&quot;</span>)</span><br><span class="line">                ans.append(<span class="string">&quot;Pop&quot;</span>)</span><br><span class="line">                index += <span class="number">1</span></span><br><span class="line">                </span><br><span class="line">            ans.append(<span class="string">&quot;Push&quot;</span>)</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2226每个小孩最多能分到多少糖果</title>
       <link href="/posts/797cc589.html"/>
       <url>/posts/797cc589.html</url>
