@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】682棒球比赛</title>
+      <link href="/posts/ea2812d6.html"/>
+      <url>/posts/ea2812d6.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/baseball-game/">题目链接</a>。</p></li><li><p>简单地说，就是给一个列表，这个列表有数字或者特殊符号，要求按顺序遍历列表计数，遇到特殊符号则按规则运算（取前两数之和，取上一数两倍，去掉上一数），求最终数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>就是简单的模拟一个栈，遇到数字直接 append 进去，遇到符号就取数运算把结果 append 进去，或者把最后一个数字 pop 出来。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">calPoints</span>(<span class="params">self, operations: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> operations:</span><br><span class="line">            <span class="keyword">if</span> i == <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                rec.append(rec[-<span class="number">1</span>]+rec[-<span class="number">2</span>])</span><br><span class="line">            <span class="keyword">elif</span> i == <span class="string">&quot;D&quot;</span>:</span><br><span class="line">                rec.append(rec[-<span class="number">1</span>]*<span class="number">2</span>)</span><br><span class="line">            <span class="keyword">elif</span> i == <span class="string">&quot;C&quot;</span>:</span><br><span class="line">                rec.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                rec.append(<span class="built_in">int</span>(i))</span><br><span class="line">            <span class="comment"># print(rec)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(rec)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】844比较含退格的字符串</title>
       <link href="/posts/16d5e0b0.html"/>
       <url>/posts/16d5e0b0.html</url>
