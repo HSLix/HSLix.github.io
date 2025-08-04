@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2390从字符串中移除星号</title>
+      <link href="/posts/54bbdd35.html"/>
+      <url>/posts/54bbdd35.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/removing-stars-from-a-string/description/">题目链接</a>。</p></li><li><p>简单地说，就是把字符串中的星号当作退格，每次遇到就删除前面一个字符，求最终处理后的字符串。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>除了符号不同，与题目 <a href="/posts/16d5e0b0.html" title="【Leetcode Daily】844比较含退格的字符串">【Leetcode Daily】844比较含退格的字符串</a> 几乎一摸一样，故不赘述。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeStars</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        rec = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c != <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                rec.append(c)</span><br><span class="line">            <span class="keyword">elif</span> rec:</span><br><span class="line">                rec.pop()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(rec)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】682棒球比赛</title>
       <link href="/posts/ea2812d6.html"/>
       <url>/posts/ea2812d6.html</url>
