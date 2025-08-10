@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1047删除字符串中的所有相邻重复项</title>
+      <link href="/posts/17c656ee.html"/>
+      <url>/posts/17c656ee.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，现在要求删除其中所有相邻是重复的字符，如果删除后会产生新的相邻重复字符，则继续删除。求最终处理后的字符串。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>只要知道了 Python 的列表可以方便的加元素（append），弹出末尾元素（pop），以及可以很方便地组合列表元素（join），本题就能轻松解决。</p></li><li><p>以及 python 中有种有意思的设计，就是对于各种类型，有内置的 <code>__bool__</code> 函数，可以当作判断该变量内部是否有内容的方法。比如下面的<code>if stk and stk[-1] == c</code>，第一个条件就是判断列表是否为空，如果为空就是 false，否则有内容的情况下再看最后一个元素。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeDuplicates</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> stk <span class="keyword">and</span> stk[-<span class="number">1</span>] == c:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(c)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2696删除子串后的字符串最小长度</title>
       <link href="/posts/96dc13ca.html"/>
       <url>/posts/96dc13ca.html</url>
