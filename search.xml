@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1544整理字符串</title>
+      <link href="/posts/e5ef864a.html"/>
+      <url>/posts/e5ef864a.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/make-the-string-great/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，现在规定要删除串内所有相邻的字母不能是一个小写，另一个大写的情况，返回处理后的结果。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>处理的基本思路与昨天的 <a href="/posts/17c656ee.html" title="【Leetcode Daily】1047删除字符串中的所有相邻重复项">【Leetcode Daily】1047删除字符串中的所有相邻重复项</a> 一模一样，不过这里有一个值得说一下的是如何判断一个小写另一个大写。</p></li><li><p>如果用位运算的话，确实能通过特定位的变化来检测，大小写相差 32 来着（ASCII），那么取异或运算后，第五位必定为 1。但普通一些的方法也有，一个是按照题目所说，规定一个小写另一个大写就弹，这也是下面参考中被注释的一行；另一个聪明一些的写法是，检测两个字母的小写形式相同，且两个字母不同，那就必定为一个小写另一个大写。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">makeGood</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="comment"># if stk and ((c == stk[-1].upper() and stk[-1] == stk[-1].lower()) or (c == stk[-1].lower() and stk[-1] == stk[-1].upper())):</span></span><br><span class="line">            <span class="keyword">if</span> stk <span class="keyword">and</span> (c.lower() == stk[-<span class="number">1</span>].lower() <span class="keyword">and</span> c != stk[-<span class="number">1</span>]):</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(c)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1047删除字符串中的所有相邻重复项</title>
       <link href="/posts/17c656ee.html"/>
       <url>/posts/17c656ee.html</url>
