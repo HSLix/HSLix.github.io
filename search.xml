@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1003检查替换后的词是否有效</title>
+      <link href="/posts/ea3f85ea.html"/>
+      <url>/posts/ea3f85ea.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，该字符串是从一个空字符串开始，不断插入“abc”形成的，这个插入是从字符串的任意处都可以行动。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这个题目和实际的题意完全不是一个意思，坏。不过这个不重要。</p></li><li><p>发现做栈，只要把握一点，就是何时弹栈。例如本题，只要意识到，弹栈的时候，正在遍历的字母是 c，栈顶有 a 和 b，就轻松地写出了条件。</p></li><li><p>这个条件应该不是最快的，因为只要中间的 abc 有一处无法正确匹配，就可以算是检测不过关，所以更快的思路应该是按照正在遍历的 abc 三种情况，分别检测栈是否符合“正常”。</p><blockquote><p><a href="https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions/solutions/2253773/zhan-jian-ji-xie-fa-pythonjavacgo-by-end-i9o7/">https://leetcode.cn/problems/check-if-word-is-valid-after-substitutions/solutions/2253773/zhan-jian-ji-xie-fa-pythonjavacgo-by-end-i9o7/</a></p></blockquote></li><li><p>本题不断插入 abc，并要求检测是否都是 abc，实际上就是一层层包裹的字符串，通过栈就能从内而外地拆分，最后如果只剩下空字符串说明检测不过关。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(stk) &gt; <span class="number">1</span> <span class="keyword">and</span> c == <span class="string">&#x27;c&#x27;</span> <span class="keyword">and</span> stk[-<span class="number">1</span>] == <span class="string">&#x27;b&#x27;</span> <span class="keyword">and</span> stk[-<span class="number">2</span>] == <span class="string">&#x27;a&#x27;</span>:</span><br><span class="line">                stk.pop()</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(c)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">not</span> stk</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3561移除相邻字符</title>
       <link href="/posts/ccda6640.html"/>
       <url>/posts/ccda6640.html</url>
