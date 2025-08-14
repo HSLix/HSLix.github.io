@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2216美化数组的最少删除数</title>
+      <link href="/posts/ff3894d9.html"/>
+      <url>/posts/ff3894d9.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-deletions-to-make-array-beautiful/">题目链接</a>。</p></li><li><p>简单地说，就是规定美丽数组的定义是，长度为偶数，且下标为偶数的数值与其后一位的数值不能相同，要求把给定数组改成美丽数组的最小删除字符数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>先满足下标偶数数值与后一位不同的条件，这个只要用栈模拟遍历数组，一旦栈的长度达到偶数，下一个数值就排除同栈顶的元素值即可。</p></li><li><p>那么长度为偶数的条件呢，可以在遍历结束后，如果最后数组长度为奇数，直接去掉栈顶即可。由于前面都满足条件二，去掉末尾元素不会违反其它条件。</p></li><li><p>看下来，本题实际上不需要真的做出一个栈，毕竟加入元素的过程与栈顶之前的元素没有任何关系，所以只要记录栈顶和栈的长度即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minDeletion</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        last_num = -<span class="number">1</span> <span class="comment">#栈顶</span></span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> index % <span class="number">2</span> == <span class="number">1</span> <span class="keyword">and</span> last_num == x:</span><br><span class="line">                index -= <span class="number">1</span></span><br><span class="line">            last_num = x</span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> index % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            index -= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(nums)-index</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1003检查替换后的词是否有效</title>
       <link href="/posts/ea3f85ea.html"/>
       <url>/posts/ea3f85ea.html</url>
