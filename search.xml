@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1209删除字符串中的所有相邻重复项II</title>
+      <link href="/posts/b842f0a8.html"/>
+      <url>/posts/b842f0a8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串和一个整数 k，要求把其中所有相邻的连续的，长度超过k的项删除，返回最后的字符串。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>除了暴力的检测到相邻字符，删除后从头到尾再检测一边这种。其实可以通过记录每个字符的重复计数来加速过程。</p></li><li><p>比如本题用栈记录遍历过的字符，以及对应的重复计数（一个字符与上一个字符相同时则加一），在这个计数大于 k 时，把这个字符弹栈 k 次。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeDuplicates</span>(<span class="params">self, s: <span class="built_in">str</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        rec = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="keyword">if</span> stk <span class="keyword">and</span> c == stk[-<span class="number">1</span>]:</span><br><span class="line">                rec.append(rec[-<span class="number">1</span>]+<span class="number">1</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                rec.append(<span class="number">1</span>)</span><br><span class="line">            stk.append(c)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> rec[-<span class="number">1</span>] == k:</span><br><span class="line">                <span class="keyword">while</span> rec[-<span class="number">1</span>] != <span class="number">1</span>:</span><br><span class="line">                    stk.pop()</span><br><span class="line">                    rec.pop()</span><br><span class="line">                stk.pop()</span><br><span class="line">                rec.pop()</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2216美化数组的最少删除数</title>
       <link href="/posts/ff3894d9.html"/>
       <url>/posts/ff3894d9.html</url>
