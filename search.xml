@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】735小行星碰撞</title>
+      <link href="/posts/2eded2b8.html"/>
+      <url>/posts/2eded2b8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/asteroid-collision/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组，其中的正数代表向右运动的行星，负数代表向左运动的行星，规定行星会碰撞，且小的行星会破碎如果两个大小相等就都破碎。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这种只涉及最靠边的两个数值的情况，就适合用栈来辅助。</p></li><li><p>首先判定碰撞，只有新元素为负数且栈有元素，以及栈顶为正数的情况会有碰撞。</p></li><li><p>然后是模拟碰撞，就是看栈顶和新行星的情况，谁大留谁，一样大就都不留，一直循环到栈空或者栈顶值更大。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">asteroidCollision</span>(<span class="params">self, asteroids: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> plantnet <span class="keyword">in</span> asteroids:</span><br><span class="line">            <span class="comment"># 下面是唯一的必定有碰撞的情况</span></span><br><span class="line">            continue_flag = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">while</span> plantnet &lt; <span class="number">0</span> <span class="keyword">and</span> stk <span class="keyword">and</span> stk[-<span class="number">1</span>] &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="comment"># 这是向左的行星一直撞的情况</span></span><br><span class="line">                <span class="keyword">if</span> -plantnet &gt; stk[-<span class="number">1</span>]:</span><br><span class="line">                    stk.pop()</span><br><span class="line">                <span class="comment"># 这是两个行星一起碎的情况</span></span><br><span class="line">                <span class="keyword">elif</span> -plantnet == stk[-<span class="number">1</span>]:</span><br><span class="line">                    stk.pop()</span><br><span class="line">                    continue_flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="comment"># 这是新的行星直接碎了情况</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    continue_flag = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> continue_flag:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            stk.append(plantnet)</span><br><span class="line">        <span class="keyword">return</span> stk</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1209删除字符串中的所有相邻重复项II</title>
       <link href="/posts/b842f0a8.html"/>
       <url>/posts/b842f0a8.html</url>
