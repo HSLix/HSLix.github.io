@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】20有效的括号</title>
+      <link href="/posts/1eab9166.html"/>
+      <url>/posts/1eab9166.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/valid-parentheses/">题目链接</a>。</p></li><li><p>简单地说，就是给一个有小、中、大括号的六个符号组成的字符串，如果其中所有的括号都能正确配队，那么算有效，否则无效。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>基本逻辑肯定涉及到了栈，但如何应用有好几种不同方法。</p></li><li><p>下面的参考题解就是最普通的一种，在栈有元素且新元素为括号右侧的情况下，判断是否出栈，最终栈空代表有效。</p></li><li><p>但其实还有其它的不错思路，比如遍历到括号左侧，就入栈对应的括号右侧，这样就把问题转换成了消除字符串相邻的元素；或者用哈希表存储括号右侧对应的左侧符号与栈顶是否一致……</p><blockquote><p><a href="https://leetcode.cn/problems/valid-parentheses/solutions/2809539/gua-hao-xiao-xiao-le-san-chong-li-yong-z-2xb3/">https://leetcode.cn/problems/valid-parentheses/solutions/2809539/gua-hao-xiao-xiao-le-san-chong-li-yong-z-2xb3/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isValid</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        res = <span class="literal">True</span></span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="comment"># print(ord(&#x27;)&#x27;)-ord(&#x27;(&#x27;))</span></span><br><span class="line">        <span class="comment"># print(ord(&#x27;]&#x27;)-ord(&#x27;[&#x27;))</span></span><br><span class="line">        <span class="comment"># print(ord(&#x27;&#125;&#x27;)-ord(&#x27;&#123;&#x27;))</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> stk:</span><br><span class="line">                <span class="keyword">if</span> c == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">ord</span>(c) - <span class="built_in">ord</span>(stk[-<span class="number">1</span>]) == <span class="number">1</span>:</span><br><span class="line">                        stk.pop()</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        res = <span class="literal">False</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> c == <span class="string">&#x27;]&#x27;</span> <span class="keyword">or</span> c == <span class="string">&#x27;&#125;&#x27;</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">ord</span>(c) - <span class="built_in">ord</span>(stk[-<span class="number">1</span>]) == <span class="number">2</span>:</span><br><span class="line">                        stk.pop()</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        res = <span class="literal">False</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    stk.append(c)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(c)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> res <span class="keyword">and</span> <span class="keyword">not</span> stk</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】735小行星碰撞</title>
       <link href="/posts/2eded2b8.html"/>
       <url>/posts/2eded2b8.html</url>
