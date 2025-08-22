@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】856括号的分数</title>
+      <link href="/posts/c7c5ea10.html"/>
+      <url>/posts/c7c5ea10.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/score-of-parentheses/">题目链接</a>。</p></li><li><p>简单地说，就是给一个由 () 组成的字符串，要求根据规则，统计字符串的分数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本题本质是对于字符串的划分，参考题解的解法就是通过栈记录以及合并数值，最终使得栈内是处理后剩下的数值。不过根据下面的引用连接，可以对括号替换为函数，然后用 eval 函数来进行计算。</p><blockquote><p><a href="https://leetcode.cn/problems/score-of-parentheses/solutions/1876173/gua-hao-de-fen-shu-by-leetcode-solution-we6b/comments/1787774/">https://leetcode.cn/problems/score-of-parentheses/solutions/1876173/gua-hao-de-fen-shu-by-leetcode-solution-we6b/comments/1787774/</a></p></blockquote></li><li><p>不过本题在参考题解的基础上能够再简化一些，本质上，() 算 1，内部若有值则乘二的规则，可以视作内部值默认零情况下，乘二后与 1 比较取大值，这样就不用区分括号内有无元素了。</p><blockquote><p><a href="https://leetcode.cn/problems/score-of-parentheses/solutions/1876173/gua-hao-de-fen-shu-by-leetcode-solution-we6b/">https://leetcode.cn/problems/score-of-parentheses/solutions/1876173/gua-hao-de-fen-shu-by-leetcode-solution-we6b/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">scoreOfParentheses</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stk.append(c)</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> stk:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="comment"># 下面就是遇到括号右部，要结算的时候</span></span><br><span class="line">            tmp_sum = <span class="number">0</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                last = stk.pop()</span><br><span class="line">                <span class="keyword">if</span> last == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                    <span class="comment"># 第一种情况，发现栈顶就是括号左部，结算一分</span></span><br><span class="line">                    <span class="keyword">if</span> tmp_sum == <span class="number">0</span>:</span><br><span class="line">                        tmp_sum = <span class="number">1</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="comment"># 第二种情况，结算括号内部乘二</span></span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        tmp_sum *= <span class="number">2</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 这是累计括号内数字和，准备乘二</span></span><br><span class="line">                    tmp_sum += last</span><br><span class="line">            stk.append(tmp_sum)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(stk)</span><br><span class="line">            </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1190反转每对括号间的子串</title>
       <link href="/posts/96f0b224.html"/>
       <url>/posts/96f0b224.html</url>
