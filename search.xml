@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】150逆波兰表达式求值</title>
+      <link href="/posts/fe2570e7.html"/>
+      <url>/posts/fe2570e7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个逆波兰表达式，该表达式与后缀表达式类似，但是只有四则运算，所以遇到符号就能弹栈两个数立即计算并入栈。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>由于逆波兰表达式的特性，只要处理好遇到符号时取两数计算以及入栈数字的情况即可。</p></li><li><p>这里得补充一个 Python 除法的小知识点，与 CPP 等语言不同，Python 的整数无上限，同时除法时的抹零特性也并非向零截断，而是向下截断。所以需要<code>int(a / float(b))</code>的整型转化来模拟取零。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">evalRPN</span>(<span class="params">self, tokens: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stk = <span class="built_in">list</span>()</span><br><span class="line">        <span class="keyword">for</span> token <span class="keyword">in</span> tokens:</span><br><span class="line">            <span class="comment">#$ print(stk)</span></span><br><span class="line">            <span class="keyword">if</span> token == <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                b = stk.pop()</span><br><span class="line">                a = stk.pop()</span><br><span class="line">                stk.append(<span class="built_in">int</span>(a / <span class="built_in">float</span>(b)))</span><br><span class="line">            <span class="keyword">elif</span> token == <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                stk.append(stk.pop() + stk.pop())</span><br><span class="line">            <span class="keyword">elif</span> token == <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                b = stk.pop()</span><br><span class="line">                a = stk.pop()</span><br><span class="line">                stk.append(a - b)</span><br><span class="line">            <span class="keyword">elif</span> token == <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                stk.append(stk.pop() * stk.pop())</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(<span class="built_in">int</span>(token))</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> stk[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1006笨阶乘</title>
       <link href="/posts/737debf0.html"/>
       <url>/posts/737debf0.html</url>
