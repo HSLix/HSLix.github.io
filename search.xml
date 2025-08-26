@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】394字符串解码</title>
+      <link href="/posts/44bd772.html"/>
+      <url>/posts/44bd772.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/decode-string/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，对于其中 3[*] 的部分，就替换成 *** 这样把中括号内部重复 3 遍，前面的数字部分可以为 1-300 的任意整数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>一开始的思路是对于[]的内部直接延长为数字倍数，但发现这个思路不太好应对多层嵌套。</p></li><li><p>于是，如果用栈记录每层的字符情况以及要乘的数字倍数情况，然后在括号结束时计算倍数，就可以解决嵌套的问题。</p></li><li><p>不过这里记录一个 Python 有趣的知识，对于 <code>l = [&quot;1&quot;, &quot;2&quot;]</code> 这样的列表，用 <code>l[-1] += l.pop()</code> 的结果是什么呢？这个代码的原本目标是去除最后的一个元素，并将内容与前一个字符串融合，即目标答案是 [“12”]。但实际上却是 [“22”]。原因是虽然表达式是右到左来解析，但左边的 l[-1] 的“值”在式子一开始就是固定的，十分微妙，不知道算 bug 还是什么。（3.12.2）只能说各位实际上写的时候，尽量避免 -1 和 pop 这种比较相关的操作同时运行。</p></li><li><p>灵神的题解一如既往的神啊，参考题解与灵神的栈思路类似</p><blockquote><p><a href="https://leetcode.cn/problems/decode-string/solutions/3744428/di-gui-yong-zhan-mo-ni-di-gui-pythonjava-kcsv/">https://leetcode.cn/problems/decode-string/solutions/3744428/di-gui-yong-zhan-mo-ni-di-gui-pythonjava-kcsv/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">decodeString</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        count_rec = <span class="built_in">list</span>()</span><br><span class="line">        left_rec = <span class="built_in">list</span>()</span><br><span class="line">        contents = [<span class="string">&quot;&quot;</span>]</span><br><span class="line">        count = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="keyword">if</span> x == <span class="string">&#x27;[&#x27;</span>:</span><br><span class="line">                count_rec.append(count)</span><br><span class="line">                <span class="comment"># left_rec.append(i)</span></span><br><span class="line">                count = <span class="number">0</span></span><br><span class="line">                contents.append(<span class="string">&quot;&quot;</span>)</span><br><span class="line">            <span class="keyword">elif</span> x == <span class="string">&#x27;]&#x27;</span>:</span><br><span class="line">                tmp = contents.pop() * count_rec.pop()</span><br><span class="line">                contents[-<span class="number">1</span>] += tmp</span><br><span class="line">            <span class="keyword">elif</span> x.isdigit():</span><br><span class="line">                count *= <span class="number">10</span></span><br><span class="line">                count += <span class="built_in">int</span>(x)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                contents[-<span class="number">1</span>] += x</span><br><span class="line">            <span class="comment"># print(contents)</span></span><br><span class="line">            <span class="comment"># print(count_rec)</span></span><br><span class="line">            <span class="comment"># print()</span></span><br><span class="line">        <span class="comment"># print(contents)</span></span><br><span class="line">        <span class="keyword">return</span> contents[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】150逆波兰表达式求值</title>
       <link href="/posts/fe2570e7.html"/>
       <url>/posts/fe2570e7.html</url>
