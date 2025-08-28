@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】224基本计算器</title>
+      <link href="/posts/82ff7aa0.html"/>
+      <url>/posts/82ff7aa0.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/basic-calculator/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，串内是一个有加减法和小括号的数学表达式，请计算表达式的结果。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>最简的表达式为 <code>a +/- b</code>，即左部、符号、右部。加入小括号后，小括号内可以优先计算，化为一个数，也就是可当作左部或者右部。</p></li><li><p>那么从左向右遍历字符串，只要记录已经计算后的结果、正在遍历的数字以及正在使用的计算符号就行。一旦遇到下一个符号，就把上一个符号和数字计算并加入到结果当中。遇到小括号，就把结果和符号保存到栈中，计算完小括号后，把值放右部，提取栈值和符号作为左部计算。</p><blockquote><p><a href="https://leetcode.cn/problems/basic-calculator/solutions/646800/ru-he-xiang-dao-yong-zhan-si-lu-lai-zi-y-gpca/">https://leetcode.cn/problems/basic-calculator/solutions/646800/ru-he-xiang-dao-yong-zhan-si-lu-lai-zi-y-gpca/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">calculate</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        res, num, sign = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span> <span class="comment"># 分别是结果，正在处理的数字，以及对应符号</span></span><br><span class="line">        stk = <span class="built_in">list</span>() <span class="comment"># 作为存储括号内数值和符号的栈，两两一组</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c.isdigit():</span><br><span class="line">                <span class="comment"># 记录当前数字</span></span><br><span class="line">                num *= <span class="number">10</span></span><br><span class="line">                num += <span class="built_in">int</span>(c)</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&#x27;+&#x27;</span> <span class="keyword">or</span> c == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                <span class="comment"># 遇到符号，也就是说上一阶段的计算得结束了</span></span><br><span class="line">                res += sign * num <span class="comment"># 用 sign 就免除了再判断 + -</span></span><br><span class="line">                num = <span class="number">0</span></span><br><span class="line">                sign = <span class="number">1</span> <span class="keyword">if</span> c == <span class="string">&#x27;+&#x27;</span> <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                <span class="comment"># 保存当前结果，准备下一阶段的计算</span></span><br><span class="line">                stk.append(res)</span><br><span class="line">                stk.append(sign)</span><br><span class="line">                res, sign = <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                <span class="comment"># 把栈的结果（上一层）与现有的结果合并</span></span><br><span class="line">                res += sign * num</span><br><span class="line">                num = <span class="number">0</span></span><br><span class="line">                res *= stk.pop() <span class="comment"># 这里的 res 实际上是括号内部（或者说计算式的右侧）</span></span><br><span class="line">                res += stk.pop() <span class="comment"># 上一层的计算结果</span></span><br><span class="line">        res += sign * num</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】394字符串解码</title>
       <link href="/posts/44bd772.html"/>
       <url>/posts/44bd772.html</url>
