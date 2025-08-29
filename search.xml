@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】227基本计算器II</title>
+      <link href="/posts/9b3364d1.html"/>
+      <url>/posts/9b3364d1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/basic-calculator-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串，其中是一个有加减乘除运算的数学表达式（无括号），要求表达式结果。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>与 <a href="/posts/82ff7aa0.html" title="【Leetcode Daily】224基本计算器">【Leetcode Daily】224基本计算器</a> 类似，中心主旨是简化表达式为加法。通过栈来存储待加数字，然后设置一个变量存储上一个符号（这样子就可以在遇到下一个符号时，用已有的栈末尾和正在遍历数字进行上一次运算），最后计算栈的总和就是表达式答案。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">calculate</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        nums = []</span><br><span class="line">        pre_opr = <span class="string">&quot;+&quot;</span> <span class="comment"># 上一次符号，默认 0 + 开始</span></span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">            <span class="keyword">if</span> c.isdigit():</span><br><span class="line">                num *= <span class="number">10</span></span><br><span class="line">                num += <span class="built_in">int</span>(c)</span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span> <span class="keyword">or</span> c <span class="keyword">in</span> <span class="string">&quot;+-*/&quot;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_opr == <span class="string">&quot;+&quot;</span>:</span><br><span class="line">                    nums.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_opr == <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                    nums.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_opr == <span class="string">&quot;*&quot;</span>:</span><br><span class="line">                    nums.append(nums.pop() * num)</span><br><span class="line">                <span class="keyword">elif</span> pre_opr == <span class="string">&quot;/&quot;</span>:</span><br><span class="line">                    nums.append(<span class="built_in">int</span>(nums.pop() / <span class="built_in">float</span>(num)))</span><br><span class="line">                num = <span class="number">0</span></span><br><span class="line">                pre_opr = c</span><br><span class="line">                <span class="comment"># print(nums)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(nums)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】224基本计算器</title>
       <link href="/posts/82ff7aa0.html"/>
       <url>/posts/82ff7aa0.html</url>
