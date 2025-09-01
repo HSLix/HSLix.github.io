@@ -4,6 +4,62 @@
   
     
     <entry>
+      <title>【Leetcode Daily】933最近的请求次数</title>
+      <link href="/posts/758120d8.html"/>
+      <url>/posts/758120d8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-recent-calls/description/">题目链接</a>。</p></li><li><p>简单地说，就是自己实现一个类，能够存储数字（给的数字按升序排列），同时每次插入数字都会返回已有数字中数值上最近 3000 的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>参考题解中，用队列先进先出的特性，保持队首和队尾差值不超过 3000，否则开始弹队尾。</p></li><li><p>也可以不用队列，在存储数字后，可以二分查找队首元素减 3000 的位置，然后就可以计算出有多少数字了。</p><blockquote><p><a href="https://leetcode.cn/problems/number-of-recent-calls/solutions/1472153/-by-fuxuemingzhu-ryxx/">https://leetcode.cn/problems/number-of-recent-calls/solutions/1472153/-by-fuxuemingzhu-ryxx/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RecentCounter</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.que = deque()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">ping</span>(<span class="params">self, t: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="variable language_">self</span>.que.append(t)</span><br><span class="line">        <span class="keyword">while</span> <span class="variable language_">self</span>.que[-<span class="number">1</span>] - <span class="variable language_">self</span>.que[<span class="number">0</span>] &gt; <span class="number">3000</span>:</span><br><span class="line">            <span class="comment"># self.que = self.que[1:]</span></span><br><span class="line">            <span class="variable language_">self</span>.que.popleft()</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.que)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your RecentCounter object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = RecentCounter()</span></span><br><span class="line"><span class="comment"># param_1 = obj.ping(t)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1475商品折扣后的最终价格</title>
+      <link href="/posts/a484b865.html"/>
+      <url>/posts/a484b865.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/final-prices-with-a-special-discount-in-a-shop/">题目链接</a>。</p></li><li><p>简单地说，就是给一个商品价格列表，现在每个价格可以拥有优惠，即减去该商品之后最近的那个价格不大于自身的商品价格。求折扣后的商品价格列表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>对于每个元素查找下一个比自己小的元素，很自然就想到可以用单调栈来处理，以参考题解的从左往右为例。</p></li><li><p>只要在栈内存储比较大的，还没找到下个比自己小的元素，然后遍历新元素时，检查栈顶是否比自己大，是的情况就弹栈处理优惠，否则就直接压栈。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">finalPrices</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        stk = []</span><br><span class="line">        ans = prices[:]</span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(prices):</span><br><span class="line">            <span class="keyword">while</span> stk <span class="keyword">and</span> x &lt;= prices[stk[-<span class="number">1</span>]]:</span><br><span class="line">                ans[stk.pop()] -= x</span><br><span class="line">            stk.append(i)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 栈 </tag>
+            
+            <tag> 单调栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】739每日温度</title>
       <link href="/posts/95126c70.html"/>
       <url>/posts/95126c70.html</url>
