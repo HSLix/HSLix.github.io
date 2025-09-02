@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】950按递增顺序显示卡牌</title>
+      <link href="/posts/4b811c54.html"/>
+      <url>/posts/4b811c54.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/reveal-cards-in-increasing-order/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个取数组数的方法，就是弹出最左边的数，并把下一个数放末尾，直到所有数都被弹出。现在给出初始数组的顺序，使得按方法取出的数是递增顺序的。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本题有两个难点，第一个是读题，从本题我发现我已经有相当的时间没有好好读东西了，读到题目也心烦意乱，导致获取上面的题意都有些困难；</p></li><li><p>第二个是逆思维，这题乍一看没思路，但是实际上要得到那个“初始顺序”，所需的最终的顺序和得到顺序的过程都有了，只要对着升序的数字执行倒过来的行动（把末位数提前，然后在左边加一个数）</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">deckRevealedIncreasing</span>(<span class="params">self, deck: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        deck.sort()</span><br><span class="line">        q = deque()</span><br><span class="line">        <span class="keyword">while</span> deck:</span><br><span class="line">            <span class="keyword">if</span> q:</span><br><span class="line">                q.appendleft(q.pop())</span><br><span class="line">            q.appendleft(deck.pop())</span><br><span class="line">            <span class="comment">#print(q)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(q)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】933最近的请求次数</title>
       <link href="/posts/758120d8.html"/>
       <url>/posts/758120d8.html</url>
