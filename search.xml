@@ -4,6 +4,37 @@
   
     
     <entry>
+      <title>【Leetcode Daily】239滑动窗口最大值</title>
+      <link href="/posts/8b46e1a9.html"/>
+      <url>/posts/8b46e1a9.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/sliding-window-maximum/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和一个数字 k，请给出这个数组中，所有连续 k 个数字中最大的那个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>题目其实已经说明了本题的核心就是滑动窗口了，滑动窗口核心的三步就是进入窗口，弹出窗口，记录数据。</p></li><li><p>但是从窗口中获得最大值的方式可以改进。最暴力的手段是直接遍历其中的 k 个值外（时间复杂度 (n-k+1)*k），那有没有什么办法能简化呢？</p></li><li><p>一个简单的办法是设置一个变量维护当前窗口的最大值，当该值弹出时再遍历。能够一定程度上减去部分直接遍历的情况，但对于降序的数组等同于最坏情况。</p></li><li><p>比较高明的手段是通过单调队列，维护队列内队首到队尾降序，答案就取队首。</p><blockquote><p><a href="https://leetcode.cn/problems/sliding-window-maximum/solutions/2499715/shi-pin-yi-ge-shi-pin-miao-dong-dan-diao-ezj6/">https://leetcode.cn/problems/sliding-window-maximum/solutions/2499715/shi-pin-yi-ge-shi-pin-miao-dong-dan-diao-ezj6/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSlidingWindow</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        q = deque()</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">while</span> q <span class="keyword">and</span> x &gt;= nums[q[-<span class="number">1</span>]]:</span><br><span class="line">                q.pop()</span><br><span class="line">            q.append(i)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> i - q[<span class="number">0</span>] &gt;= k:</span><br><span class="line">                q.popleft()</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> i &gt;= k-<span class="number">1</span>:</span><br><span class="line">                ans.append(nums[q[<span class="number">0</span>]])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 队列 </tag>
+            
+            <tag> 单调队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1670设计前中后队列</title>
       <link href="/posts/eed95439.html"/>
       <url>/posts/eed95439.html</url>
