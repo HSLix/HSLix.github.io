@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】184设计自助结算系统</title>
+      <link href="/posts/87be9fdb.html"/>
+      <url>/posts/87be9fdb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/dui-lie-de-zui-da-zhi-lcof/">题目链接</a>。</p></li><li><p>简单地说，就是设计一个类，类中能够存储价格队列，并能随时提取其中最大值，要求加入值，弹出值和取最大值的时间复杂度均为 O(1)</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>入队出队对于普通的队列都是 O(1) 复杂度，所以只要解决从队列中提取最大值为 O(1) 复杂度即可。</p></li><li><p>解决这个问题，只要同时引入单调队列维护最大值即可，如果只用一个变量维护最大值，在最坏情况下仍是 O(n) 复杂度。</p></li><li><p>删除队列的元素时，由于单调队列只会降序保存大值，不需要担心顺序错位，毕竟队列按顺序弹值也一定让单调队列按顺序弹值。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Checkout</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.max_q = deque()</span><br><span class="line">        <span class="variable language_">self</span>.q = deque()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get_max</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.max_q[<span class="number">0</span>] <span class="keyword">if</span> <span class="variable language_">self</span>.max_q <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, value: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="variable language_">self</span>.q.append(value)</span><br><span class="line">        <span class="keyword">while</span> <span class="variable language_">self</span>.max_q <span class="keyword">and</span> value &gt; <span class="variable language_">self</span>.max_q[-<span class="number">1</span>]:</span><br><span class="line">            <span class="variable language_">self</span>.max_q.pop()</span><br><span class="line">        <span class="variable language_">self</span>.max_q.append(value)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">remove</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        v = <span class="variable language_">self</span>.q.popleft() <span class="keyword">if</span> <span class="variable language_">self</span>.q <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> v != -<span class="number">1</span> <span class="keyword">and</span> v == <span class="variable language_">self</span>.max_q[<span class="number">0</span>]:</span><br><span class="line">            <span class="variable language_">self</span>.max_q.popleft()</span><br><span class="line">        <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your Checkout object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = Checkout()</span></span><br><span class="line"><span class="comment"># param_1 = obj.get_max()</span></span><br><span class="line"><span class="comment"># obj.add(value)</span></span><br><span class="line"><span class="comment"># param_3 = obj.remove()</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】239滑动窗口最大值</title>
       <link href="/posts/8b46e1a9.html"/>
       <url>/posts/8b46e1a9.html</url>
