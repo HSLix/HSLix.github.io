@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2558从数量最多的堆取走礼物</title>
+      <link href="/posts/7a111808.html"/>
+      <url>/posts/7a111808.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/take-gifts-from-the-richest-pile/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，并重复 k 次找其中最大的数字平方再放回去，返回最后数组的数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>对于这种找最大&#x2F;最小的情况，可以考虑堆。堆会自然维护堆顶为所有元素的最小或者最大，并且在去除这个最值后，也能很方便地提取出下一个最值。</p></li><li><p>那有人可能就问了，之前学的单调栈和单调队列不也能方便地取最值吗，为什么不用？原因是单调栈和单调队列的维护效率不及堆，在本题，提取的最值处理后又要放回去，提取是方便，但放回去的最坏情况是O(n)，即从最大值变最小值。</p><blockquote><p><a href="https://leetcode.cn/problems/take-gifts-from-the-richest-pile/solutions/2501655/yuan-di-dui-hua-o1-kong-jian-fu-ti-dan-p-fzdh/">https://leetcode.cn/problems/take-gifts-from-the-richest-pile/solutions/2501655/yuan-di-dui-hua-o1-kong-jian-fu-ti-dan-p-fzdh/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pickGifts</span>(<span class="params">self, gifts: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(gifts)):</span><br><span class="line">            gifts[i] *= -<span class="number">1</span> <span class="comment"># 默认是小顶堆，转化为大顶堆</span></span><br><span class="line">        heapify(gifts)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> k <span class="keyword">and</span> -gifts[<span class="number">0</span>] &gt; <span class="number">1</span>:</span><br><span class="line">            heapreplace(gifts, -isqrt(-gifts[<span class="number">0</span>])) <span class="comment"># 弹出堆中的最小项，同时推入“最大值”的平方</span></span><br><span class="line">            k -= <span class="number">1</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> -<span class="built_in">sum</span>(gifts)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1438绝对差不超过限制的最长连续子数组</title>
+      <link href="/posts/d5c461ca.html"/>
+      <url>/posts/d5c461ca.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和一个限制数字 limit，要求返回一个最长连续子数的长度，其中任意两个数字之差不能超过 limit</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>通过滑动窗口的思路，可以遍历其中所有限制值之内的窗口，问题是如何快速判断当前窗口是否合法。</p></li><li><p>单调队列的功能在于，方便地维护一定区间内的最值。而单调栈看似类似，实则更适合找对某个值的下个更小或者更大的情况，是比较级，不是最级。</p><blockquote><p><a href="https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/solutions/3707019/on-zuo-fa-hua-dong-chuang-kou-dan-diao-d-g45r/">https://leetcode.cn/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/solutions/3707019/on-zuo-fa-hua-dong-chuang-kou-dan-diao-d-g45r/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestSubarray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], limit: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_q = deque()</span><br><span class="line">        min_q = deque()</span><br><span class="line">        res = <span class="number">0</span></span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">while</span> max_q <span class="keyword">and</span> x &gt; nums[max_q[-<span class="number">1</span>]]:</span><br><span class="line">                max_q.pop()</span><br><span class="line">            max_q.append(i)</span><br><span class="line">            <span class="keyword">while</span> min_q <span class="keyword">and</span> x &lt; nums[min_q[-<span class="number">1</span>]]:</span><br><span class="line">                min_q.pop()</span><br><span class="line">            min_q.append(i)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> nums[max_q[<span class="number">0</span>]] - nums[min_q[<span class="number">0</span>]] &gt; limit:</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> left &gt; max_q[<span class="number">0</span>]:</span><br><span class="line">                    max_q.popleft()</span><br><span class="line">                <span class="keyword">if</span> left &gt; min_q[<span class="number">0</span>]:</span><br><span class="line">                    min_q.popleft()          </span><br><span class="line"></span><br><span class="line">            res = <span class="built_in">max</span>(res, i-left+<span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> res</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】184设计自助结算系统</title>
       <link href="/posts/87be9fdb.html"/>
       <url>/posts/87be9fdb.html</url>
