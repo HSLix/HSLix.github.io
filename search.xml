@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】300最长递增子序列</title>
+      <link href="/posts/cd0c4b1f.html"/>
+      <url>/posts/cd0c4b1f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/longest-increasing-subsequence/">题目链接</a>。</p></li><li><p>简单地说，就是给你一个整型数组，你可以删除其中元素，但不改变元素顺序的情况下，制造出一个严格递增子数组，求该子数组的最长长度</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>目前的 dp 无非两种思路：1. 选或不选；2. 枚举选哪个。选或不选形成的决策类似二叉树，而枚举选哪个会类似多叉树。前者很多时候划分为前 i 个元素的子问题，后者则是经常划分为以 i 下标为尾部的子问题。对于本题，可以分为以 i 下标为末尾的最长递增子序列长度。</p></li><li><p>回到本题，首先尝试用记忆化回溯实现，如果采用思路一，那么在选择当前位的数字时，传递的过程中还需要报错前一个选择的数字下标（或者值），否则将无法保证选出来的序列严格递增；如果采用思路二，则是在枚举的循环内完成对不能满足严格递增情况的过滤，只要传递尾部下标即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">lengthOfLIS</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 记忆化递归</span></span><br><span class="line">        <span class="comment"># n = len(nums)</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(index:int) -&gt; int:</span></span><br><span class="line">        <span class="comment">#     res = 0</span></span><br><span class="line">        <span class="comment">#     for i in range(index):</span></span><br><span class="line">        <span class="comment">#         if nums[i] &lt; nums[index]:</span></span><br><span class="line">        <span class="comment">#             res = max(res, dfs(i))</span></span><br><span class="line">        <span class="comment">#     return res +1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># return max(dfs(i) for i in range(n))</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 改为递推</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        f = [<span class="number">0</span>] * n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">                <span class="keyword">if</span> nums[j] &lt; nums[i]:</span><br><span class="line">                    f[i] = <span class="built_in">max</span>(f[j], f[i])</span><br><span class="line">            f[i] += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(f)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】72编辑距离</title>
       <link href="/posts/eebf8c16.html"/>
       <url>/posts/eebf8c16.html</url>
@@ -49,7 +76,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 堆 </tag>
+            <tag> 动态规划 </tag>
             
         </tags>
       
