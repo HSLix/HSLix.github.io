@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3693爬楼梯II</title>
+      <link href="/posts/75dd467d.html"/>
+      <url>/posts/75dd467d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/climbing-stairs-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个 n 阶台阶，规定从第 i 级台阶跳到第 j 级台阶的成本定义为： costs[j] + (j - i)^2，求从 0 到台阶顶的最小成本。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>和 <a href="/posts/4adf90bb.html" title="【Leetcode Daily】746使用最小花费爬楼梯">【Leetcode Daily】746使用最小花费爬楼梯</a> 相似，也是属于“枚举选哪个”的部分</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">climbStairs</span>(<span class="params">self, n: <span class="built_in">int</span>, costs: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(costs)</span><br><span class="line"></span><br><span class="line">        f = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            f[i] = <span class="built_in">min</span>(f[j] + (j-i)*(j-i) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">max</span>(i-<span class="number">3</span>, <span class="number">0</span>), i))+costs[i-<span class="number">1</span>]</span><br><span class="line">        <span class="comment"># print(f)</span></span><br><span class="line">        <span class="keyword">return</span> f[n]</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 记忆化回溯</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(i:int)-&gt; int:</span></span><br><span class="line">        <span class="comment">#     if i == -1:</span></span><br><span class="line">        <span class="comment">#         return 0</span></span><br><span class="line">        <span class="comment">#     res = inf</span></span><br><span class="line">        <span class="comment">#     for j in range(i-1, i-4, -1):</span></span><br><span class="line">        <span class="comment">#         if j &lt; -1:</span></span><br><span class="line">        <span class="comment">#             break</span></span><br><span class="line">        <span class="comment">#         res = min(res, dfs(j)+costs[i] + (j-i)*(j-i))</span></span><br><span class="line">        <span class="comment">#     # print(str(i) + &quot;:&quot; + str(res))</span></span><br><span class="line">        <span class="comment">#     return res</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># return dfs(n-1)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】746使用最小花费爬楼梯</title>
+      <link href="/posts/4adf90bb.html"/>
+      <url>/posts/4adf90bb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/min-cost-climbing-stairs/">题目链接</a>。</p></li><li><p>简单地说，就是从第 0 或 1 开始爬楼梯，每个楼梯有花费，求爬到楼顶的最小花费。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>划分子问题，本题可以把爬到第 n 阶的最小花费变成爬到第 n-1 阶的最小花费问题，搞定这个就能写出来回溯dfs。然后再转递推。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minCostClimbingStairs</span>(<span class="params">self, cost: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(cost)</span><br><span class="line">        f = [<span class="number">0</span>] * (n+<span class="number">1</span>)</span><br><span class="line">        f[<span class="number">0</span>] = cost[<span class="number">0</span>]</span><br><span class="line">        f[<span class="number">1</span>] = cost[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>, n):</span><br><span class="line">            f[i] = <span class="built_in">min</span>(f[i-<span class="number">1</span>], f[i-<span class="number">2</span>]) + cost[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(f[n-<span class="number">1</span>], f[n-<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(i :int) -&gt; int:</span></span><br><span class="line">        <span class="comment">#     if i == 0 or i == 1:</span></span><br><span class="line">        <span class="comment">#         return cost[i]</span></span><br><span class="line">        <span class="comment">#     return min(dfs(i-1), dfs(i-2)) + cost[i]</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># return min(dfs(n-1), dfs(n-2))</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】300最长递增子序列</title>
       <link href="/posts/cd0c4b1f.html"/>
       <url>/posts/cd0c4b1f.html</url>
