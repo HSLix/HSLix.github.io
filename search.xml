@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2266统计打字方案数</title>
+      <link href="/posts/1369f689.html"/>
+      <url>/posts/1369f689.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-number-of-texts/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一串打字的按键记录（手机九宫格），请给出这些打字记录可以显现出来的字符串方案个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>如果只是但看一种数字串的组合方案，就很容易发现这是根据字母个数固定的（3或4）。对每一段连续数字，都可以用 dfs 遍一下。为什么不会因重复超时？因为即使是不同种数字，只要数量相同和字母个数相同，那么组合出的方案也相同。</p></li><li><p>本题最重要的是学到了用 groupby 函数可以把列表中的一段段同种数字整合成一个个值与对应的迭代器，注意，迭代器一旦使用就不可逆，所以要么就使用一次（下面就是只是用了一次量长度），要么就保存到另一个变量使用。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countTexts</span>(<span class="params">self, pressedKeys: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">10</span>**<span class="number">9</span> + <span class="number">7</span></span><br><span class="line">        </span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">remaining, is_special</span>):</span><br><span class="line">            <span class="string">&quot;&quot;&quot;统一的DFS函数&quot;&quot;&quot;</span></span><br><span class="line">            <span class="keyword">if</span> remaining == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> remaining &lt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">            total = <span class="number">0</span></span><br><span class="line">            max_step = <span class="number">4</span> <span class="keyword">if</span> is_special <span class="keyword">else</span> <span class="number">3</span></span><br><span class="line">            <span class="keyword">for</span> step <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, max_step + <span class="number">1</span>):</span><br><span class="line">                total = (total + dfs(remaining - step, is_special)) % MOD</span><br><span class="line">            <span class="keyword">return</span> total</span><br><span class="line">        </span><br><span class="line">        result = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> ch, group <span class="keyword">in</span> groupby(pressedKeys):</span><br><span class="line">            length = <span class="built_in">len</span>(<span class="built_in">list</span>(group))</span><br><span class="line">            is_special = (ch <span class="keyword">in</span> <span class="string">&quot;79&quot;</span>)</span><br><span class="line">            result = (result * dfs(length, is_special)) % MOD</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> result</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># MOD = 1_000_000_007</span></span><br><span class="line">        <span class="comment"># # 下面分别是有三个字母和四个字母按 0、1、2、3 的可能次数</span></span><br><span class="line">        <span class="comment"># f = [1, 1, 2, 4]</span></span><br><span class="line">        <span class="comment"># g = [1, 1, 2, 4]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for _ in range(100_002):</span></span><br><span class="line">        <span class="comment">#     f.append((f[-1]+f[-2]+f[-3])%MOD)</span></span><br><span class="line">        <span class="comment">#     g.append((g[-1]+g[-2]+g[-3]+g[-4])%MOD)</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># res = 1</span></span><br><span class="line">        <span class="comment"># for i, s in groupby(pressedKeys):</span></span><br><span class="line">        <span class="comment">#     n = len(list(s))</span></span><br><span class="line">        <span class="comment">#     res =  res * (g[n] if i in &quot;79&quot; else f[n]) % MOD</span></span><br><span class="line">        <span class="comment"># return res</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2466统计构造好字符串的方案数</title>
+      <link href="/posts/ea6c5965.html"/>
+      <url>/posts/ea6c5965.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-ways-to-build-good-strings/description/">题目链接</a>。</p></li><li><p>简单地说，就是从空字符串开始，每次操作可以在字符串右侧加上 zero 个 0 或者 one 个 1，求操作完后字符串长度处于 low 和 high 的闭区间内的方案数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这个问题可以划分为构造长度更短的子问题，而且采用“枚举选哪个”的思路，所以“易得”记忆化回溯的写法。</p></li><li><p>但是在过程中要注意取模，不是说最后的结果取模，而是在回溯（递推）过程中也要做取模工作。虽然 Python 可以兼容大数字，但是对大数字进行运算的效率比较低下，所以需要取模使得运算过程保持小数字（先取模后做加法不影响结果）</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countGoodStrings</span>(<span class="params">self, low: <span class="built_in">int</span>, high: <span class="built_in">int</span>, zero: <span class="built_in">int</span>, one: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        f = [<span class="number">0</span>] * (high+<span class="number">1</span>)</span><br><span class="line">        f[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, high+<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">if</span> i &gt;= zero: f[i] = f[i-zero]</span><br><span class="line">            <span class="keyword">if</span> i &gt;= one: f[i] = (f[i] + f[i-one]) % MOD</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(f[low:]) % MOD</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 记忆化回溯</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(length)-&gt;int:</span></span><br><span class="line">        <span class="comment">#     res = 0</span></span><br><span class="line">        <span class="comment">#     if length &gt; high:</span></span><br><span class="line">        <span class="comment">#         return res</span></span><br><span class="line">        <span class="comment">#     elif length &gt;= low:</span></span><br><span class="line">        <span class="comment">#         res += 1</span></span><br><span class="line">            </span><br><span class="line">        <span class="comment">#     res += dfs(length + zero)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#     res += dfs(length + one)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#     return res % (1_000_000_007)</span></span><br><span class="line">        <span class="comment"># return dfs(0) % (1_000_000_007)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3693爬楼梯II</title>
       <link href="/posts/75dd467d.html"/>
       <url>/posts/75dd467d.html</url>
