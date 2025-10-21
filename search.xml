@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2320统计放置房子的方式数</title>
+      <link href="/posts/367215.html"/>
+      <url>/posts/367215.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-number-of-ways-to-place-houses/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个街道的长度 n，现在街道两边都能放置房子，每个占据单位长度 1，在房子不能相邻的情况下，请给出所有建造房子的方案数目。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>先划分子问题，对于长度 n 的街道放房子，可以先只考虑一边的，因为两边互补干扰，方案数量一致。而如果在第 n 个地方放了房子，这个选择的方案数就相当于在街道前 n-2 的地方放置房子的方案数；如果 n 处不放，n - 1 就可以放，相当于街道前 n-1 的方案数。</p></li><li><p>然后试着思考下边界条件：当没有地方放房子，只有不放这一种方案；当有一个地方放房子，就有放或不放两种选项。</p></li><li><p>最后就可以写出记忆化搜索了，再翻译成递推如下。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countHousePlacements</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        <span class="comment"># 尝试记忆化搜索</span></span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">places:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> places == <span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">2</span></span><br><span class="line">            <span class="keyword">elif</span> places == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> (dfs(places-<span class="number">2</span>) + dfs(places-<span class="number">1</span>))  % MOD</span><br><span class="line">        </span><br><span class="line">        one_side = dfs(n)</span><br><span class="line">        <span class="keyword">return</span> (one_side ** <span class="number">2</span>) % MOD</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 0 是没有位置的情况，只能不放；1 是可以放或不放</span></span><br><span class="line">        <span class="comment"># f = [1, 2]</span></span><br><span class="line">        <span class="comment"># MOD = 1_000_000_007</span></span><br><span class="line">        <span class="comment"># for i in range(1, n):</span></span><br><span class="line">        <span class="comment">#     f.append((f[-1]+f[-2]) % MOD)</span></span><br><span class="line">        <span class="comment"># return (f[n] ** 2) %MOD</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2266统计打字方案数</title>
       <link href="/posts/1369f689.html"/>
       <url>/posts/1369f689.html</url>
