@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】416分割等和子集</title>
+      <link href="/posts/506d19c4.html"/>
+      <url>/posts/506d19c4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/partition-equal-subset-sum/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个只有正整数的非空数组，要求是否能取出两个子集且这两个子集和相等。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本质其实是问是否能找到一个和相当于总和一半的子集。首先总和为奇数不可能达成，然后尝试划分一下子问题。</p></li><li><p>对于本题，可以采用“选或不选”的思路，建立的数组f[i][j]的含义是，从数组的前 i 个数字选出合适的子集和为 j。</p></li><li><p>从后向前（从前向后应当也行）每个数字考虑选的时候，就把总和减去这个对应位置数字，同时下标减一，这样就得到了下一个子问题；不选，就直接下标减一，考虑下个数字，这就是另一个子问题。</p></li><li><p>子问题不断划分后，就要考虑边界，对于上面从后向前的顺序，最后下标到 0，如果此时剩余和为零，说明刚好满足，返回 True，其余情况不满足则 False</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">canPartition</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        sum_all = <span class="built_in">sum</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> sum_all % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        sum_all //= <span class="number">2</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        f = [[<span class="literal">False</span>] * (sum_all + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">        f[<span class="number">0</span>][<span class="number">0</span>] = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(sum_all+<span class="number">1</span>):</span><br><span class="line">                f[i+<span class="number">1</span>][j] = f[i][j] <span class="keyword">or</span> (j &gt;= x <span class="keyword">and</span> f[i][j-nums[i]])</span><br><span class="line">        <span class="keyword">return</span> f[n][sum_all]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># f[i][j] = f[i-1][j] or f[i-1][j-nums[i]]</span></span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        <span class="comment"># sum_all = sum(nums)</span></span><br><span class="line">        <span class="comment"># if sum_all % 2 == 1:</span></span><br><span class="line">        <span class="comment">#     return False</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># n = len(nums)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(index:int, sum_cur:int) -&gt; bool:</span></span><br><span class="line">        <span class="comment">#     # print(str(index) + &quot; &quot; + str(sum_cur))</span></span><br><span class="line">        <span class="comment">#     if index &lt;= 0:</span></span><br><span class="line">        <span class="comment">#         return True if sum_cur == 0 else False</span></span><br><span class="line">        <span class="comment">#     return (nums[index] &lt;= sum_cur and dfs(index-1, sum_cur-nums[index]) or dfs(index-1, sum_cur))</span></span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">        <span class="comment"># return dfs(n-1, sum_all//2)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2320统计放置房子的方式数</title>
       <link href="/posts/367215.html"/>
       <url>/posts/367215.html</url>
