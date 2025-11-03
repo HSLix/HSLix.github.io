@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1578使得绳子变成彩色的最短时间</title>
+      <link href="/posts/1d2b8d5b.html"/>
+      <url>/posts/1d2b8d5b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/?envType=daily-question&envId=2025-11-03">题目链接</a>。</p></li><li><p>简单地说，就是绳子上有很多气球（字符串表示），每个气球都有拆下来的代价（整型数组），求把绳子上的气球拆得没有连续颜色需要的最小代价。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/solutions/3808739/tan-xin-mei-duan-bao-liu-zui-da-de-pytho-4xln/?envType=daily-question&envId=2025-11-03">https://leetcode.cn/problems/minimum-time-to-make-rope-colorful/solutions/3808739/tan-xin-mei-duan-bao-liu-zui-da-de-pytho-4xln/?envType=daily-question&amp;envId=2025-11-03</a></p></blockquote></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>贪心策略，先计算代价之和，然后去除每一段颜色中，代价最大的气球即可。</li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minCost</span>(<span class="params">self, colors: <span class="built_in">str</span>, neededTime: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = cur_max = <span class="number">0</span></span><br><span class="line">        n = <span class="built_in">len</span>(colors)</span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(neededTime):</span><br><span class="line">            ans += x</span><br><span class="line">            <span class="keyword">if</span> cur_max &lt; x:</span><br><span class="line">                cur_max = x</span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span> <span class="keyword">or</span> colors[i] != colors[i+<span class="number">1</span>]:</span><br><span class="line">                ans -= cur_max</span><br><span class="line">                cur_max = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】740删除并获得点数</title>
+      <link href="/posts/8aba20e4.html"/>
+      <url>/posts/8aba20e4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/delete-and-earn/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一串无序、可重复的整数，可以任取其中的一个数字加入，但取数的同时，该数值相邻（+1或-1）的值都会删除，求如何取数能最大。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>读题有个陷阱，取数才算值，删除的不算，这么一来就变成了不能偷盗相邻房屋的打家劫舍问题。</p></li><li><p>划分子问题就可以是截止到数值 i（i-1、i-2……）可获得的最大数值</p></li><li><p>状态转移方程为 f[i] &#x3D; max(f[i-1], f[i-2]+val[i])，其中 val 可以代表该值的总和。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">deleteAndEarn</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        a = [<span class="number">0</span>] * (<span class="built_in">max</span>(nums)+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> x <span class="keyword">in</span> nums:</span><br><span class="line">            a[x] += x</span><br><span class="line"></span><br><span class="line">        f = [<span class="number">0</span>] * <span class="built_in">len</span>(a)</span><br><span class="line">        f[<span class="number">0</span>] = a[<span class="number">0</span>]</span><br><span class="line">        f[<span class="number">1</span>] = a[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(a)-<span class="number">2</span>):</span><br><span class="line">            f[i+<span class="number">2</span>] = <span class="built_in">max</span>(f[i+<span class="number">1</span>], f[i]+a[i+<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> f[<span class="built_in">len</span>(a)-<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】64最小路径和</title>
       <link href="/posts/e84a885b.html"/>
       <url>/posts/e84a885b.html</url>
