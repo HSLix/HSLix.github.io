@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2606找到最大开销的字符串</title>
+      <link href="/posts/4e76ce57.html"/>
+      <url>/posts/4e76ce57.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-the-substring-with-maximum-cost/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串和一些字母与数值的对应，要求所有子字符串的最大开销（包括空字符串）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>直接采用动态规划方法，可将求前 i 个元素的最大开销子字符串转化为求前 i-1 个的，状态转移方程为 f[i] &#x3D; max(0, f[i-1]) + map(s[i])</p><blockquote><p><a href="https://leetcode.cn/problems/find-the-substring-with-maximum-cost/solutions/2203595/zhuan-huan-zui-da-zi-shu-zu-he-pythonjav-6it2/">https://leetcode.cn/problems/find-the-substring-with-maximum-cost/solutions/2203595/zhuan-huan-zui-da-zi-shu-zu-he-pythonjav-6it2/</a></p></blockquote></li><li><p>注意，本题由于可以有空字符串，所以如果还是一维数组，可以留一个位置置零。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumCostSubstring</span>(<span class="params">self, s: <span class="built_in">str</span>, chars: <span class="built_in">str</span>, vals: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = defaultdict(<span class="built_in">int</span>)</span><br><span class="line">        <span class="comment"># get default valut first</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>), <span class="built_in">ord</span>(<span class="string">&#x27;z&#x27;</span>)+<span class="number">1</span>):</span><br><span class="line">            rec[<span class="built_in">chr</span>(i)] = i-<span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>)+<span class="number">1</span></span><br><span class="line">        <span class="comment"># print(rec)</span></span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(chars):</span><br><span class="line">            rec[c] = vals[i]</span><br><span class="line">        <span class="comment"># print(rec)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># dynamic plan</span></span><br><span class="line">        <span class="comment"># n = len(s)</span></span><br><span class="line">        <span class="comment"># f = [0] * (n+1)</span></span><br><span class="line">        <span class="comment"># for i in range(n):</span></span><br><span class="line">        <span class="comment">#     f[i+1] = max(0, f[i])+rec[s[i]]</span></span><br><span class="line">        <span class="comment"># return max(f)</span></span><br><span class="line"></span><br><span class="line">        ans = cur = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            cur = <span class="built_in">max</span>(<span class="number">0</span>, cur) + rec[c]</span><br><span class="line">            ans = <span class="built_in">max</span>(cur, ans)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】53最大子数组和</title>
+      <link href="/posts/4f4139d1.html"/>
+      <url>/posts/4f4139d1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-subarray/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组，请给出一个子数组（连续且至少包含一个数字）求其中子数组和最大值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>两个方法：</p></li><li><p>第一个是求其前缀和，然后转化为贪心的求子数组和问题；</p></li><li><p>第二个是动态规划，把求前 i 个元素的最大子数组和转化为求前 i-1 个元素的，其中状态转移为 f[i] &#x3D; max(0, f[i-1])+nums[i]，原因是如果前 i-1 个的最大子数组和为负数，那么还不如另起炉灶从零开始。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-subarray/solutions/2533977/qian-zhui-he-zuo-fa-ben-zhi-shi-mai-mai-abu71/">https://leetcode.cn/problems/maximum-subarray/solutions/2533977/qian-zhui-he-zuo-fa-ben-zhi-shi-mai-mai-abu71/</a></p></blockquote></li><li><p>注意，动态规划所得 f 的最后一个数字并非答案，因为这样的状态转移方程要求第 i 处必须有 nums 的第 i 个元素，所以得看 f 中最大的值。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 动态规划</span></span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        f = [<span class="number">0</span>] * n</span><br><span class="line">        f[<span class="number">0</span>] = nums[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums):</span><br><span class="line">            <span class="keyword">if</span> i == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            f[i] = <span class="built_in">max</span>(<span class="number">0</span>, f[i-<span class="number">1</span>]) + num</span><br><span class="line">        <span class="comment"># print(f)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(f)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 通过前缀和转为贪心</span></span><br><span class="line">        <span class="comment"># n = len(nums)</span></span><br><span class="line">        <span class="comment"># pre_sum = [nums[0]] * (n)</span></span><br><span class="line">        <span class="comment"># for i in range(1, n):</span></span><br><span class="line">        <span class="comment">#     pre_sum[i] = pre_sum[i-1] + nums[i]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># ans = -inf</span></span><br><span class="line">        <span class="comment"># min_pre = 0</span></span><br><span class="line">        <span class="comment"># for num in pre_sum:</span></span><br><span class="line">        <span class="comment">#     ans = max(ans, num-min_pre)</span></span><br><span class="line">        <span class="comment">#     if num &lt; min_pre:</span></span><br><span class="line">        <span class="comment">#         min_pre = num</span></span><br><span class="line">        <span class="comment"># return ans</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1578使得绳子变成彩色的最短时间</title>
       <link href="/posts/1d2b8d5b.html"/>
       <url>/posts/1d2b8d5b.html</url>
@@ -2919,7 +2973,7 @@
       <link href="/posts/83a53e85.html"/>
       <url>/posts/83a53e85.html</url>
       
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode 刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input disabled="" type="checkbox"> 速通 JavaSE 和 JavaWeb 2025.10.13-2025.10.20</p></li><li><p><input checked="" disabled="" type="checkbox"> qt 作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
+        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode 刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input checked="" disabled="" type="checkbox"> qt 作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
       
       
       <categories>
