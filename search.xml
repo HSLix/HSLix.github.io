@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1191K次串联后最大子数组之和</title>
+      <link href="/posts/9275f629.html"/>
+      <url>/posts/9275f629.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/k-concatenation-maximum-sum/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和一个数字k，这个数组将自我复制 k 次串联一起，求串联后的数组中子数组之和的最大值。（可以为空）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>当 k 为 1 时，就相当于只求这个数组的最大子数组和，与 <a href="/posts/4f4139d1.html" title="【Leetcode Daily】53最大子数组和">【Leetcode Daily】53最大子数组和</a> 无异；当 k 为 2 时，除了数组变化，与 1 没什么区别；当 k 大于等于 3，如果子数组从第一个到最后一个，那么就相当于在 k &#x3D; 2 的基础上，加上了 k-2 个数组的总和。<blockquote><p><a href="https://leetcode.cn/problems/k-concatenation-maximum-sum/solutions/3675237/fu-yong-53-ti-dai-ma-jian-ji-xie-fa-pyth-qmtp/">https://leetcode.cn/problems/k-concatenation-maximum-sum/solutions/3675237/fu-yong-53-ti-dai-ma-jian-ji-xie-fa-pyth-qmtp/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubArr</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        s = f = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(arr):</span><br><span class="line">            f = <span class="built_in">max</span>(f, <span class="number">0</span>) + x</span><br><span class="line">            s = <span class="built_in">max</span>(s, f)</span><br><span class="line">            <span class="comment"># print(&quot;%d %d&quot; % (f, s))</span></span><br><span class="line">        <span class="keyword">return</span> s </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">kConcatenationMaxSum</span>(<span class="params">self, arr: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> k == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.maxSubArr(arr)</span><br><span class="line">        s = <span class="variable language_">self</span>.maxSubArr(arr+arr)</span><br><span class="line">        <span class="keyword">return</span> (s + <span class="built_in">max</span>(<span class="built_in">sum</span>(arr)*(k-<span class="number">2</span>), <span class="number">0</span>))% <span class="number">1_000_000_007</span></span><br><span class="line">        </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2606找到最大开销的字符串</title>
       <link href="/posts/4e76ce57.html"/>
       <url>/posts/4e76ce57.html</url>
