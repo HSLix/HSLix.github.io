@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3393统计异或值为给定值的路径数目</title>
+      <link href="/posts/ddb800e7.html"/>
+      <url>/posts/ddb800e7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-paths-with-the-given-xor-value/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，求从左上角到右下角，同时其中值异或值为目标值 k 的目标路径数目。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>划分子问题，把最后一个值异或 k 得出新的值 q，然后就变成了更小的二维数组的路径目标值为 q。然后得出状态转移方程，f[i+1][j+1][val]&#x3D;f[i][j+1][val^grid[i][j]] + f[i+1][j][val^grid[i][j]]<blockquote><p><a href="https://leetcode.cn/problems/count-paths-with-the-given-xor-value/solutions/3026905/wang-ge-tu-dpcong-ji-yi-hua-sou-suo-dao-k1bpm/">https://leetcode.cn/problems/count-paths-with-the-given-xor-value/solutions/3026905/wang-ge-tu-dpcong-ji-yi-hua-sou-suo-dao-k1bpm/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countPathsWithXorValue</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        u = <span class="number">1</span> &lt;&lt; <span class="built_in">max</span>(<span class="built_in">map</span>(<span class="built_in">max</span>, grid)).bit_length()</span><br><span class="line">        <span class="keyword">if</span> k &gt;= u:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        f = [[[<span class="number">0</span>] * u <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        f[<span class="number">1</span>][<span class="number">0</span>][<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(u):</span><br><span class="line">                    <span class="comment"># print(i, j, x)</span></span><br><span class="line">                    f[i+<span class="number">1</span>][j+<span class="number">1</span>][x] = (f[i][j+<span class="number">1</span>][x ^ grid[i][j]] + f[i+<span class="number">1</span>][j][x ^ grid[i][j]]) % MOD</span><br><span class="line">        <span class="keyword">return</span> f[m][n][k]</span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        <span class="comment"># m, n = len(grid), len(grid[0])</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(i:int, j:int, val:int) -&gt; int:</span></span><br><span class="line">        <span class="comment">#     if i &lt; 0 or j &lt; 0:</span></span><br><span class="line">        <span class="comment">#         return 0</span></span><br><span class="line">        <span class="comment">#     if i == 0 and j == 0:</span></span><br><span class="line">        <span class="comment">#         return 1 if val == grid[0][0] else 0</span></span><br><span class="line">        <span class="comment">#     val ^= grid[i][j]</span></span><br><span class="line">        <span class="comment">#     return (dfs(i-1, j, val) + dfs(i, j-1, val)) % 1_000_000_007</span></span><br><span class="line">        <span class="comment"># return dfs(m-1, n-1, k) % 1_000_000_007</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2169得到0的操作数</title>
+      <link href="/posts/371b8c8.html"/>
+      <url>/posts/371b8c8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-operations-to-obtain-zero/description/?envType=daily-question&envId=2025-11-09">题目链接</a>。</p></li><li><p>简单地说，就是给两个数字，规定只能让大的数字减去小的数字，直到其中有一个数字归零，求这个操作数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这是个简单题，所以直接两个数字模拟这个大减小计数就行。重点在于找到其本质，来加深相关知识。</p><blockquote><p><a href="https://leetcode.cn/problems/count-operations-to-obtain-zero/solutions/1262427/olog-zhan-zhuan-xiang-chu-fa-by-endlessc-vxq0/?envType=daily-question&envId=2025-11-09">https://leetcode.cn/problems/count-operations-to-obtain-zero/solutions/1262427/olog-zhan-zhuan-xiang-chu-fa-by-endlessc-vxq0/?envType=daily-question&amp;envId=2025-11-09</a></p></blockquote></li><li><p>对于本题，不断减去大的数字，直到该数字比另一个数字少，这个过程本质是求余数，而把余数和除数倒转的样子，不就是辗转相除法嘛（GCD），而本题所求的操作数，本质上就是 GCD 过程中产生的除数之和。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countOperations</span>(<span class="params">self, num1: <span class="built_in">int</span>, num2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> num2 &gt; <span class="number">0</span>:</span><br><span class="line">            ans += num1 // num2</span><br><span class="line">            num1, num2 = num2, num1 % num2</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">        <span class="comment"># 模拟</span></span><br><span class="line">        <span class="comment"># ans = 0</span></span><br><span class="line">        <span class="comment"># while num1 and num2:</span></span><br><span class="line">        <span class="comment">#     ans += 1</span></span><br><span class="line">        <span class="comment">#     if num1 &gt;= num2:</span></span><br><span class="line">        <span class="comment">#         num1 -= num2</span></span><br><span class="line">        <span class="comment">#     else:</span></span><br><span class="line">        <span class="comment">#         num2 -= num1</span></span><br><span class="line">        <span class="comment"># return ans</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】63不同路径II</title>
       <link href="/posts/f52347b.html"/>
       <url>/posts/f52347b.html</url>
