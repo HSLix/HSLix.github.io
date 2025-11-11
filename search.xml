@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】474一和零</title>
+      <link href="/posts/1549036c.html"/>
+      <url>/posts/1549036c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/ones-and-zeroes/?envType=daily-question&envId=2025-11-11">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串数组，其中的字符串均由 0 和 1 组成，同时给两个数字，m n，要求找出一个字符串子集，使得该子集内的字符串个数尽可能大的同时，0 和 1 的数量分别不超过 m 和 n。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>我居然能自己看出来这个是 01背包 问题了，确实进步啦，这种问题采用 选或不选 的思路就行。</p><blockquote><p><a href="https://leetcode.cn/problems/ones-and-zeroes/solutions/3038333/yi-bu-bu-si-kao-cong-ji-yi-hua-sou-suo-d-lqio/?envType=daily-question&envId=2025-11-11">https://leetcode.cn/problems/ones-and-zeroes/solutions/3038333/yi-bu-bu-si-kao-cong-ji-yi-hua-sou-suo-d-lqio/?envType=daily-question&amp;envId=2025-11-11</a></p></blockquote></li><li><p>但我觉着需要注意的难点在于记忆化搜索转换成递推的形式，在于考虑边界和初始化，毕竟记忆化搜索只要 return 就行了，而递推要考虑的就多了。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findMaxForm</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>], m: <span class="built_in">int</span>, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 空间优化</span></span><br><span class="line">        l = <span class="built_in">len</span>(strs)</span><br><span class="line">        f = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(strs):</span><br><span class="line">            z = s.count(<span class="string">&#x27;0&#x27;</span>)</span><br><span class="line">            o = <span class="built_in">len</span>(s) - z</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(m, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                    <span class="keyword">if</span> z &lt;= j <span class="keyword">and</span> o &lt;= k:</span><br><span class="line">                        f[j][k] = <span class="built_in">max</span>(f[j-z][k-o]+<span class="number">1</span>, f[j][k])</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        f[j][k] = f[j][k]</span><br><span class="line">        <span class="keyword">return</span> f[m][n]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        <span class="comment"># l = len(strs)</span></span><br><span class="line">        <span class="comment"># f = [[[0]*(n+1) for _ in range(m+1)] for _ in range(l+1)]</span></span><br><span class="line">        <span class="comment"># for i, s in enumerate(strs):</span></span><br><span class="line">        <span class="comment">#     z = s.count(&#x27;0&#x27;)</span></span><br><span class="line">        <span class="comment">#     o = len(s) - z</span></span><br><span class="line">        <span class="comment">#     for j in range(m+1):</span></span><br><span class="line">        <span class="comment">#         for k in range(n+1):</span></span><br><span class="line">        <span class="comment">#             if z &lt;= j and o &lt;= k:</span></span><br><span class="line">        <span class="comment">#                 f[i+1][j][k] = max(f[i][j-z][k-o]+1, f[i][j][k])</span></span><br><span class="line">        <span class="comment">#             else:</span></span><br><span class="line">        <span class="comment">#                 f[i+1][j][k] = f[i][j][k]</span></span><br><span class="line">        <span class="comment"># return f[-1][m][n]</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(i:int, zero:int, one:int) -&gt; int:</span></span><br><span class="line">        <span class="comment">#     if i &lt; 0:</span></span><br><span class="line">        <span class="comment">#         return 0</span></span><br><span class="line">        <span class="comment">#     z = strs[i].count(&#x27;0&#x27;)</span></span><br><span class="line">        <span class="comment">#     o = len(strs[i]) - z</span></span><br><span class="line">        <span class="comment">#     if z &lt;= zero and o &lt;= one:</span></span><br><span class="line">        <span class="comment">#         return max(dfs(i-1, zero-z, one-o)+1, dfs(i-1, zero, one))</span></span><br><span class="line">        <span class="comment">#     return dfs(i-1, zero, one)</span></span><br><span class="line">        <span class="comment"># return dfs(len(strs)-1, m, n)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2684矩阵中移动的最大次数</title>
+      <link href="/posts/80e38d69.html"/>
+      <url>/posts/80e38d69.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，要从第一列向右走，可以同行或者上下一行，但下一个位置的值必须严格大于当前的值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>从思路而言，就是把上一题旋转 90 度 <a href="/posts/9a6ce81f.html" title="【Leetcode Daily】931下降路径最小和">【Leetcode Daily】931下降路径最小和</a><blockquote><p><a href="https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/solutions/2269244/cong-ji-yi-hua-sou-suo-dao-di-tui-by-end-pgq3/">https://leetcode.cn/problems/maximum-number-of-moves-in-a-grid/solutions/2269244/cong-ji-yi-hua-sou-suo-dao-di-tui-by-end-pgq3/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxMoves</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># f[i][j] = max(f[i][j-1], f[i+1][j-1], f[i-1][j-1])+1</span></span><br><span class="line">        f = [[-<span class="number">1</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            f[i][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">                <span class="keyword">for</span> k <span class="keyword">in</span> i-<span class="number">1</span>, i, i+<span class="number">1</span>:</span><br><span class="line">                    <span class="keyword">if</span> <span class="number">0</span> &lt;= k &lt;= m-<span class="number">1</span> <span class="keyword">and</span> f[k][j-<span class="number">1</span>] != -<span class="number">1</span> <span class="keyword">and</span> grid[k][j-<span class="number">1</span>] &lt; grid[i][j] :</span><br><span class="line">                        f[i][j] = <span class="built_in">max</span>(f[i][j], f[k][j-<span class="number">1</span>]+<span class="number">1</span>)</span><br><span class="line">                <span class="keyword">if</span> f[i][j] != -<span class="number">1</span>:</span><br><span class="line">                    ans = <span class="built_in">max</span>(ans, j)</span><br><span class="line">        <span class="comment"># print(f)</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        <span class="comment"># ans = 0</span></span><br><span class="line">        <span class="comment"># m, n = len(grid), len(grid[0])</span></span><br><span class="line">        <span class="comment"># # 走到 i j 的最大步数为 val</span></span><br><span class="line">        <span class="comment"># @cache</span></span><br><span class="line">        <span class="comment"># def dfs(i:int, j:int) -&gt; None:</span></span><br><span class="line">        <span class="comment">#     nonlocal ans</span></span><br><span class="line">        <span class="comment">#     ans = max(ans, j)</span></span><br><span class="line">        <span class="comment">#     if j == n-1:</span></span><br><span class="line">        <span class="comment">#         return </span></span><br><span class="line">        <span class="comment">#     cur = grid[i][j]</span></span><br><span class="line">        <span class="comment">#     for k in range(i-1, i+2):</span></span><br><span class="line">        <span class="comment">#         if 0 &lt;= k &lt;= m-1 and cur &lt; grid[k][j+1]:</span></span><br><span class="line">        <span class="comment">#             dfs(k, j+1)   </span></span><br><span class="line">        <span class="comment">#     grid[i][j] = 0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for i in range(m):</span></span><br><span class="line">        <span class="comment">#     dfs(i, 0)</span></span><br><span class="line">        <span class="comment"># return ans</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3542将所有元素变为0的最少操作次数</title>
       <link href="/posts/e14dc564.html"/>
       <url>/posts/e14dc564.html</url>
@@ -22,7 +76,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 动态规划 </tag>
+            <tag> 单调栈 </tag>
             
         </tags>
       
@@ -1092,33 +1146,6 @@
             <tag> Algorithm </tag>
             
             <tag> 栈 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【操作系统导论】第一章-进程（楚门）的世界</title>
-      <link href="/posts/8a9d5e8.html"/>
-      <url>/posts/8a9d5e8.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><ul><li><p>OS Three Easy Pieces（操作系统导论）将操作系统的核心概括为三个特性：虚拟化、并行、持久化。</p></li><li><p>本篇将从书中的虚拟化部分（除高级板块）中小结一下何为“虚拟化”，同时这个功能又给计算机带来了什么便利，姑且作为这段学习的反刍。</p></li><li><p>本书作为操作系统的教材相当优秀啊，不仅清晰地讲述知识（就是翻译比较……），还给你模拟器玩辅助理解。甚至还有实例拆析，要是能更悠闲地学就好力~</p></li></ul><h1 id="DD-比单推更“高级”？——-进程是怎么运行的"><a href="#DD-比单推更“高级”？——-进程是怎么运行的" class="headerlink" title="DD 比单推更“高级”？—— 进程是怎么运行的"></a>DD 比单推更“高级”？—— 进程是怎么运行的</h1><ul><li><p>如果你不太了解虚拟主播，请忽略标题（和下面一些意义不明的比喻）。总之本章将从进程的角度试着看看操作系统的工作。</p></li><li><p>众所周知，单推人往往能且只能打开一个虚拟主播的直播间开始发电，这样的行为与早期计算机的行动一致，即在相当的一段时间内只做一件事（包括等待这件事）。</p></li><li><p>现在引入一些术语，进程，一个创建出来为了完成一件事（这一件事的定义很宽泛）的结构。内含这件事的状态（1. 就绪，也就是未开始；2. 运行；3. 阻塞，等待其它事情的完成才会解除），这件事怎么做（代码和静态数据）等。</p></li><li><p>计算机运行过程中，肯定要处理很多进程。但毕竟就一个 CPU，怎么能够多开呢？要解决这个问题，就要说到CPU的虚拟化（后面还有其它部分的）。</p><blockquote><p>“只要让每个进程都觉得它们各有一个专属 CPU 不就好了吗？”某个计算机学家说道。于是进程只管自己执行就好了，而操作系统要考虑的可就多了。</p></blockquote></li><li><p>总之，为了保证进程不会对系统造成比较严重的损害，让进程的运行会有两个状态，用户态和系统态，其中区别是系统态能执行一些比较“危险”的行为，比如读写文件。当进程在用户态执行到调用系统行为的部分，或是出现错误，就切换上下文，即把当前进程的各种寄存器信息保存到某处（比如内核栈），然后让操作系统接管运行，直到完成任务后再恢复上下文。</p></li><li><p>上面的用户态与系统态的互相切换，涉及到了中断。对于进程在用户态来说，写入文件的部分可能就一小段代码，但就这部分会引起中断，也就是不继续执行剩下的程序，而是转去执行其它程序。当这个其它程序运行完，也会发生中断，这次中断则是断回上一次中断的后面继续执行（如果没有多次中断的话）。</p><blockquote><p>想起了《计算机组成原理》 唐** 版在某个期末考试有可能会因为中断，让你默写长达十几条的中断顺序……</p></blockquote></li><li><p>现在，我们了解了一个进程是怎么完成自己的事，那么操作系统面对这么多个进程，是怎么调度这些进程的呢？</p></li></ul><h1 id="时间管理大师-——-操作系统是怎么“同时”应付多个进程的"><a href="#时间管理大师-——-操作系统是怎么“同时”应付多个进程的" class="headerlink" title="时间管理大师 —— 操作系统是怎么“同时”应付多个进程的"></a>时间管理大师 —— 操作系统是怎么“同时”应付多个进程的</h1><ul><li><p>对于一个海王而言，如何一个晚上约完七次也是一个相当有挑战性的任务，更何况操作系统。</p></li><li><p>不过，在介绍具体的方法之前，需要先引入两个衡量调度方法的指标。</p><ul><li><ol><li>周转时间，即一个进程从到达进程队列，到完成的时间；</li></ol></li><li><ol start="2"><li>响应时间，即一个进程从到达进程队列，到首次开始运行的时间；</li></ol></li><li>很好理解，理想状况是每个对象都您尽早被翻到牌子以及完事（从安全的角度来考虑）</li></ul></li><li><p>那么接下来迅速且简单的过一下普通的方法：FIFO，早进早出，非抢占式，两个指标都一般；SJF，短的优先，非抢占式，但长时任务可能饿死，而且如果短的晚到那么就和 FIFO 没啥差别；STCF，短剩余时间优先，抢占式，和 SJF 区别就是这个会运行一小会再选，所以不担心短任务晚到，但长的还是可能饿死；RR，就是轮转，公平地给予每个进程相同时间，响应时间短，但周转时间长。</p></li><li><p>要尽可能多处理任务，且时间长的任务也能处理到，这就需要多级反馈队列。顾名思义，按优先级设立多个进程队列，优先处理高优先级任务。但是，针对两个特殊情况会有特殊机制（下面仅为举例做法，核心是解决特殊情况的问题）。1. 对于很占用 CPU 的进程，这类进程既然占了这么多计算资源却还没做完，说明它还很可能会占很多时间，后面还有这么多任务，所以会降级；2. 对于没那么占用 CPU 的低优先级进程（排除因为太短直接完成的），既然会因为 IO 啥的空出时间，而且还会经常调用，那么就升级。</p></li><li><p>不过进程也有一些方法能糊弄操作系统，比如加入无意义的 IO，让 OS 误以为该程序其实占 CPU 没那么多来提升优先级，对于这种可以设置配额，一旦进程用完在这个队列的配额，无论是否有 IO，都会降级。</p></li><li><p>上面的多级反馈队列（MLFQ）简单的说就是让占 CPU 时间长的连续任务后做，同时让占 CPU 比较少的任务早完成。这种设计不需要考虑进程的具体设计，算得上是通用调度程序。</p></li><li><p>还有一种有趣的调度方式，叫做彩票调度，就是给不同进程划分不同数量的彩票，然后随机抽签，抽到谁执行谁。显然，彩票数越多的进程越容易被执行。但抽签终究有随机性，所以又有人想到，把彩票换成步长，让 CPU 优先执行总步数最少的程序，规定彩票越多，步长越短。这样即使小部分情况顺序偶有随机，总体上规定时间内的执行次数是确定的。但对于未知程序难以分配合适的彩票次数，所以这样的调度方式只能在相对容易的领域实现。</p></li></ul><h1 id="CPU-虚拟化小结"><a href="#CPU-虚拟化小结" class="headerlink" title="CPU 虚拟化小结"></a>CPU 虚拟化小结</h1><ul><li>再简单一点地说，CPU 的虚拟化，就是解决了进程自身如何运行，以及系统如何调度多个进程。</li></ul><h1 id="进程（楚门）的世界-——-内存虚拟化"><a href="#进程（楚门）的世界-——-内存虚拟化" class="headerlink" title="进程（楚门）的世界 —— 内存虚拟化"></a>进程（楚门）的世界 —— 内存虚拟化</h1><ul><li><p>首先，要知道，计算机的 IO 的效率并不高，所以要尽可能规避进程对硬盘的直接读写。</p></li><li><p>知道了上面这一点，就不难理解为什么不能让每个进程都独立访问硬盘了（而且早些时候，一台计算机很可能得同时应付多个用户）。那么该如何在减少 IO 的情况下，让进程对硬盘的操作都能正常运行呢？</p></li><li><p>宗旨就一条，让进程觉着自己拥有独立硬盘，从而避免多个进程对硬盘的混乱操作。要实现这一点，先后出现了分段和分页两种流派。</p></li><li><p>在具体讲述流派区别前，先简单说一下地址的映射，学过计组的都知道，有个间接寻址，*A + B，说人话就是访问 A 寄存器的内容，与 B 寄存器内容相加得出的地址。对于一个进程来说，它对硬盘的存储，都经过了这样的映射，比如存到 0 地址的数据，实际上映射去了 100（随便的例子，不必较真）。</p></li><li><p>映射间亦有高下，如何有条理的映射地址来方便管理呢？分段应运而生。所谓的段，就是一块能够连续增长的空间。经典分段将一个进程的地址空间分为代码，栈和堆。由于栈和堆的增长方向相反，这种方式能够比较有效地利用空间，而且对于同一段代码，可以有不同的堆栈代表不同的进程。</p></li><li><p>但是分段容易把内存变得碎片化，比如一块 4KB 的内存，若是从中间取走 2KB 又放回来，不做合并的情况下就变成了 1KB 2KB 1KB 的尴尬情形，而合并又是一件比较复杂的处理方式。有没有什么方法能够在避免内存难以利用的情况下，高效利用内存呢？这就是分页诞生的意义。</p></li><li><p>分页直接将内存碎片化为页，即一段固定长度的地址（只要自杀了就不会被人杀了的既视感）然后在每个进程设立一个叫做页表的数据结构，能够记录所有页的使用情况（是否被占用），页内又记载了虚拟地址到物理地址的映射，所以进程根据页表调用就好。（先不要疑惑为什么每个进程都要设立页表，毕竟最终设计就那样）</p></li><li><p>但是上面这种方式的效率其实很低，原因有二：1. 页表的设立还是没有解决进程的直接读写多的问题，而且更是严重了；2. 页比较小，所以页表往往很大，如果每个进程都要保存一份，光是创建进程所耗的内存就很大了。</p><ul><li><p>对于问题一，通过快速地址转换（TLB），在内存设立一个部分，专门保存进程很有可能访问的页，如果进程需要访问硬盘，可以优先访问 TLB，命中的情况下就可以避免对硬盘的直接访问在硬盘数据需要更新时，TLB 还能一次性把更改的部分都写入，这样的方式比分开写入会高效不少。</p></li><li><p>那么 TLB 未命中的情况下则要考虑把硬盘的对应页替换进来，具体算法有 FIFO，LRU 等。主要讲下近似 LRU，会定期把所有的页的使用位置 0，使用则置 1，要替换页时就让某个指针线性去找第一个使用位为 0 的页换出来。还有不少方法，比如考虑脏页（修改过的页）的情况下，会优先替换走未修改的干净页，这样就不用把脏页覆写硬盘了（写时复制）。</p></li><li><p>问题二则可以通过多级页表解决，以两级为例，第一级页表记录的是小页表的情况，假设该进程被分配了两个小页表的内存，则进程除了第一级页表，还有对应的两个小页表，总共三个。</p></li><li><p>其实还有反向页表，这个页表是全局的，记录页与对应的使用进程，能节省空间，但是效率会降低。</p></li></ul></li><li><p>从上面的脏页处理，可以知道计算机为了效率，有不少的“懒惰”操作，尽可能减少操作。这样的原理其实也应用在无限内存上，硬盘中设立了一个交换空间，里面放了进程正在占用但还没有使用的页，只有当进程确实需要才会把这些页放进内存。</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 操作系统导论 | OS：Three Easy Pieces </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 操作系统 </tag>
-            
-            <tag> 学习笔记 </tag>
             
         </tags>
       
@@ -2420,31 +2447,6 @@
     
     
     <entry>
-      <title>【Introduction to Mathematical Thinking】Lecture-3-implies</title>
-      <link href="/posts/ecd93791.html"/>
-      <url>/posts/ecd93791.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本节的内容是介绍了 implies，或者应该叫包含、蕴含。</p></li><li><p>举个例子来说明比较好，A⇒B，表示 A 蕴含 B，这里的 A 和 B 分别代表一个表达式。</p></li><li><p>注意，A 和 B 不一定要有“因果关系”，比如<code>“他很好看”⇒“1+3=4”</code>这种也算蕴含，而且还是正确的（原因后面会补充）。</p></li></ul><h2 id="蕴含的-True-和-False"><a href="#蕴含的-True-和-False" class="headerlink" title="蕴含的 True 和 False"></a>蕴含的 True 和 False</h2><ul><li><p>和上一节一样，这个逻辑符号的式子也有 True 和 False 的结果，虽然结论是中学学过的，但为什么这样还是值得记录一下。</p></li><li><p>A⇒B，A 是前因（先前假设），B 是后果，如果两者都为真，那么结果就是真吧，像是<code>N&gt;7 ⇒ N^2&gt;40</code>。</p></li><li><p>但是如果 A 和 B 毫无关联会怎样呢？<code>1+2=3  -1&lt;0</code>这两条都为真，却毫无关联。规定为真，这样做的原因是无论式子是否具有意义，都能有一个定义，避免了未知状态的情况。</p></li><li><p>小结一下就可以说是，<code>A⇒B</code>为真时，而且 A 也为真时，要求 B 为真。</p></li><li><p>那么，什么时候<code>A⇒B</code>为假呢？只要不满足刚刚这一条即可，如果 B 为假，A 为真，就不满足<code>A⇒B</code>为真时的要求，那么就是假啦。</p></li><li><p>到此为止，已经讨论了<code>A⇒B</code>为真或者假的情况，但是这两种情况中的 A 都为真，如果 A 为假呢？</p></li><li><p>这里就会从 <code>A⇏B</code>入手，A 不包含 B，从上面的结论知道，如果 A 为真，B 为假，这个式子就为真。那么除此之外的情况，都为假。所以当 A 为假，A蕴含B的式子都为真。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A⇒B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>F</td></tr><tr><td>F</td><td>T</td><td>T</td></tr><tr><td>F</td><td>F</td><td>T</td></tr></tbody></table><h2 id="蕴含的变形"><a href="#蕴含的变形" class="headerlink" title="蕴含的变形"></a>蕴含的变形</h2><ul><li>从作业任务中可以学到，<code>A⇒B</code>与<code>¬A∨B</code>的真假表结果一致，<code>A⇏B</code>和<code>A∧¬B</code>也是。这种我记得在离散当结论记来着。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Introduction to Mathematical Thinking </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Math </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【Leetcode Daily】447回旋镖的数量</title>
       <link href="/posts/adfdba1.html"/>
       <url>/posts/adfdba1.html</url>
@@ -2680,31 +2682,6 @@
     
     
     <entry>
-      <title>【Introduction to Mathematical Thinking】Lecture-2-Basic-Combinators</title>
-      <link href="/posts/e4d33db3.html"/>
-      <url>/posts/e4d33db3.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li>总得来说，要学会 mathematical thinking，首先得让语言变得严谨无歧义，一种方法是采用数理符号来实现。毕竟日常对话的歧义是通过大量上下文和背景知识来消除歧义，而当我们探索未知的边界（也就是学习研究）时，可没有这样方便的环境。</li></ul><h2 id="关于作业"><a href="#关于作业" class="headerlink" title="关于作业"></a>关于作业</h2><ul><li>作业是用来引领我们尝试不同方式思考的引子，所以不用专注于得到作业的答案，而是尽可能地通过各种思考来解决问题。</li></ul><h2 id="And"><a href="#And" class="headerlink" title="And"></a>And</h2><ul><li><p>与，在逻辑中表示两块部分观点一致，或者说相关。</p></li><li><p>但是日常生活中有一点歧义，也就是无意义的补充，比如“I took a bag, and I ate some bread.” 带了一个包与吃了些面包不一致，甚至不相关，但就是会这么说，这样的表述在逻辑中不会出现。</p></li><li><p>在说明一个逻辑时，我们可以列出他的组合表来认识他，下面的 &amp; 符号用来代表与。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A&amp;B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>F</td></tr><tr><td>F</td><td>T</td><td>F</td></tr><tr><td>F</td><td>F</td><td>F</td></tr></tbody></table><ul><li>可以看到，需要两个部分都为真，他们的组合也为真，才算 与。</li></ul><h2 id="Or"><a href="#Or" class="headerlink" title="Or"></a>Or</h2><ul><li><p>或，在逻辑中表示只需要两个部分的其中一个为真，那么整体就是真的意思。</p></li><li><p>日常生活中，也有带歧义的句子，比如“Study hard, or you will fail.”，这里的 or，并非上面的逻辑含义，而是带有否则的含义，使得两个部分的观点，不可能都为真，这样的 or 叫做 exclusive-or，而之前的 or 叫 inclusive-or。之后的逻辑中的 or 均为 inclusive 的 or。</p></li><li><p>让我们看看组合表认识一下这个逻辑，下面用 | 这个符号来表示或。</p></li></ul><table><thead><tr><th>A</th><th>B</th><th>A|B</th></tr></thead><tbody><tr><td>T</td><td>T</td><td>T</td></tr><tr><td>T</td><td>F</td><td>T</td></tr><tr><td>F</td><td>T</td><td>T</td></tr><tr><td>F</td><td>F</td><td>F</td></tr></tbody></table><h2 id="Not"><a href="#Not" class="headerlink" title="Not"></a>Not</h2><ul><li><p>否，就是否定观点，取相反的结论。</p></li><li><p>我们直接看看组合表，然后通过例子更深刻地来认识这个逻辑。下面表格用 ！ 来代表否定符号</p></li></ul><table><thead><tr><th>A</th><th>!A</th></tr></thead><tbody><tr><td>T</td><td>F</td></tr><tr><td>F</td><td>T</td></tr></tbody></table><ul><li><p>或许你已经觉得你掌握了 否，但请你再看看下面例子来加深你的理解。</p><ul><li>请问 “All the male will die.” 的否定结论是什么？</li><li>A. “All the male will not die.”</li><li>B. “All the female will die.”</li><li>C. “All the female will not die.”</li></ul></li><li><p>答案是，上述的选项都是错的，A 的否定并不完全，因为当所有的男性都会死亡不成立时，也不意味着所有男性都不会死亡，如果有一个男性不会死亡，结论依旧不成立；B 和 C 都有一个问题，在于更改了结论，原观点只是在讨论男性，B 和 C 说的都是女性，两者毫无关联，根本谈不上是结论。</p></li><li><p>一个对应的示例答案可以是 “At least one male will not die.”</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Introduction to Mathematical Thinking </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Math </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【Leetcode Daily】3371识别数组中的最大异常值</title>
       <link href="/posts/88712ee8.html"/>
       <url>/posts/88712ee8.html</url>
@@ -2832,31 +2809,6 @@
             <tag> Algorithm </tag>
             
             <tag> 枚举 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【Introduction to Mathematical Thinking】Lecture-0-and-Lecture-1-Background</title>
-      <link href="/posts/46219e20.html"/>
-      <url>/posts/46219e20.html</url>
-      
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><ul><li><p>该课程可以在 <a href="https://www.coursera.org/learn/mathematical-thinking">coursera</a> 网站上免费学习，<a href="https://www.coursera.org/learn/mathematical-thinking">具体课程的链接就点这里跳转</a>。</p></li><li><p>陆爻齐不太指望学完这门课就能让自己走向人生巅峰（笑，只是对于像这种方法论类型的比较感兴趣，而且也是一个很好的锻炼英语的机会 ：）</p></li></ul><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><ul><li><p>本次笔记记录了学习 Lecture 0 、Lecture 1和阅读材料 Background Reading 的内容。</p></li><li><p>第一节课都会讲讲这门课到底讲啥，这门课的重要性，开设的理由什么的。</p></li></ul><h2 id="本课的目标，重要性，也就是开设的理由"><a href="#本课的目标，重要性，也就是开设的理由" class="headerlink" title="本课的目标，重要性，也就是开设的理由"></a>本课的目标，重要性，也就是开设的理由</h2><ul><li><p>让学生学会使用 mathematical thinking，直译过来应该叫“数学思维”。</p></li><li><p>在大学之前，我们所学的中学及之前的数学，都可以叫 “think inside the box”，意思就是，我们会学习各种各样的方法，对已有的问题提供的数字相关信息进行加工，最后得出一个结果。</p></li><li><p>这样的过程与烹饪料理书何曾相似，只要按照步骤一步步地加工，就能获得一个对应的结果。</p></li><li><p>但是，大学的要学的高等数学，或者更广义一些，对于未来在科研或是企业中所要遇到的各种问题，我们往往需要去应对这些未知的问题。而去将未知的问题化为已知的问题并解决，正是 mathematical thinking 所对应的，即 make unvisble to visble. 这样的思考，可以叫 “think outside the box”.</p></li><li><p>这种思考能够引领我们解决问题，而本系列的课程不会给我们提供各种解决问题的方法，而是引领我们尝试去思考出这些方法。</p></li></ul><h2 id="数学的有趣小背景"><a href="#数学的有趣小背景" class="headerlink" title="数学的有趣小背景"></a>数学的有趣小背景</h2><ul><li><p>数学的起始就是十分工具性的用处，与金钱相关（数钱嘛），在漫长的岁月力，往往是在现有数理难以解决问题进展迅速。而大部分我们今日所熟知的数学，其实就是这最近几百年的成果。</p></li><li><p>数学符号是数学的表示，而非数学本身。就像是乐谱上的乐符表示的音乐（的演奏），但这不是音乐，通过乐器（或是合成）出来的与人共鸣的声音才是音乐。同理，数学的本质，其实应该是透过数学符号的，你对这个世界的认知。</p></li></ul><h2 id="小附录"><a href="#小附录" class="headerlink" title="小附录"></a>小附录</h2><ul><li>雅思的学习还是很有用处的，记得之前想上这门课，感觉十分吃力，主要是难以接受大量的生词输入，而雅思正是锻炼了这种能力，词汇量确实需要增长，但对于不会的生词也能大致了解大意的能力更是宝贵。</li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> Introduction to Mathematical Thinking </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Math </tag>
             
         </tags>
       
@@ -3239,31 +3191,6 @@
             <tag> 二分 </tag>
             
             <tag> 前缀和 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>备忘录 | ToDoList</title>
-      <link href="/posts/83a53e85.html"/>
-      <url>/posts/83a53e85.html</url>
-      
-        <content type="html"><![CDATA[<ul><li><p><input disabled="" type="checkbox"> Leetcode 刷题，不急，慢慢学 2025.04.08-?</p></li><li><p><input checked="" disabled="" type="checkbox"> qt 作业三 2025.06.13</p></li><li><p><input checked="" disabled="" type="checkbox"> 恢复 LALC 的 pr 维护事项 2025.06.13-17</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成可视化的报告 2025.06.13-14</p></li><li><p><input checked="" disabled="" type="checkbox"> 紧急备战**考试 2025.06.12</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成数据库安全的报告 2025.06.06-2025.06.07</p></li><li><p><input checked="" disabled="" type="checkbox"> 完成编译原理期末考试<del>（垂死挣扎）</del> 2025.06.05</p></li><li><p><input checked="" disabled="" type="checkbox"> 调整博客首页，隐藏像 Leetcode Daily 隐藏这样偏向记录形式的文章 2025.06.03</p></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 杂记 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 杂记 </tag>
             
         </tags>
       
@@ -6663,7 +6590,7 @@
       <link href="/posts/5fa462b0.html"/>
       <url>/posts/5fa462b0.html</url>
       
-        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大家早上中午晚上好，这里是第一次像这样写文章的陆爻齐。姑且不管什么格式，推广，吸引眼球乱七八糟的，做好记录再说。</p><p>本来吧，重装系统真没啥可记录的，但中间遇到的些许问题还是最好记录下来，备后面使用。  </p><p>#正文</p><p>装备：待重装系统的老旧电脑*3 装了微PE工具箱的u盘*1 能上网正常使用的电脑*1  </p><p>重装系统的参考教程：硬件茶谈的视频【装机教程】超详细WIN10系统安装教程，官方ISO直装与PE两种方法教程，UEFI+GUID分区与Legacy+MBR分区</p><p>接下来是三段难度依次递增的重装系统过程（：</p><p>##（1）联想笔记本 4G运行内存 原win10系统  </p><p>该笔记本因不明原因，缺失某系统文件导致不断反复开机的流程而不进入系统。经过PE辅助装机问题全部解决，无异常。</p><p>重新安装Window7，为了方便使用，硬盘只划分一个分区，重新启动后就已可以让原主正常使用。  </p><p>##（2）联想笔记本 1G运行内存 149G储存容量的固态硬盘 原XP系统  </p><p>该笔记本因360和各种“下崽器”，卡顿不堪，抢救其中的图片与视频后，正常将硬盘格式化并安装WindowsXP系统。  </p><p>重装过程中也出现问题，XP的ISO不能像win7，win10的一样，挂载后直接运行setup.exe即可，所以借助PE自带的WinNTsetup软件中安装XP的功能，选中挂载的ISO和要安装的系统盘即可。</p><p>这次重装系统遇到的问题在于使得XP系统能够正常使用，毕竟纯净的XP系统，既不能识别u盘，又不能直接上网。  </p><p>首先要解决的不能识别u盘的问题，既然重装系统前能正常识别，说明问题不在XP系统本身。经上网查询，问题大概率为没有打KB955704补丁，故在系统之家下载补丁，并通过PE将其转移并使用，问题解决。</p><p>然后顺便在景元论坛发现XP补丁合集，遂放入u盘收藏并应用于重装XP中。  </p><p>接着通过u盘转移winrar和xp_activate32来解决无法解压rar和激活XP的问题。</p><p>还有无法上网的问题，经查询，很可能是没有安装驱动，故在u盘里放了个驱动总裁，使用后问题也顺利解决。</p><p>##（3）戴尔笔记本 512M运行内存 80G储存容量的机械硬盘 原XP系统</p><p>这次问题主要集中在重装系统本身，刚开始PE无法进入，XP系统又无法自己打开ISO进行系统安装，一筹莫展。</p><p>刚开始的思路是，修复该笔记本各种dll缺失，启动微软自己的安装系统，但即便用DirectX修复后仍然无法解决，故转换思路。</p><p>经思考与查询，决定将PE更换为32位，然后成功进入PE。</p><p>然后发现0.5G的运行内存不能使用分区助手，分区精灵来分区，于是只能用系统自带分区来实现。</p><p>值得注意的是，给系统盘拓展卷时，会提示基本磁盘变为动态磁盘，不可作为系统盘。要解决这个问题需要先删除该盘所有分区，再将该磁盘变为基本磁盘，然后才新建简单卷。</p><p>接着通过WinNTSetup成功安装XP。</p><p>接下来进入下一个问题，拔掉u盘重启后，电脑显示no bootable device。</p><p>出现该问题有可能是硬盘连接断开，故在bios检查，发现硬盘仍正常连接，排除该原因。</p><p>接着考虑是引导程序出问题，故重新进入PE启动引导修复工具，在提示重新引导完成后重启电脑，但仍出现一样结果。</p><p>此时又进入一筹莫展之境地，经上网查询后，尝试以下步骤。</p><ol><li><p>进入PE，并运行cmd</p></li><li><p>diskpart</p></li><li><p>list disk</p></li><li><p>select disk 0（这里的数字0代表系统盘）</p></li><li><p>list partition</p></li><li><p>select partition 0（这里的数字0代表分区中装载系统的分区）</p></li><li><p>active</p></li></ol><p>如果最后一步无报错，说明系统分区成功激活，重启即可。</p><p>上述步骤出自知乎，我的电脑出现了no bootable device，怎么解决?</p><p>然后问题解决，成功进入XP安装，其余同（2）  </p><p>#总结  </p><p>重装系统其实不算难，难的是旧电脑遗留各种问题需要克服，运行内存不足，无法进入pe等，希望本文能给予后人一点参考，少踩坑，多休息。</p>]]></content>
+        <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>大家早上中午晚上好，这里是第一次像这样写文章的陆爻齐。姑且不管什么格式，推广，吸引眼球乱七八糟的，做好记录再说。</p><p>本来吧，重装系统真没啥可记录的，但中间遇到的些许问题还是最好记录下来，备后面使用。  </p><h1 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h1><p>装备：待重装系统的老旧电脑*3 装了微PE工具箱的u盘*1 能上网正常使用的电脑*1  </p><p>重装系统的参考教程：硬件茶谈的视频【装机教程】超详细WIN10系统安装教程，官方ISO直装与PE两种方法教程，UEFI+GUID分区与Legacy+MBR分区</p><p>接下来是三段难度依次递增的重装系统过程（：</p><h2 id="（1）联想笔记本-4G运行内存-原win10系统"><a href="#（1）联想笔记本-4G运行内存-原win10系统" class="headerlink" title="（1）联想笔记本 4G运行内存 原win10系统"></a>（1）联想笔记本 4G运行内存 原win10系统</h2><p>该笔记本因不明原因，缺失某系统文件导致不断反复开机的流程而不进入系统。经过PE辅助装机问题全部解决，无异常。</p><p>重新安装Window7，为了方便使用，硬盘只划分一个分区，重新启动后就已可以让原主正常使用。  </p><h2 id="（2）联想笔记本-1G运行内存-149G储存容量的固态硬盘-原XP系统"><a href="#（2）联想笔记本-1G运行内存-149G储存容量的固态硬盘-原XP系统" class="headerlink" title="（2）联想笔记本 1G运行内存 149G储存容量的固态硬盘 原XP系统"></a>（2）联想笔记本 1G运行内存 149G储存容量的固态硬盘 原XP系统</h2><p>该笔记本因360和各种“下崽器”，卡顿不堪，抢救其中的图片与视频后，正常将硬盘格式化并安装WindowsXP系统。  </p><p>重装过程中也出现问题，XP的ISO不能像win7，win10的一样，挂载后直接运行setup.exe即可，所以借助PE自带的WinNTsetup软件中安装XP的功能，选中挂载的ISO和要安装的系统盘即可。</p><p>这次重装系统遇到的问题在于使得XP系统能够正常使用，毕竟纯净的XP系统，既不能识别u盘，又不能直接上网。  </p><p>首先要解决的不能识别u盘的问题，既然重装系统前能正常识别，说明问题不在XP系统本身。经上网查询，问题大概率为没有打KB955704补丁，故在系统之家下载补丁，并通过PE将其转移并使用，问题解决。</p><p>然后顺便在景元论坛发现XP补丁合集，遂放入u盘收藏并应用于重装XP中。  </p><p>接着通过u盘转移winrar和xp_activate32来解决无法解压rar和激活XP的问题。</p><p>还有无法上网的问题，经查询，很可能是没有安装驱动，故在u盘里放了个驱动总裁，使用后问题也顺利解决。</p><h2 id="（3）戴尔笔记本-512M运行内存-80G储存容量的机械硬盘-原XP系统"><a href="#（3）戴尔笔记本-512M运行内存-80G储存容量的机械硬盘-原XP系统" class="headerlink" title="（3）戴尔笔记本 512M运行内存 80G储存容量的机械硬盘 原XP系统"></a>（3）戴尔笔记本 512M运行内存 80G储存容量的机械硬盘 原XP系统</h2><p>这次问题主要集中在重装系统本身，刚开始PE无法进入，XP系统又无法自己打开ISO进行系统安装，一筹莫展。</p><p>刚开始的思路是，修复该笔记本各种dll缺失，启动微软自己的安装系统，但即便用DirectX修复后仍然无法解决，故转换思路。</p><p>经思考与查询，决定将PE更换为32位，然后成功进入PE。</p><p>然后发现0.5G的运行内存不能使用分区助手，分区精灵来分区，于是只能用系统自带分区来实现。</p><p>值得注意的是，给系统盘拓展卷时，会提示基本磁盘变为动态磁盘，不可作为系统盘。要解决这个问题需要先删除该盘所有分区，再将该磁盘变为基本磁盘，然后才新建简单卷。</p><p>接着通过WinNTSetup成功安装XP。</p><p>接下来进入下一个问题，拔掉u盘重启后，电脑显示no bootable device。</p><p>出现该问题有可能是硬盘连接断开，故在bios检查，发现硬盘仍正常连接，排除该原因。</p><p>接着考虑是引导程序出问题，故重新进入PE启动引导修复工具，在提示重新引导完成后重启电脑，但仍出现一样结果。</p><p>此时又进入一筹莫展之境地，经上网查询后，尝试以下步骤。</p><ol><li><p>进入PE，并运行cmd</p></li><li><p>diskpart</p></li><li><p>list disk</p></li><li><p>select disk 0（这里的数字0代表系统盘）</p></li><li><p>list partition</p></li><li><p>select partition 0（这里的数字0代表分区中装载系统的分区）</p></li><li><p>active</p></li></ol><p>如果最后一步无报错，说明系统分区成功激活，重启即可。</p><p>上述步骤出自知乎，我的电脑出现了no bootable device，怎么解决?</p><p>然后问题解决，成功进入XP安装，其余同（2）  </p><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>重装系统其实不算难，难的是旧电脑遗留各种问题需要克服，运行内存不足，无法进入pe等，希望本文能给予后人一点参考，少踩坑，多休息。</p>]]></content>
       
       
       
