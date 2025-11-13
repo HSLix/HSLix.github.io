@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3228将1移动到末尾的最大操作次数</title>
+      <link href="/posts/60876328.html"/>
+      <url>/posts/60876328.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-number-of-operations-to-move-ones-to-the-end/?envType=daily-question&envId=2025-11-13">题目链接</a>。</p></li><li><p>简单地说，就是给一个由 0 和 1 组成的一维数组，现在可以对数组中的任意 1 做右移到末尾或者下个 1 的左边，求可以这么操作的最大操作数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>对于陌生题居然能想出和写出与灵神相同的答案，荣幸之至啊。下面说下思路。</p><blockquote><p><a href="https://leetcode.cn/problems/maximum-number-of-operations-to-move-ones-to-the-end/solutions/2851730/du-che-pythonjavacgo-by-endlesscheng-tllv/?envType=daily-question&envId=2025-11-13">https://leetcode.cn/problems/maximum-number-of-operations-to-move-ones-to-the-end/solutions/2851730/du-che-pythonjavacgo-by-endlesscheng-tllv/?envType=daily-question&amp;envId=2025-11-13</a></p></blockquote></li><li><p>一般来说，从最少操作的角度，应当从右边向右归类，因为如果有 1 挡在中间，那么其左边的 1 就不能一步到位（至少还需要更多的移动）。现在反过来需要最多操作，那么就从最左边的 1 向右就行了。</p></li><li><p>操作策略定下来了，但是怎么比较快速的确定操作了多少个 1 呢？只要遍历的时候记录已经遍历的 1，一旦遇到下一个 0，可以让已经有的 1 各操作一次（从右向左），这样就能 O(1) 计算操作数。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxOperations</span>(<span class="params">self, s: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(s)</span><br><span class="line">        left = <span class="number">0</span></span><br><span class="line">        i = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> i &lt; n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27;1&#x27;</span>:</span><br><span class="line">                left += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans += left</span><br><span class="line">                <span class="keyword">while</span> i &lt; n-<span class="number">1</span> <span class="keyword">and</span> s[i+<span class="number">1</span>] == <span class="string">&#x27;0&#x27;</span>:</span><br><span class="line">                    i += <span class="number">1</span></span><br><span class="line">            i += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2304网络中的最小路径代价</title>
+      <link href="/posts/926bbf3e.html"/>
+      <url>/posts/926bbf3e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-path-cost-in-a-grid/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，要从这个数组的第一行移动到最后一行，其中每个值会有移动到下一行的对应代价，路径代价由移动的代价和移动格子值相加所得，求最小的路径代价。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>从思路而言，就是把上一题加上要计算对应值移动的代价 <a href="/posts/9a6ce81f.html" title="【Leetcode Daily】931下降路径最小和">【Leetcode Daily】931下降路径最小和</a><blockquote><p><a href="https://leetcode.cn/problems/minimum-path-cost-in-a-grid/solutions/2536856/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-bd25/">https://leetcode.cn/problems/minimum-path-cost-in-a-grid/solutions/2536856/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-bd25/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minPathCost</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], moveCost: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        f = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            f[m-<span class="number">1</span>][i] = grid[m-<span class="number">1</span>][i]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># f[i][j] = min(f[i+1][k] + moveCost[grid[i][j]][k] for k in range(n)) + grid[i][j]</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                val = grid[i][j]</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i+<span class="number">1</span>][k] + moveCost[val][k] <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n)) + val</span><br><span class="line">        <span class="comment"># print(f)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(f[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment">## 记忆化搜索</span></span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        <span class="comment"># 移动到下标 i j 时，最小的值之和</span></span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">i:<span class="built_in">int</span>, j:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            val = grid[i][j]</span><br><span class="line">            <span class="keyword">if</span> i == m-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> val</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">min</span>(dfs(i+<span class="number">1</span>, k) + moveCost[val][k] <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n)) + val</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dfs(<span class="number">0</span>, j) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3603交替方向的最小路径代价II</title>
       <link href="/posts/261bb7f4.html"/>
       <url>/posts/261bb7f4.html</url>
