@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1094拼车</title>
+      <link href="/posts/7ebe0aeb.html"/>
+      <url>/posts/7ebe0aeb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/car-pooling/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，其中的元素为长度 3 的一维数组，三个值分别是上车的人数，上车的下标，下车的下标，求整个过程中，车上的人数是否都小于 capacity。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>此前对于一段值的差值用前缀和处理，而前缀和的反面则是差分，求两个值的差值。所以差分记录的是值的变化，一个特点是，对于 a-b 区间的值加 10，相当于在差分数组上的 a 处加 10，b 处减 10.</p><blockquote><p><a href="https://leetcode.cn/problems/car-pooling/solutions/2550264/suan-fa-xiao-ke-tang-chai-fen-shu-zu-fu-9d4ra/">https://leetcode.cn/problems/car-pooling/solutions/2550264/suan-fa-xiao-ke-tang-chai-fen-shu-zu-fu-9d4ra/</a></p></blockquote></li><li><p>所以本题只要先求出整个数组的差分，再对差分做前缀和，过程中判断是否有值超过阈值即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">carPooling</span>(<span class="params">self, trips: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], capacity: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        f = [<span class="number">0</span>]*<span class="number">1001</span></span><br><span class="line">        <span class="keyword">for</span> val, start, end <span class="keyword">in</span> trips:</span><br><span class="line">            f[start] += val</span><br><span class="line">            f[end] -= val</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">all</span>(passengers &lt;= capacity <span class="keyword">for</span> passengers <span class="keyword">in</span> accumulate(f))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1289下降路径最小和II</title>
+      <link href="/posts/d03eb1d2.html"/>
+      <url>/posts/d03eb1d2.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-falling-path-sum-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，现在要从第一行走到最后一行，但是两个相邻行的取数不能同列</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>此题最大的难点在于读题，是相邻行不能同列，并非只能相邻的列。之后的思路与 <a href="/posts/9a6ce81f.html" title="【Leetcode Daily】931下降路径最小和">【Leetcode Daily】931下降路径最小和</a> 基本相同，故不赘述。<blockquote><p><a href="https://leetcode.cn/problems/minimum-falling-path-sum-ii/solutions/3077128/ling-cha-shan-ai-fang-fang-ling-shen-jia-7jxz/">https://leetcode.cn/problems/minimum-falling-path-sum-ii/solutions/3077128/ling-cha-shan-ai-fang-fang-ling-shen-jia-7jxz/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minFallingPathSum</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 递推</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        n = <span class="built_in">len</span>(grid)</span><br><span class="line">        <span class="keyword">if</span> n == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> grid[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">        <span class="comment"># f[i][j] = min(f[i+1][k] for k in range(n) if k != j) + grid[i][j]</span></span><br><span class="line">        f = [[<span class="number">0</span>]*n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                f[i][j] = <span class="built_in">min</span>(f[i+<span class="number">1</span>][k] <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n) <span class="keyword">if</span> k != j) + grid[i][j]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(f[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        n = <span class="built_in">len</span>(grid)</span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">i:<span class="built_in">int</span>, j:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> (<span class="number">0</span> &lt;= j &lt;= n-<span class="number">1</span>):</span><br><span class="line">                <span class="keyword">return</span> inf</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> i == n-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> grid[i][j]</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">min</span>(dfs(i+<span class="number">1</span>, k) <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(n) <span class="keyword">if</span> k != j) + grid[i][j]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">min</span>(dfs(<span class="number">0</span>, i) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3228将1移动到末尾的最大操作次数</title>
       <link href="/posts/60876328.html"/>
       <url>/posts/60876328.html</url>
