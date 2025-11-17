@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2787将一个数字表示成幂的和的方案数</title>
+      <link href="/posts/23acf4c4.html"/>
+      <url>/posts/23acf4c4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/ways-to-express-an-integer-as-sum-of-powers/">题目链接</a>。</p></li><li><p>简单地说，就是给正整数 n 和 x，要求有多少无重复正整数数字的 x 次方之和恰好为 n。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>01 背包题目，核心就是 选或不选 的思想，如果选了当前的值（要先判断选择是否合法，否则直接不选），那么就要更新剩余可以用的空间；不选则直接到下一个物品来判断。<blockquote><p><a href="https://leetcode.cn/problems/ways-to-express-an-integer-as-sum-of-powers/solutions/2354970/0-1-bei-bao-mo-ban-ti-by-endlesscheng-ap09/">https://leetcode.cn/problems/ways-to-express-an-integer-as-sum-of-powers/solutions/2354970/0-1-bei-bao-mo-ban-ti-by-endlesscheng-ap09/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfWays</span>(<span class="params">self, n: <span class="built_in">int</span>, x: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        f = [<span class="number">1</span>] + [<span class="number">0</span>]*n</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            v = i**x</span><br><span class="line">            <span class="keyword">if</span> v &gt; n:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n, v-<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">                f[j] += f[j-v]</span><br><span class="line">                f[j] %= MOD</span><br><span class="line">        <span class="keyword">return</span> f[n]%MOD</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1094拼车</title>
       <link href="/posts/7ebe0aeb.html"/>
       <url>/posts/7ebe0aeb.html</url>
