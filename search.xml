@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】322零钱兑换</title>
+      <link href="/posts/60372410.html"/>
+      <url>/posts/60372410.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/coin-change/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一些数额的零钱，每种数额数量无限，再给一个目标值，求用零钱凑到目标值所用最少的硬币数目。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>每种数额无限使用，和此前的零一背包的选或不选有一点差别，之前选了以后下标也会变化，代表只能选一次，现在选了以后下标不变，直到不能选了。<blockquote><p><a href="https://leetcode.cn/problems/coin-change/solutions/2119065/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-21m5/">https://leetcode.cn/problems/coin-change/solutions/2119065/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-21m5/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">coinChange</span>(<span class="params">self, coins: <span class="type">List</span>[<span class="built_in">int</span>], amount: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 记忆化搜索</span></span><br><span class="line">        <span class="built_in">sorted</span>(coins)</span><br><span class="line">        n = <span class="built_in">len</span>(coins)</span><br><span class="line"><span class="meta">        @cache</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">i:<span class="built_in">int</span>, a:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> i == -<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span> <span class="keyword">if</span> a==<span class="number">0</span> <span class="keyword">else</span> inf</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">min</span>(dfs(i-<span class="number">1</span>, a), dfs(i, a-coins[i]) + <span class="number">1</span> <span class="keyword">if</span> a &gt;= coins[i] <span class="keyword">else</span> inf)</span><br><span class="line">        <span class="keyword">return</span> dfs(n-<span class="number">1</span>, amount) <span class="keyword">if</span> dfs(n-<span class="number">1</span>, amount) != inf <span class="keyword">else</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2787将一个数字表示成幂的和的方案数</title>
       <link href="/posts/23acf4c4.html"/>
       <url>/posts/23acf4c4.html</url>
