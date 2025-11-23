@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】304二维区域和检索-矩阵不可变</title>
+      <link href="/posts/d735d05.html"/>
+      <url>/posts/d735d05.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/range-sum-query-2d-immutable/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，给一个区域的起点和终点，求每个区域的数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>具体计算二维前缀和的方式都在参考链接，不多赘述。难点在于区分四种数组的下标，比如 row1 col1 row2 col2，真正要求的数组范围是否需要 + 1，这需要画出来理清楚。<blockquote><p><a href="https://leetcode.cn/problems/range-sum-query-2d-immutable/solutions/2667331/tu-jie-yi-zhang-tu-miao-dong-er-wei-qian-84qp/">https://leetcode.cn/problems/range-sum-query-2d-immutable/solutions/2667331/tu-jie-yi-zhang-tu-miao-dong-er-wei-qian-84qp/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NumMatrix</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, matrix: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>):</span><br><span class="line">        m, n = <span class="built_in">len</span>(matrix), <span class="built_in">len</span>(matrix[<span class="number">0</span>])</span><br><span class="line">        s = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        <span class="keyword">for</span> i, row <span class="keyword">in</span> <span class="built_in">enumerate</span>(matrix):</span><br><span class="line">            <span class="keyword">for</span> j, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(row):</span><br><span class="line">                s[i+<span class="number">1</span>][j+<span class="number">1</span>] = s[i+<span class="number">1</span>][j] + s[i][j+<span class="number">1</span>] - s[i][j] + x</span><br><span class="line">        <span class="variable language_">self</span>.s = s</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumRegion</span>(<span class="params">self, row1: <span class="built_in">int</span>, col1: <span class="built_in">int</span>, row2: <span class="built_in">int</span>, col2: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.s[row2+<span class="number">1</span>][col2+<span class="number">1</span>] - <span class="variable language_">self</span>.s[row1][col2+<span class="number">1</span>] - <span class="variable language_">self</span>.s[row2+<span class="number">1</span>][col1] + <span class="variable language_">self</span>.s[row1][col1]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your NumMatrix object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = NumMatrix(matrix)</span></span><br><span class="line"><span class="comment"># param_1 = obj.sumRegion(row1,col1,row2,col2)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1262可被三整除的最大和</title>
       <link href="/posts/662ad968.html"/>
       <url>/posts/662ad968.html</url>
