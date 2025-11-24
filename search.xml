@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1290二进制链表转整数</title>
+      <link href="/posts/11350319.html"/>
+      <url>/posts/11350319.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/description/">题目链接</a>。</p></li><li><p>简单地说，就是用链表存储二进制数，现在给你链表，请你给出所代表的二进制数的十进制表现。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>二进制转十进制的方法很简单，起始为 0，取数加上去，乘二，再取数加上去直到取尽。至于遍历链表，只要 head ！&#x3D; None，head &#x3D; head.next 即可。<blockquote><p><a href="https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/solutions/3723060/bian-li-lian-biao-pythonjavaccgojsrust-b-ykjd/">https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/solutions/3723060/bian-li-lian-biao-pythonjavaccgojsrust-b-ykjd/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getDecimalValue</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = head</span><br><span class="line">        rec = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> n != <span class="literal">None</span>:</span><br><span class="line">            rec= rec * <span class="number">2</span> + n.val</span><br><span class="line">            n = n.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> rec</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1314矩阵区域和</title>
       <link href="/posts/45f84fa2.html"/>
       <url>/posts/45f84fa2.html</url>
