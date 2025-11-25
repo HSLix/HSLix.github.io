@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2058找出临界点之间的最小和最大距离</title>
+      <link href="/posts/2439e353.html"/>
+      <url>/posts/2439e353.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个长度至少为二的链表，其中可能存在局部的极大点或者极小点，返回极值点之间的最小距离和最大距离</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>用 first 和 last 记录已经遍历到的最早和最晚的极值点，那么最大距离就是这两个之差，但是最小距离需要实时计算，每次可以拿新的极值点与 last 做差更新。<blockquote><p><a href="https://leetcode.cn/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/solutions/1075991/go-mo-ni-bian-li-lian-biao-bian-li-lin-j-rx9s/">https://leetcode.cn/problems/find-the-minimum-and-maximum-number-of-nodes-between-critical-points/solutions/1075991/go-mo-ni-bian-li-lian-biao-bian-li-lin-j-rx9s/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nodesBetweenCriticalPoints</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        first, last = <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">        a, b, c = head, head.<span class="built_in">next</span>, head.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">        index = <span class="number">1</span></span><br><span class="line">        minDist = inf</span><br><span class="line">        <span class="keyword">while</span> c:</span><br><span class="line">            <span class="keyword">if</span> a.val &lt; b.val &gt; c.val <span class="keyword">or</span> a.val &gt; b.val &lt; c.val:</span><br><span class="line">                <span class="keyword">if</span> first == <span class="number">0</span>:</span><br><span class="line">                    first = index</span><br><span class="line">                <span class="keyword">if</span> last &gt; <span class="number">0</span> <span class="keyword">and</span> index-last &lt; minDist:</span><br><span class="line">                    minDist = index-last</span><br><span class="line">                last = index</span><br><span class="line">            a, b, c = b, c, c.<span class="built_in">next</span></span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> [minDist, last-first] <span class="keyword">if</span> first != last <span class="keyword">else</span> [-<span class="number">1</span>, -<span class="number">1</span>]</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1290二进制链表转整数</title>
       <link href="/posts/11350319.html"/>
       <url>/posts/11350319.html</url>
@@ -22,7 +49,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
+            <tag> 链表 </tag>
             
         </tags>
       
