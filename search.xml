@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3381长度可被K整除的子数组的最大元素和</title>
+      <link href="/posts/35dabf1b.html"/>
+      <url>/posts/35dabf1b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-subarray-sum-with-length-divisible-by-k/?envType=daily-question&envId=2025-11-27">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组和数字 k，要求其中长度为 k 的子数组数值之和的最大值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>由于涉及到求子数组之和，就可以用前缀和处理，同时由于有长度限制被 k 整除，也就是可以用 (j-i)%k&#x3D;&#x3D;0，那么 j%k&#x3D;&#x3D;i%k，也就是说，子数组的两端同余，既然如此，所有的 i 可以化为 k 组，一个 j 对应的 i 就是 j%k，然后维护 i 对应的最小子数组值即可。<blockquote><p><a href="https://leetcode.cn/problems/maximum-subarray-sum-with-length-divisible-by-k/solutions/3013897/qian-zhui-he-mei-ju-you-wei-hu-zuo-pytho-0t8p/?envType=daily-question&envId=2025-11-27">https://leetcode.cn/problems/maximum-subarray-sum-with-length-divisible-by-k/solutions/3013897/qian-zhui-he-mei-ju-you-wei-hu-zuo-pytho-0t8p/?envType=daily-question&amp;envId=2025-11-27</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxSubarraySum</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        pre = accumulate(nums, initial=<span class="number">0</span>)</span><br><span class="line">        ans = -inf</span><br><span class="line">        min_rec = [inf]*k</span><br><span class="line">        <span class="keyword">for</span> j, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(pre):</span><br><span class="line">            i = j%k</span><br><span class="line">            ans = <span class="built_in">max</span>(ans, num - min_rec[i])</span><br><span class="line">            min_rec[i] = <span class="built_in">min</span>(min_rec[i], num)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2181合并零之间的节点</title>
+      <link href="/posts/8a145a51.html"/>
+      <url>/posts/8a145a51.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/merge-nodes-in-between-zeros/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，将其中两个为零的节点之间的节点合成一个节点，节点和为其值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>我的思路是单指针遍历节点，将遇到非零值纳入新链表；灵茶山艾府的方法是双指针，一个指针指第一个 0，另一个指针向后遍历，遇到的非零值加到第一个指针上，遇到零则更新第一个指针到第二个指针的位置，直接原地修改。<blockquote><p><a href="https://leetcode.cn/problems/merge-nodes-in-between-zeros/">https://leetcode.cn/problems/merge-nodes-in-between-zeros/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeNodes</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># 灵茶山</span></span><br><span class="line">        first = head</span><br><span class="line">        last = head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">while</span> last.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">if</span> last.val:</span><br><span class="line">                first.val += last.val</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                first = first.<span class="built_in">next</span></span><br><span class="line">                first.val = <span class="number">0</span></span><br><span class="line">            last = last.<span class="built_in">next</span></span><br><span class="line">        first.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line">        <span class="comment"># 自己的做法</span></span><br><span class="line">        last = head.<span class="built_in">next</span></span><br><span class="line">        num = <span class="number">0</span></span><br><span class="line">        new_sentinal = ListNode(<span class="number">0</span>, <span class="literal">None</span>)</span><br><span class="line">        new_cur = new_sentinal</span><br><span class="line">        <span class="keyword">while</span> last.<span class="built_in">next</span> != <span class="literal">None</span>:</span><br><span class="line">            num += last.val</span><br><span class="line">            last = last.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> last.val == <span class="number">0</span>:</span><br><span class="line">                new_cur.<span class="built_in">next</span> = ListNode(num, <span class="literal">None</span>)</span><br><span class="line">                new_cur = new_cur.<span class="built_in">next</span></span><br><span class="line">                num = <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> new_sentinal.<span class="built_in">next</span></span><br><span class="line">                </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2435矩阵中和能被K整除的路径</title>
       <link href="/posts/3b7fd6c2.html"/>
       <url>/posts/3b7fd6c2.html</url>
