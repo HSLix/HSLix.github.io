@@ -4,6 +4,62 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3070元素和小于等于k的子矩阵的数目</title>
+      <link href="/posts/d1adfc8d.html"/>
+      <url>/posts/d1adfc8d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-submatrices-with-top-left-element-and-sum-less-than-k/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，找到其中所有左上角就是 0，0 的子矩阵之和小于等于给定数字 k 的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>按照经典的二维前缀和求的同时，统计当前前缀和值是否小于等于k即可。如何计算这个二位前缀和不再赘述。<blockquote><p><a href="https://leetcode.cn/problems/count-submatrices-with-top-left-element-and-sum-less-than-k/solutions/2664654/mo-ban-er-wei-qian-zhui-he-pythonjavacgo-fnk1/">https://leetcode.cn/problems/count-submatrices-with-top-left-element-and-sum-less-than-k/solutions/2664654/mo-ban-er-wei-qian-zhui-he-pythonjavacgo-fnk1/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countSubmatrices</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        f = [[<span class="number">0</span>]*(n+<span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(m+<span class="number">1</span>)]</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                f[i+<span class="number">1</span>][j+<span class="number">1</span>] = f[i][j+<span class="number">1</span>] + f[i+<span class="number">1</span>][j] - f[i][j] + grid[i][j]</span><br><span class="line">                <span class="keyword">if</span> f[i+<span class="number">1</span>][j+<span class="number">1</span>] &lt;= k:</span><br><span class="line">                    ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1590使数组和能被P整除</title>
+      <link href="/posts/de161770.html"/>
+      <url>/posts/de161770.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/make-sum-divisible-by-p/description/?envType=daily-question&envId=2025-11-30">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和数字 p，现在可以移除数组内的最短长度的子数组，使得数组和能被 p 整除。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本质上就是找到子数组和能与总数组和同余时，长度最小的情况。对于找子数组的前缀和区间两侧：(right - left)%p &#x3D; num, (right-num)%p &#x3D; left%p。</p></li><li><p>那么遍历前缀和，通过哈希表就能方便得记录前面子数组的余数情况，如果有匹配的左侧子数组，就记录当前长度。</p><blockquote><p><a href="https://leetcode.cn/problems/make-sum-divisible-by-p/solutions/2158435/tao-lu-qian-zhui-he-ha-xi-biao-pythonjav-rzl0/?envType=daily-question&envId=2025-11-30">https://leetcode.cn/problems/make-sum-divisible-by-p/solutions/2158435/tao-lu-qian-zhui-he-ha-xi-biao-pythonjav-rzl0/?envType=daily-question&amp;envId=2025-11-30</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minSubarray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], p: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        accu_sum = <span class="built_in">list</span>(accumulate(nums, initial=<span class="number">0</span>))</span><br><span class="line">        left = accu_sum[-<span class="number">1</span>] % p </span><br><span class="line">        <span class="keyword">if</span> left == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            </span><br><span class="line">        rec = &#123;&#125;</span><br><span class="line">        ans = n = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(accu_sum):</span><br><span class="line">            rec[num % p] = i </span><br><span class="line">            last_index = rec.get((num-left) % p, -n)</span><br><span class="line">            ans = <span class="built_in">min</span>(ans, i-last_index)</span><br><span class="line">        <span class="keyword">return</span> ans <span class="keyword">if</span> ans &lt; n <span class="keyword">else</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+            <tag> 哈希表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3512使数组和能被K整除的最少操作次数</title>
       <link href="/posts/90ec5c24.html"/>
       <url>/posts/90ec5c24.html</url>
