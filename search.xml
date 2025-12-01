@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3623统计梯形的数目I</title>
+      <link href="/posts/5a2c272e.html"/>
+      <url>/posts/5a2c272e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-number-of-trapezoids-i/description/?envType=daily-question&envId=2025-12-02">题目链接</a>。</p></li><li><p>简单地说，就是给一组点，用这些点组成至少有一对水平边的水平梯形，求组合数</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>由于有一组边必须与 x 轴平行，所以可以记录每一行的点数，然后每一行的点两两组合就有 i*(i-1)&#x2F;&#x2F;2 种，接着每两行的组合数相乘就是这两行的水平梯形的个数。由于最坏情况下，两行之间的水平梯形的个数也不超过 9*10^18， 不超过 64 位数字的最大值，所以可以不用在循环里面取模。<blockquote><p><a href="https://leetcode.cn/problems/count-number-of-trapezoids-i/solutions/3728518/mei-ju-you-wei-hu-zuo-pythonjavacgo-by-e-lwnv/?envType=daily-question&envId=2025-12-02">https://leetcode.cn/problems/count-number-of-trapezoids-i/solutions/3728518/mei-ju-you-wei-hu-zuo-pythonjavacgo-by-e-lwnv/?envType=daily-question&amp;envId=2025-12-02</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countTrapezoids</span>(<span class="params">self, points: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        rec = Counter(p[<span class="number">1</span>] <span class="keyword">for</span> p <span class="keyword">in</span> points)</span><br><span class="line">        ans = other = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> rec.values():</span><br><span class="line">            com = i*(i-<span class="number">1</span>)//<span class="number">2</span> </span><br><span class="line">            ans += other * com</span><br><span class="line">            other += com</span><br><span class="line">            ans %= MOD</span><br><span class="line">            other %= MOD</span><br><span class="line">        <span class="keyword">return</span> ans % MOD</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2848与车相交的点</title>
+      <link href="/posts/764e6b50.html"/>
+      <url>/posts/764e6b50.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/points-that-intersect-with-cars/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，内部的一维数组代表汽车的长度占坐标的起始与终点，汽车之间可重合，求所有汽车共占多少点。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>通过一维差分记录每个车占的地方，然后求前缀和，一旦值大于等于 1，说明至少有一辆或多辆车占据，可记 1.<blockquote><p><a href="https://leetcode.cn/problems/points-that-intersect-with-cars/solutions/2435384/chai-fen-shu-zu-xian-xing-zuo-fa-by-endl-3xpm/">https://leetcode.cn/problems/points-that-intersect-with-cars/solutions/2435384/chai-fen-shu-zu-xian-xing-zuo-fa-by-endl-3xpm/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfPoints</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = [<span class="number">0</span>]*<span class="number">101</span></span><br><span class="line">        <span class="keyword">for</span> start, end <span class="keyword">in</span> nums:</span><br><span class="line">            rec[start-<span class="number">1</span>] += <span class="number">1</span></span><br><span class="line">            rec[end] -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(a &gt; <span class="number">0</span> <span class="keyword">for</span> a <span class="keyword">in</span> accumulate(rec))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1738找出第K大的异或坐标值</title>
       <link href="/posts/7d7a55b.html"/>
       <url>/posts/7d7a55b.html</url>
