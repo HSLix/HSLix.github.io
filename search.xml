@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2211统计道路上的碰撞次数</title>
+      <link href="/posts/40ff5f8b.html"/>
+      <url>/posts/40ff5f8b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-collisions-on-a-road/?envType=daily-question&envId=2025-12-04">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维数组，其中有三个值，L， S， R， 分别代表向左，静止，向右的车子，如果车碰撞静止车，则碰撞次数加一，如果两个动的车相碰，则碰撞次数加二。求碰撞次数之和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>陆爻齐采用了栈来模拟碰撞情况，实际上有更巧妙的方法，动碰静加一，动碰动加二，说明动车计数一次，那么只要去除左侧向左和右侧向右的车子，剩下会动的必定碰撞计数即可。<blockquote><p><a href="https://leetcode.cn/problems/count-collisions-on-a-road/solutions/1352598/jie-lun-ti-san-xing-gao-ding-by-endlessc-bvnw/?envType=daily-question&envId=2025-12-04">https://leetcode.cn/problems/count-collisions-on-a-road/solutions/1352598/jie-lun-ti-san-xing-gao-ding-by-endlessc-bvnw/?envType=daily-question&amp;envId=2025-12-04</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countCollisions</span>(<span class="params">self, directions: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        directions = directions.lstrip(<span class="string">&quot;L&quot;</span>)</span><br><span class="line">        directions = directions.rstrip(<span class="string">&quot;R&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(directions) - directions.count(<span class="string">&quot;S&quot;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 用栈模拟碰撞情况</span></span><br><span class="line">        <span class="comment"># ans = 0</span></span><br><span class="line">        <span class="comment"># st = []</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># for car in directions:</span></span><br><span class="line">        <span class="comment">#     if car == &quot;R&quot;:</span></span><br><span class="line">        <span class="comment">#         st.append(&quot;R&quot;)</span></span><br><span class="line">        <span class="comment">#         continue</span></span><br><span class="line">        <span class="comment">#     if car == &quot;S&quot;:</span></span><br><span class="line">        <span class="comment">#         while st and st[-1] == &quot;R&quot;:</span></span><br><span class="line">        <span class="comment">#             ans += 1</span></span><br><span class="line">        <span class="comment">#             st.pop()</span></span><br><span class="line">        <span class="comment">#         st.append(&quot;S&quot;)</span></span><br><span class="line">        <span class="comment">#         continue</span></span><br><span class="line">        <span class="comment">#     if st and st[-1] == &quot;R&quot;:</span></span><br><span class="line">        <span class="comment">#         while st and st[-1] == &quot;R&quot;:</span></span><br><span class="line">        <span class="comment">#             ans += 1</span></span><br><span class="line">        <span class="comment">#             st.pop()</span></span><br><span class="line">        <span class="comment">#         ans += 1</span></span><br><span class="line">        <span class="comment">#         st.append(&quot;S&quot;)</span></span><br><span class="line">        <span class="comment">#     elif st and st[-1] == &quot;S&quot;:</span></span><br><span class="line">        <span class="comment">#         ans += 1</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># return ans</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1854人口最多的年份</title>
+      <link href="/posts/58bab159.html"/>
+      <url>/posts/58bab159.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-population-year/description/">题目链接</a>。</p></li><li><p>简单地说，就是给二维数组，其中的元素代表一个人的出生和死亡年份，计算人口最多的年份（同样多的取早）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>由于死亡年份不计入人口，所以不需要通过在末尾加一。其余的内容只是简单的一维差分，不再赘述。<blockquote><p><a href="https://leetcode.cn/problems/maximum-population-year/solutions/766081/ren-kou-zui-duo-de-nian-fen-by-leetcode-5m7r4/">https://leetcode.cn/problems/maximum-population-year/solutions/766081/ren-kou-zui-duo-de-nian-fen-by-leetcode-5m7r4/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumPopulation</span>(<span class="params">self, logs: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = [<span class="number">0</span>]*<span class="number">101</span></span><br><span class="line">        base_year = <span class="number">1950</span></span><br><span class="line">        <span class="keyword">for</span> birth, death <span class="keyword">in</span> logs:</span><br><span class="line">            rec[birth-base_year] += <span class="number">1</span></span><br><span class="line">            rec[death-base_year] -= <span class="number">1</span></span><br><span class="line">        pre = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        acc_rec = <span class="built_in">list</span>(accumulate(rec))</span><br><span class="line">        <span class="comment"># print(acc_rec)</span></span><br><span class="line">        <span class="keyword">for</span> i, num <span class="keyword">in</span> <span class="built_in">enumerate</span>(acc_rec):</span><br><span class="line">            <span class="keyword">if</span> num &gt; pre:</span><br><span class="line">                ans = base_year + i </span><br><span class="line">                pre = num</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">        </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1893检查是否区域内所有整数都被覆盖</title>
       <link href="/posts/c8013419.html"/>
       <url>/posts/c8013419.html</url>
