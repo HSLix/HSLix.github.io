@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1893检查是否区域内所有整数都被覆盖</title>
+      <link href="/posts/c8013419.html"/>
+      <url>/posts/c8013419.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/check-if-all-the-integers-in-a-range-are-covered/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，其中的元素是长度为 2 的一维数组，代表覆盖的区间，题目会再给一个区间，问整个区间是不是都被覆盖了。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>简单的一维差分就可以了，这里就细化一点陆爻齐做了几天差分的感受，前缀和更多用于子数组之间的差，而差分则往往用于将一段段连续的变化转换成离散的形式，然后再组合成整体的变化。<blockquote><p><a href="https://leetcode.cn/problems/check-if-all-the-integers-in-a-range-are-covered/solutions/825466/jian-cha-shi-fou-qu-yu-nei-suo-you-zheng-5hib/">https://leetcode.cn/problems/check-if-all-the-integers-in-a-range-are-covered/solutions/825466/jian-cha-shi-fou-qu-yu-nei-suo-you-zheng-5hib/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isCovered</span>(<span class="params">self, ranges: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], left: <span class="built_in">int</span>, right: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        rec = [<span class="number">0</span>] * <span class="number">52</span></span><br><span class="line">        <span class="keyword">for</span> start, end <span class="keyword">in</span> ranges:</span><br><span class="line">            rec[start]+=<span class="number">1</span></span><br><span class="line">            rec[end+<span class="number">1</span>] -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># print(list(accumulate(rec)))</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">all</span>(a &gt; <span class="number">0</span> <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">list</span>(accumulate(rec))[left:right+<span class="number">1</span>])</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3623统计梯形的数目I</title>
       <link href="/posts/5a2c272e.html"/>
       <url>/posts/5a2c272e.html</url>
@@ -22,7 +49,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
+            <tag> 枚举 </tag>
+            
+            <tag> 哈希表 </tag>
             
         </tags>
       
@@ -49,7 +78,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
+            <tag> 差分 </tag>
             
         </tags>
       
