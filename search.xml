@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3432统计元素和差值为偶数的分区方案</title>
+      <link href="/posts/cd47f603.html"/>
+      <url>/posts/cd47f603.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-partitions-with-even-sum-difference/description/?envType=daily-question&envId=2025-12-05">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，要将这个数组化为左右两部分的非空分区，对这两个分区求和，然后作差，求差值为偶数的分区方案。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这里刚开始的思路是模拟求和做差的过程，所以就会用到前缀和。</p></li><li><p>但是在写的过程中想到，如果全体数和为奇数，那么怎么分，差值也一定为奇数；如果全体数和为偶数，无论新加入左子数组的是奇数还是偶数，两部分的差值都是偶数（差值+2*变化值），所以本质上如果全体数和为偶数，只要给出数组长度减一的值即可。</p><blockquote><p><a href="https://leetcode.cn/problems/count-partitions-with-even-sum-difference/solutions/3843925/tong-ji-yuan-su-he-chai-zhi-wei-ou-shu-d-mruw/?envType=daily-question&envId=2025-12-05">https://leetcode.cn/problems/count-partitions-with-even-sum-difference/solutions/3843925/tong-ji-yuan-su-he-chai-zhi-wei-ou-shu-d-mruw/?envType=daily-question&amp;envId=2025-12-05</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countPartitions</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        all_sum = <span class="built_in">sum</span>(nums)</span><br><span class="line">        <span class="keyword">if</span> all_sum % <span class="number">2</span> != <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(nums)-<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2960统计已测试设备</title>
+      <link href="/posts/e18bcbae.html"/>
+      <url>/posts/e18bcbae.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-tested-devices-after-test-operations/">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维数组，从左向右遍历操作，若当前的数字大于零，则对其之后的所有数字做减一操作，这算一次操作，求总共的操作数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>暴力模拟的思想是每次遍历到一个大于零的数字，就向后遍历减一。</p></li><li><p>但是学了差分的思想后，完全可以在差分数组在对应下标做减一，但是差分数组还可以简化，直接用一个变量记录当前的操作数，也就是后面的数字需要减的数字，若当前数字大于操作数，才算操作。</p><blockquote><p><a href="https://leetcode.cn/problems/count-tested-devices-after-test-operations/solutions/2560949/on-zuo-fa-pythonjavacgo-by-endlesscheng-fc5k/">https://leetcode.cn/problems/count-tested-devices-after-test-operations/solutions/2560949/on-zuo-fa-pythonjavacgo-by-endlesscheng-fc5k/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countTestedDevices</span>(<span class="params">self, batteryPercentages: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        have_cut = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> batteryPercentages:</span><br><span class="line">            <span class="keyword">if</span> b + have_cut &gt; <span class="number">0</span>:</span><br><span class="line">                have_cut -= <span class="number">1</span></span><br><span class="line">                ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2211统计道路上的碰撞次数</title>
       <link href="/posts/40ff5f8b.html"/>
       <url>/posts/40ff5f8b.html</url>
