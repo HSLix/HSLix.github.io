@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3355零数组变换I</title>
+      <link href="/posts/90d3855d.html"/>
+      <url>/posts/90d3855d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/zero-array-transformation-i/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数一维数组，和一个个区间，你可以从区间中选任意多个下标做减一操作，求操作完后，最终数组是否全为零。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>本质上还是求差分的前缀和，任选下标的本质，是如果差分对应的值大于数组也没关系，毕竟可以选择不要，所以只要关注减不干净的就行。<blockquote><p><a href="https://leetcode.cn/problems/zero-array-transformation-i/solutions/2991455/mo-ban-chai-fen-shu-zu-pythonjavacgo-by-i4axs/">https://leetcode.cn/problems/zero-array-transformation-i/solutions/2991455/mo-ban-chai-fen-shu-zu-pythonjavacgo-by-i4axs/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isZeroArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], queries: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(nums)</span><br><span class="line">        rec = [<span class="number">0</span>]*(n+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> l, r <span class="keyword">in</span> queries:</span><br><span class="line">            rec[l] -= <span class="number">1</span></span><br><span class="line">            rec[r+<span class="number">1</span>] += <span class="number">1</span></span><br><span class="line"> </span><br><span class="line">        <span class="keyword">for</span> cur_num, cut_num <span class="keyword">in</span> <span class="built_in">zip</span>(nums, accumulate(rec)):</span><br><span class="line">            <span class="keyword">if</span> cur_num + cut_num &gt; <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1109航班预订统计</title>
+      <link href="/posts/9c996188.html"/>
+      <url>/posts/9c996188.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/corporate-flight-bookings/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个航班预定表，内容分别是起始航班下标，终止航班下标，预订座位数组成的多个数据，求最终每个航班预定的座位数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>越是做差分的题，越是发现，差分十分擅长处理增减的累计。拿此题来讲，只要通过差分记录各个航班的累计座位数，然后求前缀和即可。<blockquote><p><a href="https://leetcode.cn/problems/corporate-flight-bookings/solutions/968214/hang-ban-yu-ding-tong-ji-by-leetcode-sol-5pv8/">https://leetcode.cn/problems/corporate-flight-bookings/solutions/968214/hang-ban-yu-ding-tong-ji-by-leetcode-sol-5pv8/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">corpFlightBookings</span>(<span class="params">self, bookings: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], n: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        rec = [<span class="number">0</span>]*(n+<span class="number">2</span>)</span><br><span class="line">        <span class="keyword">for</span> start, last, seats <span class="keyword">in</span> bookings:</span><br><span class="line">            rec[start] += seats</span><br><span class="line">            rec[last+<span class="number">1</span>] -= seats</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">list</span>(accumulate(rec[<span class="number">1</span>:n+<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
+            
+            <tag> 差分 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3432统计元素和差值为偶数的分区方案</title>
       <link href="/posts/cd47f603.html"/>
       <url>/posts/cd47f603.html</url>
@@ -46,6 +104,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
             
             <tag> 差分 </tag>
             
@@ -99,6 +159,8 @@
             
             <tag> Algorithm </tag>
             
+            <tag> 前缀和 </tag>
+            
             <tag> 差分 </tag>
             
         </tags>
@@ -125,6 +187,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
             
             <tag> 差分 </tag>
             
@@ -181,6 +245,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
             
             <tag> 差分 </tag>
             
@@ -775,6 +841,8 @@
         <tags>
             
             <tag> Algorithm </tag>
+            
+            <tag> 前缀和 </tag>
             
             <tag> 差分 </tag>
             
