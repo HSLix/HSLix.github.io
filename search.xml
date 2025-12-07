@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1523在区间范围内统计奇数数目</title>
+      <link href="/posts/528aa162.html"/>
+      <url>/posts/528aa162.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/description/?envType=daily-question&envId=2025-12-07">题目链接</a>。</p></li><li><p>简单地说，就是给一个区间（闭区间），求其中奇数范围。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>暴力求解就是顺序遍历统计奇数，这个不多赘述。这边本来没什么想法，但先找找规律，只要知道两个奇数、两个偶数、一个奇数和一个偶数这三种情况就可以直接求解，这也是下面的第二个解法。</p></li><li><p>灵神根据找数学规律来求解，可以把 low 和 high 之前的奇数，变成 0-high 与 0-low-1 的奇数之差，然后 1 &lt;&#x3D; 2k-1 &lt;&#x3D; n，k &lt;&#x3D; (n+1)&#x2F;&#x2F;2， k 就相当于奇数的个数，问题就变成了 (high+1)&#x2F;&#x2F;2 - low&#x2F;&#x2F;2。</p><blockquote><p><a href="https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/solutions/3844307/o1-shu-xue-jie-pythonjavaccgojsrust-by-e-86dc/?envType=daily-question&envId=2025-12-07">https://leetcode.cn/problems/count-odd-numbers-in-an-interval-range/solutions/3844307/o1-shu-xue-jie-pythonjavaccgojsrust-by-e-86dc/?envType=daily-question&amp;envId=2025-12-07</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countOdds</span>(<span class="params">self, low: <span class="built_in">int</span>, high: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">return</span> (high+<span class="number">1</span>)//<span class="number">2</span> - low//<span class="number">2</span></span><br><span class="line">        <span class="comment"># 都是奇数 (high - low) // 2 + 1</span></span><br><span class="line">        <span class="comment"># 都是偶数 (high - low) // 2</span></span><br><span class="line">        <span class="comment"># 一奇数一偶数，(high - low) // 2 + 1</span></span><br><span class="line">        <span class="keyword">return</span> (high-low)//<span class="number">2</span> <span class="keyword">if</span> low%<span class="number">2</span>==<span class="number">0</span> <span class="keyword">and</span> high%<span class="number">2</span>==<span class="number">0</span> <span class="keyword">else</span> (high-low)//<span class="number">2</span>+<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3355零数组变换I</title>
       <link href="/posts/90d3855d.html"/>
       <url>/posts/90d3855d.html</url>
