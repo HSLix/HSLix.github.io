@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1925统计平方和三元组的数目</title>
+      <link href="/posts/6aeaa902.html"/>
+      <url>/posts/6aeaa902.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-square-sum-triples/?envType=daily-question&envId=2025-12-08">题目链接</a>。</p></li><li><p>简单地说，就是给一个数字 n，求 abc 三个数字在 n 范围内，a平方+b平方等于c平方的方案数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>O(n^2)暴力枚举可以过，灵神也给出了数学上更巧妙的方案，只是这里暂时不想看，以后再说罢<blockquote><p><a href="https://leetcode.cn/problems/count-square-sum-triples/solutions/869409/go-yu-chu-li-you-hua-by-endlesscheng-61mj/?envType=daily-question&envId=2025-12-08">https://leetcode.cn/problems/count-square-sum-triples/solutions/869409/go-yu-chu-li-you-hua-by-endlesscheng-61mj/?envType=daily-question&amp;envId=2025-12-08</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countTriples</span>(<span class="params">self, n: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = [<span class="number">0</span>] * (<span class="number">250</span>**<span class="number">2</span>+<span class="number">1</span>)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n+<span class="number">1</span>):</span><br><span class="line">            rec[i**<span class="number">2</span>] += <span class="number">1</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, i):</span><br><span class="line">                ans += rec[i**<span class="number">2</span>-j**<span class="number">2</span>]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3508设计路由器</title>
+      <link href="/posts/78a2a93a.html"/>
+      <url>/posts/78a2a93a.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/implement-router/">题目链接</a>。</p></li><li><p>简单地说，就是给一个路由器类的框架，需要实现添加包、弹出包，查找符合条件的包三个方法。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>最重要的是想到 1. 可以通过 destination 来分隔不同的包存储，空间换时间；2. 由于本题时间戳按非递减顺序添加，所以可以用二分查找找到包时间戳的区间。<blockquote><p><a href="https://leetcode.cn/problems/implement-router/solutions/3641772/mo-ni-ha-xi-biao-dui-lie-er-fen-cha-zhao-y7l7/">https://leetcode.cn/problems/implement-router/solutions/3641772/mo-ni-ha-xi-biao-dui-lie-er-fen-cha-zhao-y7l7/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Router</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, memoryLimit: <span class="built_in">int</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.max_len = memoryLimit</span><br><span class="line">        <span class="variable language_">self</span>.packs = deque()</span><br><span class="line">        <span class="variable language_">self</span>.packSet = <span class="built_in">set</span>()</span><br><span class="line">        <span class="variable language_">self</span>.dest_to_timestamp = defaultdict(deque)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addPacket</span>(<span class="params">self, source: <span class="built_in">int</span>, destination: <span class="built_in">int</span>, timestamp: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        pack = (source, destination, timestamp)</span><br><span class="line">        <span class="keyword">if</span> pack <span class="keyword">in</span> <span class="variable language_">self</span>.packSet:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.packs) &gt;= <span class="variable language_">self</span>.max_len:</span><br><span class="line">            <span class="variable language_">self</span>.forwardPacket()</span><br><span class="line">        <span class="variable language_">self</span>.packSet.add(pack)</span><br><span class="line">        <span class="variable language_">self</span>.packs.append([source, destination, timestamp])</span><br><span class="line">        <span class="variable language_">self</span>.dest_to_timestamp[destination].append(timestamp)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forwardPacket</span>(<span class="params">self</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.packs:</span><br><span class="line">            res = <span class="variable language_">self</span>.packs.popleft()</span><br><span class="line">            <span class="variable language_">self</span>.dest_to_timestamp[res[<span class="number">1</span>]].popleft()</span><br><span class="line">            <span class="variable language_">self</span>.packSet.remove(<span class="built_in">tuple</span>(res))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res = []</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getCount</span>(<span class="params">self, destination: <span class="built_in">int</span>, startTime: <span class="built_in">int</span>, endTime: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        q = <span class="variable language_">self</span>.dest_to_timestamp[destination]</span><br><span class="line">        l = bisect_left(q, startTime)</span><br><span class="line">        r = bisect_right(q, endTime)</span><br><span class="line">        <span class="keyword">return</span> r - l</span><br><span class="line"></span><br><span class="line"><span class="comment"># Your Router object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = Router(memoryLimit)</span></span><br><span class="line"><span class="comment"># param_1 = obj.addPacket(source,destination,timestamp)</span></span><br><span class="line"><span class="comment"># param_2 = obj.forwardPacket()</span></span><br><span class="line"><span class="comment"># param_3 = obj.getCount(destination,startTime,endTime)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 队列 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1523在区间范围内统计奇数数目</title>
       <link href="/posts/528aa162.html"/>
       <url>/posts/528aa162.html</url>
