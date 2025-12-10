@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3531统计被覆盖的建筑</title>
+      <link href="/posts/2cf3051d.html"/>
+      <url>/posts/2cf3051d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-covered-buildings/?envType=daily-question&envId=2025-12-11">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组代表点集，求其中上下左右都有点的点的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>又是能和灵神思考相近的一次，开心喵。</p></li><li><p>首先考虑暴力解法，那就是对于每一个点，再遍历数组，查看是否该点的横纵坐标都有更大以及更小的值。复杂度已经达到了 O(n^2)。</p></li><li><p>想要降低复杂度，就需要改进判断这个点的上下左右是否有值，那么如果能知道对应的 x，y 坐标上的极值，不就可以了嘛。</p></li><li><p>所以，在遍历所有点前，可以先预处理，记录每个横纵坐标的极值，这样就把二次遍历的过程优化了，时间复杂度下降到了 O(n)。</p><blockquote><p><a href="https://leetcode.cn/problems/count-covered-buildings/solutions/3663296/pai-xu-er-fen-cha-zhao-pythonjavacgo-by-z2c5d/?envType=daily-question&envId=2025-12-11">https://leetcode.cn/problems/count-covered-buildings/solutions/3663296/pai-xu-er-fen-cha-zhao-pythonjavacgo-by-z2c5d/?envType=daily-question&amp;envId=2025-12-11</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">countCoveredBuildings</span>(<span class="params">self, n: <span class="built_in">int</span>, buildings: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        vertical_rec_high = [-inf]*(n+<span class="number">1</span>)</span><br><span class="line">        vertical_rec_low = [inf]*(n+<span class="number">1</span>)</span><br><span class="line">        horizon_rec_left = [inf]*(n+<span class="number">1</span>)</span><br><span class="line">        horizon_rec_right = [-inf]*(n+<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> buildings:</span><br><span class="line">            vertical_rec_high[x] = <span class="built_in">max</span>(vertical_rec_high[x], y)</span><br><span class="line">            vertical_rec_low[x] = <span class="built_in">min</span>(vertical_rec_low[x], y)</span><br><span class="line">            horizon_rec_left[y] = <span class="built_in">min</span>(horizon_rec_left[y], x)</span><br><span class="line">            horizon_rec_right[y] = <span class="built_in">max</span>(horizon_rec_right[y], x)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> buildings:</span><br><span class="line">            <span class="keyword">if</span> horizon_rec_left[y] &lt; x &lt; horizon_rec_right[y] <span class="keyword">and</span> vertical_rec_low[x] &lt; y &lt; vertical_rec_high[x]:</span><br><span class="line">                ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3264K次乘运算后的最终数组I</title>
+      <link href="/posts/96e8998b.html"/>
+      <url>/posts/96e8998b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/final-array-state-after-k-multiplication-operations-i/">题目链接</a>。</p></li><li><p>简单地说，就是给一维数组，k 和 m，k 次从数组中找到最小的值，原地乘 m，求最终的数组。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本题比较重要的一点是，题目要求是在原地进行乘法操作，所以如果要用堆处理，需要同时保存下标信息。</p></li><li><p>接下来就好说了，先做出保存下标信息的堆，然后不断取出小值乘 m 放回，直到达到 k 次。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getFinalState</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span>, multiplier: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        rec = [(x, i) <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(nums)]</span><br><span class="line">        heapify(rec)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            new_num = rec[<span class="number">0</span>][<span class="number">0</span>] * multiplier</span><br><span class="line">            new_index = rec[<span class="number">0</span>][<span class="number">1</span>]</span><br><span class="line">            heapreplace(rec, (new_num, new_index))</span><br><span class="line">        <span class="keyword">for</span> x, i <span class="keyword">in</span> rec:</span><br><span class="line">            nums[i] = x</span><br><span class="line">        <span class="keyword">return</span> nums</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3577统计计算机解锁顺序排列数</title>
       <link href="/posts/1d040374.html"/>
       <url>/posts/1d040374.html</url>
