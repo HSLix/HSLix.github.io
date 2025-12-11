@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2336无限集中的最小数字</title>
+      <link href="/posts/e0707581.html"/>
+      <url>/posts/e0707581.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/smallest-number-in-infinite-set/description/">题目链接</a>。</p></li><li><p>简单地说，就是要实现一个数据结构，这个结构初始是一个正整数集合，要求能返回集合中的最小值，并随时往集合里加正整数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>返回最小值，可以用堆来维护，至于堆是维护新加的，还是已有的，就看具体实现方式。但都需要思考如何去重，避免重复添加。</p></li><li><p>官方题解提到了 SortedSet，可以在完成堆的任务的同时，高效去重。就不需要像参考题解这样，又用堆，也用 Set 了。</p><blockquote><p><a href="https://leetcode.cn/problems/smallest-number-in-infinite-set/solutions/2542156/wu-xian-ji-zhong-de-zui-xiao-shu-zi-by-l-5mfr/">https://leetcode.cn/problems/smallest-number-in-infinite-set/solutions/2542156/wu-xian-ji-zhong-de-zui-xiao-shu-zi-by-l-5mfr/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SmallestInfiniteSet</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="variable language_">self</span>.heap = [<span class="number">1</span>]</span><br><span class="line">        <span class="variable language_">self</span>.rec = <span class="built_in">set</span>()</span><br><span class="line">        heapify(<span class="variable language_">self</span>.heap)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">popSmallest</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># print(&quot;pop&quot;)</span></span><br><span class="line">        res = heappop(<span class="variable language_">self</span>.heap)</span><br><span class="line">        <span class="variable language_">self</span>.rec.add(res)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(<span class="variable language_">self</span>.heap) == <span class="number">0</span>:</span><br><span class="line">            heappush(<span class="variable language_">self</span>.heap, res+<span class="number">1</span>)</span><br><span class="line">        <span class="comment"># print(list(self.heap))</span></span><br><span class="line">        <span class="comment"># print(self.rec)</span></span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addBack</span>(<span class="params">self, num: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&quot;add <span class="subst">&#123;num&#125;</span>&quot;</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> num <span class="keyword">in</span> <span class="variable language_">self</span>.rec:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        heappush(<span class="variable language_">self</span>.heap, num)</span><br><span class="line">        <span class="variable language_">self</span>.rec.discard(num)</span><br><span class="line">        <span class="comment"># print(list(self.heap))</span></span><br><span class="line">        <span class="comment"># print(self.rec)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your SmallestInfiniteSet object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = SmallestInfiniteSet()</span></span><br><span class="line"><span class="comment"># param_1 = obj.popSmallest()</span></span><br><span class="line"><span class="comment"># obj.addBack(num)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3531统计被覆盖的建筑</title>
       <link href="/posts/2cf3051d.html"/>
       <url>/posts/2cf3051d.html</url>
@@ -22,7 +49,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 堆 </tag>
+            <tag> 哈希表 </tag>
             
         </tags>
       
