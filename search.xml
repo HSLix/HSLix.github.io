@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2530执行K次操作后的最大分数</title>
+      <link href="/posts/d5120c36.html"/>
+      <url>/posts/d5120c36.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximal-score-after-applying-k-operations/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组和一个整数 k，现在从数组中取一个数算分数，然后将这个数除三并向上取整放回去，求执行 k 次后能获取的最大分数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>频繁地求一个数组的最大值，那必须是堆出场。由于默认小顶堆，所以把数组的值取反再建堆就是大顶堆了。至于向上取整，在负数的情况下， python 直接整除就算取整了，如果不放心，可以调用 floor 函数，在负数时向下取整就是普通的向上取整。<blockquote><p><a href="https://leetcode.cn/problems/maximal-score-after-applying-k-operations/solutions/2487446/o1-kong-jian-zuo-fa-pythonjavacgojsrust-ztx6f/">https://leetcode.cn/problems/maximal-score-after-applying-k-operations/solutions/2487446/o1-kong-jian-zuo-fa-pythonjavacgojsrust-ztx6f/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxKelements</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            nums[i] = -nums[i]</span><br><span class="line">        heapify(nums)</span><br><span class="line">        <span class="keyword">while</span> k:</span><br><span class="line">            ans -= heapreplace(nums, nums[<span class="number">0</span>]//<span class="number">3</span>)</span><br><span class="line">            k -= <span class="number">1</span></span><br><span class="line">        <span class="comment"># while k:</span></span><br><span class="line">        <span class="comment">#     point = nums[0]</span></span><br><span class="line">        <span class="comment">#     ans -= point</span></span><br><span class="line">        <span class="comment">#     point = floor(point/3)</span></span><br><span class="line">        <span class="comment">#     heapreplace(nums, point)</span></span><br><span class="line">        <span class="comment">#     k-=1</span></span><br><span class="line">            <span class="comment"># print(list(nums))</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2606优惠券校验器</title>
+      <link href="/posts/4073e48e.html"/>
+      <url>/posts/4073e48e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/coupon-code-validator/description/?envType=daily-question&envId=2025-12-13">题目链接</a>。</p></li><li><p>简单地说，就是给三个列表，列表各项组合对应一个优惠券，并规定了优惠券的合法场景，要求筛选出其中合法的优惠券代码，并最终按几个条件排序。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>虽然标的是简单题，但做着挺费劲。灵神提供了一个很好的思路，由于需要按照其中的一些字符串排序，可以把字符串直接映射成整数，这样排序就方便了。而且 python 的 isalnum 函数能够轻松判断这个字符是否是数字或字母，相当方便。<blockquote><p><a href="https://leetcode.cn/problems/coupon-code-validator/solutions/3716401/mo-ni-pythonjavacgo-by-endlesscheng-xqv4/?envType=daily-question&envId=2025-12-13">https://leetcode.cn/problems/coupon-code-validator/solutions/3716401/mo-ni-pythonjavacgo-by-endlesscheng-xqv4/?envType=daily-question&amp;envId=2025-12-13</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validateCoupons</span>(<span class="params">self, code: <span class="type">List</span>[<span class="built_in">str</span>], businessLine: <span class="type">List</span>[<span class="built_in">str</span>], isActive: <span class="type">List</span>[<span class="built_in">bool</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">str</span>]:</span><br><span class="line">        catagory_map = &#123;</span><br><span class="line">            <span class="string">&quot;electronics&quot;</span>: <span class="number">0</span> ,</span><br><span class="line">            <span class="string">&quot;grocery&quot;</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="string">&quot;pharmacy&quot;</span>: <span class="number">2</span>,</span><br><span class="line">            <span class="string">&quot;restaurant&quot;</span>: <span class="number">3</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        group = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>)]</span><br><span class="line">        <span class="keyword">for</span> s, b, a <span class="keyword">in</span> <span class="built_in">zip</span>(code, businessLine, isActive):</span><br><span class="line">            catagory = catagory_map.get(b, -<span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> catagory &gt;= <span class="number">0</span> <span class="keyword">and</span> a <span class="keyword">and</span> <span class="built_in">len</span>(s) &gt; <span class="number">0</span> <span class="keyword">and</span> <span class="built_in">all</span>(c == <span class="string">&quot;_&quot;</span> <span class="keyword">or</span> c.isalnum() <span class="keyword">for</span> c <span class="keyword">in</span> s):</span><br><span class="line">                group[catagory].append(s)</span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> g <span class="keyword">in</span> group:</span><br><span class="line">            g.sort()</span><br><span class="line">            ans.extend(g)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2336无限集中的最小数字</title>
       <link href="/posts/e0707581.html"/>
       <url>/posts/e0707581.html</url>
