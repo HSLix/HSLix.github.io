@@ -4,6 +4,112 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1962移除石子使总数最小</title>
+      <link href="/posts/3e63affd.html"/>
+      <url>/posts/3e63affd.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/remove-stones-to-minimize-the-total/">题目链接</a>。</p></li><li><p>简单地说，就是给一堆一维数组，每次操作取最大值，并减去这个值一半的去小数的底值，共执行 k 次，求最终的数组和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>就是堆的基本操作，负化使小顶堆变大顶堆，负数 &#x2F;&#x2F; 2 相当于取 ceil，heapreplace 直接快速取值和加值。<blockquote><p><a href="https://leetcode.cn/problems/remove-stones-to-minimize-the-total/solutions/2576668/yuan-di-dui-hua-o1-kong-jian-pythonjavac-29iz/">https://leetcode.cn/problems/remove-stones-to-minimize-the-total/solutions/2576668/yuan-di-dui-hua-o1-kong-jian-pythonjavac-29iz/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minStoneSum</span>(<span class="params">self, piles: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        stoneSum = <span class="built_in">sum</span>(piles)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(piles)):</span><br><span class="line">            piles[i] = -piles[i]</span><br><span class="line">        heapify(piles)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            max_stone = piles[<span class="number">0</span>] // <span class="number">2</span> <span class="comment">#负数情况下，消除小数部分，相当于 ceil，相当于减去 floor</span></span><br><span class="line">            <span class="comment"># print(max_stone)</span></span><br><span class="line">            stoneSum += piles[<span class="number">0</span>] - max_stone</span><br><span class="line">            heapreplace(piles, max_stone)</span><br><span class="line">        <span class="keyword">return</span> stoneSum</span><br><span class="line">            </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2110股票平滑下跌阶段的数目</title>
+      <link href="/posts/4b37fd7f.html"/>
+      <url>/posts/4b37fd7f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-smooth-descent-periods-of-a-stock/?envType=daily-question&envId=2025-12-15">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组代表股票，定义平滑下跌为一日值为前一日减一，求有多少个连续子数组是满足平滑下跌的。（包括长度为 1）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>每一天为止，是否为平滑下跌只与前一日有关，所以 f[i] +&#x3D; f[i-1] + 1 if prices[i] &#x3D;&#x3D; prices[i-1]+1 else 1<blockquote><p><a href="https://leetcode.cn/problems/number-of-smooth-descent-periods-of-a-stock/solutions/1165540/fen-zu-xun-huan-by-endlesscheng-ykhm/?envType=daily-question&envId=2025-12-15">https://leetcode.cn/problems/number-of-smooth-descent-periods-of-a-stock/solutions/1165540/fen-zu-xun-huan-by-endlesscheng-ykhm/?envType=daily-question&amp;envId=2025-12-15</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getDescentPeriods</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        dec = <span class="number">0</span></span><br><span class="line">        last_price = prices[<span class="number">0</span>]+<span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> _, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(prices):</span><br><span class="line">            <span class="keyword">if</span> last_price == p + <span class="number">1</span>:</span><br><span class="line">                dec += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dec = <span class="number">1</span></span><br><span class="line">            last_price = p</span><br><span class="line">            ans += dec</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2147分隔长廊的方案数</title>
+      <link href="/posts/c03474a5.html"/>
+      <url>/posts/c03474a5.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/number-of-ways-to-divide-a-long-corridor/?envType=daily-question&envId=2025-12-14">题目链接</a>。</p></li><li><p>简单地说，就是给一个长廊（数组），其中有座位（S）和植物（P），现在需要一个或多个屏风，保证分隔后每段都有且仅有两个座位，求这么分隔的方案数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>要将座位两两分隔的方案，首先如果没有座位，或者座位数量为奇数都不能达成；其次，这么分隔的本质是求每两个座位之前的空隙数量，只要得到空隙之积就算是答案了。<blockquote><p><a href="https://leetcode.cn/problems/number-of-ways-to-divide-a-long-corridor/solutions/1226675/an-zhao-ti-yi-mo-ni-o1-e-wai-kong-jian-b-5oqd/?envType=daily-question&envId=2025-12-14">https://leetcode.cn/problems/number-of-ways-to-divide-a-long-corridor/solutions/1226675/an-zhao-ti-yi-mo-ni-o1-e-wai-kong-jian-b-5oqd/?envType=daily-question&amp;envId=2025-12-14</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfWays</span>(<span class="params">self, corridor: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        cnt_s = last_s = <span class="number">0</span></span><br><span class="line">        ans = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(corridor):</span><br><span class="line">            <span class="keyword">if</span> c == <span class="string">&quot;S&quot;</span>:</span><br><span class="line">                cnt_s += <span class="number">1</span></span><br><span class="line">                <span class="keyword">if</span> cnt_s &gt; <span class="number">2</span> <span class="keyword">and</span> cnt_s % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">                    ans = ans * (i-last_s) % MOD</span><br><span class="line">                last_s = i </span><br><span class="line">        <span class="keyword">if</span> cnt_s == <span class="number">0</span> <span class="keyword">or</span> cnt_s % <span class="number">2</span> == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3066超过阈值的最少操作数II</title>
+      <link href="/posts/57e28b0a.html"/>
+      <url>/posts/57e28b0a.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，需要操作将数组中最小的两个值提出来，经运算放回去一个更大的值，求多少次操作后，整个数组的值均大于等于数字 k。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>频繁取小值，用堆！接下来就没啥好说的了，不断循环取两个小值运算放回，一旦堆顶大于等于 k，说明整个堆大于等于 k，就可以停止了。<blockquote><p><a href="https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii/solutions/2664316/zui-xiao-dui-mo-ni-pythonjavacgo-by-endl-07jk/">https://leetcode.cn/problems/minimum-operations-to-exceed-threshold-value-ii/solutions/2664316/zui-xiao-dui-mo-ni-pythonjavacgo-by-endl-07jk/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minOperations</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        heapify(nums)</span><br><span class="line">        <span class="keyword">while</span> <span class="built_in">len</span>(nums) &gt; <span class="number">1</span>:</span><br><span class="line">            min_num = heappop(nums)</span><br><span class="line">            <span class="keyword">if</span> min_num &gt;= k:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            min_other = heappop(nums)</span><br><span class="line">            heappush(nums, min_num*<span class="number">2</span>+min_other)</span><br><span class="line">            ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">            </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2530执行K次操作后的最大分数</title>
       <link href="/posts/d5120c36.html"/>
       <url>/posts/d5120c36.html</url>
