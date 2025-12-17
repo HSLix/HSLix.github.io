@@ -4,6 +4,116 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1845座位预约管理系统</title>
+      <link href="/posts/93bcd472.html"/>
+      <url>/posts/93bcd472.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/discuss/post/3583665/fen-xiang-gun-ti-dan-chang-yong-shu-ju-j-bvmv/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数字 n，现在会有两种操作，预约和取消预约，前者会拿到当前可拿的最小座位号，后者会将指定的座位号恢复为没有预约的状态，完成一系列预约和取消预约的调用。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>可参照<a href="/posts/b546109d.html" title="【Leetcode Daily】3275第K近障碍物查询">【Leetcode Daily】3275第K近障碍物查询</a>，用整型变量维护普通的最小值，用堆维护例外的最小值，这样整个题目的空间复杂度就与 n 无关了（与暴力的 n 元素数组查询合法对比）<blockquote><p><a href="https://leetcode.cn/problems/seat-reservation-manager/solutions/2838121/liang-chong-fang-fa-wei-hu-ke-yu-yue-de-tmub8/">https://leetcode.cn/problems/seat-reservation-manager/solutions/2838121/liang-chong-fang-fa-wei-hu-ke-yu-yue-de-tmub8/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">SeatManager</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, n: <span class="built_in">int</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.min_seat = <span class="number">1</span></span><br><span class="line">        <span class="variable language_">self</span>.more_seat = []</span><br><span class="line">        heapq.heapify(<span class="variable language_">self</span>.more_seat)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reserve</span>(<span class="params">self</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="variable language_">self</span>.more_seat:</span><br><span class="line">            <span class="keyword">return</span> heapq.heappop(<span class="variable language_">self</span>.more_seat)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="variable language_">self</span>.min_seat += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.min_seat - <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">unreserve</span>(<span class="params">self, seatNumber: <span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">        heapq.heappush(<span class="variable language_">self</span>.more_seat, seatNumber)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your SeatManager object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = SeatManager(n)</span></span><br><span class="line"><span class="comment"># param_1 = obj.reserve()</span></span><br><span class="line"><span class="comment"># obj.unreserve(seatNumber)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3652按策略买卖股票的最佳时机</title>
+      <link href="/posts/49561570.html"/>
+      <url>/posts/49561570.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-using-strategy/description/?envType=daily-question&envId=2025-12-18">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维数组代表股票，另一个数组代表策略和一个数字 k，总之可以选择对策略操作：取其中连续 k 个数字，前半设持有，后半卖出。求最终最大利润。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>通过前缀和能方便地计算子数组的值，然后把题目的利润拆分成多个可操作的前缀和即可，具体如何拆分不赘述，总之赞美灵神。<blockquote><p><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-using-strategy/solutions/3755330/liang-chong-fang-fa-qian-zhui-he-ding-ch-uq98/?envType=daily-question&envId=2025-12-18">https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-using-strategy/solutions/3755330/liang-chong-fang-fa-qian-zhui-he-ding-ch-uq98/?envType=daily-question&amp;envId=2025-12-18</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maxProfit</span>(<span class="params">self, prices: <span class="type">List</span>[<span class="built_in">int</span>], strategy: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(prices)</span><br><span class="line">        s = <span class="built_in">list</span>(accumulate((p*x <span class="keyword">for</span> p, x <span class="keyword">in</span> <span class="built_in">zip</span>(prices, strategy)), initial=<span class="number">0</span>))</span><br><span class="line">        num_price = <span class="built_in">list</span>(accumulate((p <span class="keyword">for</span> p <span class="keyword">in</span> prices), initial=<span class="number">0</span>))</span><br><span class="line">        ans = <span class="built_in">max</span>(s[i-k] + s[n] - s[i] + num_price[i] - num_price[i-k//<span class="number">2</span>] <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k, n+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">max</span>(ans, s[n])</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 滑动窗口 </tag>
+            
+            <tag> 前缀和 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3275第K近障碍物查询</title>
+      <link href="/posts/b546109d.html"/>
+      <url>/posts/b546109d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/k-th-nearest-obstacle-queries/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，每个其中的一维数组代表一个点，求从左向右遍历，已遍历点中距离原点第 k 近的那个距离（x 的绝对值加 y 的绝对值）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>与 <a href="/posts/339b70b6.html" title="【Leetcode Daily】703数据流中的第K大元素">【Leetcode Daily】703数据流中的第K大元素</a> 十分相近，要注意的是，堆中能确定的就是堆顶，不要以为建了小顶堆后，这个堆的第 k 个就是第 k 小。但维护长度 k 的大顶堆一定满足这个条件。<blockquote><p><a href="https://leetcode.cn/problems/k-th-nearest-obstacle-queries/solutions/2900061/zui-da-dui-wei-hu-qian-k-xiao-pythonjava-h15x/">https://leetcode.cn/problems/k-th-nearest-obstacle-queries/solutions/2900061/zui-da-dui-wei-hu-qian-k-xiao-pythonjava-h15x/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">resultsArray</span>(<span class="params">self, queries: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        rec = []</span><br><span class="line">        ans = [-<span class="number">1</span>] * <span class="built_in">len</span>(queries)</span><br><span class="line">        heapq.heapify(rec)</span><br><span class="line">        <span class="keyword">for</span> i, (x, y) <span class="keyword">in</span> <span class="built_in">enumerate</span>(queries):</span><br><span class="line">            heapq.heappush(rec, -(<span class="built_in">abs</span>(x)+<span class="built_in">abs</span>(y)))</span><br><span class="line">            <span class="keyword">if</span> i &lt; k-<span class="number">1</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(rec) &gt; k:</span><br><span class="line">                heapq.heappop(rec)</span><br><span class="line">            ans[i] = -rec[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】703数据流中的第K大元素</title>
+      <link href="/posts/339b70b6.html"/>
+      <url>/posts/339b70b6.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/kth-largest-element-in-a-stream/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个一维数组，一个代表已有的数据，另一个代表一个个输入的数据流，求每次数据流输入时当前数据第 K 大的值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>由于只加不减，所以只要维护 k 个元素的小顶堆，取堆顶就是第 K 大（大顶堆就能通过负数实现第 K 小罢）。<blockquote><p><a href="https://leetcode.cn/problems/kth-largest-element-in-a-stream/solutions/600618/mian-shi-ti-jing-gao-jing-dian-topk-ben-u7w30/">https://leetcode.cn/problems/kth-largest-element-in-a-stream/solutions/600618/mian-shi-ti-jing-gao-jing-dian-topk-ben-u7w30/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">KthLargest</span>:</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, k: <span class="built_in">int</span>, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>):</span><br><span class="line">        <span class="variable language_">self</span>.heap = nums</span><br><span class="line">        heapq.heapify(<span class="variable language_">self</span>.heap)</span><br><span class="line">        <span class="variable language_">self</span>.k = k</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">add</span>(<span class="params">self, val: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        heappush(<span class="variable language_">self</span>.heap, val)</span><br><span class="line">        <span class="keyword">while</span>(<span class="built_in">len</span>(<span class="variable language_">self</span>.heap) &gt; <span class="variable language_">self</span>.k):</span><br><span class="line">            heapq.heappop(<span class="variable language_">self</span>.heap)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.heap[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Your KthLargest object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"># obj = KthLargest(k, nums)</span></span><br><span class="line"><span class="comment"># param_1 = obj.add(val)</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1962移除石子使总数最小</title>
       <link href="/posts/3e63affd.html"/>
       <url>/posts/3e63affd.html</url>
