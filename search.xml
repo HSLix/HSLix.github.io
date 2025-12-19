@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2233K次增加后的最大乘积</title>
+      <link href="/posts/a072d4a4.html"/>
+      <url>/posts/a072d4a4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-product-after-k-increments/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维数组，可以对其中任意一个数字加一，执行 k 次，求数组的最大乘积。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>为使乘积最大化，应该需要每次取最小值+1（如果 x变成了 x+1，整体变成原来的 (x+1)&#x2F;x,也就是 1 + 1&#x2F;x，发现 x 越小，总乘积越大）<blockquote><p><a href="https://leetcode.cn/problems/maximum-product-after-k-increments/solutions/1408853/tan-xin-mei-ci-gei-zui-xiao-de-yuan-su-j-jxnl/">https://leetcode.cn/problems/maximum-product-after-k-increments/solutions/1408853/tan-xin-mei-ci-gei-zui-xiao-de-yuan-su-j-jxnl/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumProduct</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        heapq.heapify(nums)</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            heapq.heapreplace(nums, nums[<span class="number">0</span>]+<span class="number">1</span>)</span><br><span class="line">        ans = <span class="number">1</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            ans = ans*num % <span class="number">1_000_000_007</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2208将数组和减半的最少操作次数</title>
+      <link href="/posts/9bfc0eb1.html"/>
+      <url>/posts/9bfc0eb1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-operations-to-halve-array-sum/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，现在需要你对这个数组做操作，即取一个数减半，求整个数组之和不大于原来一半的最少操作数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>想要每次操作尽可能多减少数值，就每次都要取其中的最大值，这里就可以用大顶堆来辅助了。</p></li><li><p>不过灵神指出，为了尽可能准确，应该尽量避免浮点数的产生，通过看不懂的每个数字除不超过 20 次，所以就把每个数乘 2^20。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-operations-to-halve-array-sum/solutions/1353455/by-endlesscheng-xzk2/">https://leetcode.cn/problems/minimum-operations-to-halve-array-sum/solutions/1353455/by-endlesscheng-xzk2/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">halveArray</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        s = <span class="built_in">sum</span>(nums) / <span class="number">2</span></span><br><span class="line">        cur_s = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            nums[i] = -nums[i]</span><br><span class="line">        heapq.heapify(nums)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span>(cur_s &lt; s):</span><br><span class="line">            ans += <span class="number">1</span></span><br><span class="line">            new_num = nums[<span class="number">0</span>]/<span class="number">2</span></span><br><span class="line">            cur_s -= new_num</span><br><span class="line">            heapq.heapreplace(nums, new_num)</span><br><span class="line">            <span class="comment"># print(cur_s)</span></span><br><span class="line">            <span class="comment"># print(nums)</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1845座位预约管理系统</title>
       <link href="/posts/93bcd472.html"/>
       <url>/posts/93bcd472.html</url>
