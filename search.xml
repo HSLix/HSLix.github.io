@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>【Leetcode Daily】944删列造序</title>
+      <link href="/posts/c0b8930f.html"/>
+      <url>/posts/c0b8930f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/delete-columns-to-make-sorted/?envType=daily-question&envId=2025-12-20">题目链接</a>。</p></li><li><p>简单地说，就是给一个字符串数组，每个字符串长度相等，排在一起看每个列是否为非严格递增，如果不是，就要删除，统计删除的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>用灵神的话说“简单题简单做”，但 Python 有不少语法糖还能加速编写。<blockquote><p><a href="https://leetcode.cn/problems/delete-columns-to-make-sorted/solutions/3852643/jian-dan-ti-jian-dan-zuo-pythonjavacgo-b-138m/?envType=daily-question&envId=2025-12-20">https://leetcode.cn/problems/delete-columns-to-make-sorted/solutions/3852643/jian-dan-ti-jian-dan-zuo-pythonjavacgo-b-138m/?envType=daily-question&amp;envId=2025-12-20</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minDeletionSize</span>(<span class="params">self, strs: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> col <span class="keyword">in</span> <span class="built_in">zip</span>(*strs):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">any</span>(x &gt; y <span class="keyword">for</span> x, y <span class="keyword">in</span> pairwise(col)):</span><br><span class="line">                ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        n = <span class="built_in">len</span>(strs[<span class="number">0</span>])</span><br><span class="line">        is_up = [<span class="literal">True</span>]*n</span><br><span class="line">        rec = [<span class="string">&#x27;a&#x27;</span>]*n</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> strs:</span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">                <span class="keyword">if</span> is_up[i] <span class="keyword">and</span> s[i] &gt;= rec[i]:</span><br><span class="line">                    rec[i] = s[i]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    is_up[i] = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> is_up.count(<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3296移山所需的最少秒数</title>
+      <link href="/posts/403e552e.html"/>
+      <url>/posts/403e552e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数字代表山的高度，和一个数组代表工人挖一单位山的工作时间，工人每挖一次，下次会耗时更久，求工人们挖空山的最短时间。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>用最小堆模拟工人的挖山时间变化即可，不过灵神的解法似乎利用了局部变量的泄露，还挺巧妙的，保险起见还是在外面声明一下好点。<blockquote><p><a href="https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/solutions/2925848/er-fen-da-an-pythonjavacgo-by-endlessche-myg4/">https://leetcode.cn/problems/minimum-number-of-seconds-to-make-mountain-height-zero/solutions/2925848/er-fen-da-an-pythonjavacgo-by-endlessche-myg4/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minNumberOfSeconds</span>(<span class="params">self, mountainHeight: <span class="built_in">int</span>, workerTimes: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        worker = [(t, t, t) <span class="keyword">for</span> t <span class="keyword">in</span> workerTimes]</span><br><span class="line">        heapq.heapify(worker)</span><br><span class="line">        nxt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(mountainHeight):</span><br><span class="line">            nxt, delta, base = worker[<span class="number">0</span>]</span><br><span class="line">            heapq.heapreplace(worker, (nxt+delta+base, delta+base, base))</span><br><span class="line">        <span class="keyword">return</span> nxt</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2233K次增加后的最大乘积</title>
       <link href="/posts/a072d4a4.html"/>
       <url>/posts/a072d4a4.html</url>
