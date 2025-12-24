@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3074重新分装苹果</title>
+      <link href="/posts/16133013.html"/>
+      <url>/posts/16133013.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/apple-redistribution-into-boxes/description/?envType=daily-question&envId=2025-12-24">题目链接</a>。</p></li><li><p>简单地说，就是给两个一维数组，第一个代表一袋袋苹果，每个元素代表每一袋苹果个数；第二个代表一个个箱子的容量。现在需要把苹果都放箱子里，求需要箱子的最小值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>要求所用最小箱子数，贪心的思想表示，用的箱子大，个数就会小，而且与苹果的袋数没什么关系。这也是灵神的思路，“简单题，简单做”~</p><blockquote><p><a href="https://leetcode.cn/problems/apple-redistribution-into-boxes/solutions/2678660/pai-xu-tan-xin-pythonjavacgo-by-endlessc-8x64/?envType=daily-question&envId=2025-12-24">https://leetcode.cn/problems/apple-redistribution-into-boxes/solutions/2678660/pai-xu-tan-xin-pythonjavacgo-by-endlessc-8x64/?envType=daily-question&amp;envId=2025-12-24</a></p></blockquote></li><li><p>不过这里也会频繁的取数组最大值，除了排序后处理外，突然很想用堆，毕竟之前天天用。当然也是可以的，在苹果用完前，不断取最大容量箱子使用即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">minimumBoxes</span>(<span class="params">self, apple: <span class="type">List</span>[<span class="built_in">int</span>], capacity: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        sum_a = <span class="built_in">sum</span>(apple)</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(capacity)):</span><br><span class="line">            capacity[i] = -capacity[i]</span><br><span class="line">        heapq.heapify(capacity)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> sum_a &gt; <span class="number">0</span>:</span><br><span class="line">            ans += <span class="number">1</span></span><br><span class="line">            sum_a += heapq.heappop(capacity)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+            <tag> 力扣日常 | LeetcodeDaily </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】720词典中最长的单词</title>
+      <link href="/posts/11e606c2.html"/>
+      <url>/posts/11e606c2.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/longest-word-in-dictionary/">题目链接</a>。</p></li><li><p>简单地说，就是给一个词典，规定合法的单词是存在另一个单词右侧加一个字母所得（单字母直接合法），求合法单词中长度最长且字典序最小的。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>本题有个没有明说的要求，是要必须从单字母开始，如果有一个 rm，还是没有 r，那么 rm 后面衍生的都不合法。</p></li><li><p>老样子，通过哈希表和切片可以实现快速查找一个单词的前缀是否存在。此外，通过字典树则能直接往后筛选，参考题解是一边建树一边筛选记录，实际上也可以先把字典树建好，然后用单字母路线向下遍历，需要整条路线都是末节点才算是合法答案（即都是一个个字母加起来的）</p><blockquote><p><a href="https://leetcode.cn/problems/longest-word-in-dictionary/solutions/1342188/ci-dian-zhong-zui-chang-de-dan-ci-by-lee-k5gj/">https://leetcode.cn/problems/longest-word-in-dictionary/solutions/1342188/ci-dian-zhong-zui-chang-de-dan-ci-by-lee-k5gj/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">longestWord</span>(<span class="params">self, words: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        root = &#123;&#125;</span><br><span class="line">        words.sort(key=<span class="keyword">lambda</span> x : <span class="built_in">len</span>(x))</span><br><span class="line">        <span class="comment"># print(words)</span></span><br><span class="line">        ans = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i, s <span class="keyword">in</span> <span class="built_in">enumerate</span>(words):</span><br><span class="line">            cur = root</span><br><span class="line">            l = <span class="built_in">len</span>(s)</span><br><span class="line">            <span class="keyword">if</span> l == <span class="number">1</span> <span class="keyword">and</span> s <span class="keyword">not</span> <span class="keyword">in</span> cur:</span><br><span class="line">                cur[s] = &#123;&#125;</span><br><span class="line">                cur[s][<span class="string">&quot;#&quot;</span>] = &#123;&#125;</span><br><span class="line">                <span class="keyword">if</span> <span class="built_in">len</span>(s) &gt; <span class="built_in">len</span>(ans) <span class="keyword">or</span> ans &gt; s:</span><br><span class="line">                    ans = s</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            increase = <span class="literal">False</span></span><br><span class="line">            <span class="keyword">for</span> j, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(s):</span><br><span class="line">                <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> cur:</span><br><span class="line">                    cur[c] = &#123;&#125;</span><br><span class="line">                </span><br><span class="line">                cur = cur[c]</span><br><span class="line">                <span class="keyword">if</span> j == l-<span class="number">2</span> <span class="keyword">and</span> <span class="string">&quot;#&quot;</span> <span class="keyword">in</span> cur:</span><br><span class="line">                    increase = <span class="literal">True</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">len</span>(s) &gt; <span class="built_in">len</span>(ans) <span class="keyword">or</span> ans &gt; s:</span><br><span class="line">                        ans = s</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> increase:</span><br><span class="line">                cur[<span class="string">&quot;#&quot;</span>] = &#123;&#125;</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 字典树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2054两个最好的不重叠活动</title>
       <link href="/posts/158dc715.html"/>
       <url>/posts/158dc715.html</url>
