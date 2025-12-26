@@ -4,6 +4,114 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2483商店的最少代价</title>
+      <link href="/posts/57ca53a4.html"/>
+      <url>/posts/57ca53a4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/minimum-penalty-for-a-shop/description/?envType=daily-question&envId=2025-12-26">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维数组，其中的每一个值代表一个时间段有没有客人到来（Y 有，N 无），现在需要选择能使代价最小的关门时间，关门前一个时间段无客人就 1 代价，关门后一个时间段有人就有 1 代价。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>这边第一时间实现的方法，是先求了 Y 和 N 的前缀和，结合各自的总和，对整个日志做依次遍历，过程中结合上面的值 O（1）计算代价。虽然过了，但消耗的时间和空间所有人中属于较多的。</p></li><li><p>但是灵神提出了能显著降低消耗的时间与空间的方法。前缀和不需要提前求，遍历过程中直接实时计算，遍历的当前点，也就是假设开始时所有点都在关门后，让当前时间为关门时间，左边遇到一个 Y 就让代价 -1，否则 +1，这样子就迅速地得到了所有所有的代价，自然也就能获取其中的最小值。</p><blockquote><p><a href="https://leetcode.cn/problems/minimum-penalty-for-a-shop/solutions/1993077/qian-hou-zhui-fen-jie-o1-kong-jian-by-en-c2m5/?envType=daily-question&envId=2025-12-26">https://leetcode.cn/problems/minimum-penalty-for-a-shop/solutions/1993077/qian-hou-zhui-fen-jie-o1-kong-jian-by-en-c2m5/?envType=daily-question&amp;envId=2025-12-26</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">bestClosingTime</span>(<span class="params">self, customers: <span class="built_in">str</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="comment"># 灵神的解法</span></span><br><span class="line">        ans = penalty = min_penalty = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(customers):</span><br><span class="line">            penalty += <span class="number">1</span> <span class="keyword">if</span> c == <span class="string">&quot;N&quot;</span> <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> penalty &lt; min_penalty:</span><br><span class="line">                ans = i+<span class="number">1</span></span><br><span class="line">                min_penalty = penalty</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">        <span class="comment"># 最初的解法</span></span><br><span class="line">        n = <span class="built_in">len</span>(customers)</span><br><span class="line">        y_acc = [<span class="number">0</span>]</span><br><span class="line">        n_acc = [<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">for</span> i, c <span class="keyword">in</span> <span class="built_in">enumerate</span>(customers):</span><br><span class="line">            y_acc.append(y_acc[i]+(<span class="number">1</span> <span class="keyword">if</span> c == <span class="string">&quot;Y&quot;</span> <span class="keyword">else</span> <span class="number">0</span>))</span><br><span class="line">            n_acc.append(n_acc[i]+(<span class="number">1</span> <span class="keyword">if</span> c == <span class="string">&quot;N&quot;</span> <span class="keyword">else</span> <span class="number">0</span>))</span><br><span class="line">        y_sum = customers.count(<span class="string">&quot;Y&quot;</span>)</span><br><span class="line">        n_sum = customers.count(<span class="string">&quot;N&quot;</span>)</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        min_val = inf</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n+<span class="number">1</span>):</span><br><span class="line">            cur_val = n_acc[i] + y_sum - y_acc[i]</span><br><span class="line">            <span class="keyword">if</span> cur_val &lt; min_val:</span><br><span class="line">                min_val = cur_val</span><br><span class="line">                ans = i </span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 并查集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3493属性图</title>
+      <link href="/posts/b2a6fb97.html"/>
+      <url>/posts/b2a6fb97.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/properties-graph/description/">题目链接</a>。</p></li><li><p>简单地说，给一个二维数组代表一个个点，一个一维数组代表一个点的内容，先规定给定数值 k，任意两个不同的点有超过 k 各相同的各异值则相连，求现在图中的连通分量。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>求连通分量，各种连接？上并查集！并查集的相关思路请看 <a href="/posts/76fbb6e7.html" title="【Leetcode Daily】684冗余连接">【Leetcode Daily】684冗余连接</a> 不过还有一个子问题需要解决：怎么快速地判断两个点有没有 k 个或以上的各异值相同；</p></li><li><p>判断各异值的相同个数，本质上就是求两个集合的交集，所以只要把所有的点化为集合，然后就能用求交集的方式解决这个子问题。总体上与灵神思路相近，不过灵神通过运用 map 函数快速地变换了点的形态到集合，值得借鉴。</p><blockquote><p><a href="https://leetcode.cn/problems/properties-graph/solutions/3624345/bing-cha-ji-pythonjavacgo-by-endlesschen-xi0d/">https://leetcode.cn/problems/properties-graph/solutions/3624345/bing-cha-ji-pythonjavacgo-by-endlesschen-xi0d/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numberOfComponents</span>(<span class="params">self, properties: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        n = <span class="built_in">len</span>(properties)</span><br><span class="line">        cc = n</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">            properties[i] = <span class="built_in">set</span>(properties[i])</span><br><span class="line">        </span><br><span class="line">        rec = <span class="built_in">list</span>(<span class="built_in">range</span>(n+<span class="number">1</span>))</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">index:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> rec[index] == index:</span><br><span class="line">                rec[index] = find(rec[index])</span><br><span class="line">            <span class="keyword">return</span> rec[index]</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">merge</span>(<span class="params">i:<span class="built_in">int</span>, j:<span class="built_in">int</span></span>) -&gt; <span class="literal">None</span>:</span><br><span class="line">            rec[find(i)] = rec[find(j)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i, p <span class="keyword">in</span> <span class="built_in">enumerate</span>(properties):</span><br><span class="line">            <span class="keyword">for</span> j, q <span class="keyword">in</span> <span class="built_in">enumerate</span>(properties):</span><br><span class="line">                <span class="keyword">if</span> i == j:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> find(i) == find(j) <span class="keyword">and</span> <span class="built_in">len</span>(p &amp; q) &gt;= k:</span><br><span class="line">                    <span class="comment"># print(i, j, p, q, p and q)</span></span><br><span class="line">                    merge(i, j)</span><br><span class="line">                    cc -= <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> cc</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 并查集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】684冗余连接</title>
+      <link href="/posts/76fbb6e7.html"/>
+      <url>/posts/76fbb6e7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/redundant-connection/">题目链接</a>。</p></li><li><p>简单地说，就是给一个图，说这原来是个树（没闭环），后来加了一条边才变成了现在的图，请遍历边集并找出那个冗余的边，如果有多个答案，取靠后的。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>得用并查集，因为要将树变成图，就是两个同一组的节点相连，而树的构建过程中，两个点必定属于不同类（一旦属于同类，相连后就会产生闭环）。</p></li><li><p>所以只要构建出并查集，遍历边，找到两个点属于同一类的最后的答案即可。</p><blockquote><p><a href="https://leetcode.cn/problems/redundant-connection/solutions/557616/rong-yu-lian-jie-by-leetcode-solution-pks2/">https://leetcode.cn/problems/redundant-connection/solutions/557616/rong-yu-lian-jie-by-leetcode-solution-pks2/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findRedundantConnection</span>(<span class="params">self, edges: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        n = <span class="built_in">len</span>(edges)</span><br><span class="line">        parent = <span class="built_in">list</span>(<span class="built_in">range</span>(n+<span class="number">1</span>))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">index: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> parent[index] != index:</span><br><span class="line">                parent[index] = find(parent[index])</span><br><span class="line">            <span class="keyword">return</span> parent[index]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">union</span>(<span class="params">index1:<span class="built_in">int</span>, index2:<span class="built_in">int</span></span>):</span><br><span class="line">            parent[find(index1)] = parent[find(index2)]</span><br><span class="line"></span><br><span class="line">        ans = []</span><br><span class="line">        <span class="keyword">for</span> node1, node2 <span class="keyword">in</span> edges:</span><br><span class="line">            <span class="keyword">if</span> find(node1) != find(node2):</span><br><span class="line">                union(node1, node2)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                ans = [node1, node2]</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 并查集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3075幸福值最大化的选择方案</title>
+      <link href="/posts/6ac202cc.html"/>
+      <url>/posts/6ac202cc.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximize-happiness-of-selected-children/description/?envType=daily-question&envId=2025-12-25">题目链接</a>。</p></li><li><p>简单地说，就是给一个一维整数数组，从中取 k 个数，每取一个数，就要对数组中所有大于零的数减一，求最终可得最大和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>由于 0 不会再减，可见直接从大值开始取就行。具体解法难得与灵神一致，就是先排序数组，然后用下标记录要减的值，一旦这个值大于数组的值就可以中断循环，因为后面都是 0.<blockquote><p><a href="https://leetcode.cn/problems/maximize-happiness-of-selected-children/solutions/2678114/pai-xu-tan-xin-pythonjavacgo-by-endlessc-onma/?envType=daily-question&envId=2025-12-25">https://leetcode.cn/problems/maximize-happiness-of-selected-children/solutions/2678114/pai-xu-tan-xin-pythonjavacgo-by-endlessc-onma/?envType=daily-question&amp;envId=2025-12-25</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximumHappinessSum</span>(<span class="params">self, happiness: <span class="type">List</span>[<span class="built_in">int</span>], k: <span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        happiness.sort(reverse=<span class="literal">True</span>)</span><br><span class="line">        <span class="comment"># print(happiness)</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(k):</span><br><span class="line">            <span class="keyword">if</span> happiness[i]-i &lt;= <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            ans += happiness[i]-i</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3074重新分装苹果</title>
       <link href="/posts/16133013.html"/>
       <url>/posts/16133013.html</url>
