@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2402会议室III</title>
+      <link href="/posts/fda18a27.html"/>
+      <url>/posts/fda18a27.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/meeting-rooms-iii/description/?envType=daily-question&envId=2025-12-27">题目链接</a>。</p></li><li><p>简单地说，就是给一系列会议的开始时间和结束时间，以及会议室个数，现在规定，每个会议都会默认用当前空闲会议室中最小的，如果没有会议室空闲就延期开始，求使用最多的会议室编号。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>陆爻齐想到了双堆处理空闲会议室和开始的会议，但由于实现得不好失败了，根据灵神的解法，重点在于处理会议的延期，只有没有空闲的时候才处理比较容易不出错。</p></li><li><p>剩下的就是比较平常的东西，简单过一下，遍历会议，在处理会议开会前，先处理已经结束的会议释放房间，如果没有空闲房间就处理延期，也就是增加当前会议的结束时间。从上面的思路来看，堆只要记录房间号和结束时间即可，到点就放房间。</p><blockquote><p><a href="https://leetcode.cn/problems/meeting-rooms-iii/solutions/1799420/shuang-dui-mo-ni-pythonjavacgo-by-endles-ctwc/?envType=daily-question&envId=2025-12-27">https://leetcode.cn/problems/meeting-rooms-iii/solutions/1799420/shuang-dui-mo-ni-pythonjavacgo-by-endles-ctwc/?envType=daily-question&amp;envId=2025-12-27</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mostBooked</span>(<span class="params">self, n: <span class="built_in">int</span>, meetings: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = [<span class="number">0</span>]*n</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        max_vis = <span class="number">0</span></span><br><span class="line">        room = <span class="built_in">list</span>(<span class="built_in">range</span>(n))</span><br><span class="line">        heapq.heapify(room)</span><br><span class="line">        meetings.sort(key=<span class="keyword">lambda</span> x : x[<span class="number">0</span>])</span><br><span class="line">        on_meetings = []</span><br><span class="line">        heapq.heapify(on_meetings)</span><br><span class="line">        <span class="comment"># print(meetings)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> start, end <span class="keyword">in</span> meetings:</span><br><span class="line">            <span class="keyword">while</span> on_meetings <span class="keyword">and</span> on_meetings[<span class="number">0</span>][<span class="number">0</span>] &lt;= start:</span><br><span class="line">                heappush(room, heappop(on_meetings)[<span class="number">1</span>])</span><br><span class="line">            e = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">len</span>(room) == <span class="number">0</span>:</span><br><span class="line">                e, r = heapq.heappop(on_meetings)</span><br><span class="line">                heapq.heappush(room, r)</span><br><span class="line">                end += e - start</span><br><span class="line">            nxt_room = heapq.heappop(room)</span><br><span class="line">            heapq.heappush(on_meetings, (end, nxt_room))</span><br><span class="line">            rec[nxt_room] += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> rec.index(<span class="built_in">max</span>(rec))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 堆 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】990等式方程的可满足性</title>
+      <link href="/posts/524587bb.html"/>
+      <url>/posts/524587bb.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/satisfiability-of-equality-equations/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一系列 &#x3D;&#x3D; 或者 !&#x3D; 的等式或不等式，左右两侧会是小写字母的变量，求所有式子是否不矛盾。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>当出现等式，就是两边应该属于一类，不等式即不属于一类，那就直接并查集先把相等的归类，再看不等是否产生矛盾。</p><blockquote><p><a href="https://leetcode.cn/problems/satisfiability-of-equality-equations/solutions/279091/deng-shi-fang-cheng-de-ke-man-zu-xing-by-leetcode-/">https://leetcode.cn/problems/satisfiability-of-equality-equations/solutions/279091/deng-shi-fang-cheng-de-ke-man-zu-xing-by-leetcode-/</a></p></blockquote></li><li><p>那有小朋友可能要问了，为什么不能先不等呢？因为并查集刚开始初始化时大家都不等，自然都满足，所以就先处理相等，再处理不等才能发生矛盾。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">equationsPossible</span>(<span class="params">self, equations: <span class="type">List</span>[<span class="built_in">str</span>]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        parent = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">27</span>))</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">find</span>(<span class="params">i:<span class="built_in">int</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> parent[i] != i:</span><br><span class="line">                parent[i] = find(parent[i])</span><br><span class="line">            <span class="keyword">return</span> parent[i]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">union</span>(<span class="params">i:<span class="built_in">int</span>, j:<span class="built_in">int</span></span>):</span><br><span class="line">            parent[find(i)] = parent[find(j)]</span><br><span class="line">        </span><br><span class="line">        other_index = []</span><br><span class="line">        <span class="keyword">for</span> i, equation <span class="keyword">in</span> <span class="built_in">enumerate</span>(equations):</span><br><span class="line">            <span class="keyword">if</span> equation[<span class="number">1</span>] == <span class="string">&quot;=&quot;</span>:</span><br><span class="line">                a = <span class="built_in">ord</span>(equation[<span class="number">0</span>]) - <span class="number">97</span></span><br><span class="line">                b = <span class="built_in">ord</span>(equation[-<span class="number">1</span>]) - <span class="number">97</span></span><br><span class="line">                union(a, b)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                other_index.append(i)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> other_index:</span><br><span class="line">            equation = equations[i]</span><br><span class="line">            a = <span class="built_in">ord</span>(equation[<span class="number">0</span>]) - <span class="number">97</span></span><br><span class="line">            b = <span class="built_in">ord</span>(equation[-<span class="number">1</span>]) - <span class="number">97</span></span><br><span class="line">            <span class="keyword">if</span> find(a) == find(b):</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 并查集 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2483商店的最少代价</title>
       <link href="/posts/57ca53a4.html"/>
       <url>/posts/57ca53a4.html</url>
