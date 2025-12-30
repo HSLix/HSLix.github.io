@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】840矩阵中的幻方</title>
+      <link href="/posts/737b46e6.html"/>
+      <url>/posts/737b46e6.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/magic-squares-in-grid/?envType=daily-question&envId=2025-12-30">题目链接</a>。</p></li><li><p>简单地说，就是规定3x3的幻方中的数字 1-9，且行列对角线之和都相等，求给定矩阵中有多少个上述的 3x3 幻方。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>根据灵神的一系列推导分析，3x3 幻方满足，中心必定为 5，前两行和前两列之和为 15，所有数字为 1-9.其中要快速判断矩阵中是否有且只有 1-9，可以通过位运算，2^10-2 可以代表 1-9 都在（2 的 x 次方代表 x 在）<blockquote><p><a href="https://leetcode.cn/problems/magic-squares-in-grid/solutions/3867033/wu-xu-ji-suan-di-san-xing-lie-de-he-yi-j-djue/?envType=daily-question&envId=2025-12-30">https://leetcode.cn/problems/magic-squares-in-grid/solutions/3867033/wu-xu-ji-suan-di-san-xing-lie-de-he-yi-j-djue/?envType=daily-question&amp;envId=2025-12-30</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">numMagicSquaresInside</span>(<span class="params">self, grid: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        m, n = <span class="built_in">len</span>(grid), <span class="built_in">len</span>(grid[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">if</span> m &lt; <span class="number">3</span> <span class="keyword">or</span> n &lt; <span class="number">3</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m-<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n-<span class="number">2</span>):</span><br><span class="line">                <span class="keyword">if</span> grid[i+<span class="number">1</span>][j+<span class="number">1</span>] != <span class="number">5</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">                mask = <span class="number">0</span></span><br><span class="line">                x_sum = [<span class="number">0</span>]*<span class="number">3</span></span><br><span class="line">                y_sum = [<span class="number">0</span>]*<span class="number">3</span></span><br><span class="line">                <span class="keyword">for</span> p <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">                    <span class="keyword">for</span> q <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>):</span><br><span class="line">                        x = grid[i+p][j+q]</span><br><span class="line">                        x_sum[p] += x </span><br><span class="line">                        y_sum[q] += x </span><br><span class="line">                        mask |= <span class="number">1</span> &lt;&lt; x </span><br><span class="line">                </span><br><span class="line">                <span class="keyword">if</span> mask == <span class="number">1022</span> <span class="keyword">and</span> x_sum[<span class="number">0</span>] == x_sum[<span class="number">1</span>] == y_sum[<span class="number">0</span>] == y_sum[<span class="number">1</span>] == <span class="number">15</span>:</span><br><span class="line">                    ans += <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 哈希表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1669合并两个链表</title>
+      <link href="/posts/94a1e8d2.html"/>
+      <url>/posts/94a1e8d2.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/merge-in-between-linked-lists/">题目链接</a>。</p></li><li><p>简单地说，就是给两个链表，将一个链表代替另一个链表的中间一段，返回合并后的链表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>就是找到要删除区间的前一个节点和中间的最后一个节点，这两个节点的 next 分别是要插入链表的起点和终点，如此就插好了。<blockquote><p><a href="https://leetcode.cn/problems/merge-in-between-linked-lists/solutions/3820116/ling-shen-ti-dan-qing-xi-ti-jie-by-pure-11575/">https://leetcode.cn/problems/merge-in-between-linked-lists/solutions/3820116/ling-shen-ti-dan-qing-xi-ti-jie-by-pure-11575/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeInBetween</span>(<span class="params">self, list1: ListNode, a: <span class="built_in">int</span>, b: <span class="built_in">int</span>, list2: ListNode</span>) -&gt; ListNode:</span><br><span class="line">        remove_left, remove_right = list1, list1</span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(a-<span class="number">1</span>):</span><br><span class="line">            remove_left = remove_left.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(b):</span><br><span class="line">            remove_right = remove_right.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        remove_left.<span class="built_in">next</span> = list2</span><br><span class="line">        <span class="keyword">while</span> list2.<span class="built_in">next</span>:</span><br><span class="line">            list2 = list2.<span class="built_in">next</span></span><br><span class="line">        list2.<span class="built_in">next</span> = remove_right.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> list1</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】237删除链表中的节点</title>
       <link href="/posts/72308065.html"/>
       <url>/posts/72308065.html</url>
