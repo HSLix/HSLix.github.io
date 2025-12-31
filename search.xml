@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2807在链表中插入最大公约数</title>
+      <link href="/posts/f278b262.html"/>
+      <url>/posts/f278b262.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/insert-greatest-common-divisors-in-linked-list/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，现在在每两个节点空隙插入一个节点，值为左右节点值的最大公约数，求最终的链表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>最大公约数的求解直接用辗转相除法，Python 的 math 库中有现成的 gcd 函数调用。至于节点的插入，用两个指针，左指针指新节点，新节点指向右指针。<blockquote><p><a href="https://leetcode.cn/problems/insert-greatest-common-divisors-in-linked-list/solutions/2592797/jian-ji-xie-fa-pythonjavacgojsrust-by-en-i1rn/">https://leetcode.cn/problems/insert-greatest-common-divisors-in-linked-list/solutions/2592797/jian-ji-xie-fa-pythonjavacgojsrust-by-en-i1rn/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rcd</span>(<span class="params">i:<span class="built_in">int</span>, j:<span class="built_in">int</span></span>):</span><br><span class="line">    <span class="keyword">while</span> i % j != <span class="number">0</span>:</span><br><span class="line">        i, j = j, i % j</span><br><span class="line">    <span class="keyword">return</span> j</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insertGreatestCommonDivisors</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># if not head.next:</span></span><br><span class="line">        <span class="comment">#     return head</span></span><br><span class="line"></span><br><span class="line">        left, right = head, head</span><br><span class="line">        <span class="keyword">while</span> left.<span class="built_in">next</span>:</span><br><span class="line">            right = left.<span class="built_in">next</span></span><br><span class="line">            new_node = ListNode(rcd(left.val, right.val), right)</span><br><span class="line">            left.<span class="built_in">next</span> = new_node</span><br><span class="line">            left = right</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2487从链表中移除节点</title>
+      <link href="/posts/f31b69c.html"/>
+      <url>/posts/f31b69c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/remove-nodes-from-linked-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，对于其中的每一个节点，如果其右侧有比该节点值更大的点，就删除该点，求最后的链表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>朴素解法：先遍历一次链表，把节点的值转化成数组，然后再求每个下标的右边的最大值，再遍历一次链表，这次对于值小于对应右侧最大值的就删除。时间 O(3n)</p></li><li><p>灵神给出了更优雅的解法，下面就说下递归的。递归天然就适合倒着来，毕竟链表比较右侧数值正好就是倒着的。可以从最后的两个点开始模拟，最后一个点自然是直接返回，所以递归函数的含义是获取该节点及之后数值最大的那个节点，如果当前节点比这个小，那就可以删掉当前节点，直接返回最大节点；反之则让当前节点与获得点相连，然后返回。</p><blockquote><p><a href="https://leetcode.cn/problems/remove-nodes-from-linked-list/solutions/1993491/di-gui-jian-ji-xie-fa-by-endlesscheng-jfwi/">https://leetcode.cn/problems/remove-nodes-from-linked-list/solutions/1993491/di-gui-jian-ji-xie-fa-by-endlesscheng-jfwi/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeNodes</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="comment"># 递归</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head </span><br><span class="line">        node = <span class="variable language_">self</span>.removeNodes(head.<span class="built_in">next</span>)</span><br><span class="line">        <span class="keyword">if</span> head.val &lt; node.val:</span><br><span class="line">            <span class="keyword">return</span> node</span><br><span class="line">        head.<span class="built_in">next</span> = node</span><br><span class="line">        <span class="keyword">return</span> head</span><br><span class="line"></span><br><span class="line">        <span class="comment"># O(3n)</span></span><br><span class="line">        rec = []</span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            rec.append(cur.val)</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(rec)-<span class="number">2</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            rec[i] = <span class="built_in">max</span>(rec[i], rec[i+<span class="number">1</span>])</span><br><span class="line">        </span><br><span class="line">        index = <span class="number">0</span></span><br><span class="line">        ans = ListNode(<span class="number">0</span>, head)</span><br><span class="line">        cur = ans</span><br><span class="line">        <span class="comment"># print(rec)</span></span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">if</span> cur.<span class="built_in">next</span>.val &lt; rec[index]:</span><br><span class="line">                cur.<span class="built_in">next</span> = cur.<span class="built_in">next</span>.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur = cur.<span class="built_in">next</span></span><br><span class="line">            index += <span class="number">1</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> ans.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】840矩阵中的幻方</title>
       <link href="/posts/737b46e6.html"/>
       <url>/posts/737b46e6.html</url>
