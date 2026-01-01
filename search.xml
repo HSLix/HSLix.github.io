@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】66加一</title>
+      <link href="/posts/6aa30c0b.html"/>
+      <url>/posts/6aa30c0b.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/plus-one/description/?envType=daily-question&envId=2026-01-01">题目链接</a>。</p></li><li><p>简单地说，就是给一个整数数组，代表一个很大的数字，现在要对这个数字加一，返回一个加一后的大数组。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>在加一的情况下，这个数字变化最简单的情况就是最后一位加一，但复杂的情况是诸位向前进 1，不过只要意识到加一的情况只会把后面的九都变 0，并把最后一个非九的加一（没有就新增一位）</p></li><li><p>换句话，本质就是从右向左找到第一个非九的位 + 1，路上的九都换成零。</p><blockquote><p><a href="https://leetcode.cn/problems/plus-one/solutions/3784551/jian-dan-ti-jian-dan-zuo-pythonjavaccgoj-6gb2/?envType=daily-question&envId=2026-01-01">https://leetcode.cn/problems/plus-one/solutions/3784551/jian-dan-ti-jian-dan-zuo-pythonjavaccgoj-6gb2/?envType=daily-question&amp;envId=2026-01-01</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">plusOne</span>(<span class="params">self, digits: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        stop = <span class="literal">False</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(digits)-<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>):</span><br><span class="line">            cur = <span class="number">1</span> + digits[i]</span><br><span class="line">            <span class="keyword">if</span> cur == <span class="number">10</span>:</span><br><span class="line">                digits[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                digits[i] = cur</span><br><span class="line">                stop = <span class="literal">True</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> stop:</span><br><span class="line">            digits.insert(<span class="number">0</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> digits</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】147对链表进行插入排序</title>
+      <link href="/posts/fa3c2333.html"/>
+      <url>/posts/fa3c2333.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/insertion-sort-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，要对这个链表做插入排序。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>只能遍历链表，留一个哨兵节点，因为头节点也可能更换。</p></li><li><p>把第一个节点当成已遍历的节点，一个个向后，如果新遇到的节点值比最后一个已遍历节点更大，这个好办，就直接插后面；</p></li><li><p>但如果新的节点值更少，那就得从头遍历找到合适的位置插入。这里的插入处理起来很是要注意，很容易把指针指错。</p><blockquote><p><a href="https://leetcode.cn/problems/insertion-sort-list/solutions/491124/dui-lian-biao-jin-xing-cha-ru-pai-xu-by-leetcode-s/">https://leetcode.cn/problems/insertion-sort-list/solutions/491124/dui-lian-biao-jin-xing-cha-ru-pai-xu-by-leetcode-s/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insertionSortList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">        sentinal = ListNode(<span class="number">0</span>, head)</span><br><span class="line">        cur = head</span><br><span class="line">        last_sorted = head</span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span>:</span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> cur.val &lt; last_sorted.val:</span><br><span class="line">                pre = sentinal</span><br><span class="line">                <span class="keyword">while</span> pre.<span class="built_in">next</span>.val &lt; cur.val:</span><br><span class="line">                    pre = pre.<span class="built_in">next</span></span><br><span class="line">                last_sorted.<span class="built_in">next</span> = cur.<span class="built_in">next</span></span><br><span class="line">                insert_next = pre.<span class="built_in">next</span></span><br><span class="line">                pre.<span class="built_in">next</span> = cur</span><br><span class="line">                cur.<span class="built_in">next</span> = insert_next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                last_sorted = last_sorted.<span class="built_in">next</span></span><br><span class="line">            cur = last_sorted</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> sentinal.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2807在链表中插入最大公约数</title>
       <link href="/posts/f278b262.html"/>
       <url>/posts/f278b262.html</url>
