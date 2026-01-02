@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】961在长度2N的数组中找出重复N次的元素</title>
+      <link href="/posts/20d76396.html"/>
+      <url>/posts/20d76396.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/description/?envType=daily-question&envId=2026-01-02">题目链接</a>。</p></li><li><p>简单地说，就是给一个数组，长度 2n，现在其中有一个数字重复 n 次，需要找到这个数字。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>从题目得知，除了某个数字，其余数字各不相同，换句话，只要出现重复数字就是答案，于是用集合保存已遍历数字，找到重复即可。</p><blockquote><p><a href="https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/solutions/3870905/si-chong-fang-fa-ha-xi-ji-he-mo-er-tou-p-f95m/?envType=daily-question&envId=2026-01-02">https://leetcode.cn/problems/n-repeated-element-in-size-2n-array/solutions/3870905/si-chong-fang-fa-ha-xi-ji-he-mo-er-tou-p-f95m/?envType=daily-question&amp;envId=2026-01-02</a></p></blockquote></li><li><p>但是这种解法的空间复杂度是 O(n)，有一种 O(1) 的解决方案叫做摩尔投票。具体怎么做，后面再说，今天先到这里：）</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">repeatedNTimes</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        rec = <span class="built_in">set</span>()</span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums:</span><br><span class="line">            <span class="keyword">if</span> num <span class="keyword">in</span> rec:</span><br><span class="line">                <span class="keyword">return</span> num</span><br><span class="line">            rec.add(num)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】LCR029循环有序列表的插入</title>
+      <link href="/posts/8067c6c1.html"/>
+      <url>/posts/8067c6c1.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/4ueAj6/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个循环链表，链表内的数值按非降序排列，现在给一个要插入的值，返回插完后的链表头。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>根据分析，就三种情况，一是能找到处于两个一小一大节点中间（升序），二和三就是插入值是最大值或最小值，对于后面两种，先要找到整个链表的边界点，也就是唯一没有按升序的地方，插到这里就行。<blockquote><p><a href="https://leetcode.cn/problems/4ueAj6/solutions/1/gan-jue-da-jia-xie-de-du-you-dian-fu-za-k1klz/">https://leetcode.cn/problems/4ueAj6/solutions/1/gan-jue-da-jia-xie-de-du-you-dian-fu-za-k1klz/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string"># Definition for a Node.</span></span><br><span class="line"><span class="string">class Node:</span></span><br><span class="line"><span class="string">    def __init__(self, val=None, next=None):</span></span><br><span class="line"><span class="string">        self.val = val</span></span><br><span class="line"><span class="string">        self.next = next</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">self, head: <span class="string">&#x27;Node&#x27;</span>, insertVal: <span class="built_in">int</span></span>) -&gt; <span class="string">&#x27;Node&#x27;</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            head = Node(insertVal)</span><br><span class="line">            head.<span class="built_in">next</span> = head</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line">        </span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur.<span class="built_in">next</span> != head:</span><br><span class="line">            <span class="keyword">if</span> cur.<span class="built_in">next</span>.val &lt; cur.val:</span><br><span class="line">                <span class="keyword">if</span> cur.<span class="built_in">next</span>.val &gt;= insertVal:</span><br><span class="line">                    <span class="comment"># 插入的是最小值</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> cur.val &lt;= insertVal:</span><br><span class="line">                    <span class="comment"># 插入的是最大值</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="comment"># 处理中间情况</span></span><br><span class="line">            <span class="keyword">if</span> cur.val &lt;= insertVal &lt;= cur.<span class="built_in">next</span>.val:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        cur.<span class="built_in">next</span> = Node(insertVal, cur.<span class="built_in">next</span>)</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】66加一</title>
       <link href="/posts/6aa30c0b.html"/>
       <url>/posts/6aa30c0b.html</url>
@@ -1254,9 +1308,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -1283,9 +1337,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -1337,9 +1391,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -1391,9 +1445,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -1420,9 +1474,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -1478,9 +1532,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -2074,9 +2128,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 前缀和 </tag>
-            
             <tag> 差分 </tag>
+            
+            <tag> 前缀和 </tag>
             
         </tags>
       
@@ -2458,9 +2512,9 @@
             
             <tag> 堆 </tag>
             
-            <tag> 懒删除堆 </tag>
-            
             <tag> 对顶堆 </tag>
+            
+            <tag> 懒删除堆 </tag>
             
         </tags>
       
@@ -3766,9 +3820,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 栈 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4146,9 +4200,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 二分 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4262,9 +4316,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4291,9 +4345,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4320,9 +4374,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4349,9 +4403,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4378,9 +4432,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4407,9 +4461,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4436,9 +4490,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 前缀和 </tag>
+            
+            <tag> 枚举 </tag>
             
         </tags>
       
@@ -4806,9 +4860,9 @@
       
         <tags>
             
-            <tag> Python </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Python </tag>
             
         </tags>
       
@@ -5078,9 +5132,9 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 枚举 </tag>
-            
             <tag> 滑动窗口 </tag>
+            
+            <tag> 枚举 </tag>
             
             <tag> 定长滑动窗口 </tag>
             
@@ -6281,9 +6335,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6308,9 +6362,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6422,9 +6476,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6507,9 +6561,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6592,9 +6646,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6706,9 +6760,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6820,9 +6874,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
@@ -6905,9 +6959,9 @@
       
         <tags>
             
-            <tag> Git </tag>
-            
             <tag> LearnTogether </tag>
+            
+            <tag> Git </tag>
             
         </tags>
       
