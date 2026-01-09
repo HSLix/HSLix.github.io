@@ -1,0 +1,225 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除） | LuYaoQi's Blogs</title><meta name="author" content="陆爻齐-LuYaoQi"><meta name="copyright" content="陆爻齐-LuYaoQi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="前言这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在这里。 该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。 闲话少说，下面是笔记正文。 第一章 整数与二进制1.1 二进制基本性质首先，有两条基本的性质  偶数二进制最末尾的比特是 0;奇数二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）">
+<meta property="og:url" content="http://hslix.github.io/posts/7f4d8767.html">
+<meta property="og:site_name" content="LuYaoQi&#39;s Blogs">
+<meta property="og:description" content="前言这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在这里。 该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。 闲话少说，下面是笔记正文。 第一章 整数与二进制1.1 二进制基本性质首先，有两条基本的性质  偶数二进制最末尾的比特是 0;奇数二">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hslix.github.io/img/index/CINTA.png">
+<meta property="article:published_time" content="2024-07-09T15:39:00.000Z">
+<meta property="article:modified_time" content="2025-06-23T12:28:38.075Z">
+<meta property="article:author" content="陆爻齐-LuYaoQi">
+<meta property="article:tag" content="CINTA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hslix.github.io/img/index/CINTA.png"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）",
+  "url": "http://hslix.github.io/posts/7f4d8767.html",
+  "image": "http://hslix.github.io/img/index/CINTA.png",
+  "datePublished": "2024-07-09T15:39:00.000Z",
+  "dateModified": "2025-06-23T12:28:38.075Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "陆爻齐-LuYaoQi",
+      "url": "http://hslix.github.io/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/MagicGirl.png"><link rel="canonical" href="http://hslix.github.io/posts/7f4d8767.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-image: url(/img/bg/pure_night.jpg);"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/MagicGirl.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">345</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/index/CINTA.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/MagicGirl.png" alt="Logo"><span class="site-name">LuYaoQi's Blogs</span></a><a class="nav-page-title" href="/"><span class="site-name">【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">【CINTA】 具体数论与代数阅读笔记——第一章 整数和二进制（含加、乘、除）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-07-09T15:39:00.000Z" title="发表于 2024-07-09 23:39:00">2024-07-09</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-06-23T12:28:38.075Z" title="更新于 2025-06-23 20:28:38">2025-06-23</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">2k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>7分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这本书说自己是计算机专业数学入门之入门,成为读者攻读其他经典著作的垫脚石，但个人以为足矣替换掉本校内不知所云的、抽象的、让学生考完后马上全忘的那些课程。本书的 GitHub 仓库在<a target="_blank" rel="noopener" href="https://github.com/lbwang/CINTA-cn">这里</a>。</p>
+<p>该笔记并非单纯的整理归纳，而是记录陆爻齐在书中找到的对自己很有感触的部分。</p>
+<p>闲话少说，下面是笔记正文。</p>
+<h1 id="第一章-整数与二进制"><a href="#第一章-整数与二进制" class="headerlink" title="第一章 整数与二进制"></a>第一章 整数与二进制</h1><h2 id="1-1-二进制"><a href="#1-1-二进制" class="headerlink" title="1.1 二进制"></a>1.1 二进制</h2><h3 id="基本性质"><a href="#基本性质" class="headerlink" title="基本性质"></a>基本性质</h3><p>首先，有两条基本的性质</p>
+<ol>
+<li>偶数二进制最末尾的比特是 0;奇数二进制最末尾的比特是 1；</li>
+<li>在一个二进制数末尾增加一个 0 等同于在十进制中对这个数乘 2。<br>反过来说,对一个十进制数进行乘 2 操作等同于对其二进制表达左移一个比特。</li>
+</ol>
+<p>显然，比如 2 的二进制表示为 0010，3 为 0011， 4即 2*2 为0100。</p>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>随后提出<strong>思考</strong>：请问,你认为对一个十进制数进行除 2 等于对其二进制表达右移一个比特吗?</p>
+<p>陆爻齐的回答是：是的，对 3，出 2 得 1.5，0011 右移一个比特得 0001.1，正好为 1.5。对 2， 除 2 得 1，0010 右移一个比特得 0001，正好为1。</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>接着在基于“考虑任意自然数 n,所谓 2 的 n 次方 (2^n) 只是不断对 1 乘 n 次 2”给出了两条性质<br>3、给定任意自然数 n, 十进制数 2^n 的二进制数表达就是在 1 后加 n 个 0；<br>4、给定任意自然数 n, 十进制数 2^n − 1 的二进制数表达就是 n 个 1；</p>
+<p>结合一点例子就能认同，4 是 2 的 2 次方，即 1 后加 2 个 0，即 0100。1 是 2 的 0 次方，为 1 后加 0 个 0，即 0001。4 减 1 得 3，0011，就是 2 的 1 次方和 0 次方相加所得， 0011 &#x3D; 0010 + 0001；2^2 - 1 &#x3D; 2^1 + 2^0。</p>
+<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><p>接下来是作者给的<strong>思考</strong>，请将以上计算过程的结论归纳成一个定理,并证明。你可以使用任何的证明方法。<br>请问,以上“硬”算的方法能否推广为一种证明方法?</p>
+<p>陆爻齐认为，可以归纳为，对任意自然数 n+1（n&gt;&#x3D;0)，有$2^{(n+1)} &#x3D; \sum_0^n 2^n$</p>
+<h3 id="位置计数法"><a href="#位置计数法" class="headerlink" title="位置计数法"></a>位置计数法</h3><p>如此，便引入了位置计数法，即对任意整数 b，有 $b&#x3D;\sum_{i&#x3D;0}^{n-1}b_i2^i$，其中$b_i\in{0,1}$</p>
+<p>显然，取 10，即 1010，可以视为 $1010 &#x3D; 1<em>2^3 + 0</em>2^2 + 1<em>2^1 + 0</em>2^0$，换句话 10 &#x3D; 1<em>8 + 0</em>4 + 1<em>2 + 0</em>1。</p>
+<h2 id="加法与乘法"><a href="#加法与乘法" class="headerlink" title="加法与乘法"></a>加法与乘法</h2><h3 id="加法"><a href="#加法" class="headerlink" title="加法"></a>加法</h3><p>加法，大家都能想到 a+b，但要是不准用 + 呢？</p>
+<p>于是有下面这个加法的算法，C++ 实现如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输入：两个整数a和b的和</span></span><br><span class="line"><span class="comment">// 输出：a与b的和</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span> <span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span></span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> a;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(a^b, (a&amp;b)&lt;&lt;<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作者想表达计算机的本质是bit的异或、与及移位操作。</p>
+<h3 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h3><p>这里又是<strong>思考</strong>：要理解这个加法算法只需要地正确回答出以下三个问题:</p>
+<ol>
+<li>a ∧ b 得到的是什么?</li>
+<li>(b&amp;a) &lt;&lt; 1 得到的是什么?</li>
+<li>该算法为什么会终止?</li>
+</ol>
+<p>陆爻齐的回答是，</p>
+<ol>
+<li>a ^ b 得到的是 a 和 b 相加后，移位之后且还没计算进位的部分。异或操作是 10 和 01 得 1，11 或 00 得 0，1 与 0 相加，那位不用进位，留 1；而 0 + 0 或 1 + 1，则会在原地留 0，这正好符合异或操作的结果。</li>
+<li>(b&amp;a) &lt;&lt; 1 得到进位的部分，a&amp;b 的与操作就可以得到 1 + 1 的位，&lt;&lt; 1 是移位操作，根据上文，二进制乘 2，靠后面加个 0， 故向左移一位。</li>
+<li>算法之所以会终止，是因为从右向左，每次执行完进位操作一定能保证该位以右不会有可进位的位，如设第 1 位要进位，那么进位后第一位就确认为 1 或 0，但进位后可能导致下一位需要进位，若此时第二位要进位，那么就处理进位并确认第二位为 1 或 0，以此类推，处理至尽。因处理的数字是有限位数字，故算法一定能终止。</li>
+</ol>
+<h3 id="乘法"><a href="#乘法" class="headerlink" title="乘法"></a>乘法</h3><p>作者介绍了一种朴素乘法，即 a*b 的本质，是 b 个 a 相加。下面作者以此为例，从正确性、效率、优化三个角度分析该算法。</p>
+<p>显然，这种不断加的乘法时间复杂度为O（n）。</p>
+<p>然后是重点，递归版的“简单乘法”，C++ 实现如下。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">multiply</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_even</span>(b)) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span> * <span class="built_in">multiply</span>(a, b &gt;&gt; <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span> * <span class="built_in">multiply</span>(a, b &gt;&gt; <span class="number">1</span>) + a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实这个程序可以这么理解，返 0 不用说，如果 b 是偶数，比如 0b100 是 8，a 随便取个数，比如 3，即 0b11，用 100 * 11 相当于 2 * （10 * 11），也等于 2 * （ 2 * （ 1 * 11）），最后省个 1，也就加个 a，综上。</p>
+<p>换个复杂点的例子，让 b 为 1010，那就可以看为 (1<em>2^4 + 0</em>2^3 + 1<em>2^2 + 0</em>2^1) * 3 。</p>
+<p>同时作者还补充，在附录 A 有更高效的乘法实现。</p>
+<h2 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h2><h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>首先得有个除法定理，对任意给定的整数 a 和 b,其中 b &gt; 0,存在唯一的整数对 q(商)和 r(余数)，使得 a &#x3D; qb + r 且 0 ≤ r &lt; b。</p>
+<p>然后，介绍了下良序原则和单射、满射、一一映射等概念，不过感觉在下面没啥用。</p>
+<p>然后是除法的实现，朴素除法与朴素乘法类似，是不断减去除数，至被除数比除数小时，相减次数为“商”，剩下的被除数为“余数”。</p>
+<h3 id="简单除法"><a href="#简单除法" class="headerlink" title="简单除法"></a>简单除法</h3><p>而简单除法的 C++ 实现如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; <span class="title">m_divide</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// cout &lt;&lt; a &lt;&lt; &quot; &quot; &lt;&lt; b &lt;&lt; endl;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">pair</span>&lt;<span class="type">int</span>, <span class="type">int</span>&gt;(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    std::pair&lt;<span class="type">int</span>, <span class="type">int</span>&gt; result = <span class="built_in">m_divide</span>(a &gt;&gt; <span class="number">1</span>, b);</span><br><span class="line"></span><br><span class="line">    result.first &lt;&lt;= <span class="number">1</span>; result.second &lt;&lt;= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (a &amp; <span class="number">1</span>) &#123;</span><br><span class="line">        result.second += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (result.second &gt;= b) &#123;</span><br><span class="line">        result.first += <span class="number">1</span>;</span><br><span class="line">        result.second -= b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>某种程度就是那个简单除法的逆运算捏，但我觉得我也不是那么明白，只能感受到，这是在不断对背除数除二，然后从左至右确认“商”，最后消除还不明白如何产生的误差来确认“余数”。</p>
+<h1 id="第一章-习题"><a href="#第一章-习题" class="headerlink" title="第一章 习题"></a>第一章 习题</h1><p>嘛，又不是正式上课，就选两道做做罢</p>
+<h2 id="1-判断奇偶的函数，c语言实现"><a href="#1-判断奇偶的函数，c语言实现" class="headerlink" title="1 判断奇偶的函数，c语言实现"></a>1 判断奇偶的函数，c语言实现</h2><p>判断奇数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span> <span class="params">(<span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a &amp; <span class="number">1</span>) <span class="keyword">return</span> True;</span><br><span class="line">  <span class="keyword">return</span> False;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>判断偶数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">func</span> <span class="params">(<span class="type">int</span> a)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (a &amp; <span class="number">1</span>) <span class="keyword">return</span> False;</span><br><span class="line">  <span class="keyword">return</span> True;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>思想是，奇数的二进制表示中，最右位总为 1，只要 &amp; 上 1，就只会保留最右位，1 则奇数，0 则偶数。</p>
+<h2 id="2-判断-v-是否为-2-的某次方"><a href="#2-判断-v-是否为-2-的某次方" class="headerlink" title="2 判断 v 是否为 2 的某次方"></a>2 判断 v 是否为 2 的某次方</h2><p>两个思路</p>
+<ol>
+<li>若 v 为 2 的某次方，必表现为 100……0 的形式，那么用 while 循环从右至左判断，是否只有最后（最左）为 1 则是；</li>
+<li>若 v 为 2 的某次方，必在减 1 后，为 111……11 的形式，那么用相同位数的 111……11 与之异或，若最后得 0，则是；</li>
+</ol>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>CINTA 第一章下来，我想我还是更优先看看 CSAPP 或许更好些，不过其中部分内容真是有意思，从二进制的角度看待加、乘、除，别有一番风味。另外也庆幸不是学校的专业课，不然又是一门备考时令人头疼的科目力</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hslix.github.io">陆爻齐-LuYaoQi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hslix.github.io/posts/7f4d8767.html">http://hslix.github.io/posts/7f4d8767.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hslix.github.io" target="_blank">LuYaoQi's Blogs</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CINTA/">CINTA</a></div><div class="post-share"><div class="social-share" data-image="/img/index/CINTA.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/6682ef88.html" title="【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学"><img class="cover" src="/img/index/JLUTongZhi.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【JLU】 数据结构与算法上机题解思路分享-课程设计第三次和第四次上机 吉林大学</div></div><div class="info-2"><div class="info-item-1">前言首先，请务必自己尽全力尝试实现题目，直接看成品代码，思维就被拘束了，也很容易被查重。 这里只是思路解析的博客，代码仓库在 JLU_Data_Structures_Record 希望你能在这里找到你想要的:) 第三次上机 A 手撕BST分数 50作者 朱允刚单位 吉林大学对一棵初始为空的二叉查找树（Binary Search Tree, BST）进行若干插入或删除操作，请输出最后的二叉查找树。 bst.png 输入格式:输入第一行为一个整数 T，表示操作数目。随后 T 行，每行为Insert K（表示插入关键词为K的结点，若树中已有关键词为K的结点，则不插入）或Remove K（表示删除关键词为K的结点，若树中无关键词为K的结点，则不删除），其中K为整数。 T 不超过2×10^5，树高不超过10^4。 输出格式:输出经上述操作后得到的二叉查找树的中根序列和先根序列，序列中每个整数后一个空格，两个序列之间用空行间隔。 输入样例:16Insert 17Insert 31Insert 13Insert 11Insert 20Insert 35Insert 25Insert...</div></div></div></a><a class="pagination-related" href="/posts/9297ccf9.html" title="【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充"><img class="cover" src="/img/index/DataWhale_AI.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【Datawhale AI 夏令营】 机器学习 Task1 体验记录 思考 补充</div></div><div class="info-2"><div class="info-item-1">前言首先感谢 Datawhale 组织这个活动，让我有机会入门机器学习。 嘛，不过这个 Task1 只要跟着速通手册运行给定程序，再拿结果去提交，体验下过程而已，于我而言，更为宝贵的地方是后续的“加餐”，也就是分析题目，精读代码的部分 “加餐”小结分析题目赛题任务是：通过多个房屋历史电力消耗数据等信息，预测房屋对应电力的消耗。 这是所谓的“时间序列问题”，简单地说就是分析数据和预测趋势。 说起来，大一的课程设计也简单做过所谓的“酒吧销量预测”功能，当时是采用“线性回归”来着。 而要解决这样的问题，就大致有建立传统时间序列模型、机器学习模型、深度学习模型的方法。 这三种方法各有利弊，按适合处理数据集规模大小和预测能力升序，按解释性和计算资源降序。 分析代码先贴出代码好了 123456789101112131415161718192021# 1. 导入需要用到的相关库# 导入 pandas 库，用于数据处理和分析import pandas as pd# 导入 numpy 库，用于科学计算和多维数组操作import numpy as np# 2. 读取训练集和测试集# 使用...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/MagicGirl.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">陆爻齐-LuYaoQi</div><div class="author-info-description">d(`･∀･)b</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">345</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">42</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/HSLix"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">希望你我都能得偿所愿
+PS：相对流水账的文章只能在归档找得到</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E6%95%B4%E6%95%B0%E4%B8%8E%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-number">2.</span> <span class="toc-text">第一章 整数与二进制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="toc-number">2.1.</span> <span class="toc-text">1.1 二进制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">基本性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%80%83"><span class="toc-number">2.1.2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%B4%A8"><span class="toc-number">2.1.3.</span> <span class="toc-text">性质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%80%83-1"><span class="toc-number">2.1.4.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-number">2.1.5.</span> <span class="toc-text">位置计数法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95%E4%B8%8E%E4%B9%98%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">加法与乘法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A0%E6%B3%95"><span class="toc-number">2.2.1.</span> <span class="toc-text">加法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%80%83-2"><span class="toc-number">2.2.2.</span> <span class="toc-text">思考</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%98%E6%B3%95"><span class="toc-number">2.2.3.</span> <span class="toc-text">乘法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%A4%E6%B3%95"><span class="toc-number">2.3.</span> <span class="toc-text">除法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E7%90%86"><span class="toc-number">2.3.1.</span> <span class="toc-text">定理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E9%99%A4%E6%B3%95"><span class="toc-number">2.3.2.</span> <span class="toc-text">简单除法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E4%B9%A0%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">第一章 习题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%88%A4%E6%96%AD%E5%A5%87%E5%81%B6%E7%9A%84%E5%87%BD%E6%95%B0%EF%BC%8Cc%E8%AF%AD%E8%A8%80%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.</span> <span class="toc-text">1 判断奇偶的函数，c语言实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%88%A4%E6%96%AD-v-%E6%98%AF%E5%90%A6%E4%B8%BA-2-%E7%9A%84%E6%9F%90%E6%AC%A1%E6%96%B9"><span class="toc-number">3.2.</span> <span class="toc-text">2 判断 v 是否为 2 的某次方</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">4.</span> <span class="toc-text">小结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/9eaf2c3e.html" title="【Leetcode Daily】234回文链表"><img src="/img/index/leetcode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Leetcode Daily】234回文链表"/></a><div class="content"><a class="title" href="/posts/9eaf2c3e.html" title="【Leetcode Daily】234回文链表">【Leetcode Daily】234回文链表</a><time datetime="2026-01-09T02:22:11.000Z" title="发表于 2026-01-09 10:22:11">2026-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/62a47fe.html" title="【Leetcode Daily】2095删除链表的中间节点"><img src="/img/index/leetcode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Leetcode Daily】2095删除链表的中间节点"/></a><div class="content"><a class="title" href="/posts/62a47fe.html" title="【Leetcode Daily】2095删除链表的中间节点">【Leetcode Daily】2095删除链表的中间节点</a><time datetime="2026-01-09T02:11:32.000Z" title="发表于 2026-01-09 10:11:32">2026-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/f32dda65.html" title="【Leetcode Daily】876链表的中间结点"><img src="/img/index/leetcode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Leetcode Daily】876链表的中间结点"/></a><div class="content"><a class="title" href="/posts/f32dda65.html" title="【Leetcode Daily】876链表的中间结点">【Leetcode Daily】876链表的中间结点</a><time datetime="2026-01-09T02:06:49.000Z" title="发表于 2026-01-09 10:06:49">2026-01-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/9958b024.html" title="【Leetcode Daily】1721交换链表中的节点"><img src="/img/index/leetcode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Leetcode Daily】1721交换链表中的节点"/></a><div class="content"><a class="title" href="/posts/9958b024.html" title="【Leetcode Daily】1721交换链表中的节点">【Leetcode Daily】1721交换链表中的节点</a><time datetime="2026-01-07T23:57:29.000Z" title="发表于 2026-01-08 07:57:29">2026-01-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/12f06cc3.html" title="【Leetcode Daily】1339分裂二叉树的最大乘积"><img src="/img/index/leetcode.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="【Leetcode Daily】1339分裂二叉树的最大乘积"/></a><div class="content"><a class="title" href="/posts/12f06cc3.html" title="【Leetcode Daily】1339分裂二叉树的最大乘积">【Leetcode Daily】1339分裂二叉树的最大乘积</a><time datetime="2026-01-07T00:01:57.000Z" title="发表于 2026-01-07 08:01:57">2026-01-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2026 By 陆爻齐-LuYaoQi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.3.3</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="请尽情地深入我喵！" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div></body></html>
