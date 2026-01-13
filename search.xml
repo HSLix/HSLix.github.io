@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】328奇偶链表</title>
+      <link href="/posts/c0a1cf72.html"/>
+      <url>/posts/c0a1cf72.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/odd-even-linked-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个奇数和偶数轮流的链表，现在需要把这个链表重组，使得奇数都放前面，偶数放奇数后面。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/odd-even-linked-list/solutions/482737/qi-ou-lian-biao-by-leetcode-solution/">https://leetcode.cn/problems/odd-even-linked-list/solutions/482737/qi-ou-lian-biao-by-leetcode-solution/</a></p></blockquote></li><li><p>参考题解和官方的差不多，都是发现奇偶只要各用一个指针管理，由于奇偶交叉，所以让偶数指针指向奇数指针的下一个，让奇数指针指向偶数指针原来的下一个，以此类推即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">oddEvenList</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head <span class="keyword">or</span> <span class="keyword">not</span> head.<span class="built_in">next</span>:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line"></span><br><span class="line">        even_head = head.<span class="built_in">next</span></span><br><span class="line">        odd_cur = head</span><br><span class="line">        even_cur = head.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> odd_cur.<span class="built_in">next</span> <span class="keyword">or</span> <span class="keyword">not</span> even_cur:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            </span><br><span class="line">            odd_cur.<span class="built_in">next</span> = even_cur.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> odd_cur.<span class="built_in">next</span>:</span><br><span class="line">                odd_cur = odd_cur.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">            even_cur.<span class="built_in">next</span> = odd_cur.<span class="built_in">next</span></span><br><span class="line">            even_cur = even_cur.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        odd_cur.<span class="built_in">next</span> = even_head</span><br><span class="line">        <span class="keyword">return</span> head</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】3453分割正方形I</title>
+      <link href="/posts/d46390a8.html"/>
+      <url>/posts/d46390a8.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/separate-squares-i/description/?envType=daily-question&envId=2026-01-13">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维数组，代表一个二维坐标系上有很多矩阵，现在可以画一个横线，求这个横线能恰好平分上下的正方形面积的高度（y 值）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>没想到是二分答案，而且由于题目要求精度为 10^5 所以可以对于每个面积的计算乘 10**5 化为整数，然后从下往上，二分去逼近这个答案。<blockquote><p><a href="https://leetcode.cn/problems/separate-squares-i/solutions/3076424/zheng-shu-er-fen-pythonjavacgo-by-endles-8yn5/?envType=daily-question&envId=2026-01-13">https://leetcode.cn/problems/separate-squares-i/solutions/3076424/zheng-shu-er-fen-pythonjavacgo-by-endles-8yn5/?envType=daily-question&amp;envId=2026-01-13</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">separateSquares</span>(<span class="params">self, squares: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">float</span>:</span><br><span class="line">        M = <span class="number">100_000</span></span><br><span class="line">        total_area = <span class="built_in">sum</span>(l*l <span class="keyword">for</span> _, _, l <span class="keyword">in</span> squares)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">multi_y: <span class="built_in">int</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">            area = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> _, y, l <span class="keyword">in</span> squares:</span><br><span class="line">                <span class="keyword">if</span> y * M &lt; multi_y:</span><br><span class="line">                    area += l * <span class="built_in">min</span>(multi_y -  y * M, l * M)</span><br><span class="line">            <span class="keyword">return</span> area * <span class="number">2</span> &gt;= total_area * M </span><br><span class="line">        </span><br><span class="line">        max_y = <span class="built_in">max</span>(y+l <span class="keyword">for</span> _,y, l <span class="keyword">in</span> squares)</span><br><span class="line">        <span class="keyword">return</span> bisect_left(<span class="built_in">range</span>(max_y*M), <span class="literal">True</span>, key=check) / M</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】142环形链表II</title>
       <link href="/posts/b1157370.html"/>
       <url>/posts/b1157370.html</url>
