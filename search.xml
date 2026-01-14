@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】86分隔链表</title>
+      <link href="/posts/9ef2e842.html"/>
+      <url>/posts/9ef2e842.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/partition-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表和一个定值 x，现在需要把链表中小于 x 的节点集中到前面，大于 x 的节点集中到后面，同时保持原有顺序。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/partition-list/solutions/543768/fen-ge-lian-biao-by-leetcode-solution-7ade/">https://leetcode.cn/problems/partition-list/solutions/543768/fen-ge-lian-biao-by-leetcode-solution-7ade/</a></p></blockquote></li><li><p>不过这次的参考题解和官方的思路一样，都是构建两个子链表，一个存小的，一个存大的，最后小的再连上大的就行了。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">partition</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode], x: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> head:</span><br><span class="line">            <span class="keyword">return</span> head</span><br><span class="line"></span><br><span class="line">        less_x = ListNode(<span class="number">0</span>, <span class="literal">None</span>)</span><br><span class="line">        more_x = ListNode(<span class="number">0</span>, <span class="literal">None</span>)</span><br><span class="line"></span><br><span class="line">        less_cur = less_x</span><br><span class="line">        more_cur = more_x</span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            <span class="keyword">if</span> cur.val &gt;= x:</span><br><span class="line">                more_cur.<span class="built_in">next</span> = cur</span><br><span class="line">                more_cur = more_cur.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                less_cur.<span class="built_in">next</span> = cur</span><br><span class="line">                less_cur = less_cur.<span class="built_in">next</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        more_cur.<span class="built_in">next</span> = <span class="literal">None</span></span><br><span class="line">        less_cur.<span class="built_in">next</span> = more_x.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> less_x.<span class="built_in">next</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】328奇偶链表</title>
       <link href="/posts/c0a1cf72.html"/>
       <url>/posts/c0a1cf72.html</url>
@@ -49,7 +76,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 链表 </tag>
+            <tag> 二分 </tag>
             
         </tags>
       
