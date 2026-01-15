@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2943最大化网络图中正方形空洞的面积</title>
+      <link href="/posts/99ee3437.html"/>
+      <url>/posts/99ee3437.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximize-area-of-square-hole-in-grid/description/?envType=daily-question&envId=2026-01-15">题目链接</a>。</p></li><li><p>简单地说，给一个矩形，这个矩形已经被分割成了多个 1x1 正方形，又给了两个边集，现在只能从边集删边，求删边后矩形中能有的面积最大的正方形。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>正如灵神所说，这题最难的是读题。陆爻齐一开始理解成了只有边集的边才会成立，后面发现前面又说更开始都是 1x1 正方形矛盾而疑惑。但其实，边集和矩形中有多少边没关系，边集只限制了能删的边。所以求出两个方向中，最多连续可删的边的较小值平方就是本题答案。<blockquote><p><a href="https://leetcode.cn/problems/maximize-area-of-square-hole-in-grid/solutions/2542812/heng-shu-fen-bie-tong-ji-fen-zu-xun-huan-nboj/?envType=daily-question&envId=2026-01-15">https://leetcode.cn/problems/maximize-area-of-square-hole-in-grid/solutions/2542812/heng-shu-fen-bie-tong-ji-fen-zu-xun-huan-nboj/?envType=daily-question&amp;envId=2026-01-15</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="comment"># 返回 a 排序后的最长连续递增子数组的长度</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">self, a: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        a.sort()</span><br><span class="line">        mx = cnt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, x <span class="keyword">in</span> <span class="built_in">enumerate</span>(a):</span><br><span class="line">            <span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span> x == a[i - <span class="number">1</span>] + <span class="number">1</span>:</span><br><span class="line">                cnt += <span class="number">1</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cnt = <span class="number">1</span>  <span class="comment"># 重新计数</span></span><br><span class="line">            mx = <span class="built_in">max</span>(mx, cnt)</span><br><span class="line">        <span class="keyword">return</span> mx</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximizeSquareHoleArea</span>(<span class="params">self, n: <span class="built_in">int</span>, m: <span class="built_in">int</span>, hBars: <span class="type">List</span>[<span class="built_in">int</span>], vBars: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        side = <span class="built_in">min</span>(<span class="variable language_">self</span>.f(hBars), <span class="variable language_">self</span>.f(vBars)) + <span class="number">1</span></span><br><span class="line">        <span class="keyword">return</span> side * side</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 贪心 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】160相交链表</title>
+      <link href="/posts/1bcad32a.html"/>
+      <url>/posts/1bcad32a.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/intersection-of-two-linked-lists/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个链表头，判断这两个链表是否相交。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>利用了如果链表相交，那么两个链表走到头后，互换位置再一起走，一定能走到相交位置（如果有的话）<blockquote><p><a href="https://leetcode.cn/problems/intersection-of-two-linked-lists/solutions/2958778/tu-jie-yi-zhang-tu-miao-dong-xiang-jiao-m6tg1/">https://leetcode.cn/problems/intersection-of-two-linked-lists/solutions/2958778/tu-jie-yi-zhang-tu-miao-dong-xiang-jiao-m6tg1/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, x):</span></span><br><span class="line"><span class="comment">#         self.val = x</span></span><br><span class="line"><span class="comment">#         self.next = None</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">getIntersectionNode</span>(<span class="params">self, headA: ListNode, headB: ListNode</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        p, q = headA, headB</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">not</span> p == q:</span><br><span class="line">            p = p.<span class="built_in">next</span> <span class="keyword">if</span> p <span class="keyword">else</span> headB</span><br><span class="line">            q = q.<span class="built_in">next</span> <span class="keyword">if</span> q <span class="keyword">else</span> headA</span><br><span class="line">        <span class="keyword">return</span> p</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】86分隔链表</title>
       <link href="/posts/9ef2e842.html"/>
       <url>/posts/9ef2e842.html</url>
