@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2975移除栅栏得到的正方形田地的最大面积</title>
+      <link href="/posts/28aed427.html"/>
+      <url>/posts/28aed427.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/maximum-square-area-by-removing-fences-from-a-field/description/?envType=daily-question&envId=2026-01-16">题目链接</a>。</p></li><li><p>简单地说，就是给一个矩形和栅栏坐标，可以删除其中的一些栅栏，求其中最大的正方形面积（没有正方形就 -1）</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>找到横纵所有栅栏的间隔，找到两边的交集最大值，平方就是正方形面积<blockquote><p><a href="https://leetcode.cn/problems/maximum-square-area-by-removing-fences-from-a-field/solutions/2577867/fen-bie-ji-suan-bao-li-mei-ju-by-endless-zxhr/?envType=daily-question&envId=2026-01-16">https://leetcode.cn/problems/maximum-square-area-by-removing-fences-from-a-field/solutions/2577867/fen-bie-ji-suan-bao-li-mei-ju-by-endless-zxhr/?envType=daily-question&amp;envId=2026-01-16</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">self, a:<span class="type">List</span>[<span class="built_in">int</span>], mx:<span class="built_in">int</span></span>) -&gt; <span class="type">Set</span>[<span class="built_in">int</span>]:</span><br><span class="line">        a += [<span class="number">1</span>, mx]</span><br><span class="line">        a.sort()</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">set</span>(y-x <span class="keyword">for</span> x, y <span class="keyword">in</span> combinations(a, <span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">maximizeSquareArea</span>(<span class="params">self, m: <span class="built_in">int</span>, n: <span class="built_in">int</span>, hFences: <span class="type">List</span>[<span class="built_in">int</span>], vFences: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        MOD = <span class="number">1_000_000_007</span></span><br><span class="line">        h, v = <span class="variable language_">self</span>.f(hFences, m), <span class="variable language_">self</span>.f(vFences, n)</span><br><span class="line">        ans = <span class="built_in">max</span>(h &amp; v, default=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> (ans * ans) % MOD <span class="keyword">if</span> ans &gt; <span class="number">0</span> <span class="keyword">else</span> -<span class="number">1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】2两数相加</title>
+      <link href="/posts/675015.html"/>
+      <url>/posts/675015.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/add-two-numbers/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个链表，分别代表两个数字，每个节点就是一位数字，现在要把这两个数字加起来，给一个新的数字，用链表表示。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>重点是了解到如果进位，需要建一个新的位来存储，而且两个数字是可能不相同位的，只要知道这两点，此题就剩下把数字加起来建新点。<blockquote><p><a href="https://leetcode.cn/problems/add-two-numbers/solutions/2327008/dong-hua-jian-ji-xie-fa-cong-di-gui-dao-oe0di/">https://leetcode.cn/problems/add-two-numbers/solutions/2327008/dong-hua-jian-ji-xie-fa-cong-di-gui-dao-oe0di/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode], carry:<span class="built_in">int</span>=<span class="number">0</span></span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> l1 <span class="keyword">and</span> <span class="keyword">not</span> l2 <span class="keyword">and</span> carry == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        cur = carry</span><br><span class="line">        <span class="keyword">if</span> l1:</span><br><span class="line">            cur += l1.val</span><br><span class="line">            l1 = l1.<span class="built_in">next</span></span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> l2:</span><br><span class="line">            cur += l2.val</span><br><span class="line">            l2 = l2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ListNode(cur % <span class="number">10</span>, <span class="variable language_">self</span>.addTwoNumbers(l1, l2, cur // <span class="number">10</span>))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2943最大化网络图中正方形空洞的面积</title>
       <link href="/posts/99ee3437.html"/>
       <url>/posts/99ee3437.html</url>
