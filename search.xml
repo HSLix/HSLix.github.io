@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】3047求交集区域内的最大正方形面积</title>
+      <link href="/posts/67f366c0.html"/>
+      <url>/posts/67f366c0.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/find-the-largest-area-of-square-inside-two-rectangles/description/?envType=daily-question&envId=2026-01-17">题目链接</a>。</p></li><li><p>简单地说，就是给一个二维坐标系和一堆矩形的左下角和右上角坐标，现在求一个最大的正方形面积，这个正方形必须在两个矩形的交集区域。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>只要通过枚举，找到每个矩形与其它矩形的交集，这些交集必然是矩形，只要找到这个矩形的最小边（包括 0），求平方的最大值，就是答案了。<blockquote><p><a href="https://leetcode.cn/problems/find-the-largest-area-of-square-inside-two-rectangles/solutions/2653554/jian-ji-xie-fa-wu-xu-fen-lei-tao-lun-pyt-b7yq/?envType=daily-question&envId=2026-01-17">https://leetcode.cn/problems/find-the-largest-area-of-square-inside-two-rectangles/solutions/2653554/jian-ji-xie-fa-wu-xu-fen-lei-tao-lun-pyt-b7yq/?envType=daily-question&amp;envId=2026-01-17</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">largestSquareArea</span>(<span class="params">self, bottomLeft: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]], topRight: <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        max_side = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> i, ((lx, ly), (rx, ry)) <span class="keyword">in</span> <span class="built_in">enumerate</span>(<span class="built_in">zip</span>(bottomLeft, topRight)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i):</span><br><span class="line">                lx2, ly2 = bottomLeft[j]</span><br><span class="line">                rx2, ry2 = topRight[j]</span><br><span class="line"></span><br><span class="line">                width = <span class="built_in">min</span>(rx, rx2) - <span class="built_in">max</span>(lx, lx2)</span><br><span class="line">                height = <span class="built_in">min</span>(ry, ry2) - <span class="built_in">max</span>(ly, ly2)</span><br><span class="line"></span><br><span class="line">                side = <span class="built_in">min</span>(width, height)</span><br><span class="line">                max_side = <span class="built_in">max</span>(max_side, side)</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">return</span> max_side**<span class="number">2</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】445两数相加II</title>
+      <link href="/posts/42076e6d.html"/>
+      <url>/posts/42076e6d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/add-two-numbers-ii/description/">题目链接</a>。</p></li><li><p>简单地说，给两个链表代表数字，每个节点代表一位，求和，但是这次的链表头是大值位。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>灵神给的反转链表 + 复用 <a href="/posts/675015.html" title="【Leetcode Daily】2两数相加">【Leetcode Daily】2两数相加</a> 是最容易的，膜拜灵神。</p><blockquote><p><a href="https://leetcode.cn/problems/add-two-numbers-ii/solutions/2328330/fan-zhuan-lian-biao-liang-shu-xiang-jia-okw6q/">https://leetcode.cn/problems/add-two-numbers-ii/solutions/2328330/fan-zhuan-lian-biao-liang-shu-xiang-jia-okw6q/</a></p></blockquote></li><li><p>不过，题目有个附加要求：尝试不用反转链表来解决。那么解法就可以用栈（python 直接用 list 就行）记录每个位之和，然后再做进一步处理，最终根据处理好的值建新链表。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">addTwoNumbers</span>(<span class="params">self, l1: <span class="type">Optional</span>[ListNode], l2: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        l1_nums = []</span><br><span class="line">        l2_nums = []</span><br><span class="line">        <span class="keyword">while</span> l1 <span class="keyword">or</span> l2:</span><br><span class="line">            cur = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> l1:</span><br><span class="line">                l1_nums.append(l1.val)</span><br><span class="line">                l1 = l1.<span class="built_in">next</span></span><br><span class="line">            <span class="keyword">if</span> l2:</span><br><span class="line">                l2_nums.append(l2.val)</span><br><span class="line">                l2 = l2.<span class="built_in">next</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        nums = [<span class="number">0</span>] * <span class="built_in">max</span>(<span class="built_in">len</span>(l1_nums), <span class="built_in">len</span>(l2_nums))</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(nums)):</span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(l1_nums):</span><br><span class="line">                nums[-i-<span class="number">1</span>] += l1_nums[-i-<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">if</span> i &lt; <span class="built_in">len</span>(l2_nums):</span><br><span class="line">                nums[-i-<span class="number">1</span>] += l2_nums[-i-<span class="number">1</span>]</span><br><span class="line">            </span><br><span class="line">        pre = <span class="literal">None</span></span><br><span class="line">        last_add = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span> num <span class="keyword">in</span> nums[::-<span class="number">1</span>]:</span><br><span class="line">            <span class="keyword">if</span> last_add &gt; <span class="number">0</span>:</span><br><span class="line">                num += <span class="number">1</span></span><br><span class="line">                last_add = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> num &gt;= <span class="number">10</span>:</span><br><span class="line">                last_add = <span class="number">1</span></span><br><span class="line">                num -= <span class="number">10</span></span><br><span class="line"></span><br><span class="line">            pre = ListNode(num, pre)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> last_add &gt; <span class="number">0</span>:</span><br><span class="line">            pre = ListNode(<span class="number">1</span>, pre)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> pre</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2975移除栅栏得到的正方形田地的最大面积</title>
       <link href="/posts/28aed427.html"/>
       <url>/posts/28aed427.html</url>
@@ -22,7 +76,7 @@
             
             <tag> Algorithm </tag>
             
-            <tag> 链表 </tag>
+            <tag> 数学 </tag>
             
         </tags>
       
