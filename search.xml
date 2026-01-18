@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2816翻倍以链表形式表示的数字</title>
+      <link href="/posts/597808f7.html"/>
+      <url>/posts/597808f7.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/double-a-number-represented-as-a-linked-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，从头到尾就是从大到小表示一个数字的位，现在要把这个数字乘 2，求最终的数字链表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>本题通过 <a href="/posts/f140f9f8.html" title="【Leetcode Daily】206反转链表">【Leetcode Daily】206反转链表</a> 和 <a href="/posts/675015.html" title="【Leetcode Daily】2两数相加">【Leetcode Daily】2两数相加</a> 就能轻松解决，无需赘述。<blockquote><p><a href="https://leetcode.cn/problems/double-a-number-represented-as-a-linked-list/solutions/2385962/o1-kong-jian-zuo-fa-kan-cheng-shi-head-y-1dco/">https://leetcode.cn/problems/double-a-number-represented-as-a-linked-list/solutions/2385962/o1-kong-jian-zuo-fa-kan-cheng-shi-head-y-1dco/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverseList</span>(<span class="params">self, head</span>):</span><br><span class="line">        pre = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            nxt = head.<span class="built_in">next</span></span><br><span class="line">            head.<span class="built_in">next</span> = pre</span><br><span class="line">            pre = head</span><br><span class="line">            head = nxt</span><br><span class="line">        <span class="keyword">return</span> pre</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">doubleIt</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">Optional</span>[ListNode]:</span><br><span class="line">        head = <span class="variable language_">self</span>.reverseList(head)</span><br><span class="line">        cur = head</span><br><span class="line">        add_nxt = <span class="number">0</span></span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            cur.val *= <span class="number">2</span></span><br><span class="line">            cur.val += add_nxt</span><br><span class="line">            add_nxt = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> cur.val &gt;= <span class="number">10</span>:</span><br><span class="line">                add_nxt = <span class="number">1</span></span><br><span class="line">                cur.val -= <span class="number">10</span></span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> cur.<span class="built_in">next</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            cur = cur.<span class="built_in">next</span></span><br><span class="line">            </span><br><span class="line">        <span class="keyword">if</span> add_nxt &gt; <span class="number">0</span>:</span><br><span class="line">            cur.<span class="built_in">next</span> = ListNode(<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.reverseList(head)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】3047求交集区域内的最大正方形面积</title>
       <link href="/posts/67f366c0.html"/>
       <url>/posts/67f366c0.html</url>
