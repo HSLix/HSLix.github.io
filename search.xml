@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1019链表中的下一个更大的节点</title>
+      <link href="/posts/548c9b0c.html"/>
+      <url>/posts/548c9b0c.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/next-greater-node-in-linked-list/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个链表，现在对于每个节点，要找下一个比它更大的节点的值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>两个关键点：1. 是严格更大，相同不算；2. 根据评论区所言，如果感到不知所措，就可以尝试转成数组来思考。</p></li><li><p>本题可以通过倒序遍历+单调栈来解决，单调栈存储每个节点的下一个更大的值（没有就用 0），倒序遍历就是单调栈，让遍历每一个值的时候，可以 O(1) 判断其右侧还有没的更大值。</p><blockquote><p><a href="https://leetcode.cn/problems/next-greater-node-in-linked-list/solutions/2217563/tu-jie-dan-diao-zhan-liang-chong-fang-fa-v9ab/">https://leetcode.cn/problems/next-greater-node-in-linked-list/solutions/2217563/tu-jie-dan-diao-zhan-liang-chong-fang-fa-v9ab/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">reverse</span>(<span class="params">self, head</span>):</span><br><span class="line">        pre = <span class="literal">None</span></span><br><span class="line">        cur = head</span><br><span class="line">        <span class="keyword">while</span> cur:</span><br><span class="line">            nxt = cur.<span class="built_in">next</span></span><br><span class="line">            cur.<span class="built_in">next</span> = pre</span><br><span class="line">            pre = cur</span><br><span class="line">            cur = nxt</span><br><span class="line">        <span class="keyword">return</span> pre</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">nextLargerNodes</span>(<span class="params">self, head: <span class="type">Optional</span>[ListNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        head = <span class="variable language_">self</span>.reverse(head)</span><br><span class="line">        ans = []</span><br><span class="line">        st = []</span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            <span class="keyword">while</span> st <span class="keyword">and</span> st[-<span class="number">1</span>] &lt;= head.val:</span><br><span class="line">                st.pop()</span><br><span class="line">            ans.append(st[-<span class="number">1</span>] <span class="keyword">if</span> st <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line">            st.append(head.val)</span><br><span class="line">            head = head.<span class="built_in">next</span></span><br><span class="line">        <span class="keyword">return</span> ans[::-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 链表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2816翻倍以链表形式表示的数字</title>
       <link href="/posts/597808f7.html"/>
       <url>/posts/597808f7.html</url>
