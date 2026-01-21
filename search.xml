@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】671二叉树中第二小的节点</title>
+      <link href="/posts/f3716b07.html"/>
+      <url>/posts/f3716b07.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/second-minimum-node-in-a-binary-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，规定其中的每个节点值，满足一个节点如果有两个子节点，那么这个值就是子节点的最小值，且除叶子节点以外节点均有两个子节点。求整个二叉树的第二小的值。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>一开始突然觉得 bfs 会不会表现更好，遇到比答案更大节点就返回会不会更快。但是这个思维忽略了更小的节点可能藏在更深的层次的情况，所以最终还是要遍历整个二叉树。</p></li><li><p>那么怎么记录这个第二小的值呢？一开始想的是堆，python 默认小顶堆，直接管上。但其实不必要，毕竟最终就要一个值，所以其实只要维护一个大于根节点中的最小值即可。</p></li><li><p>这位灵茶山土地的答案挺不错。</p><blockquote><p><a href="https://leetcode.cn/problems/second-minimum-node-in-a-binary-tree/solutions/3645006/ling-shen-ke-hou-qian-xu-bian-li-by-zhi-oc3tc/">https://leetcode.cn/problems/second-minimum-node-in-a-binary-tree/solutions/3645006/ling-shen-ke-hou-qian-xu-bian-li-by-zhi-oc3tc/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findSecondMinimumValue</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        min_num = root.val</span><br><span class="line">        ans = inf</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root: <span class="type">Optional</span>[TreeNode]</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">if</span> root.val &gt; min_num:</span><br><span class="line">                <span class="keyword">nonlocal</span> ans</span><br><span class="line">                ans = ans <span class="keyword">if</span> ans &lt;= root.val <span class="keyword">else</span> root.val</span><br><span class="line">            dfs(root.left)</span><br><span class="line">            dfs(root.right)</span><br><span class="line">        dfs(root)</span><br><span class="line">        <span class="keyword">return</span> ans <span class="keyword">if</span> ans &lt; inf <span class="keyword">else</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># min_num = root.val</span></span><br><span class="line">        <span class="comment"># ans_heap = []</span></span><br><span class="line">        <span class="comment"># heapq.heapify(ans_heap)</span></span><br><span class="line">        <span class="comment"># def dfs(root: Optional[TreeNode]):</span></span><br><span class="line">        <span class="comment">#     if not root:</span></span><br><span class="line">        <span class="comment">#         return</span></span><br><span class="line">        <span class="comment">#     if root.val &gt; min_num:</span></span><br><span class="line">        <span class="comment">#         nonlocal ans_heap</span></span><br><span class="line">        <span class="comment">#         heappush(ans_heap, root.val)</span></span><br><span class="line">        <span class="comment">#     dfs(root.left)</span></span><br><span class="line">        <span class="comment">#     dfs(root.right)</span></span><br><span class="line">        <span class="comment"># dfs(root)</span></span><br><span class="line">        <span class="comment"># return ans_heap[0] if len(ans_heap) &gt; 0 else -1</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】404左叶子之和</title>
+      <link href="/posts/1881ec65.html"/>
+      <url>/posts/1881ec65.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/sum-of-left-leaves/description/">题目链接</a>。</p></li><li><p>简单地说，就是统计二叉树中所有处于左边的叶子节点数值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>dfs，然后只计算当左节点没有下一个左右节点的和即可。<blockquote><p><a href="https://leetcode.cn/problems/sum-of-left-leaves/solutions/3751068/jian-dan-ti-jian-dan-zuo-pythonjavaccgoj-w8st/">https://leetcode.cn/problems/sum-of-left-leaves/solutions/3751068/jian-dan-ti-jian-dan-zuo-pythonjavaccgoj-w8st/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumOfLeftLeaves</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root</span>)-&gt;<span class="built_in">int</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            left = root.left</span><br><span class="line">            ans = <span class="number">0</span></span><br><span class="line">            <span class="keyword">if</span> left <span class="keyword">and</span> <span class="keyword">not</span> left.left <span class="keyword">and</span> <span class="keyword">not</span> left.right:</span><br><span class="line">                ans += left.val</span><br><span class="line">            ans += dfs(root.left) + dfs(root.right)</span><br><span class="line">            <span class="keyword">return</span> ans</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dfs(root)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】LCP44开幕式焰火</title>
       <link href="/posts/a1ce21d4.html"/>
       <url>/posts/a1ce21d4.html</url>
