@@ -4,6 +4,114 @@
   
     
     <entry>
+      <title>【Leetcode Daily】988从叶结点开始的最小字符串</title>
+      <link href="/posts/b28c814d.html"/>
+      <url>/posts/b28c814d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/smallest-string-starting-from-leaf/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，找从叶节点到根节点形成的字符串中，字典序最小的那个。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/smallest-string-starting-from-leaf/solutions/3603/cong-xie-jie-dian-kai-shi-de-zui-xiao-zi-fu-chuan-/">https://leetcode.cn/problems/smallest-string-starting-from-leaf/solutions/3603/cong-xie-jie-dian-kai-shi-de-zui-xiao-zi-fu-chuan-/</a></p></blockquote></li><li><p>本题难在字典序的判断，真正的规则是，优先判断字母的大小是否满足，只要前面的某个字母小，就是字典序小。如果前面的字母都相同，就取长度更小的。只要明白了这一点，剩下就是 dfs 遍历然后搜集字符串比较的过程。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">compare</span>(<span class="params">self, s1:<span class="built_in">str</span>, s2:<span class="built_in">str</span></span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">for</span> x, y <span class="keyword">in</span> <span class="built_in">zip</span>(s1, s2):</span><br><span class="line">            <span class="keyword">if</span> x &lt; y:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">            <span class="keyword">elif</span> x &gt; y:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">len</span>(s1) &lt; <span class="built_in">len</span>(s2)</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">smallestFromLeaf</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        ans = <span class="string">&quot;z&quot;</span>*<span class="number">8501</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root:<span class="type">Optional</span>[TreeNode], prefix:<span class="built_in">str</span></span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            cur_str = prefix + <span class="built_in">chr</span>(root.val + <span class="built_in">ord</span>(<span class="string">&#x27;a&#x27;</span>))</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right:</span><br><span class="line">                <span class="keyword">nonlocal</span> ans</span><br><span class="line">                <span class="comment"># print(cur_str, len(cur_str), len(ans), cur_str &lt; ans)</span></span><br><span class="line">                tmp = cur_str[::-<span class="number">1</span>]</span><br><span class="line">                <span class="comment"># print(tmp)</span></span><br><span class="line">                <span class="keyword">if</span> <span class="variable language_">self</span>.compare(tmp, ans):</span><br><span class="line">                    ans = tmp</span><br><span class="line">            dfs(root.left, cur_str)</span><br><span class="line">            dfs(root.right, cur_str)</span><br><span class="line">        dfs(root, <span class="string">&quot;&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1315祖父节点值为偶数的节点和</title>
+      <link href="/posts/228b171f.html"/>
+      <url>/posts/228b171f.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/sum-of-nodes-with-even-valued-grandparent/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，找到其中所有祖父节点为偶数的节点，求这些节点值和。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/sum-of-nodes-with-even-valued-grandparent/solutions/101301/zu-fu-jie-dian-zhi-wei-ou-shu-de-jie-dian-he-by-2/">https://leetcode.cn/problems/sum-of-nodes-with-even-valued-grandparent/solutions/101301/zu-fu-jie-dian-zhi-wei-ou-shu-de-jie-dian-he-by-2/</a></p></blockquote></li><li><p>判断祖父节点，所谓的难点和链表类似，不能像数组一样随心所欲地倒回去看看是否是偶数。这里的参考题解采用的是递归中通过参数传入父节点和祖父节点的值，中间传递的时候也更新这些值。</p></li><li><p>看到还有另一种思路，是找到值为偶数的节点后，再向下找孙子节点的值加上来，这个方法也不错。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sumEvenGrandparent</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], parent:<span class="built_in">int</span>=<span class="number">1</span>, grand_parent:<span class="built_in">int</span>=<span class="number">1</span></span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="comment"># print(root.val, parent, grand_parent)</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.sumEvenGrandparent(root.left, root.val, parent) + <span class="variable language_">self</span>.sumEvenGrandparent(root.right, root.val, parent) + (root.val <span class="keyword">if</span> grand_parent % <span class="number">2</span> == <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1448统计二叉树中好节点的数目</title>
+      <link href="/posts/ed383903.html"/>
+      <url>/posts/ed383903.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-good-nodes-in-binary-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是规定，一个二叉树节点，如果根节点到这个节点的路上没有比节点值更大的点，那么这个点就是好节点，求好节点数目。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>直接 dfs，路上记录当前遍历到的最大值，比较当前节点的值是否大于等于这个值，如果是，那就是好节点。</p></li><li><p>灵神采用递归方式，先递归下去，带上当前遍历最大值，最后返回值时再结算当前是否是好节点。</p><blockquote><p><a href="https://leetcode.cn/problems/count-good-nodes-in-binary-tree/solutions/2403677/jian-ji-xie-fa-pythonjavacgojs-by-endles-gwxt/">https://leetcode.cn/problems/count-good-nodes-in-binary-tree/solutions/2403677/jian-ji-xie-fa-pythonjavacgojs-by-endles-gwxt/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">goodNodes</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root: <span class="type">Optional</span>[TreeNode], cur_max: <span class="built_in">int</span></span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line">            <span class="keyword">if</span> root.val &gt;= cur_max:</span><br><span class="line">                <span class="keyword">nonlocal</span> ans</span><br><span class="line">                ans += <span class="number">1</span></span><br><span class="line">            cur_max = <span class="built_in">max</span>(cur_max, root.val)</span><br><span class="line">            dfs(root.left, cur_max)</span><br><span class="line">            dfs(root.right, cur_max)</span><br><span class="line">        dfs(root, root.val)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】199二叉树的右视图</title>
+      <link href="/posts/75ccc110.html"/>
+      <url>/posts/75ccc110.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/binary-tree-right-side-view/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，然后返回二叉树每层最右边的节点列表。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>灵神的思路很牛逼，采用递归的方法，每次递归检测当前递归深度是否达到答案的长度，如果是，说明这是本层第一次遍历，然后只要保证每层先往右遍历就能实现第一个就是最右边。</p><blockquote><p><a href="https://leetcode.cn/problems/binary-tree-right-side-view/solutions/2015061/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-r1nc/">https://leetcode.cn/problems/binary-tree-right-side-view/solutions/2015061/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-r1nc/</a></p></blockquote></li><li><p>不过灵神的方法没那么直观，参考题解采用层序遍历，直观地一层层节点，取第一个（也是保证先把右边的放进遍历列表）</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">rightSideView</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">List</span>[<span class="built_in">int</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> []</span><br><span class="line">        ans = []</span><br><span class="line">        visit = deque([root])</span><br><span class="line">        <span class="keyword">while</span> visit:</span><br><span class="line">            ans.append(visit[<span class="number">0</span>].val)</span><br><span class="line">            cnt_vis = <span class="built_in">len</span>(visit)</span><br><span class="line">            <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(cnt_vis):</span><br><span class="line">                cur = visit.popleft()</span><br><span class="line">                <span class="keyword">if</span> cur.right:</span><br><span class="line">                    visit.append(cur.right)</span><br><span class="line">                <span class="keyword">if</span> cur.left:</span><br><span class="line">                    visit.append(cur.left)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line">            </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】129求根节点到叶节点数字之和</title>
       <link href="/posts/c42848cf.html"/>
       <url>/posts/c42848cf.html</url>
