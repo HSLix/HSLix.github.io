@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】100相同的树</title>
+      <link href="/posts/849b0a3d.html"/>
+      <url>/posts/849b0a3d.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/same-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是给两个二叉树，判断这两个树是否相同（节点上的值和结构）。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>和 <a href="/posts/a78174e4.html" title="【Leetcode Daily】965单值二叉树">【Leetcode Daily】965单值二叉树</a> 差不多，判断两个二叉树是否相同，就是看两个节点值是否相同，节点左子树和右子树是否相同，不断递归下去。<blockquote><p><a href="https://leetcode.cn/problems/same-tree/solutions/2015056/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-empk/">https://leetcode.cn/problems/same-tree/solutions/2015056/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-empk/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSameTree</span>(<span class="params">self, p: <span class="type">Optional</span>[TreeNode], q: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> p <span class="keyword">or</span> <span class="keyword">not</span> q:</span><br><span class="line">            <span class="keyword">return</span> p <span class="keyword">is</span> q <span class="comment"># 两个都空才 true</span></span><br><span class="line">        <span class="keyword">return</span> p.val == q.val <span class="keyword">and</span> <span class="variable language_">self</span>.isSameTree(p.left, q.left) <span class="keyword">and</span> <span class="variable language_">self</span>.isSameTree(p.right, q.right)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】965单值二叉树</title>
+      <link href="/posts/a78174e4.html"/>
+      <url>/posts/a78174e4.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/univalued-binary-tree/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，判断其中的节点的值是否相同</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼。</p><blockquote><p><a href="https://leetcode.cn/problems/univalued-binary-tree/solutions/1512258/dan-zhi-er-cha-shu-by-leetcode-solution-15bn/">https://leetcode.cn/problems/univalued-binary-tree/solutions/1512258/dan-zhi-er-cha-shu-by-leetcode-solution-15bn/</a></p></blockquote></li><li><p>灵神有一句话说得特别好，大致意思是不要在一开始就拘泥于细节，就比如在二叉树的相关题目，开始先考虑节点本身与左子树和右子树的关系就好。</p></li><li><p>那本题来讲，本题要判断整个二叉树是否值都相等，那么如果一个二叉树满足这个条件，那么每个节点都与其左子树和右子树的值都相等，只要在这个基础上，处理好叶子节点和空即可。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isUnivalTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        ans = <span class="literal">True</span></span><br><span class="line">        <span class="keyword">if</span> root.left:</span><br><span class="line">            ans = ans <span class="keyword">and</span> root.val == root.left.val</span><br><span class="line">        <span class="keyword">if</span> root.right:</span><br><span class="line">            ans = ans <span class="keyword">and</span> root.val == root.right.val</span><br><span class="line">        <span class="keyword">return</span> ans <span class="keyword">and</span> <span class="variable language_">self</span>.isUnivalTree(root.left) <span class="keyword">and</span> <span class="variable language_">self</span>.isUnivalTree(root.right)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】1022从根到叶的二进制数之和</title>
       <link href="/posts/c50ef84d.html"/>
       <url>/posts/c50ef84d.html</url>
