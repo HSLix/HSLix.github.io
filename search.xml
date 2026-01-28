@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】951翻转等价二叉树</title>
+      <link href="/posts/15510d3e.html"/>
+      <url>/posts/15510d3e.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/flip-equivalent-binary-trees/description/">题目链接</a>。</p></li><li><p>简单地说，就是判断两个二叉树，对其中一个二叉树做任意次对任意节点的翻转操作，能否使两个二叉树相同。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>就一个节点而言，判断两个二叉树的这个点是否符合要求，只要这两个点的数值相同，且一个点的左子树与另一个点的左右子树相同，右子树则与剩下的那个相同即可。<blockquote><p><a href="https://leetcode.cn/problems/flip-equivalent-binary-trees/solutions/3852988/ling-shen-mei-xie-de-ti-jie-wo-lai-bu-sh-uw60/">https://leetcode.cn/problems/flip-equivalent-binary-trees/solutions/3852988/ling-shen-mei-xie-de-ti-jie-wo-lai-bu-sh-uw60/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">flipEquiv</span>(<span class="params">self, root1: <span class="type">Optional</span>[TreeNode], root2: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root1 <span class="keyword">or</span> <span class="keyword">not</span> root2:</span><br><span class="line">            <span class="keyword">return</span> root1 <span class="keyword">is</span> root2 </span><br><span class="line">        <span class="keyword">return</span> root1.val == root2.val <span class="keyword">and</span> ((<span class="variable language_">self</span>.flipEquiv(root1.left, root2.right) <span class="keyword">and</span> <span class="variable language_">self</span>.flipEquiv(root1.right, root2.left)) <span class="keyword">or</span> (<span class="variable language_">self</span>.flipEquiv(root1.left, root2.left) <span class="keyword">and</span> <span class="variable language_">self</span>.flipEquiv(root1.right, root2.right)))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】101对称二叉树</title>
+      <link href="/posts/9fbb8b59.html"/>
+      <url>/posts/9fbb8b59.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/symmetric-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是判断一个二叉树是否轴对称。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>通过递归，可以轻松判断两个二叉树是否相同，判断是否轴对称只要转换成判断二叉树根节点的左右子树是否结构相同，值则是左对右，右对左即可。<blockquote><p><a href="https://leetcode.cn/problems/symmetric-tree/solutions/2015063/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-6dq5/">https://leetcode.cn/problems/symmetric-tree/solutions/2015063/ru-he-ling-huo-yun-yong-di-gui-lai-kan-s-6dq5/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSame</span>(<span class="params">self, p: <span class="type">Optional</span>[TreeNode], q: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> p <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">or</span> q <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> p <span class="keyword">is</span> q</span><br><span class="line">        <span class="keyword">return</span> p.val == q.val <span class="keyword">and</span> <span class="variable language_">self</span>.isSame(p.left, q.right) <span class="keyword">and</span> <span class="variable language_">self</span>.isSame(p.right, q.left) </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">isSymmetric</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> root <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.isSame(root.left, root.right)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】100相同的树</title>
       <link href="/posts/849b0a3d.html"/>
       <url>/posts/849b0a3d.html</url>
