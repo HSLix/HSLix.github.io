@@ -4,6 +4,60 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2333计算布尔二叉树的值</title>
+      <link href="/posts/b2429205.html"/>
+      <url>/posts/b2429205.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/evaluate-boolean-binary-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是把二叉树叶子节点值映射 true 和 false，非叶子节点则映射成 or 或者 and，求最终整个二叉树的结果。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>就自底向上的递归即可，灵神的解法更精妙，对于叶子节点的判断是子树是否有空，毕竟题目规定节点要么 0 要么 2 节点。<blockquote><p><a href="https://leetcode.cn/problems/evaluate-boolean-binary-tree/">https://leetcode.cn/problems/evaluate-boolean-binary-tree/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">evaluateTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">bool</span>:</span><br><span class="line">        <span class="keyword">if</span> root.val == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">        <span class="keyword">elif</span> root.val == <span class="number">1</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">elif</span> root.val == <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.evaluateTree(root.left) <span class="keyword">or</span> <span class="variable language_">self</span>.evaluateTree(root.right)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="variable language_">self</span>.evaluateTree(root.left) <span class="keyword">and</span> <span class="variable language_">self</span>.evaluateTree(root.right)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】617合并二叉树</title>
+      <link href="/posts/90aae667.html"/>
+      <url>/posts/90aae667.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/merge-two-binary-trees/description/">题目链接</a>。</p></li><li><p>简单地说，就是把两个二叉树合并，都有的节点数值合并，不为 null 的节点直接作为新二叉树的节点。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/merge-two-binary-trees/solutions/424201/he-bing-er-cha-shu-by-leetcode-solution/">https://leetcode.cn/problems/merge-two-binary-trees/solutions/424201/he-bing-er-cha-shu-by-leetcode-solution/</a></p></blockquote></li><li><p>这边的思考过程是：1. 不要拘泥于细节，所以关注二叉树本身节点和左右子树；2. 对于两边都 null，那返回 null；3. 对于一边 null，就直接返回另一边，因为剩下的也不会有另一个点，所以不需要再递归；4. 如果两边都有点，那么需要新建点</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">mergeTrees</span>(<span class="params">self, root1: <span class="type">Optional</span>[TreeNode], root2: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root1 <span class="keyword">and</span> <span class="keyword">not</span> root2:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span> </span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root2:</span><br><span class="line">            <span class="keyword">return</span> root1</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root1:</span><br><span class="line">            <span class="keyword">return</span> root2</span><br><span class="line">        <span class="keyword">return</span> TreeNode(root1.val+root2.val, <span class="variable language_">self</span>.mergeTrees(root1.left, root2.left), <span class="variable language_">self</span>.mergeTrees(root1.right, root2.right))</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】110平衡二叉树</title>
       <link href="/posts/40177f93.html"/>
       <url>/posts/40177f93.html</url>
