@@ -4,6 +4,87 @@
   
     
     <entry>
+      <title>【Leetcode Daily】2265统计值等于子树平均值的节点数</title>
+      <link href="/posts/9d2a7479.html"/>
+      <url>/posts/9d2a7479.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/count-nodes-equal-to-average-of-subtree/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树，求其中子树的平均值与子树根节点值相等的个数。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>外部记录符合条件的个数，内部 dfs 传递平均值和节点数用于计算平均值即可。<blockquote><p><a href="https://leetcode.cn/problems/count-nodes-equal-to-average-of-subtree/solutions/1477315/tong-ji-zi-shu-de-jie-dian-he-ji-jie-dia-va8t/">https://leetcode.cn/problems/count-nodes-equal-to-average-of-subtree/solutions/1477315/tong-ji-zi-shu-de-jie-dian-he-ji-jie-dia-va8t/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">averageOfSubtree</span>(<span class="params">self, root: TreeNode</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root:TreeNode</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span>, <span class="number">0</span></span><br><span class="line">            left_sum, left_count = dfs(root.left)</span><br><span class="line">            right_sum, right_count = dfs(root.right)</span><br><span class="line">            cur_sum = left_sum + right_sum + root.val</span><br><span class="line">            cur_count = left_count + right_count + <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> root.val == (cur_sum // cur_count):</span><br><span class="line">                <span class="keyword">nonlocal</span> ans </span><br><span class="line">                ans += <span class="number">1</span></span><br><span class="line">            <span class="keyword">return</span> cur_sum, cur_count</span><br><span class="line">        dfs(root)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】606根据二叉树创建字符串</title>
+      <link href="/posts/e01e6503.html"/>
+      <url>/posts/e01e6503.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/construct-string-from-binary-tree/description/">题目链接</a>。</p></li><li><p>简单地说，就是将二叉树用字符串表现，规则是对于一个节点的左右子节点用（）包裹，空节点就是（），同时注意省略无意义的（），比如右节点空就能省略。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/construct-string-from-binary-tree/solutions/1343920/gen-ju-er-cha-shu-chuang-jian-zi-fu-chua-e1af/">https://leetcode.cn/problems/construct-string-from-binary-tree/solutions/1343920/gen-ju-er-cha-shu-chuang-jian-zi-fu-chua-e1af/</a></p></blockquote></li><li><p>先分析这个括号是怎么加的，本质上，一个子节点对应一个括号，所以递归上来的加一个括号就行，这样也不违反最外面无括号的规律。同时多余的括号就两种情况，第一种是两个子树都是空，也就是叶子节点；第二种是左子树非空，右子树为空就能去掉右子树。</p></li><li><p>总结规律，发现无论什么情况，只要右子树为空就能去掉，而左子树得是右子树为空再根据自己是空才去掉。于是本题的逻辑就清楚了。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">tree2str</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">str</span>:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        left = <span class="string">&quot;(&quot;</span> + <span class="variable language_">self</span>.tree2str(root.left) + <span class="string">&quot;)&quot;</span></span><br><span class="line">        right = <span class="string">&quot;(&quot;</span> + <span class="variable language_">self</span>.tree2str(root.right) + <span class="string">&quot;)&quot;</span></span><br><span class="line">        <span class="keyword">if</span> right == <span class="string">&quot;()&quot;</span>:</span><br><span class="line">            right = <span class="string">&quot;&quot;</span></span><br><span class="line">            <span class="keyword">if</span> left == <span class="string">&quot;()&quot;</span>:</span><br><span class="line">                left = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">str</span>(root.val) + left + right</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】563二叉树的坡度</title>
+      <link href="/posts/3cdc9e9.html"/>
+      <url>/posts/3cdc9e9.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/binary-tree-tilt/description/">题目链接</a>。</p></li><li><p>简单地说，就是规定“坡度”是二叉树一个节点的左子树之和与右子树之和的差值绝对值，现在求整个二叉树的坡度</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/binary-tree-tilt/solutions/1106287/er-cha-shu-de-po-du-by-leetcode-solution-7rha/">https://leetcode.cn/problems/binary-tree-tilt/solutions/1106287/er-cha-shu-de-po-du-by-leetcode-solution-7rha/</a></p></blockquote></li><li><p>思路和官方题解一样，这种求中间值的设置外部变量存储就好做。而二叉树数值和自底向上传就比较合适，符合直觉，方便求值，效率也相对高些。</p></li><li><p>具体就直接 dfs，中间把坡度加到外部变量，递归内部保留和即可，这样就不重复计算子树数值。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">findTilt</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="built_in">int</span>:</span><br><span class="line">        ans = <span class="number">0</span></span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root: <span class="type">Optional</span>[TreeNode]</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">            l_sum = dfs(root.left)</span><br><span class="line">            r_sum = dfs(root.right)</span><br><span class="line">            <span class="keyword">nonlocal</span> ans </span><br><span class="line">            ans += <span class="built_in">abs</span>(l_sum - r_sum)</span><br><span class="line">            <span class="keyword">return</span> l_sum + r_sum + root.val</span><br><span class="line">        dfs(root)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2333计算布尔二叉树的值</title>
       <link href="/posts/b2429205.html"/>
       <url>/posts/b2429205.html</url>
