@@ -4,6 +4,87 @@
   
     
     <entry>
+      <title>【Leetcode Daily】1110删点成林</title>
+      <link href="/posts/7f09d941.html"/>
+      <url>/posts/7f09d941.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/delete-nodes-and-return-forest/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个删点的列表，删除一个二叉树中所有这些点，但是把子树都放列表返回作为答案。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼。</p><blockquote><p><a href="https://leetcode.cn/problems/delete-nodes-and-return-forest/solutions/2286145/shan-dian-cheng-lin-by-leetcode-solution-gy95/">https://leetcode.cn/problems/delete-nodes-and-return-forest/solutions/2286145/shan-dian-cheng-lin-by-leetcode-solution-gy95/</a></p></blockquote></li><li><p>官方的题解多了一个参数用于判断当前的节点是否为潜在的根节点，是则加到答案中。</p></li><li><p>而下面的题解则不要这个参数，由于删除是自底向上的，所以删除后，如果子树存在，则一定是根。所以在开始增加临时点删除，保持整个删除后将合法子节点作为答案的逻辑。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">delNodes</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], to_delete: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[TreeNode]:</span><br><span class="line">        ans = []</span><br><span class="line">        tmp = TreeNode(to_delete[<span class="number">0</span>], root)</span><br><span class="line">        to_delete = <span class="built_in">set</span>(to_delete)</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root: <span class="type">Optional</span>[TreeNode]</span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">            root.left = dfs(root.left)</span><br><span class="line">            root.right = dfs(root.right)</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.val <span class="keyword">in</span> to_delete:</span><br><span class="line">                <span class="keyword">return</span> root</span><br><span class="line">            <span class="keyword">nonlocal</span> ans</span><br><span class="line">            <span class="keyword">if</span> root.left:</span><br><span class="line">                ans.append(root.left)</span><br><span class="line">            <span class="keyword">if</span> root.right:</span><br><span class="line">                ans.append(root.right)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        dfs(tmp)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line">                </span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】1325删除给定值的叶子节点</title>
+      <link href="/posts/9df4b997.html"/>
+      <url>/posts/9df4b997.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/delete-leaves-with-a-given-value/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树和一个值 target，删除树中所有与 target 相等值的点。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/delete-leaves-with-a-given-value/solutions/101264/shan-chu-gei-ding-zhi-de-xie-zi-jie-dian-by-leet-2/">https://leetcode.cn/problems/delete-leaves-with-a-given-value/solutions/101264/shan-chu-gei-ding-zhi-de-xie-zi-jie-dian-by-leet-2/</a></p></blockquote></li><li><p>又与官方题解几乎完全一致，具体的思路和 <a href="/posts/undefined.html" title="【Leetcode Daily】814二叉树剪枝">【Leetcode Daily】814二叉树剪枝</a> 差不多，这里不多赘述。总结下来就是后序遍历结合递归。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">removeLeafNodes</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], target: <span class="built_in">int</span></span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span> </span><br><span class="line">        root.left = <span class="variable language_">self</span>.removeLeafNodes(root.left, target)</span><br><span class="line">        root.right = <span class="variable language_">self</span>.removeLeafNodes(root.right, target)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right <span class="keyword">and</span> root.val == target:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span> </span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Leetcode Daily】814二叉树剪枝</title>
+      <link href="/posts/2f495186.html"/>
+      <url>/posts/2f495186.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/binary-tree-pruning/description/">题目链接</a>。</p></li><li><p>简单地说，就是给一个数值只有 0 和 1 的二叉树，找到其中的只有 0 的子树删掉。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li><p>官方题解镇楼</p><blockquote><p><a href="https://leetcode.cn/problems/binary-tree-pruning/solutions/1683846/er-cha-shu-jian-zhi-by-leetcode-solution-k336/">https://leetcode.cn/problems/binary-tree-pruning/solutions/1683846/er-cha-shu-jian-zhi-by-leetcode-solution-k336/</a></p></blockquote></li><li><p>居然能和官方题解一摸一样，看来功力应该还是有提升的吧。</p></li><li><p>题目要求删除一整个子树，二叉树只能从上往下遍历，所以自然利用递归，让每个节点返回自己以及下面是否只有 0。</p></li><li><p>具体怎么做呢？对于边缘叶子的 0，如果返回的时候让上一层把对应的位置置空，这样删除整个为 0 的子树就转化成了一个个删除 0 的叶子节点。</p></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pruneTree</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode]</span>) -&gt; <span class="type">Optional</span>[TreeNode]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        root.left = <span class="variable language_">self</span>.pruneTree(root.left)</span><br><span class="line">        root.right = <span class="variable language_">self</span>.pruneTree(root.right)</span><br><span class="line">        <span class="keyword">if</span> root.left <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> root.right <span class="keyword">is</span> <span class="literal">None</span> <span class="keyword">and</span> root.val == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> root</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】2265统计值等于子树平均值的节点数</title>
       <link href="/posts/9d2a7479.html"/>
       <url>/posts/9d2a7479.html</url>
