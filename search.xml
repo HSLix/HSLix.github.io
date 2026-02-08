@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>【Leetcode Daily】113路经总和II</title>
+      <link href="/posts/7892f243.html"/>
+      <url>/posts/7892f243.html</url>
+      
+        <content type="html"><![CDATA[<h1 id="题目浅析"><a href="#题目浅析" class="headerlink" title="题目浅析"></a>题目浅析</h1><ul><li><p>想查看原题可以点击<a href="https://leetcode.cn/problems/path-sum-ii/">题目链接</a>。</p></li><li><p>简单地说，就是给一个二叉树和目标和 target，求所有二叉树中从根到叶子路径和刚好为 target 的路径。</p></li></ul><h1 id="思路分享"><a href="#思路分享" class="headerlink" title="思路分享"></a>思路分享</h1><ul><li>和灵神差不多，通过参数传递当前和，然后在外面维护当前路径和答案，只要当前和达到目标值就把路径复制一份保存，复制是因为 python 中不复制的话，保存的 list 会是当前路径的引用。<blockquote><p><a href="https://leetcode.cn/problems/path-sum-ii/solutions/3061294/hui-su-fu-chang-jian-wen-ti-ji-qi-jie-da-g8im/">https://leetcode.cn/problems/path-sum-ii/solutions/3061294/hui-su-fu-chang-jian-wen-ti-ji-qi-jie-da-g8im/</a></p></blockquote></li></ul><h1 id="代码解答（强烈建议自行解答后再看）"><a href="#代码解答（强烈建议自行解答后再看）" class="headerlink" title="代码解答（强烈建议自行解答后再看）"></a>代码解答（强烈建议自行解答后再看）</h1><ul><li>参考题解</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"># class TreeNode:</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, left=None, right=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.left = left</span></span><br><span class="line"><span class="comment">#         self.right = right</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">pathSum</span>(<span class="params">self, root: <span class="type">Optional</span>[TreeNode], targetSum: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span><br><span class="line">        ans = []</span><br><span class="line">        cur = []</span><br><span class="line">        <span class="keyword">def</span> <span class="title function_">dfs</span>(<span class="params">root: <span class="type">Optional</span>[TreeNode], cur_sum: <span class="built_in">int</span></span>):</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root:</span><br><span class="line">                <span class="keyword">return</span> </span><br><span class="line">            <span class="keyword">nonlocal</span> cur</span><br><span class="line">            cur_sum += root.val</span><br><span class="line">            cur.append(root.val)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> root.left <span class="keyword">and</span> <span class="keyword">not</span> root.right <span class="keyword">and</span> cur_sum == targetSum:</span><br><span class="line">                <span class="keyword">nonlocal</span> ans</span><br><span class="line">                ans.append(cur.copy())</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                dfs(root.left, cur_sum)</span><br><span class="line">                dfs(root.right, cur_sum)</span><br><span class="line"></span><br><span class="line">            cur.pop()</span><br><span class="line">        dfs(root, <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ans</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 力扣日常 | LeetcodeDaily </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> 二叉树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>【Leetcode Daily】257二叉树的所有路径</title>
       <link href="/posts/bddf898e.html"/>
       <url>/posts/bddf898e.html</url>
