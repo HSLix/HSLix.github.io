@@ -1,0 +1,35 @@
+- class_name: 友链
+  class_desc: 那些人，那些事
+  link_list:
+    - name: Lindi798
+      link: https://github.com/Lindi798
+      avatar: https://avatars.githubusercontent.com/u/151692530?v=4
+      descr: 很让人佩服的科研新星
+    
+    - name: 陈驰水
+      link: https://blog.chencs.online/
+      avatar: https://blog.chencs.online/img/avatar1_hu_63b293dd7b22b4b6.png
+      descr: 人际交往、学习能力等方面都无可挑剔
+    
+    - name: 石上三年（赵梓霖）
+      link: https://blog.sssn.tech/
+      avatar: https://avatars.githubusercontent.com/u/95859645?v=4
+      descr: 机器学习/人工智能高手
+
+    - name: 大 C 老师不想被盒
+      link: https://cmail233.netlify.app/
+      avatar: https://cmail233.netlify.app/icons/favicon233.png
+      descr: 龙辉巧大师：）南昌拌粉毁灭者
+
+- class_name: 网站
+  class_desc: 值得推荐的网站
+  link_list:
+    - name: Youtube
+      link: https://www.youtube.com/
+      avatar: https://i.loli.net/2020/05/14/9ZkGg8v3azHJfM1.png
+      descr: 强大的在线视频网站
+
+    - name: "0xffff"
+      link: https://0xffff.one/
+      avatar: https://cdn.0xffff.one/assets/favicon-gggj2dbz.png
+      descr: 讨论氛围很好的计算机技术论坛
